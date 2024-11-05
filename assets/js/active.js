@@ -257,39 +257,69 @@
                 }
             });
     });
-        // Add dropdown menu toggle functionality
-        $(document).ready(function () {
-            const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
-    
-            dropdownItems.forEach(item => {
-                item.addEventListener('click', function (e) {
-                    const submenu = this.querySelector('.dropdown-menu');
-    
-                    // Close all other submenus
-                    dropdownItems.forEach(otherItem => {
-                        const otherSubmenu = otherItem.querySelector('.dropdown-menu');
-                        if (otherSubmenu && otherSubmenu !== submenu) {
-                            otherSubmenu.style.display = 'none';
-                        }
-                    });
-    
-                    // Toggle the clicked submenu
-                    if (submenu) {
-                        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                        e.stopPropagation(); // Prevent click event from propagating
+    $(document).ready(function () {
+        // Main dropdown toggle
+        const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
+
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+                const submenu = this.querySelector('.dropdown-menu');
+
+                // Close all other main dropdown menus
+                dropdownItems.forEach(otherItem => {
+                    const otherSubmenu = otherItem.querySelector('.dropdown-menu');
+                    if (otherSubmenu && otherSubmenu !== submenu) {
+                        otherSubmenu.style.display = 'none';
                     }
                 });
-            });
-    
-            // Close all dropdown menus when clicking outside
-            document.addEventListener('click', function () {
-                dropdownItems.forEach(item => {
-                    const submenu = item.querySelector('.dropdown-menu');
-                    if (submenu) {
-                        submenu.style.display = 'none';
-                    }
-                });
+
+                // Toggle the clicked main dropdown menu
+                if (submenu) {
+                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                    e.stopPropagation(); // Prevent click event from propagating
+                }
             });
         });
+
+        // Submenu toggle
+        const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
+
+        dropdownSubmenus.forEach(submenuItem => {
+            submenuItem.addEventListener('click', function (e) {
+                const submenu = this.querySelector('.dropdown-menu');
+
+                // Close all other submenus
+                dropdownSubmenus.forEach(otherSubmenuItem => {
+                    const otherSubmenu = otherSubmenuItem.querySelector('.dropdown-menu');
+                    if (otherSubmenu && otherSubmenu !== submenu) {
+                        otherSubmenu.style.display = 'none';
+                    }
+                });
+
+                // Toggle the clicked submenu
+                if (submenu) {
+                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                    e.stopPropagation(); // Prevent click event from propagating
+                }
+            });
+        });
+
+        // Close all dropdown menus and submenus when clicking outside
+        document.addEventListener('click', function () {
+            dropdownItems.forEach(item => {
+                const submenu = item.querySelector('.dropdown-menu');
+                if (submenu) {
+                    submenu.style.display = 'none';
+                }
+            });
+
+            dropdownSubmenus.forEach(submenuItem => {
+                const submenu = submenuItem.querySelector('.dropdown-menu');
+                if (submenu) {
+                    submenu.style.display = 'none';
+                }
+            });
+        });
+    });
 
 }(jQuery));
