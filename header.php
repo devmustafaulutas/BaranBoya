@@ -195,27 +195,37 @@ $about_text="$rs[about_text]";
     </header>
             <!-- ***** Header End ***** -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const dropdownItems = document.querySelectorAll('.dropdown-item');
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdownItems = document.querySelectorAll('..nav-item.dropdown');
 
-        dropdownItems.forEach(item => {
-            item.addEventListener('click', function (e) {
-                const submenu = this.querySelector('.dropdown-menu');
-                if (submenu) {
-                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                    e.stopPropagation(); // Tıklama olayı yayılmasını durdur
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            const submenu = this.querySelector('.dropdown-menu');
+            
+            // Close all other submenus
+            dropdownItems.forEach(otherItem => {
+                const otherSubmenu = otherItem.querySelector('.dropdown-menu');
+                if (otherSubmenu && otherSubmenu !== submenu) {
+                    otherSubmenu.style.display = 'none';
                 }
             });
-        });
 
-        // Dışarıya tıkladığında tüm dropdown menüleri kapat
-        document.addEventListener('click', function () {
-            dropdownItems.forEach(item => {
-                const submenu = item.querySelector('.dropdown-menu');
-                if (submenu) {
-                    submenu.style.display = 'none';
-                }
-            });
+            // Toggle the clicked submenu
+            if (submenu) {
+                submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                e.stopPropagation(); // Prevent click event from propagating
+            }
         });
     });
+
+    // Close all dropdown menus when clicking outside
+    document.addEventListener('click', function () {
+        dropdownItems.forEach(item => {
+            const submenu = item.querySelector('.dropdown-menu');
+            if (submenu) {
+                submenu.style.display = 'none';
+            }
+        });
+    });
+});
 </script>
