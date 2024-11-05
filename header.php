@@ -153,14 +153,15 @@ $about_text="$rs[about_text]";
                                 Ürünler
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php while ($category = mysqli_fetch_array($categories_query)) { ?>
+                            <?php while ($category = mysqli_fetch_array($categories_query)) { ?>
+                                <div class="dropdown-submenu">
                                     <a class="dropdown-item" href="#"><?php echo $category['isim']; ?></a>
                                     <?php
-                                    // Alt kategorileri al
+                                    // Fetch subcategories for the current category
                                     $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $category['id']);
                                     ?>
                                     <div class="dropdown-divider"></div>
-                                    <div class="dropdown-submenu">
+                                    <?php if (mysqli_num_rows($subcategories_query) > 0) { // Check if there are subcategories ?>
                                         <ul class="dropdown-menu">
                                             <?php while ($subcategory = mysqli_fetch_array($subcategories_query)) { ?>
                                                 <li>
@@ -168,9 +169,11 @@ $about_text="$rs[about_text]";
                                                 </li>
                                             <?php } ?>
                                         </ul>
-                                    </div>
-                                <?php } ?>
-                            </div>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+
                         </li>
                         <li class="nav-item">
                             <a href="https://tahsilat.baranboya.com/Payment/UnAuthenticatedPayment?notAut=True" target="_blank" class="nav-link">Online Tahsilat</a>
@@ -194,38 +197,4 @@ $about_text="$rs[about_text]";
         </nav>
     </header>
             <!-- ***** Header End ***** -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const dropdownItems = document.querySelectorAll('..nav-item.dropdown');
 
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', function (e) {
-            const submenu = this.querySelector('.dropdown-menu');
-            
-            // Close all other submenus
-            dropdownItems.forEach(otherItem => {
-                const otherSubmenu = otherItem.querySelector('.dropdown-menu');
-                if (otherSubmenu && otherSubmenu !== submenu) {
-                    otherSubmenu.style.display = 'none';
-                }
-            });
-
-            // Toggle the clicked submenu
-            if (submenu) {
-                submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                e.stopPropagation(); // Prevent click event from propagating
-            }
-        });
-    });
-
-    // Close all dropdown menus when clicking outside
-    document.addEventListener('click', function () {
-        dropdownItems.forEach(item => {
-            const submenu = item.querySelector('.dropdown-menu');
-            if (submenu) {
-                submenu.style.display = 'none';
-            }
-        });
-    });
-});
-</script>

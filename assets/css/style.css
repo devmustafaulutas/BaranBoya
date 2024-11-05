@@ -1174,6 +1174,14 @@ header {
     visibility: hidden;
     opacity: 0;
 }
+.dropdown-submenu{
+    position: relative;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+}
 
 .dropdown:hover > .dropdown-menu {
     visibility: visible;
