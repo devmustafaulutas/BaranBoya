@@ -323,3 +323,16 @@
     });
 
 }(jQuery));
+
+// Kategori açma/kapatma
+$('.category-toggle').on('click', function (e) {
+    e.preventDefault();
+    const categoryId = $(this).data('category-id');
+    const subcategoryList = $('#subcategory-' + categoryId);
+
+    // Toggle the display of the subcategory list
+    subcategoryList.toggle();
+
+    // Diğer alt kategori listelerini kapat
+    $('.subcategory-list').not(subcategoryList).hide();
+});
