@@ -1,0 +1,25 @@
+To Install;
+
+-  Import the "database.sql" file into your phpmyadmin
+-  Update the database connection settings located in the file "z_db.php"
+-   Run your site in the browser.
+
+
+Default Admin
+
+- https://sitename.com/dashboard
+Username: admin
+Password: admin
+
+
+Supports PHP Versions 5.6 and above.
+
+Enjoy!!!!!
+
+For more projects and support, contact;
+
+Whatsapp/Telegram/ +2348138652645
+Facebook: https://facebook.com/hillsoftsnetwork
+Instagram: faith_awolu
+Email: hillsofts@gmail.com
+
