@@ -54,6 +54,7 @@ INSERT INTO `admin` (`id`, `username`, `password`, `updated_at`) VALUES
 --
 -- Ana kategoriler tablosu
 -- Ana kategoriler tablosu
+-- Ana kategoriler tablosu
 CREATE TABLE `kategoriler` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `isim` VARCHAR(255) NOT NULL
@@ -65,6 +66,14 @@ CREATE TABLE `alt_kategoriler` (
     `isim` VARCHAR(255) NOT NULL,
     `kategori_id` INT,
     FOREIGN KEY (`kategori_id`) REFERENCES `kategoriler`(`id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;
+
+-- Alt kategorilerin alt kategorileri, alt kategorilere bağlı
+CREATE TABLE `alt_kategoriler_alt` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `isim` VARCHAR(255) NOT NULL,
+    `alt_kategori_id` INT,
+    FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
 ) CHARACTER SET utf8mb4;
 
 -- Ürünler tablosu, alt kategorilere bağlı
