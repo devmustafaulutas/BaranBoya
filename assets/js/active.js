@@ -324,15 +324,26 @@
 
 }(jQuery));
 
-// Kategori açma/kapatma
-$('.category-toggle').on('click', function (e) {
-    e.preventDefault();
-    const categoryId = $(this).data('category-id');
-    const subcategoryList = $('#subcategory-' + categoryId);
 
-    // Toggle the display of the subcategory list
-    subcategoryList.toggle();
+$(document).ready(function() {
+    // Kategori tıklama işlemi
+    $('.category-toggle').on('click', function(e) {
+        e.preventDefault(); // Sayfa yenilenmesini engelle
 
-    // Diğer alt kategori listelerini kapat
-    $('.subcategory-list').not(subcategoryList).hide();
+        const categoryId = $(this).attr('href').split('kategori_id=')[1]; // Kategori ID'yi al
+        const subcategoryList = $(this).next('.subcategory-list'); // Tıklanan kategoriye ait alt kategoriyi bul
+
+        // Alt kategoriyi toggle et (aç/kapa)
+        subcategoryList.toggle();
+
+        // Diğer tüm alt kategorileri kapat
+        $('.subcategory-list').not(subcategoryList).hide();
+    });
+
+    // Sayfanın dışına tıklanınca tüm alt kategorileri kapat
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.category-list').length) {
+            $('.subcategory-list').hide();
+        }
+    });
 });

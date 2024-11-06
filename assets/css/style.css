@@ -3198,3 +3198,10 @@ body.dark,
 :: 25.0 ürünler CSS
 ****************************** */
 
+#urunler-category-h4{
+    margin-left: 15px;
+}
+
+#urunler-category-productlist {
+    margin-top: 24px;
+}

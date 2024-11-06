@@ -1,5 +1,11 @@
-<?php include "z_db.php"; ?>
-<?php include "header.php"; ?>
+<?php
+include "z_db.php";
+include "header.php";
+
+// Kategori ve alt kategori parametrelerini alın
+$kategori_id = isset($_GET['kategori_id']) ? (int)$_GET['kategori_id'] : 0;
+$alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id'] : 0;
+?>
 
 <!-- ***** Breadcrumb Area Start ***** -->
 <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
@@ -26,7 +32,7 @@
             <div class="col-lg-3">
                 <!-- Kategoriler ve Alt Kategoriler -->
                 <div class="category-list">
-                    <h4>Kategoriler</h4>
+                    <h4 id="urunler-category-h4">Kategoriler</h4>
                     <ul class="list-group">
                         <?php
                         // Kategorileri çek
@@ -34,15 +40,17 @@
                         while ($category = mysqli_fetch_array($categories_query)) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#" class="category-toggle" data-category-id="<?php echo $category['id']; ?>"><?php echo $category['isim']; ?></a>
-                                <ul class="list-group subcategory-list" id="subcategory-<?php echo $category['id']; ?>" style="display: none;">
+                                <a href="?kategori_id=<?php echo $category['id']; ?>" class="category-toggle"><?php echo $category['isim']; ?></a>
+                                <ul class="list-group subcategory-list" style="display: none;">
                                     <?php
                                     // Alt kategorileri al
                                     $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $category['id']);
                                     while ($subcategory = mysqli_fetch_array($subcategories_query)) {
                                         ?>
                                         <li class="list-group-item">
-                                            <a href="?alt_kategori_id=<?php echo $subcategory['id']; ?>"><?php echo $subcategory['isim']; ?></a>
+                                            <a href="?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>">
+                                                <?php echo $subcategory['isim']; ?>
+                                            </a>
                                         </li>
                                     <?php } ?>
                                 </ul>
@@ -52,15 +60,16 @@
                 </div>
             </div>
 
-            <div class="col-lg-9">
+            <div id="urunler-category-productlist" class="col-lg-9">
                 <div class="row">
                     <?php
-                    // Filtreleme mantığı
-                    if (isset($_GET['alt_kategori_id'])) {
-                        $product_query = mysqli_query($con, "SELECT * FROM urunler WHERE alt_kategori_id = " . $_GET['alt_kategori_id']);
-                    } elseif (isset($_GET['kategori_id'])) {
-                        $subcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $_GET['kategori_id']);
+                    // Ürünleri filtreleyin
+                    if ($alt_kategori_id > 0) {
+                        $product_query = mysqli_query($con, "SELECT * FROM urunler WHERE alt_kategori_id = $alt_kategori_id");
+                    } elseif ($kategori_id > 0) {
+                        // Alt kategorilere göre ürünleri listele
                         $subcategory_ids = [];
+                        $subcategory_query = mysqli_query($con, "SELECT id FROM alt_kategoriler WHERE kategori_id = $kategori_id");
                         while ($subcategory = mysqli_fetch_array($subcategory_query)) {
                             $subcategory_ids[] = $subcategory['id'];
                         }
@@ -70,11 +79,12 @@
                         $product_query = mysqli_query($con, "SELECT * FROM urunler");
                     }
 
+                    // Ürünleri listeleyin
                     while ($product = mysqli_fetch_array($product_query)) {
                         ?>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4">
                             <div class="card">
-                                <img src="<?php echo $product['resim']; ?>" class="card-img-top"?>">
+                                <img src="<?php echo $product['resim']; ?>" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $product['isim']; ?></h5>
                                     <p class="card-text"><?php echo $product['aciklama']; ?></p>

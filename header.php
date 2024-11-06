@@ -155,23 +155,28 @@ $about_text="$rs[about_text]";
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php while ($category = mysqli_fetch_array($categories_query)) { ?>
                                 <div class="dropdown-submenu">
-                                    <a class="dropdown-item" href="#"><?php echo $category['isim']; ?></a>
+                                    <a class="dropdown-item" href="urunler.php?kategori_id=<?php echo $category['id']; ?>">
+                                        <?php echo $category['isim']; ?>
+                                    </a>
                                     <?php
-                                    // Fetch subcategories for the current category
+                                    // Mevcut kategoriye ait alt kategorileri getir
                                     $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $category['id']);
                                     ?>
                                     <div class="dropdown-divider"></div>
-                                    <?php if (mysqli_num_rows($subcategories_query) > 0) { // Check if there are subcategories ?>
+                                    <?php if (mysqli_num_rows($subcategories_query) > 0) { ?>
                                         <ul class="dropdown-menu">
                                             <?php while ($subcategory = mysqli_fetch_array($subcategories_query)) { ?>
                                                 <li>
-                                                    <a class="dropdown-item" href="#"><?php echo $subcategory['isim']; ?></a>
+                                                    <a class="dropdown-item" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>">
+                                                        <?php echo $subcategory['isim']; ?>
+                                                    </a>
                                                 </li>
                                             <?php } ?>
                                         </ul>
                                     <?php } ?>
                                 </div>
                             <?php } ?>
+
                         </div>
 
                         </li>
