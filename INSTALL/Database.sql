@@ -148,6 +148,34 @@ INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`) VALUES
 ('Ölçüm ve Dozajlama Ekipmanları', 7);
 
 
+INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`) VALUES
+('Döküm Tipi Polyester Reçineler', 1),
+('Breton Tipi Polyester Reçineler', 1),
+('Kalıplama Polyester Reçineler', 1),
+('Genel Amaçlı (Elyaf Tip) Polyester Reçineler', 1),
+('CTP Tipi (Fitil Sarma) Polyester Reçineler', 1),
+('RTM/İnfüzyon Tipi Polyester Reçineler', 1),
+('Akrilik Tipi Polyester Reçineler', 1),
+('SMC/BMC Tipi Polyester Reçineler', 1),
+('Düğme Tipi Polyester Reçineler', 1),
+('Kimyasal Dayanımlı Polyester Reçineler', 1),
+('Alev İlerletmeyen Polyester Reçineler', 1),
+('Köpük Eritmeyen Polyester Reçineler', 1);
+
+-- "Epoksi Reçineler" alt kategorisinin alt kategorileri
+INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
+('İnce Döküm Epoksi Reçineler', 3),
+('Kalın Döküm Epoksi Reçineler', 3),
+('Laminasyon Tipi Epoksi Reçineler', 3);
+
+-- "Vinilester Reçineler" alt kategorisinin alt kategorileri
+INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
+('Bisfenol-A Vinilester Reçineler', 2),
+('Novalak Vinilester Reçineler', 2),
+('Amin Hızlandırıcı Vinilester Reçineler', 2),
+('Bromine Epoksi Vinilester Reçineler', 2);
+
+
 -- --------------------------------------------------------
 
 
@@ -186,7 +214,7 @@ CREATE TABLE `logo` (
 --
 
 INSERT INTO `logo` (`id`, `xfile`, `ufile`, `updated_at`) VALUES
-(1, 'favicon.png', 'favicon.png', '2024-11-01 16:17:29');
+(1, '../assets/img/favicon.png', '../assets/img/favicon.png', '2024-11-01 16:17:29');
 
 -- --------------------------------------------------------
 
