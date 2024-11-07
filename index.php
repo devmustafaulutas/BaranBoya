@@ -26,14 +26,14 @@ $stext=$r[2];
                         <div class="welcome-thumb-wrapper mt-5 mt-md-0">
                             <div class="slider-container">
                                 <div class="slides">
-                                    <span class="slide">
-                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik.png" alt="Image 1">
+                                    <span class="slide active">
+                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik.png">
                                     </span>
                                     <span class="slide">
-                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik1.png" alt="Image 2">
+                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik1.png">
                                     </span>
                                     <span class="slide">
-                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik2.png" alt="Image 3">
+                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik2.png">
                                     </span>
                                 </div>
                                 <div class="slider-navigation">
@@ -43,6 +43,7 @@ $stext=$r[2];
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- Shape Bottom -->

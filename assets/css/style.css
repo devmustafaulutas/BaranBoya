@@ -1295,9 +1295,6 @@ header {
     overflow: hidden; /* Görüntü sınırları aşmaması için */
 }
 
-#home > div.container > div > div.col-12.col-md-5 > div{
-    margin-left: 150px;
-}
 
 .welcome-thumb-1,
 .welcome-thumb-2,
@@ -3122,12 +3119,111 @@ body.dark,
 :: 26.0 ürünler CSS
 ****************************** */
 
-#urunler-category-h4{
-    margin-left: 15px;
+/* Kategoriler için stil */
+#urunler-category-h4 {
+    display: inline-block;
+    font-weight: 900;
+    line-height: 1em;
+    letter-spacing: -1.6px;
+    background-image: -webkit-linear-gradient(45deg, #40E0D0 15%, #000080 65%);
+    background-image: linear-gradient(45deg, #40E0D0 15%, #000080 65%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.category-list {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    margin-bottom: 30px;
 }
 
-#urunler-category-productlist {
-    margin-top: 24px;
+.category-toggle {
+    display: block;
+    color: #3498db;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.category-toggle:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.subcategory-list {
+    display: none;
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.subcategory-list li a {
+    color: #555;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.subcategory-list li a:hover {
+    color: #3498db;
+}
+
+/* Ürün kartları için stil */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    background-color: #f8f8f8;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Daha açık bir renk paleti ve arka plan düzenlemeleri */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breadcrumb-item a {
+    color: #3498db;
+}
+
+.breadcrumb-item.active {
+    color: #777;
 }
 
 
@@ -3225,4 +3321,95 @@ body.dark,
 .dropdown-menu .dropdown-menu {
     top: -8px;
     left: 100%;
+}
+
+
+
+
+/* ******************************
+:: 26.0 index.php CSS
+****************************** */
+/* Genel slider düzeni */
+/* Slider container */
+.slider-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Slides */
+.slides {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    justify-content: center; /* Resimleri ortala */
+    align-items: center; /* Resimleri dikeyde ortala */
+}
+
+.slide {
+    min-width: 100%; /* Her resim tek tek görünmeli */
+    position: relative;
+    transition: transform 1s ease-in-out;
+}
+
+/* Resimlerin boyutlarını küçültme */
+.slide img {
+    width: 90%;  /* Resimleri %90 yaparak küçült */
+    height: auto; /* Yükseklik otomatik */
+    display: block; /* Resimlerin altındaki boşlukları engelle */
+    margin: 0 auto; /* Resimleri ortala */
+}
+
+/* Slider butonları */
+.slider-navigation .prev, .slider-navigation .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px; /* Daha küçük buton */
+    font-size: 18px;
+    color: white;
+    background-color: transparent; /* Arka planı transparan */
+    border: none;
+    z-index: 1;
+    transition: color 0.3s ease, transform 0.3s ease;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* Buton konumları */
+.slider-navigation .prev {
+    left: 10px;
+}
+
+.slider-navigation .next {
+    right: 10px;
+}
+
+/* Buton hover efekti */
+.slider-navigation .prev:hover, .slider-navigation .next:hover {
+    color: rgba(255, 255, 255, 0.8); /* Butonun rengini değiştirme */
+    transform: scale(1.2); /* Hover sırasında buton büyür */
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* Mobilde slider genişliğini küçültme */
+@media (max-width: 1100px) {
+    .slider-container {
+        max-width: 80%; /* Slider'ın genişliğini biraz küçült */
+    }
+
+    .slide img {
+        width: 80%; /* Resimleri %80 yaparak küçült */
+    }
+}
+
+/* Daha küçük ekranlar için */
+@media (max-width: 768px) {
+    .slider-container {
+        max-width: 90%; /* Daha da küçült */
+    }
+
+    .slide img {
+        width: 70%; /* Resimleri %70 yaparak küçült */
+    }
 }
