@@ -329,8 +329,6 @@ $(document).ready(function() {
     // Kategori tıklama işlemi
     $('.category-toggle').on('click', function(e) {
         e.preventDefault(); // Sayfa yenilenmesini engelle
-
-        const categoryId = $(this).attr('href').split('kategori_id=')[1]; // Kategori ID'yi al
         const subcategoryList = $(this).next('.subcategory-list'); // Tıklanan kategoriye ait alt kategoriyi bul
 
         // Alt kategoriyi toggle et (aç/kapa)
@@ -344,6 +342,19 @@ $(document).ready(function() {
     $(document).on('click', function(event) {
         if (!$(event.target).closest('.category-list').length) {
             $('.subcategory-list').hide();
+        }
+    });
+
+    // Mobilde "menu-link" sınıfına sahip öğeler için tıklama olaylarını dinle
+    $('.menu-link').on('click', function(event) {
+        const submenu = $(this).next('.dropdown-menu');
+        
+        if (submenu.length && !submenu.hasClass('show')) {
+            event.preventDefault(); // İlk tıklamada yönlendirmeyi durdur
+            submenu.toggleClass('show'); // Alt menüyü aç/kapa
+            
+            // Diğer açık olan alt menüleri kapat
+            $('.dropdown-menu').not(submenu).removeClass('show');
         }
     });
 });

@@ -33,7 +33,6 @@ $about_text="$rs[about_text]";
     $longitude = "$tr[longitude]";
     $latitude = "$tr[latitude]";
 ?>
-<!-- Mirrored from theme-land.com/digimx/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 15:12:40 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -153,32 +152,45 @@ $about_text="$rs[about_text]";
                                 Ürünler
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php while ($category = mysqli_fetch_array($categories_query)) { ?>
-                                <div class="dropdown-submenu">
-                                    <a class="dropdown-item" href="urunler.php?kategori_id=<?php echo $category['id']; ?>">
-                                        <?php echo $category['isim']; ?>
-                                    </a>
-                                    <?php
-                                    // Mevcut kategoriye ait alt kategorileri getir
-                                    $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $category['id']);
-                                    ?>
-                                    <div class="dropdown-divider"></div>
-                                    <?php if (mysqli_num_rows($subcategories_query) > 0) { ?>
-                                        <ul class="dropdown-menu">
-                                            <?php while ($subcategory = mysqli_fetch_array($subcategories_query)) { ?>
-                                                <li>
-                                                    <a class="dropdown-item" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>">
-                                                        <?php echo $subcategory['isim']; ?>
-                                                    </a>
-                                                </li>
-                                            <?php } ?>
-                                        </ul>
-                                    <?php } ?>
-                                </div>
-                            <?php } ?>
+                                <?php while ($category = mysqli_fetch_array($categories_query)) { ?>
+                                    <div class="dropdown-submenu">
+                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>">
+                                            <?php echo $category['isim']; ?>
+                                        </a>
+                                        <?php
+                                        // Mevcut kategoriye ait alt kategorileri getir
+                                        $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $category['id']);
+                                        ?>
+                                        <?php if (mysqli_num_rows($subcategories_query) > 0) { ?>
+                                            <ul class="dropdown-menu">
+                                                <?php while ($subcategory = mysqli_fetch_array($subcategories_query)) { ?>
+                                                    <li class="dropdown-submenu">
+                                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>">
+                                                            <?php echo $subcategory['isim']; ?>
+                                                        </a>
+                                                        <?php
+                                                        // Alt kategoriye ait daha alt seviyedeki kategorileri getir
+                                                        $sub_subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = " . $subcategory['id']);
+                                                        ?>
+                                                        <?php if (mysqli_num_rows($sub_subcategories_query) > 0) { ?>
+                                                            <ul class="dropdown-menu">
+                                                                <?php while ($sub_subcategory = mysqli_fetch_array($sub_subcategories_query)) { ?>
+                                                                    <li class="dropdown-submenu">
+                                                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>&alt_kategori_alt_id=<?php echo $sub_subcategory['id']; ?>">
+                                                                            <?php echo $sub_subcategory['isim']; ?>
+                                                                        </a>
+                                                                    </li>
+                                                                <?php } ?>
+                                                            </ul>
+                                                        <?php } ?>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        <?php } ?>
+                                    </div>
 
-                        </div>
-
+                                <?php } ?>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a href="https://tahsilat.baranboya.com/Payment/UnAuthenticatedPayment?notAut=True" target="_blank" class="nav-link">Online Tahsilat</a>

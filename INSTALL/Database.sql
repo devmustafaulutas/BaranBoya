@@ -148,7 +148,7 @@ INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`) VALUES
 ('Ölçüm ve Dozajlama Ekipmanları', 7);
 
 
-INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`) VALUES
+INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
 ('Döküm Tipi Polyester Reçineler', 1),
 ('Breton Tipi Polyester Reçineler', 1),
 ('Kalıplama Polyester Reçineler', 1),

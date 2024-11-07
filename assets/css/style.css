@@ -999,48 +999,10 @@ img {
 ****************************** */
 /* Dropdown Menü Stili */
 /* Dropdown Menu Styles */
-.dropdown-menu {
-    display: none; /* Başlangıçta gizli */
-    position: absolute; /* Pozisyonlama */
-    z-index: 1000; /* Üstte görünmesini sağlar */
-    background-color: white; /* Arka plan rengi */
-    border: 1px solid #ccc; /* Kenar rengi */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-}
 
-/* Dropdown-submenu için ayarlar */
-.dropdown-submenu .dropdown-menu {
-    left: 100%; /* Alt menü sağa açılır */
-    top: 0; /* Üst hizalama */
-}
-
-/* Açıldığında görünürlüğü ayarlama */
-.dropdown.show .dropdown-menu {
-    display: block; /* Açıldığında görünür */
-}
 
 /* Mobil cihazlarda görünüm ayarları */
-@media (max-width: 768px) {
-    .navbar-nav {
-        flex-direction: column; /* Dikey hizalama */
-    }
-    
-    .dropdown-menu {
-        position: static; /* Alt menü için pozisyon ayarı */
-        box-shadow: none; /* Gölgeyi kaldır */
-        border: none; /* Kenarları kaldır */
-    }
-    
-    .dropdown.show .dropdown-menu {
-        display: block; /* Açıldığında görünür */
-        width: 100%; /* Tam genişlik */
-    }
 
-    /* Mobil görünümde menü ikonu için ayar */
-    .toggle {
-        display: block; /* Menü ikonunu göster */
-    }
-}
 
 
 
@@ -1161,44 +1123,6 @@ header {
     font-size: 0.9125rem;
     color: #2c2e30;
     padding: 0.625rem 1.25rem;
-}
-
-.dropdown .dropdown-menu {
-    display: block;
-    min-width: 14.375rem;
-    margin: 0;
-    padding: 0.625rem 0;
-    border: none;
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
-    visibility: hidden;
-    opacity: 0;
-}
-.dropdown-submenu{
-    position: relative;
-}
-
-.dropdown-submenu:hover > .dropdown-menu {
-    visibility: visible;
-    opacity: 1;
-}
-
-.dropdown:hover > .dropdown-menu {
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition-timing-function: ease;
-    transition-timing-function: ease;
-    -webkit-transition-duration: .4s;
-    transition-duration: .4s;
-    -webkit-transition-property: opacity, -webkit-transform;
-    transition-property: opacity, -webkit-transform;
-    transition-property: opacity, transform;
-    transition-property: opacity, transform, -webkit-transform;
-}
-
-.dropdown-menu .dropdown-menu {
-    top: -8px;
-    left: 100%;
 }
 
 .menu .items {
@@ -3195,7 +3119,7 @@ body.dark,
 }
 
 /* ******************************
-:: 25.0 ürünler CSS
+:: 26.0 ürünler CSS
 ****************************** */
 
 #urunler-category-h4{
@@ -3204,4 +3128,101 @@ body.dark,
 
 #urunler-category-productlist {
     margin-top: 24px;
+}
+
+
+
+
+/* ******************************
+:: 27.0 navbar subcategorys CSS
+****************************** */
+
+
+
+/* Alt menülerin görünürlüğünü başlangıçta gizle */
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none; /* Başlangıçta gizli */
+    position: absolute; /* Pozisyonlama */
+    z-index: 1000; /* Üstte görünmesini sağlar */
+    background-color: white; /* Arka plan rengi */
+    border: 1px solid #ccc; /* Kenar rengi */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+}
+
+/* Dropdown-submenu için ayarlar */
+.dropdown-submenu .dropdown-menu {
+    left: 100%; /* Alt menü sağa açılır */
+    top: 0; /* Üst hizalama */
+}
+
+/* Açıldığında görünürlüğü ayarlama */
+.dropdown.show .dropdown-menu {
+    display: block; /* Açıldığında görünür */
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column; /* Dikey hizalama */
+    }
+    
+    .dropdown-menu {
+        position: static; /* Alt menü için pozisyon ayarı */
+        box-shadow: none; /* Gölgeyi kaldır */
+        border: none; /* Kenarları kaldır */
+    }
+    
+    .dropdown.show .dropdown-menu {
+        display: block; /* Açıldığında görünür */
+        width: 100%; /* Tam genişlik */
+    }
+
+    /* Mobil görünümde menü ikonu için ayar */
+    .toggle {
+        display: block; /* Menü ikonunu göster */
+    }
+}
+.dropdown .dropdown-menu {
+    display: block;
+    min-width: 14.375rem;
+    margin: 0;
+    padding: 0.625rem 0;
+    border: none;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    visibility: hidden;
+    opacity: 0;
+}
+.dropdown-submenu{
+    position: relative;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown:hover > .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: .4s;
+    transition-duration: .4s;
+    -webkit-transition-property: opacity, -webkit-transform;
+    transition-property: opacity, -webkit-transform;
+    transition-property: opacity, transform;
+    transition-property: opacity, transform, -webkit-transform;
+}
+
+.dropdown-menu .dropdown-menu {
+    top: -8px;
+    left: 100%;
 }

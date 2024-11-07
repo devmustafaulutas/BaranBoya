@@ -30,12 +30,10 @@ $alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <!-- Kategoriler ve Alt Kategoriler -->
                 <div class="category-list">
                     <h4 id="urunler-category-h4">Kategoriler</h4>
                     <ul class="list-group">
                         <?php
-                        // Kategorileri çek
                         $categories_query = mysqli_query($con, "SELECT * FROM kategoriler");
                         while ($category = mysqli_fetch_array($categories_query)) {
                             ?>
@@ -43,7 +41,6 @@ $alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id
                                 <a href="?kategori_id=<?php echo $category['id']; ?>" class="category-toggle"><?php echo $category['isim']; ?></a>
                                 <ul class="list-group subcategory-list" style="display: none;">
                                     <?php
-                                    // Alt kategorileri al
                                     $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . $category['id']);
                                     while ($subcategory = mysqli_fetch_array($subcategories_query)) {
                                         ?>
@@ -63,11 +60,9 @@ $alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id
             <div id="urunler-category-productlist" class="col-lg-9">
                 <div class="row">
                     <?php
-                    // Ürünleri filtreleyin
                     if ($alt_kategori_id > 0) {
                         $product_query = mysqli_query($con, "SELECT * FROM urunler WHERE alt_kategori_id = $alt_kategori_id");
                     } elseif ($kategori_id > 0) {
-                        // Alt kategorilere göre ürünleri listele
                         $subcategory_ids = [];
                         $subcategory_query = mysqli_query($con, "SELECT id FROM alt_kategoriler WHERE kategori_id = $kategori_id");
                         while ($subcategory = mysqli_fetch_array($subcategory_query)) {
@@ -79,7 +74,6 @@ $alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id
                         $product_query = mysqli_query($con, "SELECT * FROM urunler");
                     }
 
-                    // Ürünleri listeleyin
                     while ($product = mysqli_fetch_array($product_query)) {
                         ?>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4">
