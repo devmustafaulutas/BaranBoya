@@ -407,26 +407,19 @@ INSERT INTO `static` (`id`, `stitle`, `stext`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testimony`
+-- Table structure for table `tedariciklerimiz`
 --
 
-CREATE TABLE `testimony` (
-  `id` int(11) NOT NULL,
-  `message` varchar(300) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `position` varchar(100) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `tedarikcilerimiz` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `resim` VARCHAR(1000) NOT NULL,  -- Resim dosya yolu veya adı
+  `guncellenme_tarihi` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `testimony`
 --
-
-INSERT INTO `testimony` (`id`, `message`, `name`, `position`, `ufile`, `updated_at`) VALUES
-(2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.', 'Yasmin Akter', 'Founder, Themeland', '5110avatar-2.png', '2022-07-17 19:41:45'),
-(3, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.', 'Md. Arham', 'CEO, Themeland', '4068avatar-3.png', '2022-07-17 19:48:56'),
-(4, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.', 'Junaid Hasan', 'CEO, Themeland', '5842avatar-1.png', '2022-07-17 19:50:39');
 
 -- --------------------------------------------------------
 

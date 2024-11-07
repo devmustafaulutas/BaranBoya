@@ -180,8 +180,7 @@ print "
 
 
                         <div class="section-heading text-center">
-                            <h2 class="text-white"><?php print $test_title; ?></h2>
-                            <p class="text-white d-none d-sm-block mt-4"><?php print $test_text;?></p>
+                            <h2 class="text-white">TEDARİKÇİLERİMİZ</h2>
                         </div>
                     </div>
                 </div>
@@ -190,52 +189,30 @@ print "
                     <div class="client-reviews owl-carousel">
                         <!-- Single Review -->
 
-
-
                         <?php
-				   $q="SELECT * FROM  testimony ORDER BY id DESC LIMIT 6";
+                        // Veritabanı sorgusu: Son 8 resmi al
+                        $q = "SELECT * FROM tedarikcilerimiz ORDER BY id DESC LIMIT 8";
+                        $r123 = mysqli_query($con, $q);
 
+                        // Her bir kaydı işleyerek slider için resimleri ekle
+                        while ($ro = mysqli_fetch_array($r123)) {
+                            $resim = "$ro[resim]";  // Resim dosyasının yolu veya adı
 
- $r123 = mysqli_query($con,$q);
+                            // Resmi slider içinde göstermek için HTML çıktısı
+                            print "
+                            <div class='single-review p-5'>
+                                <!-- Review Content -->
+                                <div class='review-content'>
+                                    <!-- Resim Slider -->
+                                    <div class='slider-image'>
+                                        <img class='img-fluid' src='$resim'>
+                                    </div>
+                                </div>
+                            </div>
+                            ";
+                        }
+                        ?>
 
-while($ro = mysqli_fetch_array($r123))
-{
-
-	$name="$ro[name]";
-	$position="$ro[position]";
-    $message="$ro[message]";
-    $ufile="$ro[ufile]";
-
-print "
-
-<div class='single-review p-5'>
-<!-- Review Content -->
-<div class='review-content'>
-    <!-- Review Text -->
-    <div class='review-text'>
-        <p>$message</p>
-    </div>
-    <!-- Quotation Icon -->
-
-</div>
-<!-- Reviewer -->
-<div class='reviewer media mt-3'>
-    <!-- Reviewer Thumb -->
-    <div class='reviewer-thumb'>
-        <img class='avatar-lg radius-100' src='dashboard/uploads/testimony/$ufile' alt='img'>
-    </div>
-    <!-- Reviewer Media -->
-    <div class='reviewer-meta media-body align-self-center ml-4'>
-        <h5 class='reviewer-name color-primary mb-2'>$name</h5>
-        <h6 class='text-secondary fw-6'>$position</h6>
-    </div>
-</div>
-</div>
-
-
-";
-}
-?>
                     </div>
                 </div>
             </div>

@@ -2247,6 +2247,7 @@ body.dark,
 /* ******************************
 :: 16.0 REVIEWS AREA CSS
 ****************************** */
+/* Slider kutularının boyutlarını eşitlemek ve ortalamak */
 .single-review {
     position: relative;
     background-color: #f4f4f4;
@@ -2259,18 +2260,35 @@ body.dark,
     transition: background-color, transform 0.3s ease-in-out 0s;
     transition: background-color, transform 0.3s ease-in-out 0s, -webkit-transform 0.3s ease-in-out 0s;
     z-index: 1;
+    overflow: hidden; /* Resimlerin dışarı taşmaması için */
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    width: 100%; /* Kutuların genişliğini %100 yapmak */
+    height: 250px; /* Kutunun yüksekliğini sabitlemek */
 }
 
+/* Resimlerin boyutlandırılması */
+.single-review .slider-image img {
+    width: 100%;  /* Resmin genişliğini kutuya göre ayarlıyoruz */
+    height: 100%; /* Resmin yüksekliğini kutuya göre ayarlıyoruz */
+    object-fit: cover; /* Resmin kutuyu tamamen kaplamasını sağlar */
+    display: block; /* Resmi blok elemanı yaparak altındaki boşlukları engelliyoruz */
+}
+
+/* Aktif ve ortada olan item için özel stil */
 .owl-item.active.center .single-review {
     background-color: #fff;
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
 
+/* Alt katman efektleri */
 .review-area.bg-overlay::after {
     opacity: 1;
 }
 
+/* Quote ikonunun konumu */
 .single-review .quot-icon {
     position: absolute;
     top: 8%;
