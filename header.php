@@ -145,7 +145,7 @@ $about_text="$rs[about_text]";
                             <a href="about" class="nav-link">Hakkımızda</a>
                         </li>
                         <li class="nav-item">
-                            <a href="portfolio" class="nav-link">Blog</a>
+                            <a href="blog" class="nav-link">Blog</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
