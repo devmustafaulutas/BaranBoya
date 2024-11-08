@@ -155,14 +155,16 @@ $about_text="$rs[about_text]";
 
   <!-- Mobile-only button for toggling dropdown -->
   <button
-    class="dropdown-toggle btn d-md-none d-flex justify-content-between align-items-center w-100" <!-- Makes button flex, justifies content, and full-width on mobile -->
-    id="dropdownToggle"
+    class="dropdown-toggle btn d-md-none d-flex justify-content-between align-items-center w-100"
+
+  >
+  <a href="/products" class="nav-link" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    Ürünler
+  </a>
+    <span class="caret dropdown-toggle"     id="dropdownToggle"
     data-toggle="dropdown"
     aria-haspopup="true"
-    aria-expanded="false"
-  >
-    <span>Ürünler</span> <!-- Text on the left -->
-    <span class="caret"></span> <!-- Down arrow on the right -->
+    aria-expanded="false"></span> <!-- Down arrow on the right -->
   </button>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
