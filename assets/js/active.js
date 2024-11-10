@@ -257,6 +257,7 @@
                 }
             });
     });
+}(jQuery));
     $(document).ready(function () {
         // Main dropdown toggle
         const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
@@ -321,8 +322,6 @@
             });
         });
     });
-
-}(jQuery));
 
 
 $(document).ready(function() {

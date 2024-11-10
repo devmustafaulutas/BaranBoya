@@ -3138,7 +3138,13 @@ body.dark,
 ****************************** */
 
 /* Kategoriler için stil */
+.category-h4-container{
+    display: flex;
+    justify-content: center;
+}
 #urunler-category-h4 {
+    font-size: 50px;
+    height: 15vh;
     display: inline-block;
     font-weight: 900;
     line-height: 1em;
@@ -3150,44 +3156,7 @@ body.dark,
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.category-list {
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
 
-.category-toggle {
-    display: block;
-    color: #3498db;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.category-toggle:hover {
-    background-color: #3498db;
-    color: white;
-}
-
-.subcategory-list {
-    display: none;
-    list-style-type: none;
-    padding-left: 20px;
-    margin-top: 10px;
-}
-
-.subcategory-list li a {
-    color: #555;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
-}
-
-.subcategory-list li a:hover {
-    color: #3498db;
-}
 
 /* Ürün kartları için stil */
 .card {
@@ -3251,7 +3220,9 @@ body {
 :: 27.0 navbar subcategorys CSS
 ****************************** */
 
-
+#menu > div > div > div.menu.modal-body > div > div > ul > li.nav-item.dropdown > button{
+    border: none;
+}
 
 /* Alt menülerin görünürlüğünü başlangıçta gizle */
 .dropdown-menu {
@@ -3347,6 +3318,30 @@ body {
 /* ******************************
 :: 26.0 index.php CSS
 ****************************** */
+.client-logos {
+    display: flex;
+    flex-wrap: wrap; /* Ekran küçüldüğünde alt satıra geçiş sağlar */
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.single-logo {
+    flex: 0 1 13%; /* Her bir logo için genişlik %12.5 */
+    max-width: 25%;
+    box-sizing: border-box;
+    text-align: center;
+    height: 175; /* Sabit yükseklik */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Resmi ortalar */
+    padding: 10px;
+}
+
+.single-logo img {
+    max-width: 80%; /* Resim genişliği %80 */
+    height: auto; /* Yüksekliği korur */
+}
+
 /* Genel slider düzeni */
 /* Slider container */
 .slider-container {
@@ -3383,7 +3378,6 @@ body {
     cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     padding: 8px; /* Daha küçük buton */
     font-size: 18px;
     color: white;

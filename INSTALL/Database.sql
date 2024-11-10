@@ -552,6 +552,15 @@ CREATE TABLE `tedarikcilerimiz` (
 --
 -- Dumping data for table `testimony`
 --
+INSERT INTO `tedarikcilerimiz` (`id`, `resim`, `guncellenme_tarihi`)
+VALUES
+(1, "dashboard/uploads/tedarikcilerimiz/AKPA.png", CURRENT_TIMESTAMP),
+(2, "dashboard/uploads/tedarikcilerimiz/JUSHI.png", CURRENT_TIMESTAMP),
+(3, "dashboard/uploads/tedarikcilerimiz/MARKER.png", CURRENT_TIMESTAMP),
+(4, "dashboard/uploads/tedarikcilerimiz/POLİKOR.png", CURRENT_TIMESTAMP),
+(5, "dashboard/uploads/tedarikcilerimiz/STARGİL.png", CURRENT_TIMESTAMP),
+(6, "dashboard/uploads/tedarikcilerimiz/ŞİŞECAM.png", CURRENT_TIMESTAMP),
+(7, "dashboard/uploads/tedarikcilerimiz/WACKER.png", CURRENT_TIMESTAMP);
 
 -- --------------------------------------------------------
 

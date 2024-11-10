@@ -184,36 +184,28 @@ print "
                     </div>
                 </div>
                 <div class="row">
-                    <!-- Client Reviews -->
-                    <div class="client-reviews owl-carousel">
-                        <!-- Single Review -->
-
+                    <!-- Client Logos -->
+                    <div id="client-logos" class="client-logos d-flex flex-wrap justify-content-center">
                         <?php
                         // Veritabanı sorgusu: Son 8 resmi al
                         $q = "SELECT * FROM tedarikcilerimiz ORDER BY id DESC LIMIT 8";
                         $r123 = mysqli_query($con, $q);
 
-                        // Her bir kaydı işleyerek slider için resimleri ekle
+                        // Her bir kaydı işleyerek resimleri ekle
                         while ($ro = mysqli_fetch_array($r123)) {
                             $resim = "$ro[resim]";  // Resim dosyasının yolu veya adı
 
-                            // Resmi slider içinde göstermek için HTML çıktısı
+                            // Resimleri yatayda göstermek için HTML çıktısı
                             print "
-                            <div class='single-review p-5'>
-                                <!-- Review Content -->
-                                <div class='review-content'>
-                                    <!-- Resim Slider -->
-                                    <div class='slider-image'>
-                                        <img class='img-fluid' src='$resim'>
-                                    </div>
-                                </div>
+                            <div class='single-logo p-3'>
+                                <img class='img-fluid' src='$resim' alt='Tedarikçi Logosu'>
                             </div>
                             ";
                         }
                         ?>
-
                     </div>
                 </div>
+
             </div>
         </section>
         <!-- ***** Review Area End ***** -->

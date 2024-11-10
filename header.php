@@ -149,19 +149,19 @@ $about_text="$rs[about_text]";
                         </li>
                         <li class="nav-item dropdown">
                             <!-- Desktop-only link that triggers dropdown on hover -->
-  <a href="/products" class="nav-link dropdown-toggle d-none d-md-block" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+  <a href="urunler" class="nav-link dropdown-toggle d-none d-md-block" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
     Ürünler
   </a>
 
   <!-- Mobile-only button for toggling dropdown -->
   <button
-    class="dropdown-toggle btn d-md-none d-flex justify-content-between align-items-center w-100"
+    class="d-md-none d-flex justify-content-between align-items-center w-100"
 
   >
-  <a href="/products" class="nav-link" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+  <a href="urunler" class="nav-link" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
     Ürünler
   </a>
-    <span class="caret dropdown-toggle"     id="dropdownToggle"
+    <span class="dropdown-toggle"     id="dropdownToggle"
     data-toggle="dropdown"
     aria-haspopup="true"
     aria-expanded="false"></span> <!-- Down arrow on the right -->
@@ -184,21 +184,6 @@ $about_text="$rs[about_text]";
                                                         <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>">
                                                             <?php echo $subcategory['isim']; ?>
                                                         </a>
-                                                        <?php
-                                                        // Alt kategoriye ait daha alt seviyedeki kategorileri getir
-                                                        $sub_subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = " . $subcategory['id']);
-                                                        ?>
-                                                        <?php if (mysqli_num_rows($sub_subcategories_query) > 0) { ?>
-                                                            <ul class="dropdown-menu">
-                                                                <?php while ($sub_subcategory = mysqli_fetch_array($sub_subcategories_query)) { ?>
-                                                                    <li class="dropdown-submenu">
-                                                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>&alt_kategori_alt_id=<?php echo $sub_subcategory['id']; ?>">
-                                                                            <?php echo $sub_subcategory['isim']; ?>
-                                                                        </a>
-                                                                    </li>
-                                                                <?php } ?>
-                                                            </ul>
-                                                        <?php } ?>
                                                     </li>
                                                 <?php } ?>
                                             </ul>
