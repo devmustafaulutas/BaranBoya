@@ -3,7 +3,7 @@ include "z_db.php";
 include "header.php";
 
 // Kategori ve alt kategori parametrelerini alın
-$kategori_id = isset($_GET['kategori_id']) ? (int)$_GET['kategori_id'] : 0;
+$kategori_id = isset($_GET['kategori_id']) && $_GET['kategori_id'] != 'undefined' ? (int)$_GET['kategori_id'] : 0;
 $alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id'] : 0;
 $alt_kategori_alt_id = isset($_GET['alt_kategori_alt_id']) ? (int)$_GET['alt_kategori_alt_id'] : 0;
 
@@ -113,7 +113,8 @@ if ($alt_kategori_alt_id > 0) {
                     </ul>
                 </div>
             </div>
-
+ 
+                        <!-- Ürünler Listesi -->
             <div id="urunler-category-productlist" class="col-lg-9">
                 <div class="row">
                     <?php
@@ -154,6 +155,7 @@ if ($alt_kategori_alt_id > 0) {
                     ?>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

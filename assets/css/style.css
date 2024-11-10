@@ -3157,6 +3157,16 @@ body.dark,
     -webkit-text-fill-color: transparent;
 }
 
+.subcategory {
+    display: none;
+    /* Alt kategoriler başlangıçta gizlenir */
+}
+
+.subcategory.open {
+    display: block;
+    /* Alt kategori açıldığında görünür hale gelir */
+}
+
 
 /* Ürün kartları için stil */
 .card {
@@ -3165,6 +3175,9 @@ body.dark,
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column; /* Kart içeriğini dikey hizalamak için */
+    height: 100%; /* Kartın yüksekliğini sabit tutar */
 }
 
 .card:hover {
@@ -3180,6 +3193,7 @@ body.dark,
 .card-body {
     padding: 15px;
     background-color: #f8f8f8;
+    flex-grow: 1; /* Kartın içeriğiyle orantılı olarak büyümesini sağlar */
 }
 
 .card-title {
@@ -3192,6 +3206,31 @@ body.dark,
     font-size: 14px;
     color: #777;
     margin-top: 10px;
+}
+
+/* Ürün listeleme düzeni */
+/* Ürün listeleme düzeni */
+#urunler-category-productlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ürünler arasındaki boşluğu eşit dağıtır */
+}
+
+#urunler-category-productlist .card {
+    box-sizing: border-box; /* Padding ve border'ı genişlik içinde sayar */
+}
+
+/* Daha küçük ekranlar için responsive tasarım */
+@media (max-width: 768px) {
+    #urunler-category-productlist .card {
+        width: calc(50% - 20px); /* Mobilde 2 ürün yan yana */
+    }
+}
+
+@media (max-width: 480px) {
+    #urunler-category-productlist .card {
+        width: 100%; /* Mobilde tek ürün */
+    }
 }
 
 /* Daha açık bir renk paleti ve arka plan düzenlemeleri */
@@ -3212,6 +3251,7 @@ body {
 .breadcrumb-item.active {
     color: #777;
 }
+
 
 
 
