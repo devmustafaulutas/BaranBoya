@@ -1,6 +1,10 @@
 <?php
 // $con = new mysqli("localhost", "truvaayv_root", "kerem.1234", "truvaayv_scriptdb");
+<<<<<<< HEAD
 $con = new mysqli("localhost", "root", "12345678", "script");
+=======
+$con = new mysqli("localhost", "musta", "12345678", "script");
+>>>>>>> 7e7d749e3ca068823cccb56134c83bf12516a160
 if ($con->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
