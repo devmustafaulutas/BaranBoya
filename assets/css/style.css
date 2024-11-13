@@ -3344,6 +3344,110 @@ body.dark,
 }
 
 /* ******************************
+:: 27.0 product detail CSS
+****************************** */
+/* Genel Stil Ayarları */
+.product-detail-area {
+    background-color: #f9f9f9;
+    padding: 100px 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Ürün Görseli */
+.product-detail-area .product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Sadece görselin büyümesini sağlamak */
+}
+
+.product-detail-area .product-image:hover img {
+    transform: scale(1.05); /* Görsel hoverda büyür */
+}
+
+/* Ürün Bilgileri (Başlık, Açıklama, Fiyat) */
+.product-info {
+    padding-left: 30px;
+}
+
+/* Başlık Hover Efekti */
+.product-info .product-detail h2 {
+    font-size: 2rem; /* Küçültülmüş yazı boyutu */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px; /* Daha fazla boşluk */
+}
+
+/* Ürün Açıklaması ve Diğer Metinler */
+.product-info p {
+    font-size: 1rem; /* Küçültülmüş yazı boyutu */
+    color: #555;
+    margin-bottom: 20px; /* Daha fazla boşluk */
+    padding: 20px; /* Daha fazla padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Gölge ve büyüme */
+}
+
+/* Hover Efektleri (Büyüme ve Gölgeleme) */
+.product-info p:hover {
+    transform: scale(1.05); /* Hoverda kutu büyür */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Gölge belirginleşir */
+}
+
+/* Kategoriler */
+.product-info p strong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Buton */
+.product-info button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #4170d0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Hover Efekti Buton */
+.product-info button:hover {
+    transform: scale(1.05); /* Hoverda buton büyür */
+    background-color: #3659a4;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+    .product-detail-area .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-detail-area .product-image,
+    .product-detail-area .product-info {
+        flex: 1 1 100%;
+        padding: 15px;
+    }
+
+    .product-info .product-detail h2 {
+        font-size: 2rem;
+    }
+
+    .product-info button {
+        width: 100%;
+    }
+}
+
+
+
+/* ******************************
 :: 27.0 navbar subcategorys CSS
 ****************************** */
 

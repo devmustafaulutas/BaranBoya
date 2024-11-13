@@ -2,10 +2,24 @@
 include "z_db.php";
 include "header.php";
 
-// Kategori ve alt kategori parametrelerini alın
-$kategori_id = isset($_GET['kategori_id']) && $_GET['kategori_id'] != 'undefined' ? (int)$_GET['kategori_id'] : 0;
-$alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id'] : 0;
-$alt_kategori_alt_id = isset($_GET['alt_kategori_alt_id']) ? (int)$_GET['alt_kategori_alt_id'] : 0;
+// Ürün ID'yi al
+$urun_id = isset($_GET['urun_id']) ? (int)$_GET['urun_id'] : 0;
+
+// Ürün bilgilerini al
+$product_query = "SELECT * FROM urunler WHERE id = $urun_id";
+$product_result = mysqli_query($con, $product_query);
+$product = mysqli_fetch_array($product_result);
+
+// Ürün bulunamadıysa yönlendirme yap
+if (!$product) {
+    echo "<p>Ürün bulunamadı.</p>";
+    exit;
+}
+
+// Kategori ve alt kategori bilgilerini almak için sorgular
+$kategori_id = $product['kategori_id'];
+$alt_kategori_id = $product['alt_kategori_id'];
+$alt_kategori_alt_id = $product['alt_kategori_alt_id'];
 
 // Kategoriyi al
 $category_name = '';
@@ -32,26 +46,6 @@ if ($subSubcategory) {
     $subSubcategory_name = $subSubcategory['isim'];
 }
 
-// Kategorileri listele
-$categories_query = mysqli_query($con, "SELECT * FROM kategoriler");
-
-// Ürünleri çekmek için sorgu
-$product_query = "SELECT * FROM urunler WHERE 1=1";
-
-if ($kategori_id) {
-    $product_query .= " AND kategori_id = $kategori_id";
-}
-if ($alt_kategori_id) {
-    $product_query .= " AND alt_kategori_id = $alt_kategori_id";
-}
-if ($alt_kategori_alt_id) {
-    $product_query .= " AND alt_kategori_alt_id = $alt_kategori_alt_id";
-}
-
-// Sorguyu çalıştır ve sonucu al
-$product_result = mysqli_query($con, $product_query);
-
-
 ?>
 
 <!-- ***** Breadcrumb Area Start ***** -->
@@ -60,19 +54,17 @@ $product_result = mysqli_query($con, $product_query);
         <div class="row">
             <div class="col-12">
                 <div class="breadcrumb-content d-flex flex-column align-items-center text-center">
-                    <h2 class="text-white text-uppercase mb-3">Ürünler</h2>
+                    <h2 class="text-white text-uppercase mb-3">Ürün Detay</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item text-white active">Ürünler</li>
+                        <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php">Ürünler</a></li>
                         <?php if ($category_name) { ?>
                             <li class="breadcrumb-item text-white"><?php echo $category_name; ?></li>
                         <?php } ?>
                         <?php if ($subcategory_name) { ?>
                             <li class="breadcrumb-item text-white"><?php echo $subcategory_name; ?></li>
                         <?php } ?>
-                        <?php if ($subSubcategory_name) { ?>
-                            <li class="breadcrumb-item text-white"><?php echo $subSubcategory_name; ?></li>
-                        <?php } ?>
+                        <li class="breadcrumb-item text-white active"><?php echo $product['isim']; ?></li>
                     </ol>
                 </div>
             </div>
@@ -82,7 +74,7 @@ $product_result = mysqli_query($con, $product_query);
 <!-- ***** Breadcrumb Area End ***** -->
 
 <!--====== Products Area Start ======-->
-<section class="section products-area ptb_100">
+<section class="section products-area ptb_25">
     <div class="container">
         <div class="category-h4-container">
             <h4 id="urunler-category-h4">Kategoriler</h4>
@@ -153,33 +145,47 @@ $product_result = mysqli_query($con, $product_query);
         </div>
     </div>
 </section>
-<!-- Ürünler Listesi Başlangıç -->
-<section class="product-list-area">
+<!--====== Product Detail Area Start ======-->
+<section class="section product-detail-area ptb_100">
     <div class="container">
-        <div class="row product-category-products">
-            <?php
-            if ($product_result && mysqli_num_rows($product_result) > 0) {
-                // Ürünleri listele
-                while ($product = mysqli_fetch_array($product_result)) {
-                    echo '<div class="col-md-4 product-card">';
-                    echo '<a href="product_detail.php?urun_id=' . $product['id'] . '" class="product-card-link">';
-                    echo '<div class="product-item">';
-                    echo '<img src="' . $product['resim'] . '" alt="' . $product['isim'] . '" class="img-fluid">';
-                    echo '<h4>' . $product['isim'] . '</h4>';
-                    echo '<p>' . $product['aciklama'] . '</p>';
-                    echo '<a href="product_detail.php?urun_id=' . $product['id'] . '" >Detay</a>';
-                    echo '</div>';
-                    echo '</a>';
-                    echo '</div>';
-                }
-            } else {
-                echo '<p class="text-center">Bu kategoride ürün bulunmamaktadır.</p>';
-            }
-            ?>
+        <div class="row">
+            <div class="col-md-6 product-image">
+                <!-- Ürün görseli -->
+                <img src="uploads/<?php echo $product['resim']; ?>" alt="<?php echo $product['isim']; ?>" class="img-fluid">
+            </div>
+            <div class="col-md-6 product-info">
+                <!-- Ürün başlık ve açıklaması -->
+                <div class="product-detail">
+                    <h2><?php echo $product['isim']; ?></h2>
+                </div>
+                <div class="product-description">
+                    <p><strong>Açıklama: </strong><?php echo $product['aciklama']; ?></p>
+                </div>
+                <div class="product-price">
+                    <p><strong>Fiyat: </strong><?php echo $product['fiyat']; ?> TL</p>
+                </div>
+                
+                <!-- Kategoriler -->
+                <?php if ($category_name) { ?>
+                    <div class="product-category">
+                        <p><strong>Kategori: </strong><?php echo $category_name; ?></p>
+                    </div>
+                <?php } ?>
+                <?php if ($subcategory_name) { ?>
+                    <div class="product-subcategory">
+                        <p><strong>Alt Kategori: </strong><?php echo $subcategory_name; ?></p>
+                    </div>
+                <?php } ?>
+                <?php if ($subSubcategory_name) { ?>
+                    <div class="product-subsubcategory">
+                        <p><strong>Alt Alt Kategori: </strong><?php echo $subSubcategory_name; ?></p>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Ürünler Listesi Bitiş -->
+<!--====== Product Detail Area End ======-->
 
 <?php include "footer.php"; ?>
