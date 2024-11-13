@@ -10,15 +10,15 @@
                             <!-- Footer Items -->
                             <div class="footer-items">
                                 <!-- Footer Title -->
-                            <h3 class="footer-title text-uppercase mb-2">About Us</h3>
-                                <p class="mb-2"><?php print $site_about?></p>
+                            <h3 class="footer-title text-uppercase mb-2">Hakkımzıda</h3>
+                                <p class="mb-2">Firmamız, endüstriyel boyada kalite ve dayanıklılık sunarak, her ihtiyaca özel çözümler geliştirmektedir. Müşteri memnuniyetini ve yenilikçiliği ön planda tutan ekibimizle sektörde güvenilir bir marka olmayı hedefliyoruz.</p>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <!-- Footer Items -->
                             <div class="footer-items">
                                 <!-- Footer Title -->
-                                <h3 class="footer-title text-uppercase mb-2">Services</h3>
+                                <h3 class="footer-title text-uppercase mb-2">Servislerimiz</h3>
                                 <ul>
 
  <?php
@@ -46,8 +46,8 @@ print "
                             <!-- Footer Items -->
                             <div class="footer-items">
                                 <!-- Footer Title -->
-                                <h3 class="footer-title text-uppercase mb-2">Follow Us</h3>
-                                <p class="mb-2"><?php print $follow_text ?></p>
+                                <h3 class="footer-title text-uppercase mb-2">Sosyal Medya</h3>
+                                <p class="mb-2">Bizi sosyal medya hesaplarımızdan takip edebilirsiniz.</p>
                                 <!-- Social Icons -->
                                 <ul class="social-icons list-inline pt-2">
 

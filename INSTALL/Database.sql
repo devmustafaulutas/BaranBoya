@@ -236,7 +236,7 @@ CREATE TABLE `logo` (
 --
 
 INSERT INTO `logo` (`id`, `xfile`, `ufile`, `updated_at`) VALUES
-(1, '../assets/img/favicon.png', '../assets/img/favicon.png', '2024-11-01 16:17:29');
+(1, 'assets/img/favicon.png', 'assets/img/favicon.png', '2024-11-01 16:17:29');
 
 -- --------------------------------------------------------
 
@@ -503,8 +503,9 @@ CREATE TABLE `social` (
 --
 
 INSERT INTO `social` (`id`, `name`, `fa`, `social_link`) VALUES
-(1, 'Facebook', 'fa-facebook', 'https://facebook.com/faithyemi'),
-(2, 'Instagram', 'fa-instagram', 'https://instagram.com/faith_awolu');
+(1, 'Facebook', 'fa-facebook', 'https://www.facebook.com/baranpolyester'),
+(2, 'Instagram', 'fa-instagram', 'https://www.instagram.com/baranboyaepoxs/')
+(2, 'Instagram', 'fa-twitter', 'https://x.com/baranboya');
 
 -- --------------------------------------------------------
 
