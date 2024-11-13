@@ -3267,6 +3267,83 @@ body.dark,
 
 
 /* ******************************
+:: 27.0 ürünler alt kısım CSS
+****************************** */
+
+.product-category-products .product-card {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.product-category-products .product-item {
+    -webkit-mask-image: -webkit-radial-gradient(#fff, #000);
+    text-align: center;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: .5s all;
+    position: relative;
+}
+
+.product-category-products .product-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: brightness(0.3);
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s all;
+}
+
+.product-category-products .product-item:hover img {
+    opacity: 1;
+    visibility: visible;
+}
+
+.product-category-products .product-card-link {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+.product-category-products .product-item:hover {
+    background-color: #f8f9fa;
+}
+
+.product-category-products .product-item h4 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-category-products .product-item p {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.product-category-products .product-item .btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #0d6efd;
+    border: none;
+}
+
+.product-category-products .product-item .btn:hover {
+    background-color: #0a58ca;
+}
+
+/* ******************************
 :: 27.0 navbar subcategorys CSS
 ****************************** */
 

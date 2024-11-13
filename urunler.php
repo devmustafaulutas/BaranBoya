@@ -34,6 +34,24 @@ if ($subSubcategory) {
 
 // Kategorileri listele
 $categories_query = mysqli_query($con, "SELECT * FROM kategoriler");
+
+// Ürünleri çekmek için sorgu
+$product_query = "SELECT * FROM urunler WHERE 1=1";
+
+if ($kategori_id) {
+    $product_query .= " AND kategori_id = $kategori_id";
+}
+if ($alt_kategori_id) {
+    $product_query .= " AND alt_kategori_id = $alt_kategori_id";
+}
+if ($alt_kategori_alt_id) {
+    $product_query .= " AND alt_kategori_alt_id = $alt_kategori_alt_id";
+}
+
+// Sorguyu çalıştır ve sonucu al
+$product_result = mysqli_query($con, $product_query);
+
+
 ?>
 
 <!-- ***** Breadcrumb Area Start ***** -->
@@ -135,9 +153,33 @@ $categories_query = mysqli_query($con, "SELECT * FROM kategoriler");
         </div>
     </div>
 </section>
-<!--====== Products Area End ======-->
+<!-- Ürünler Listesi Başlangıç -->
+<section class="product-list-area">
+    <div class="container">
+        <div class="row product-category-products">
+            <?php
+            if ($product_result && mysqli_num_rows($product_result) > 0) {
+                // Ürünleri listele
+                while ($product = mysqli_fetch_array($product_result)) {
+                    echo '<div class="col-md-4 product-card">';
+                    echo '<a href="urunler.php?urun_id=' . $product['id'] . '" class="product-card-link">';
+                    echo '<div class="product-item">';
+                    echo '<img src="' . $product['resim'] . '" alt="' . $product['isim'] . '" class="img-fluid">';
+                    echo '<h4>' . $product['isim'] . '</h4>';
+                    echo '<p>' . $product['aciklama'] . '</p>';
+                    echo '<a href="urun-detay.php?urun_id=' . $product['id'] . '" >Detay</a>';
+                    echo '</div>';
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p class="text-center">Bu kategoride ürün bulunmamaktadır.</p>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
 
-
-
+<!-- Ürünler Listesi Bitiş -->
 
 <?php include "footer.php"; ?>

@@ -84,7 +84,9 @@ CREATE TABLE `urunler` (
     `fiyat` DECIMAL(10, 2) NOT NULL,
     `stok` INT DEFAULT 0,
     `resim` VARCHAR(255) NOT NULL,
-    `alt_kategori_id` INT,
+    `kategori_id` INT DEFAULT NULL,
+    `alt_kategori_id`  INT DEFAULT NULL,
+    `alt_kategori_alt_id` INT DEFAULT NULL,
     FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
 ) CHARACTER SET utf8mb4;
 

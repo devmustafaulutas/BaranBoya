@@ -9,7 +9,7 @@ if ($con->connect_errno) {
 
 //Your Website URL Goes Here
 // $url="https://ornek.truva-software.com/vogue";
-$url="http://localhost/vogue";
+$url="http://localhost/vogue1/vogue";
 
 
 //Set Blog Activation Bonus Here (It must be only Number)
