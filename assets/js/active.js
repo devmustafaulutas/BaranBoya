@@ -402,7 +402,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Eğer kategori id varsa, ürünleri yükle ve alt kategorileri aç
     if (kategori_id) {
         loadProducts(kategori_id, alt_kategori_id, alt_kategori_alt_id); // Ürünleri yükle
-        toggleSubcategories(kategori_id, alt_kategori_id, alt_kategori_alt_id); // Alt kategorileri aç
     }
 
     // Kategori tıklama olayını dinleyelim
@@ -410,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function () {
     categoryLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault(); // Sayfanın yeniden yüklenmesi için URL güncelleme
-            const kategori_id = this.getAttribute('href').split('=')[1]; // Kategori id'sini al
+            const kategori_id = new URLSearchParams(this.search).get('kategori_id'); // Kategori id'sini al
             window.location.href = `urunler?kategori_id=${kategori_id}`; // URL'yi güncelle ve sayfayı yeniden yükle
         });
     });
@@ -421,22 +420,23 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function(e) {
             e.preventDefault(); // Sayfanın yeniden yüklenmesi için URL güncelleme
             const kategori_id = new URLSearchParams(window.location.search).get('kategori_id');
-            const alt_kategori_id = this.getAttribute('href').split('=')[2]; // Alt kategori id'sini al
+            const alt_kategori_id = new URLSearchParams(this.search).get('alt_kategori_id'); // Alt kategori id'sini al
             window.location.href = `urunler?kategori_id=${kategori_id}&alt_kategori_id=${alt_kategori_id}`; // URL'yi güncelle ve sayfayı yeniden yükle
         });
     });
 
-    // Alt alt kategori tıklama olayını dinleyelim
-    const subSubcategoryLinks = document.querySelectorAll('.subcategory-alt-toggle');
-    subSubcategoryLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // Sayfanın yeniden yüklenmesi için URL güncelleme
-            const kategori_id = new URLSearchParams(window.location.search).get('kategori_id');
-            const alt_kategori_id = new URLSearchParams(window.location.search).get('alt_kategori_id');
-            const alt_kategori_alt_id = this.getAttribute('href').split('=')[3]; // Alt alt kategori id'sini al
-            window.location.href = `urunler?kategori_id=${kategori_id}&alt_kategori_id=${alt_kategori_id}&alt_kategori_alt_id=${alt_kategori_alt_id}`; // URL'yi güncelle ve sayfayı yeniden yükle
-        });
-    });
+    // Ürünleri yükleme fonksiyonu
+    function loadProducts(kategori_id, alt_kategori_id = 0, alt_kategori_alt_id = 0) {
+        const url = `urunler_listele?kategori_id=${kategori_id}&alt_kategori_id=${alt_kategori_id}&alt_kategori_alt_id=${alt_kategori_alt_id}`;
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('urunler-category-productlist').innerHTML = data; // Ürünleri yükle
+            })
+            .catch(error => {
+                console.error('Ürünler yüklenirken bir hata oluştu:', error);
+            });
+    }
 
     // Alt kategoriler görünürlük kontrolü
     function toggleSubcategories(kategori_id, alt_kategori_id = 0, alt_kategori_alt_id = 0) {
@@ -468,18 +468,24 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-
-    // Ürünleri yükleme fonksiyonu
-    function loadProducts(kategori_id, alt_kategori_id = 0, alt_kategori_alt_id = 0) {
-        const url = `urunler_listele?kategori_id=${kategori_id}&alt_kategori_id=${alt_kategori_id}&alt_kategori_alt_id=${alt_kategori_alt_id}`;
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('urunler-category-productlist').innerHTML = data; // Ürünleri yükle
-                toggleSubcategories(kategori_id, alt_kategori_id, alt_kategori_alt_id); // Sayfa yenilenmeden alt kategorileri aç
-            })
-            .catch(error => {
-                console.error('Ürünler yüklenirken bir hata oluştu:', error);
-            });
-    }
+});
+$(document).ready(function() {
+    // Kategorilerin başlıklarına tıklanabilirlik ekle
+    $(".products-category-box h3").on("click", function() {
+        var $parentBox = $(this).closest(".products-category-box");
+        
+        // Menü zaten açıksa kapat
+        if ($parentBox.find(".products-dropdown-menu").hasClass("show")) {
+            $parentBox.find(".products-dropdown-menu").removeClass("show");
+            $parentBox.find(".dropdown-toggle").removeClass("open");
+        } else {
+            // Menü kapanmışsa, önce tüm menüleri kapat
+            $(".products-dropdown-menu").removeClass("show");
+            $(".dropdown-toggle").removeClass("open");
+            
+            // Tıklanan menüyü aç
+            $parentBox.find(".products-dropdown-menu").addClass("show");
+            $parentBox.find(".dropdown-toggle").addClass("open");
+        }
+    });
 });
