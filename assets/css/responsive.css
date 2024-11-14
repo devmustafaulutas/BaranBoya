@@ -219,7 +219,11 @@
 @media (max-width: 767px) {
     .welcome-area {
         height: 100% !important;
+        min-height: 400px;
         padding-top: 90px;
+    }
+    #home > div.container > div{
+        padding-bottom: 30px;
     }
 
     .welcome-intro {

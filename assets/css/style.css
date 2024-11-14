@@ -3141,8 +3141,12 @@ body.dark,
 .products-category-box h3:hover {
     color: #0056b3;
 }
+.product-category-box {
+    justify-content: space-between;
+}
 /* Ok simgesinin animasyonu */
 .dropdown-toggle {
+    justify-content: space-between;
     cursor: pointer;
     transition: transform 0.3s ease; /* Ok simgesinin dönüşü */
 }
@@ -3169,18 +3173,6 @@ body.dark,
     max-height: 500px;
     visibility: visible;
 }
-
-/* Ok simgesinin dönüşü (açma/kapama) */
-.dropdown-toggle {
-    cursor: pointer;
-    transition: transform 0.3s ease; /* Ok simgesinin dönüşü */
-}
-
-/* Ok simgesi tıklanmışsa aşağıya döner */
-.dropdown-toggle.open {
-    transform: rotate(180deg);
-}
-
 
 /* Menü öğeleri */
 .products-dropdown-item {
@@ -3222,71 +3214,89 @@ body.dark,
 }
 
 
-
 /* ******************************
 :: 27.0 ürünler alt kısım CSS
 ****************************** */
 
+/* Kategori Kartı */
 .product-category-products .product-card {
     position: relative;
     margin-bottom: 30px;
+    border-radius: 15px;  /* Yuvarlatılmış köşeler */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    overflow: hidden; /* Resmin taşmasını engeller */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover animasyonları */
+    background-color: #fff; /* Arka plan beyaz */
+    height: 250px; /* Kart boyutları küçültüldü */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
+/* Ürün Kartı */
 .product-category-products .product-item {
-    -webkit-mask-image: -webkit-radial-gradient(#fff, #000);
+    position: relative;
     text-align: center;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
-    padding: 20px;
-    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Yuvarlatılmış köşeler */
+    padding: 15px;
+    height: 250px; /* Kart boyutları küçültüldü */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    transition: .5s all;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
     position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
+    background-color: white; /* Arka plan beyaz */
 }
 
+/* Ürün Resmi */
 .product-category-products .product-item img {
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Yükseklik kaldırıldı */
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
-    filter: brightness(0.3);
-    visibility: hidden;
+    filter: brightness(0.4);
     opacity: 0;
-    transition: .5s all;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
 }
 
+/* Ürün Resmi Hover Efekti */
 .product-category-products .product-item:hover img {
     opacity: 1;
     visibility: visible;
 }
 
-.product-category-products .product-card-link {
-    text-decoration: none;
-    display: block;
-    color: inherit;
-}
-
+/* Kart Hover Efekti */
 .product-category-products .product-item:hover {
     background-color: #f8f9fa;
+    transform: scale(1.05); /* Hover ile büyüme */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
 }
 
+/* Başlık Stili */
 .product-category-products .product-item h4 {
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 16px; /* Başlık boyutu küçültüldü */
     font-weight: bold;
+    color: #333;
 }
 
+/* Açıklama Stili */
 .product-category-products .product-item p {
-    font-size: 14px;
+    font-size: 12px; /* Açıklama yazısı daha küçük */
     color: #6c757d;
+    margin-top: 10px;
 }
 
+/* Buton Stili */
 .product-category-products .product-item .btn {
     margin-top: 10px;
     padding: 8px 16px;
@@ -3296,8 +3306,67 @@ body.dark,
     border: none;
 }
 
+/* Buton Hover Efekti */
 .product-category-products .product-item .btn:hover {
     background-color: #0a58ca;
+}
+
+/* Responsive Ayarlamalar */
+@media (max-width: 768px) {
+    /* Kart boyutları daha küçük olacak */
+    .product-category-products .product-item {
+        height: 200px; /* Yükseklik daha küçük */
+    }
+
+    .product-category-products .product-item img {
+        height: 100%; /* Resimler daha geniş olacak */
+    }
+
+    .product-category-products .product-item h4 {
+        font-size: 14px; /* Başlık boyutu daha küçük */
+    }
+
+    .product-category-products .product-item p {
+        font-size: 12px; /* Açıklama yazısı daha küçük */
+    }
+}
+
+/* Alt Kategori ve Ürün Kartları */
+.product-list-area .category-card,
+.product-list-area .subcategory-card,
+.product-list-area .product-card {
+    border-radius: 15px;  /* Yuvarlatılmış köşeler */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
+    overflow: hidden;  /* Resimlerin taşmasını engeller */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover animasyonu */
+    height: 200px; /* Yükseklik ayarlandı */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* İçeriği dikey olarak ortalar */
+    align-items: center;  /* İçeriği yatay olarak ortalar */
+    text-align: center;  /* Metni ortalar */
+}
+
+/* Hover Efekti */
+.product-list-area .category-card:hover,
+.product-list-area .subcategory-card:hover,
+.product-list-area .product-card:hover {
+    transform: scale(1.05);  /* Hover ile büyüme */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
+}
+
+/* Alt Kategori Başlık */
+.product-category-box h4 {
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Alt Kategori Açıklaması */
+.product-category-box p {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 10px;
 }
 
 /* ******************************
