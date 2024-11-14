@@ -170,7 +170,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     <div class="col-md-6 d-flex flex-column"> <!-- Flexbox için d-flex ve flex-column kullanıldı -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3056.2845398240997!2d32.76084867580579!3d40.00209137150924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d349881bd99935%3A0x4f2adf4a1b5956d5!2sBaran%20Boya%20Polyester!5e0!3m2!1str!2str!4v1730577931652!5m2!1str!2str" style="border:0; width: 100%; height: 500px;" allowfullscreen="" loading="lazy"></iframe>
                         <div class="contact-map-info">
-                            <h5>Baran Boya Polyester</h5>
+                            <h5>BARAN BOYA İVEDİK (Merkez)</h5>
                         </div>
                         <div id="phone-contact" class="contact-us">
                             <ul>
@@ -187,7 +187,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     <div class="col-md-6 d-flex flex-column"> <!-- Flexbox için d-flex ve flex-column kullanıldı -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48915.37859149094!2d32.792040339506265!3d39.981386176280935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d3520a32d52bc3%3A0x766a247a8bfe0bee!2sBaran%20Boya%20Polyester%20Re%C3%A7ine%20Elyaf%20Jelkot%20Siteler!5e0!3m2!1str!2str!4v1730553471165!5m2!1str!2str" style="border:0; width: 100%; height: 500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0; width: 100%; height: 500px;" allowfullscreen="" loading="lazy"></iframe>
                         <div class="contact-map-info">
-                            <h5>Baran Boya Polyester Reçine Elyaf Jelkot Siteler</h5>
+                            <h5>BARAN BOYA SİTELER (Şube)</h5>
                         </div>
                         <div id="phone-contact" class="contact-us">
                             <ul>

@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <!-- Welcome Intro Start -->
-                    <div class="col-12 col-md-7">
+                    <div class="col-12 col-md-12">
                     <?php
     $rr=mysqli_query($con,"SELECT * FROM static");
 $r = mysqli_fetch_row($rr);
@@ -21,28 +21,6 @@ $stext=$r[2];
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5">
-                        <div class="welcome-thumb-wrapper mt-5 mt-md-0">
-                            <div class="slider-container">
-                                <div class="slides">
-                                    <span class="slide active">
-                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik.png">
-                                    </span>
-                                    <span class="slide">
-                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik1.png">
-                                    </span>
-                                    <span class="slide">
-                                        <img class="welcome-animation" src="assets/img/welcome/baran-boya-icerik2.png">
-                                    </span>
-                                </div>
-                                <div class="slider-navigation">
-                                    <button class="prev">&#10094;</button>
-                                    <button class="next">&#10095;</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <!-- Shape Bottom -->

@@ -1284,53 +1284,10 @@ header {
     font-size: 16px;
 }
 
-.welcome-thumb-wrapper {
-    position: relative;
-    display: block;
-    height: 100%;
-    width: 100%;
-    max-width: 400px; /* Resim genişliği için maksimum değer */
-    max-height: 400px; /* Resim yüksekliği için maksimum değer */
-    margin: auto; /* Ortalamak için */
-    overflow: hidden; /* Görüntü sınırları aşmaması için */
+.welcome-intro {
+    text-align: center;
 }
 
-
-.welcome-thumb-1,
-.welcome-thumb-2,
-.welcome-thumb-3,
-.welcome-thumb-4,
-.welcome-thumb-5,
-.welcome-thumb-6 {
-    position: absolute;
-    width: 300px; /* Resimlerin genişliği */
-    height: 300px; /* Yüksekliği otomatik ayarlamak için */
-    opacity: 0; /* Başlangıçta görünmez */
-    transition: opacity 1s ease-in-out; /* Opaklık geçişi */
-}
-
-.welcome-thumb-1 {
-    animation: sliderAnimation 12s infinite; /* İlk resim animasyonu */
-}
-
-.welcome-thumb-2 {
-    animation: sliderAnimation 12s infinite 4s; /* İkinci resim animasyonu gecikmeli */
-}
-
-.welcome-thumb-3 {
-    animation: sliderAnimation 12s infinite 8s; /* Üçüncü resim animasyonu gecikmeli */
-}
-
-/* Diğer resimlerin animasyonu gerektiği şekilde ayarlanabilir */
-
-@keyframes sliderAnimation {
-    0%, 33% {
-        opacity: 1; /* Görünür durum */
-    }
-    34%, 100% {
-        opacity: 0; /* Görünmez durum */
-    }
-}
 
 .welcome-area.bg-overlay::after {
     z-index: -2;
@@ -3548,30 +3505,56 @@ body.dark,
 
 /* ******************************
 :: 26.0 index.php CSS
-****************************** */
-.client-logos {
+****************************** */.client-logos {
     display: flex;
-    flex-wrap: wrap; /* Ekran küçüldüğünde alt satıra geçiş sağlar */
-    justify-content: space-between;
-    gap: 10px;
+    flex-wrap: wrap; /* Logoların alt satıra geçmesini sağlar */
+    justify-content: space-between; /* Logolar arasındaki boşlukları dengeler */
+    gap: 15px; /* Logolar arasında boşluk */
+    padding: 10px; /* Genel bir içerik boşluğu */
 }
 
 .single-logo {
-    flex: 0 1 13%; /* Her bir logo için genişlik %12.5 */
-    max-width: 25%;
+    flex: 0 1 calc(100% / 5 - 10px); /* Her bir logonun genişliğini dinamik ayarlar */
+    max-width: calc(100% / 5 - 10px);
     box-sizing: border-box;
     text-align: center;
-    height: 175; /* Sabit yükseklik */
+    height: auto; /* Yükseklik sınırlamasını kaldırır */
     display: flex;
     justify-content: center;
-    align-items: center; /* Resmi ortalar */
+    align-items: center; /* Logoları ortalar */
     padding: 10px;
 }
 
 .single-logo img {
-    max-width: 80%; /* Resim genişliği %80 */
-    height: auto; /* Yüksekliği korur */
+    max-width: 100%; /* Resmin tamamını kapsar */
+    max-height: 100px; /* Yüksekliği sınırlar */
+    width: auto; /* Oranı korur */
+    height: auto;
 }
+
+/* Mobil uyum için medya sorgusu */
+@media (max-width: 768px) {
+    .single-logo {
+        flex: 0 1 calc(100% / 3 - 10px); /* Mobilde üç logo yan yana */
+        max-width: calc(100% / 3 - 10px);
+    }
+
+    .single-logo img {
+        max-height: 80px; /* Mobilde daha küçük yükseklik */
+    }
+}
+
+@media (max-width: 480px) {
+    .single-logo {
+        flex: 0 1 calc(100% / 2 - 10px); /* Daha küçük ekranlarda iki logo yan yana */
+        max-width: calc(100% / 2 - 10px);
+    }
+
+    .single-logo img {
+        max-height: 70px; /* Daha küçük yükseklik */
+    }
+}
+
 
 /* Genel slider düzeni */
 /* Slider container */
