@@ -3217,157 +3217,102 @@ body.dark,
 /* ******************************
 :: 27.0 ürünler alt kısım CSS
 ****************************** */
-
-/* Kategori Kartı */
-.product-category-products .product-card {
+/* Genel Kart Stili */
+.product-card-row{
+    display: flex;
+    flex-wrap: wrap;  /* Kartlar yatayda ve satırlara yayılır */
+    gap: 20px;  /* Kartlar arasındaki boşluk */
+}
+.category-card, .subcategory-card, .product-card {
+    flex: 1 0 32%; /* Her satırda 3 kart, arada boşluk */
+    box-sizing: border-box;
     position: relative;
-    margin-bottom: 30px;
-    border-radius: 15px;  /* Yuvarlatılmış köşeler */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge */
-    overflow: hidden; /* Resmin taşmasını engeller */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover animasyonları */
-    background-color: #fff; /* Arka plan beyaz */
-    height: 250px; /* Kart boyutları küçültüldü */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 200px; /* Kart yüksekliği */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-color: #f9f9f9; /* Varsayılan arka plan */
 }
 
-/* Ürün Kartı */
-.product-category-products .product-item {
+
+/* Hover Efekti */
+.category-card:hover, .subcategory-card:hover, .product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20); /* Daha belirgin gölge */
+}
+
+/* Kategori, Alt Kategori ve Ürün Kutuları */
+.product-category-box {
     position: relative;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 10px; /* Yuvarlatılmış köşeler */
-    padding: 15px;
-    height: 250px; /* Kart boyutları küçültüldü */
+    width: 100%;
+    height: 100%; /* Kartın tamamını kaplar */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    transition: transform 0.5s ease, box-shadow 0.3s ease;
-    position: relative;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
-    background-color: white; /* Arka plan beyaz */
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.01); /* Varsayılan arka plan rengi */
 }
-
-/* Ürün Resmi */
-.product-category-products .product-item img {
-    object-fit: cover;
+.product-a{
     width: 100%;
-    height: 100%; /* Yükseklik kaldırıldı */
+    height: 100%;
+}
+/* Resim */
+.category-img, .subcategory-img, .product-img {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-    filter: brightness(0.4);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Oranları koruyarak tam oturur */
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+    visibility: hidden; /* Varsayılan olarak görünmez */
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease-in-out;
+    z-index: 0; /* Arka planda kalır */
 }
 
-/* Ürün Resmi Hover Efekti */
-.product-category-products .product-item:hover img {
-    opacity: 1;
+/* Hover Durumunda Resmi Göster */
+.category-card:hover .category-img,
+.subcategory-card:hover .subcategory-img,
+.product-card:hover .product-img {
     visibility: visible;
+    opacity: 1;
 }
 
-/* Kart Hover Efekti */
-.product-category-products .product-item:hover {
-    background-color: #f8f9fa;
-    transform: scale(1.05); /* Hover ile büyüme */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
-}
-
-/* Başlık Stili */
-.product-category-products .product-item h4 {
-    margin-top: 15px;
-    font-size: 16px; /* Başlık boyutu küçültüldü */
-    font-weight: bold;
-    color: #333;
-}
-
-/* Açıklama Stili */
-.product-category-products .product-item p {
-    font-size: 12px; /* Açıklama yazısı daha küçük */
-    color: #6c757d;
-    margin-top: 10px;
-}
-
-/* Buton Stili */
-.product-category-products .product-item .btn {
-    margin-top: 10px;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 5px;
-    background-color: #0d6efd;
-    border: none;
-}
-
-/* Buton Hover Efekti */
-.product-category-products .product-item .btn:hover {
-    background-color: #0a58ca;
-}
-
-/* Responsive Ayarlamalar */
-@media (max-width: 768px) {
-    /* Kart boyutları daha küçük olacak */
-    .product-category-products .product-item {
-        height: 200px; /* Yükseklik daha küçük */
-    }
-
-    .product-category-products .product-item img {
-        height: 100%; /* Resimler daha geniş olacak */
-    }
-
-    .product-category-products .product-item h4 {
-        font-size: 14px; /* Başlık boyutu daha küçük */
-    }
-
-    .product-category-products .product-item p {
-        font-size: 12px; /* Açıklama yazısı daha küçük */
-    }
-}
-
-/* Alt Kategori ve Ürün Kartları */
-.product-list-area .category-card,
-.product-list-area .subcategory-card,
-.product-list-area .product-card {
-    border-radius: 15px;  /* Yuvarlatılmış köşeler */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
-    overflow: hidden;  /* Resimlerin taşmasını engeller */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover animasyonu */
-    height: 200px; /* Yükseklik ayarlandı */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;  /* İçeriği dikey olarak ortalar */
-    align-items: center;  /* İçeriği yatay olarak ortalar */
-    text-align: center;  /* Metni ortalar */
-}
-
-/* Hover Efekti */
-.product-list-area .category-card:hover,
-.product-list-area .subcategory-card:hover,
-.product-list-area .product-card:hover {
-    transform: scale(1.05);  /* Hover ile büyüme */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
-}
-
-/* Alt Kategori Başlık */
-.product-category-box h4 {
+/* Metin Kutusu */
+.product-category-box-text, .product-subcategory-box-text, .product-item-text {
+    position: relative;
+    z-index: 1; /* Metin üstte kalır */
+    color: black; /* Varsayılan metin rengi */
     font-size: 18px;
-    margin-top: 10px;
     font-weight: bold;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
-/* Alt Kategori Açıklaması */
-.product-category-box p {
-    font-size: 14px;
-    color: #6c757d;
-    margin-top: 10px;
+/* Hover Durumunda Metin Rengi Beyaz */
+.category-card:hover .product-category-box-text,
+.subcategory-card:hover .product-subcategory-box-text,
+.product-card:hover .product-item-text {
+    color: white;
 }
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .category-card, .subcategory-card, .product-card {
+        height: 200px; /* Daha küçük ekranlarda kart yüksekliği azalır */
+    }
+    .product-category-box-text, .product-subcategory-box-text, .product-item-text {
+        font-size: 16px; /* Daha küçük yazı boyutu */
+    }
+}
+
 
 /* ******************************
 :: 27.0 product detail CSS
