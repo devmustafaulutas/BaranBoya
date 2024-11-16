@@ -3139,10 +3139,34 @@ body.dark,
 
 /* Başlık üzerine hover efekti */
 .products-category-box h3:hover {
-    color: #0056b3;
+    color: #357ac3;
 }
 .product-category-box {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* İkon ve başlık arası boşluk */
     justify-content: space-between;
+}
+.icon-container {
+    display: flex;
+    justify-content: center;
+}
+.icon-container svg {
+    width: 30px; /* İkon boyutu */
+    height: 30px;
+    fill: #555555; /* İkon rengi */
+    transition: transform 0.3s ease; /* Hover efekti */
+}
+
+.icon-container svg:hover {
+    transform: scale(1.1); /* Hover ile büyütme */
+}
+
+.text-alan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
 }
 /* Ok simgesinin animasyonu */
 .dropdown-toggle {
@@ -3328,6 +3352,7 @@ body.dark,
 .product-detail-area .product-image img {
     width: 100%;
     height: auto;
+    min-width: 100%;
     border-radius: 10px;
     transition: transform 0.3s ease; /* Sadece görselin büyümesini sağlamak */
 }
@@ -3350,7 +3375,8 @@ body.dark,
 }
 
 /* Ürün Açıklaması ve Diğer Metinler */
-.product-info p {
+
+.product-info-item {
     font-size: 1rem; /* Küçültülmüş yazı boyutu */
     color: #555;
     margin-bottom: 20px; /* Daha fazla boşluk */
@@ -3362,8 +3388,8 @@ body.dark,
 }
 
 /* Hover Efektleri (Büyüme ve Gölgeleme) */
-.product-info p:hover {
-    transform: scale(1.05); /* Hoverda kutu büyür */
+.product-info-item:hover {
+    transform: scale(1.02); /* Hoverda kutu büyür */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Gölge belirginleşir */
 }
 
@@ -3393,7 +3419,26 @@ body.dark,
     background-color: #3659a4;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
-
+.ambalaj-detail{
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.icon-span{
+    padding: 10px;
+}
+.product-detail-about{
+    padding: 18px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-top: 20px;
+}
+.product-detail-about-content{
+    margin-bottom: 10px;
+}
 /* Responsive Ayarlar */
 @media (max-width: 768px) {
     .product-detail-area .container {
