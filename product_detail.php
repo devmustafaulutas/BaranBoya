@@ -5,18 +5,10 @@ include "header.php";
 // Ürün ID'yi al
 $urun_id = isset($_GET['urun_id']) ? (int)$_GET['urun_id'] : 0;
 
-// Eğer geçerli bir ürün ID'si yoksa hata mesajı göster ve çık
-if ($urun_id <= 0) {
-    echo "<p>Geçersiz ürün ID'si.</p>";
-    exit;
-}
-
-// Ürün bilgilerini al (prepared statement ile güvenlik sağla)
-$product_query = $con->prepare("SELECT * FROM urunler WHERE id = ?");
-$product_query->bind_param("i", $urun_id);
-$product_query->execute();
-$product_result = $product_query->get_result();
-$product = $product_result->fetch_array();
+// Ürün bilgilerini al
+$product_query = "SELECT * FROM urunler WHERE id = $urun_id";
+$product_result = mysqli_query($con, $product_query);
+$product = mysqli_fetch_array($product_result);
 
 // Ürün bulunamadıysa yönlendirme yap
 if (!$product) {
@@ -34,36 +26,28 @@ $category_name = '';
 $subcategory_name = '';
 $subSubcategory_name = '';
 
-// Kategoriyi al (prepared statement ile güvenlik sağla)
-$category_query = $con->prepare("SELECT * FROM kategoriler WHERE id = ?");
-$category_query->bind_param("i", $kategori_id);
-$category_query->execute();
-$category_result = $category_query->get_result();
-$category = $category_result->fetch_array();
+$category_query = mysqli_query($con, "SELECT * FROM kategoriler WHERE id = $kategori_id");
+$category = mysqli_fetch_array($category_query);
 if ($category) {
     $category_name = $category['isim'];
 }
 
-// Alt kategoriyi al (prepared statement ile güvenlik sağla)
-$subcategory_query = $con->prepare("SELECT * FROM alt_kategoriler WHERE id = ?");
-$subcategory_query->bind_param("i", $alt_kategori_id);
-$subcategory_query->execute();
-$subcategory_result = $subcategory_query->get_result();
-$subcategory = $subcategory_result->fetch_array();
+// Alt kategoriyi al
+$subcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE id = $alt_kategori_id");
+$subcategory = mysqli_fetch_array($subcategory_query);
 if ($subcategory) {
     $subcategory_name = $subcategory['isim'];
 }
 
-// Alt alt kategoriyi al (prepared statement ile güvenlik sağla)
-$subSubcategory_query = $con->prepare("SELECT * FROM alt_kategoriler_alt WHERE id = ?");
-$subSubcategory_query->bind_param("i", $alt_kategori_alt_id);
-$subSubcategory_query->execute();
-$subSubcategory_result = $subSubcategory_query->get_result();
-$subSubcategory = $subSubcategory_result->fetch_array();
+// Alt alt kategoriyi al
+$subSubcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE id = $alt_kategori_id");
+$subSubcategory = mysqli_fetch_array($subSubcategory_query);
 if ($subSubcategory) {
     $subSubcategory_name = $subSubcategory['isim'];
 }
+
 ?>
+
 
 <!-- ***** Breadcrumb Area Start ***** -->
 <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
@@ -172,6 +156,7 @@ if ($subSubcategory) {
                         </div>
                         <div class="text-alan">
                             <small>Döküm Tipi</small>
+                            <?php echo $subSubcategory_name; ?>
                         </div>
                         <span class="dropdown-toggle" id="dropdownToggle3"></span>
                     </h3>
@@ -198,12 +183,12 @@ if ($subSubcategory) {
     </div>
 </section>
 <!--====== Product Detail Area Start ======-->
-<section class="section product-detail-area ptb_100">
+<section class="section product-detail-area ptb_25">
     <div class="container">
         <div class="row">
             <div class="col-md-6 product-image">
                 <!-- Ürün görseli -->
-                <img src="uploads/<?php echo $product['resim']; ?>" class="img-fluid">
+                <img src="<?php echo $product['resim']; ?>"  id="product-detail-img" class="img-fluid">
             </div>
             <div class="col-md-6 product-info">
                 <!-- Ürün başlık ve açıklaması -->

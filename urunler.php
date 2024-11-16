@@ -5,6 +5,7 @@ include "header.php";
 // Kategori ve alt kategori parametrelerini alın
 $kategori_id = isset($_GET['kategori_id']) ? (int)$_GET['kategori_id'] : 0;
 $alt_kategori_id = isset($_GET['alt_kategori_id']) ? (int)$_GET['alt_kategori_id'] : 0;
+$alt_kategori_alt_id = isset($_GET['alt_kategori_alt_id']) ? (int)$_GET['alt_kategori_alt_id'] : 0;
 
 // Breadcrumb'da kullanılacak değişkenler
 $category_name = '';
@@ -14,15 +15,36 @@ $subcategory_name = '';
 if ($kategori_id) {
     $category_query = mysqli_query($con, "SELECT * FROM kategoriler WHERE id = $kategori_id");
     $category = mysqli_fetch_array($category_query);
-    $category_name = $category['isim'] ?? '';
+    // Null kontrolü ekleyin
+    if ($category) {
+        $category_name = $category['isim'] ?? '';
+    } else {
+        $category_name = 'Kategori Bulunamadı'; // Yedek bir değer verin
+    }
 }
 
-// Eğer alt kategori id varsa, alt kategori adını al
 if ($alt_kategori_id) {
     $subcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE id = $alt_kategori_id");
     $subcategory = mysqli_fetch_array($subcategory_query);
-    $subcategory_name = $subcategory['isim'] ?? '';
+    // Null kontrolü
+    if ($subcategory) {
+        $subcategory_name = $subcategory['isim'] ?? '';
+    } else {
+        $subcategory_name = 'Alt Kategori Bulunamadı';
+    }
 }
+
+if ($alt_kategori_alt_id) {
+    $subSubcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE id = $alt_kategori_alt_id");
+    $subSubcategory = mysqli_fetch_array($subSubcategory_query);
+    // Null kontrolü
+    if ($subSubcategory) {
+        $subSubcategory_name = $subSubcategory['isim'] ?? '';
+    } else {
+        $subSubcategory_name = 'Alt Kategori Alt Bulunamadı';
+    }
+}
+
 
 
 ?>
@@ -133,24 +155,25 @@ if ($alt_kategori_id) {
                         </div>
                         <div class="text-alan">
                             <small>Döküm Tipi</small>
+                            <?php echo $subSubcategory_name; ?>
                         </div>
                         <span class="dropdown-toggle" id="dropdownToggle3"></span>
                     </h3>
                     <div class="products-dropdown-menu" aria-labelledby="dropdownToggle3">
                         <ul>
-                        <div class="products-dropdown-menu" aria-labelledby="dropdownToggle2">
-                        <?php
-                        if ($kategori_id && $alt_kategori_id) {
-                            $subSubcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = $alt_kategori_id");
-                            if (mysqli_num_rows($subSubcategories_query) > 0) {
-                                echo '<ul>';
-                                while ($subSubcategory = mysqli_fetch_array($subSubcategories_query)) {
-                                    echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id='.$kategori_id.'&alt_kategori_id='.$alt_kategori_id.'&alt_kategori_alt_id='.$subSubcategory['id'].'">'.$subSubcategory['isim'].'</a></li>';
+                            <div class="products-dropdown-menu" aria-labelledby="dropdownToggle2">
+                            <?php
+                            if ($kategori_id && $alt_kategori_id) {
+                                $subSubcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = $alt_kategori_id");
+                                if (mysqli_num_rows($subSubcategories_query) > 0) {
+                                    echo '<ul>';
+                                    while ($subSubcategory = mysqli_fetch_array($subSubcategories_query)) {
+                                        echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id='.$kategori_id.'&alt_kategori_id='.$alt_kategori_id.'&alt_kategori_alt_id='.$subSubcategory['id'].'">'.$subSubcategory['isim'].'</a></li>';
+                                    }
+                                    echo '</ul>';
                                 }
-                                echo '</ul>';
                             }
-                        }
-                        ?>
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -163,6 +186,7 @@ if ($alt_kategori_id) {
     <div class="container">
         <div class="row product-card-row">
             <?php
+                // Ana kategori ve alt kategori ID'si olmayan durum
                 if (!$kategori_id && !$alt_kategori_id) {
                     $categories_query = mysqli_query($con, "SELECT * FROM kategoriler");
                     while ($category = mysqli_fetch_array($categories_query)) {
@@ -178,47 +202,93 @@ if ($alt_kategori_id) {
                         echo '</div>';
                     }
                 }
-
-            elseif ($kategori_id && !$alt_kategori_id) {
-                $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = $kategori_id");
-                while ($subcategory = mysqli_fetch_array($subcategories_query)) {
-                    echo '<div class="col-md-4 mb-4 subcategory-card">'; 
-                    echo '<a class="product-a" href="urunler.php?kategori_id=' . $kategori_id . '&alt_kategori_id=' . $subcategory['id'] . '">';
-                    echo '<div class="product-category-box">';
-                    echo '<img src="' . $subcategory['resim'] . '" class="category-img img-fluid">';
-                    echo '<div class="product-subcategory-box-text">';
-                    echo '<h5>' . $subcategory['isim'] . '</h5>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</a>';
-                    echo '</div>';
-                }
-            }
-            elseif ($alt_kategori_id) {
-                $products_query = mysqli_query($con, "SELECT * FROM urunler WHERE alt_kategori_id = $alt_kategori_id");
-                if (mysqli_num_rows($products_query) > 0) {
-                    while ($product = mysqli_fetch_array($products_query)) {
-                        echo '<div class="col-md-4 mb-4 product-card">';
-                        echo '<a class="product-a" href="product_detail?urun_id=' . $product['id'] . '" class="product-card-link">';
-                        echo '<div class="product-item">';
-                        echo '<img src="' . $product['resim'] . '" class="product-img img-fluid">';
-                        echo '<div class="product-item-text">';
-                        echo '<h4>' . $product['isim'] . '</h4>';
-                        echo '<p>' . $product['aciklama'] . '</p>';
+                
+                // Kategori seçildi ve alt kategori yok
+                elseif ($kategori_id && !$alt_kategori_id) {
+                    $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = $kategori_id");
+                    while ($subcategory = mysqli_fetch_array($subcategories_query)) {
+                        echo '<div class="col-md-4 mb-4 subcategory-card">'; 
+                        echo '<a class="product-a" href="urunler.php?kategori_id=' . $kategori_id . '&alt_kategori_id=' . $subcategory['id'] . '">';
+                        echo '<div class="product-category-box">';
+                        echo '<img src="' . $subcategory['resim'] . '" class="category-img img-fluid">';
+                        echo '<div class="product-subcategory-box-text">';
+                        echo '<h5>' . $subcategory['isim'] . '</h5>';
                         echo '</div>';
                         echo '</div>';
                         echo '</a>';
                         echo '</div>';
                     }
-                } else {
-                    echo '<p>Bu alt kategoride ürün bulunmamaktadır.</p>';
                 }
-            }
+
+                // Alt kategori seçildi ve alt kategori altı var
+                elseif ($alt_kategori_id && !$alt_kategori_alt_id) {
+                    // Alt kategori altı var mı kontrol et
+                    $subSubcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = $alt_kategori_id");
+                    
+                    // Eğer alt kategori altı varsa
+                    if (mysqli_num_rows($subSubcategories_query) > 0) {
+                        while ($subSubcategory = mysqli_fetch_array($subSubcategories_query)) {
+                            echo '<div class="col-md-4 mb-4 subcategory-card">';
+                            echo '<a class="product-a" href="urunler.php?kategori_id=' . $kategori_id . '&alt_kategori_id=' . $alt_kategori_id . '&alt_kategori_alt_id=' . $subSubcategory['id'] .'">';
+                            echo '<div class="product-category-box">';
+                            echo '<img src="' . $subSubcategory['resim'] . '" class="category-img img-fluid">';
+                            echo '<div class="product-subcategory-box-text">';
+                            echo '<h5>' . $subSubcategory['isim'] . '</h5>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</a>';
+                            echo '</div>';
+                        }
+                    } 
+                    // Eğer alt kategori altı yoksa, direkt ürünleri listele
+                    else {
+                        $products_query = mysqli_query($con, "SELECT * FROM urunler WHERE alt_kategori_id = $alt_kategori_id");
+                        if (mysqli_num_rows($products_query) > 0) {
+                            while ($product = mysqli_fetch_array($products_query)) {
+                                echo '<div class="col-md-4 mb-4 product-card">';
+                                echo '<a class="product-a" href="product_detail?urun_id=' . $product['id'] . '" class="product-card-link">';
+                                echo '<div class="product-item">';
+                                echo '<img src="' . $product['resim'] . '" class="product-img img-fluid">';
+                                echo '<div class="product-item-text">';
+                                echo '<h4>' . $product['isim'] . '</h4>';
+                                echo '<p>' . $product['aciklama'] . '</p>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</a>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<p>Bu alt kategoride ürün bulunmamaktadır.</p>';
+                        }
+                    }
+                }
+
+                // Eğer alt kategori alt ID'si de varsa, ürünleri listele
+                elseif ($alt_kategori_alt_id) {
+                    $products_query = mysqli_query($con, "SELECT * FROM urunler WHERE alt_kategori_alt_id = $alt_kategori_alt_id");
+                    if (mysqli_num_rows($products_query) > 0) {
+                        while ($product = mysqli_fetch_array($products_query)) {
+                            echo '<div class="col-md-4 mb-4 product-card">';
+                            echo '<a class="product-a" href="product_detail?urun_id=' . $product['id'] . '" class="product-card-link">';
+                            echo '<div class="product-item">';
+                            echo '<img src="' . $product['resim'] . '" class="product-img img-fluid">';
+                            echo '<div class="product-item-text">';
+                            echo '<h4>' . $product['isim'] . '</h4>';
+                            echo '<p>' . $product['aciklama'] . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</a>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<p>Bu alt kategoride ürün bulunmamaktadır.</p>';
+                    }
+                }
             ?>
         </div>
     </div>
 </section>
-            
+
 <!-- Ürünler Listesi Bitiş -->
 
 <?php include "footer.php"; ?>

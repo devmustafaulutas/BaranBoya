@@ -3344,7 +3344,6 @@ body.dark,
 /* Genel Stil Ayarları */
 .product-detail-area {
     background-color: #f9f9f9;
-    padding: 100px 0;
     font-family: 'Arial', sans-serif;
 }
 
@@ -3412,7 +3411,9 @@ body.dark,
     cursor: pointer;
     margin-top: 20px;
 }
-
+#product-detail-img{
+    height: 90%;
+}
 /* Hover Efekti Buton */
 .product-info button:hover {
     transform: scale(1.05); /* Hoverda buton büyür */
