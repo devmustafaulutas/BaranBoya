@@ -10,6 +10,7 @@ $alt_kategori_alt_id = isset($_GET['alt_kategori_alt_id']) ? (int)$_GET['alt_kat
 // Breadcrumb'da kullanılacak değişkenler
 $category_name = '';
 $subcategory_name = '';
+$subSubcategory_name = '';
 
 // Eğer kategori id varsa, kategori adını al
 if ($kategori_id) {
@@ -271,7 +272,7 @@ if ($alt_kategori_alt_id) {
                             echo '<div class="col-md-4 mb-4 product-card">';
                             echo '<a class="product-a" href="product_detail?urun_id=' . $product['id'] . '" class="product-card-link">';
                             echo '<div class="product-item">';
-                            echo '<img src="' . $product['resim'] . '" class="product-img img-fluid">';
+                            echo '<img id="product-resim" src="' . $product['resim'] . '" class="product-img img-fluid">';
                             echo '<div class="product-item-text">';
                             echo '<h4>' . $product['isim'] . '</h4>';
                             echo '<p>' . $product['aciklama'] . '</p>';
