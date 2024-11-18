@@ -1789,80 +1789,249 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 /* ******************************
 :: 11.0 SERVICE AREA CSS
 ****************************** */
-.service-area {
-    z-index: 1;
+/* Başlık ve metinlere modern bir görünüm */
+#index-sevices-tittle {
+    font-size: 70px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -1.5px;
+    color: transparent; /* Başlangıçta yazı şeffaf olacak */
+    background-image: linear-gradient(45deg, #1e90ff, #40e0d0); /* Mavi ve turkuaz geçişi */
+    background-clip: text; /* Yazıyı renk geçişine uygun hale getirir */
+    -webkit-background-clip: text; /* Safari uyumluluğu */
+    position: relative;
+    text-align: center;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    transition: all 0.4s ease-in-out; /* Animasyon */
 }
 
+#index-sevices-tittle h2 {
+    margin: 0;
+    padding: 0;
+    font-size: inherit; /* CSS'ten miras alacak şekilde */
+    color: inherit;
+}
+
+/* Hover durumunda başlıkta renk değişimi ve büyüme */
+#index-sevices-tittle:hover {
+    transform: scale(1.1); /* Hoverda büyüme */
+    letter-spacing: 0px; /* Harfler arasındaki boşluk arttıkça bozulma önlenir */
+}
+
+/* Başlık altındaki açıklama metni */
+#index-sevices-tittle p {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7); /* Hafif gri metin */
+    margin-top: 20px;
+    font-weight: 400;
+}
+
+/* Hover durumunda başlık altında animasyonlu renk geçişi */
+#index-sevices-tittle:hover p {
+    color: rgba(64, 224, 208, 1); /* Hoverda açıklama metni turkuaz olur */
+    transform: translateY(10px); /* Hoverda açıklama metni biraz kayar */
+}
+
+/* İkon kutuları ve hover efektleri */
 .single-service > span {
     display: inline-block;
-    height: 4.5rem;
-    width: 4.5rem;
-    line-height: 4.5rem;
+    height: 6rem;
+    width: 6rem;
+    line-height: 6rem;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 50%; /* Yuvarlak ikonlar */
+    background-color: rgba(0, 0, 0, 0.1); /* Hafif gri arka plan */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    transition: all 0.3s ease-in-out;
+    position: relative; /* Konumlandırma için */
 }
 
+/* İkon rengi ve boyutlandırma */
 .single-service > span::before {
-    font-size: 2.5rem;
-    margin: 0;
+    font-size: 3rem; /* İkon boyutunu büyüttüm */
+    color: #40e0d0; /* Turkuaz tonu */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
+/* Arka plan renkleri */
 .single-service > span.icon-bg-1 {
-    background-color: rgba(190, 99, 249, 0.15);
+    background-color: rgba(190, 99, 249, 0.3); /* Hafif mor */
 }
 
 .single-service > span.icon-bg-2 {
-    background-color: rgba(38, 198, 218, 0.15);
+    background-color: rgba(38, 198, 218, 0.3); /* Açık mavi */
 }
 
 .single-service > span.icon-bg-3 {
-    background-color: rgba(252, 87, 59, 0.15);
+    background-color: rgba(252, 87, 59, 0.3); /* Mercan kırmızısı */
 }
 
 .single-service > span.icon-bg-4 {
-    background-color: rgba(52, 255, 146, 0.15);
+    background-color: rgba(52, 255, 146, 0.3); /* Parlak yeşil */
 }
 
 .single-service > span.icon-bg-5 {
-    background-color: rgba(255, 210, 0, 0.15);
+    background-color: rgba(255, 210, 0, 0.3); /* Sarı */
 }
 
 .single-service > span.icon-bg-6 {
-    background-color: rgba(255, 157, 69, 0.15);
+    background-color: rgba(255, 157, 69, 0.3); /* Turuncu */
 }
 
+/* Hover efektleri ve ikon değişimi */
+.single-service > span:hover {
+    transform: scale(1.2); /* Hoverda ikonu büyütme */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
+    background-color: rgba(0, 0, 0, 0.2); /* Hoverda daha koyu arka plan */
+}
+
+.single-service > span:hover::before {
+    color: #ffffff; /* Hoverda ikon rengi beyaz */
+    transform: translateY(-5px); /* İkonu hafif yukarı kaydır */
+}
+
+/* Hizmet başlıkları */
 .single-service h3 {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 600;
-    line-height: 0.9em;
-    letter-spacing: -1.6px;
+    color: #1e90ff; /* Açık mavi */
+    text-transform: capitalize;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
 }
 
+/* Başlık hover efektleri */
+.single-service h3:hover {
+    color: #40e0d0; /* Hoverda turkuaz rengi */
+    transform: translateY(-8px); /* Başlık daha fazla kayacak */
+}
+
+/* Hizmet açıklamaları */
+.single-service p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5em;
+    margin-top: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* Hoverda açıklama opaklığını artır */
+.single-service:hover p {
+    opacity: 1;
+}
+
+/* Hizmet kartları */
 .single-service.service-gallery {
-    margin-bottom: 45px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.01);
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.01);
-    -webkit-transition: -webkit-box-shadow, -webkit-transform .4s cubic-bezier(.4, 0, .2, 1);
-    transition: -webkit-box-shadow, -webkit-transform .4s cubic-bezier(.4, 0, .2, 1);
-    transition: box-shadow, transform .4s cubic-bezier(.4, 0, .2, 1);
-    transition: box-shadow, transform .4s cubic-bezier(.4, 0, .2, 1), -webkit-box-shadow, -webkit-transform .4s cubic-bezier(.4, 0, .2, 1);
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease-in-out;
 }
 
-.single-service.service-gallery .service-content {
-    padding: 2rem;
-}
-
+/* Kart hover efektleri */
 .single-service.service-gallery:hover {
-    -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.05);
-    -webkit-transform: translateY(-10px);
-    transform: translateY(-10px);
+    transform: translateY(-15px); /* Kart yukarı kayar */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Daha büyük gölge */
 }
 
-.homepage-6 .single-service.service-gallery {
-    -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.08);
-    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.08);
+/* İkonlar arasındaki boşluk */
+.index-icon-container {
+    display: flex;
+    justify-content: space-around; /* Eşit aralıkla yerleştir */
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* Mobil uyum */
+@media (max-width: 768px) {
+    .single-service > span {
+        height: 4.5rem;
+        width: 4.5rem;
+        line-height: 4.5rem;
+    }
+
+    .single-service h3 {
+        font-size: 22px; /* Başlık boyutunu mobilde küçült */
+    }
+
+    .single-service p {
+        font-size: 14px; /* Açıklama boyutunu küçült */
+    }
+}
+
+
+/* Hizmet açıklamaları */
+.single-service p {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    transition: opacity 0.3s ease;
+}
+
+/* Hoverda açıklama opaklığını artır */
+.single-service:hover p {
+    opacity: 1;
+}
+
+/* Hizmet kartlarının hover efekti */
+.single-service.service-gallery:hover {
+    transform: translateY(-12px); /* Hoverda biraz yukarı kaydır */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
+}
+
+/* Kartın içeriği için düzenleme */
+.single-service.service-gallery .service-content {
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Daha büyük gölge */
+    transition: all 0.4s ease-in-out;
+}
+
+/* Kart hoverda içerik büyümesi */
+.single-service.service-gallery:hover .service-content {
+    transform: scale(1.05); /* Hoverda içerik biraz büyür */
+}
+
+/* Mobil düzenlemeler */
+@media (max-width: 768px) {
+    .single-service h3 {
+        font-size: 24px; /* Başlık boyutu mobilde küçülür */
+    }
+
+    .single-service p {
+        font-size: 16px; /* Açıklama boyutu mobilde küçülür */
+    }
+
+    .single-service > span {
+        height: 4rem;
+        width: 4rem;
+        line-height: 4rem;
+    }
+}
+
+/* İkonun sağa sabitlenmesi */
+.index-icon-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* İkonlar arasına boşluk ekleyelim */
+}
+
+
+/* İkonların etrafındaki linkleri düzenleme */
+.index-icon-container a {
+    display: inline-block;
+    padding: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Hover animasyonu */
+}
+
+.index-icon-container a:hover {
+    transform: scale(1.2); /* Hoverda ikonu büyütme */
 }
 
 /* ******************************
@@ -3583,7 +3752,8 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 
 /* ******************************
 :: 26.0 index.php CSS
-****************************** */.client-logos {
+****************************** */
+.client-logos {
     display: flex;
     flex-wrap: wrap; /* Logoların alt satıra geçmesini sağlar */
     justify-content: space-between; /* Logolar arasındaki boşlukları dengeler */

@@ -94,40 +94,46 @@ print "
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-7">
                         <!-- Section Heading -->
-                        <div class="section-heading text-center">
-                            <h2><?php print $service_title?></h2>
-                            <p class="d-none d-sm-block mt-4"><?php print $service_text?></p>
+                        <div id="index-sevices-tittle" class="section-heading text-center" data-text="<?php echo $service_title; ?>">
+                            <h2><?php echo $service_title; ?></h2>
+                            <p class="d-none d-sm-block mt-4"><?php echo $service_text; ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
 
                 <?php
-				   $qs="SELECT * FROM  service ORDER BY id DESC LIMIT 6";
+                $qs = "SELECT * FROM service ORDER BY id DESC LIMIT 6";  // Veritabanından son 6 hizmeti al
 
+                $r1 = mysqli_query($con, $qs);  // Sorguyu çalıştır
 
- $r1 = mysqli_query($con,$qs);
+                while ($rod = mysqli_fetch_array($r1)) {  // Sonuçları döngüyle al
+                    $id = $rod['id'];  // Hizmetin ID'si
+                    $serviceg = $rod['service_title'];  // Hizmetin başlığı
+                    $service_desc = $rod['service_desc'];  // Hizmetin açıklaması
+                    $icon = $rod['icon'];  // Veritabanından çekilen ikon sınıfı
 
-while($rod = mysqli_fetch_array($r1))
-{
-	$id="$rod[id]";
-	$serviceg="$rod[service_title]";
-	$service_desc="$rod[service_desc]";
+                    // HTML çıktısını oluştur
+                    print "
+                    <div class='col-12 col-md-6 col-lg-4'>
+                        <!-- Single Service -->
+                        <div class='single-service p-4' style='border: solid 1px #788282;'>
+                            <h3 class='my-3'>$serviceg</h3>
+                            <p>$service_desc</p>
+                            <div class='index-icon-container'>
+                                <a class='service-btn' href='#'>Learn More</a>
+                                <a href='#'>
+                                    $icon
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    ";
+                }
+                ?>
 
-print "
-<div class='col-12 col-md-6 col-lg-4'>
-<!-- Single Service -->
-<div class='single-service p-4'  style='border: solid 1px #788282;'>
-    <h3 class='my-3'>$serviceg</h3>
-    <p>$service_desc</p>
-    <a class='service-btn mt-3' href='servicedetail.php?id=$id'>Learn More</a>
-</div>
-</div>
-
-";
-}
-?>
-                   </div>
+                </div>
             </div>
             <!-- Shape Bottom -->
             <div class="shape shape-bottom">
