@@ -658,7 +658,7 @@ img {
 }
 
 .bg-overlay::after {
-    background: linear-gradient(to bottom, #40E0D0 20%, #000080 100%);
+    background: linear-gradient(to right, #40e0d0, #1e90ff); /* Turkuaz ve mavi geçiş */
 }
 
 
@@ -717,11 +717,13 @@ img {
 
 /*BACKGROUND IMAGES*/
 .welcome-area {
-    background: rgba(0, 0, 0, 0) url("../img/bg/welcome_bg.jpg") no-repeat fixed center center / cover;
+    background: rgba(0, 0, 0, 0) url("../img/baranboya/unnamed.jpg") no-repeat center center;
+    background-size: cover; /* Alanı tamamen kaplar, orantıyı korur */
 }
 
+
 .homepage-2 .welcome-area {
-    background: rgba(0, 0, 0, 0) url("../img/bg/welcome_bg_2.png") no-repeat scroll center center / cover;
+    background: rgba(0, 0, 0, 0) url("../img/baranboya/unnamed.png") no-repeat scroll center center / cover;
 }
 
 .homepage-3 .welcome-area {
@@ -729,11 +731,11 @@ img {
 }
 
 .homepage-4 .welcome-area {
-    background: rgba(0, 0, 0, 0) url("../img/bg/welcome_bg_4.jpg") no-repeat fixed center center / cover;
+    background: rgba(0, 0, 0, 0) url("../img/baranboya/unnamed.png") no-repeat fixed center center / cover;
 }
 
 .cta-area {
-    background: rgba(0, 0, 0, 0) url("../img/bg/cta_bg.jpg") no-repeat fixed center center / cover;
+    background: rgba(0, 0, 0, 0) url("../img/baranboya/unnamed.png") no-repeat fixed center center / cover;
 }
 
 .breadcrumb-area {
@@ -3654,9 +3656,16 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 /* ******************************
 :: 27.0 navbar subcategorys CSS
 ****************************** */
-
+#header-container{
+    font-family: 'Open Sans', sans-serif;
+    font-size: larger;
+}
+#home > div.container > div > div > div > h1{
+    font-family: 'Open Sans', sans-serif;
+}
 #menu > div > div > div.menu.modal-body > div > div > ul > li.nav-item.dropdown > button{
     border: none;
+    background:none;
 }
 
 /* Alt menülerin görünürlüğünü başlangıçta gizle */
@@ -3993,5 +4002,110 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
         margin-bottom: 15px;
         width: 100%;
         height: auto;
+    }
+}
+/* SEKTÖRLERİMİZ SECTİON */
+/* Genel Ayarlar */
+#sektorler {
+    background: linear-gradient(to right, #40e0d0, #1e90ff); /* Turkuaz ve mavi geçiş */
+    padding: 80px 0; /* Üst-alt boşluk */
+    text-align: center; /* Başlık ve kartları ortalayalım */
+}
+
+#sektorler h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+#sektorler p {
+    font-size: 1.4rem;
+    color: #ffffff;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* Sektör Kartları */
+.sector-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+    margin: 10px 0; /* Kartlar arasına boşluk ekleyelim */
+}
+
+.sector-card img {
+    width: 100%;
+    height: 400px; /* Yüksekliği sabitliyoruz, tüm görsellerin aynı yüksekliğe sahip olmasını sağlıyoruz */
+    object-fit: cover; /* Görsellerin orantısını bozmadan kesilmesini sağlar */
+    transition: transform 0.4s ease;
+}
+
+.sector-card:hover img {
+    transform: scale(1.05); /* Hoverda görselleri %5 oranında büyütüyoruz */
+}
+#review > div > div.row.justify-content-center > div > div > h2 {
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+
+}
+.sector-card .sector-card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+.sector-card:hover {
+    transform: translateY(-15px); /* Hoverda yukarı kaydırma */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Yoğun gölge efekti */
+}
+
+/* Sektörler Row Ayarı */
+.sector-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column; /* Kartlar tek sütun halinde */
+    gap: 30px; /* Kartlar arasında boşluk */
+    margin-bottom: 50px;
+}
+
+.sector-card {
+    flex: 0 0 80%; /* Kartlar genişliği %80 olacak */
+}
+
+@media (max-width: 1200px) {
+    .sector-card {
+        flex: 0 0 85%; /* Tablet boyutunda kartlar %85 genişliğinde */
+    }
+}
+
+@media (max-width: 768px) {
+    .sector-card {
+        flex: 0 0 100%; /* Mobilde kartlar %100 genişliğinde olacak */
+    }
+
+    #sektorler h2 {
+        font-size: 2.5rem;
+    }
+
+    #sektorler p {
+        font-size: 1.2rem;
     }
 }

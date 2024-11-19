@@ -96,7 +96,7 @@ CREATE TABLE `urunler` (
 
 INSERT INTO `kategoriler` (`isim`,`resim`) VALUES
 
-('Reçineler','assets/img/categorys/YAT 1.jpeg'),
+('Reçineler','category.png'),
 ('Jelkotlar','category.png'),
 ('Cam Elyaflar','category.png'),
 ('Kalıp Ayırıcılar','category.png'),
@@ -105,75 +105,75 @@ INSERT INTO `kategoriler` (`isim`,`resim`) VALUES
 ('Sarf Malzemeleri','category.png');
 
 INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`, `resim`) VALUES
-('Polyester Reçineler', 1, 'assets/img/categorys/YAT 1.jpeg'),
-('Vinilester Reçineler', 1, 'category.png'),
-('Epoksi Reçineler', 1, 'category.png'),
-('Poliüretan Reçine', 1, 'category.png'),
-('Reçine Yardımcıları', 1, 'category.png'),
+('Polyester Reçineler', 1, 'assets/img/categorys/YAT 1.jpeg'),1
+('Vinilester Reçineler', 1, 'category.png'),2
+('Epoksi Reçineler', 1, 'category.png'),3
+('Poliüretan Reçine', 1, 'category.png'),4
+('Reçine Yardımcıları', 1, 'category.png')5,
 
-('Genel Amaçlı Jelkotlar', 2, 'category.png'),
-('Performans Jelkotlar', 2, 'category.png'),
-('Yüksek Performanslı Jelkotlar', 2, 'category.png'),
-('Zımparalanabilir Jelkotlar', 2, 'category.png'),
-('Kalıplama Jelkotları', 2, 'category.png'),
-('Marin Uygulama Jelkotları', 2, 'category.png'),
-('Kimyasal Dayanımlı Jelkotlar', 2, 'category.png'),
-('Alev İlerletmeyen Jelkotlar', 2, 'category.png'),
+('Genel Amaçlı Jelkotlar', 2, 'category.png'),6
+('Performans Jelkotlar', 2, 'category.png'),7
+('Yüksek Performanslı Jelkotlar', 2, 'category.png'),8
+('Zımparalanabilir Jelkotlar', 2, 'category.png'),9
+('Kalıplama Jelkotları', 2, 'category.png'),10
+('Marin Uygulama Jelkotları', 2, 'category.png'),11
+('Kimyasal Dayanımlı Jelkotlar', 2, 'category.png'),12
+('Alev İlerletmeyen Jelkotlar', 2, 'category.png'),13
 
-('Cam Elyaf Keçeler', 3, 'category.png'),
-('Cam Elyaf Dokuma Kumaşlar', 3, 'category.png'),
-('Karbon Elyaf Dokuma Kumaşlar', 3, 'category.png'),
-('Fitil İp Elyaflar', 3, 'category.png'),
-('Kırpık Elyaflar', 3, 'category.png'),
-('Yüzey Tülü (Kortel)', 3, 'category.png'),
-('Corematlar', 3, 'category.png'),
+('Cam Elyaf Keçeler', 3, 'category.png'),14
+('Cam Elyaf Dokuma Kumaşlar', 3, 'category.png'),15
+('Karbon Elyaf Dokuma Kumaşlar', 3, 'category.png'),16
+('Fitil İp Elyaflar', 3, 'category.png'),17
+('Kırpık Elyaflar', 3, 'category.png'),18
+('Yüzey Tülü (Kortel)', 3, 'category.png'),19
+('Corematlar', 3, 'category.png'),20
 
-('Vaks Kalıp Ayırıcılar', 4, 'category.png'),
-('Sprey Kalıp Ayırıcılar', 4, 'category.png'),
-('Sıvı Kalıp Ayırıcılar', 4, 'category.png'),
+('Vaks Kalıp Ayırıcılar', 4, 'category.png'),21
+('Sprey Kalıp Ayırıcılar', 4, 'category.png'),22
+('Sıvı Kalıp Ayırıcılar', 4, 'category.png'),23
 
-('Kalsitler', 5, 'category.png'),
-('Talk Pudrası', 5, 'category.png'),
-('Aerosil', 5, 'category.png'),
-('Çinko Streat', 5, 'category.png'),
-('Alüminyum Tozu', 5, 'category.png'),
-('Alev Geciktirici Dolgu', 5, 'category.png'),
+('Kalsitler', 5, 'category.png'),24
+('Talk Pudrası', 5, 'category.png'),25
+('Aerosil', 5, 'category.png'),26
+('Çinko Streat', 5, 'category.png'),27
+('Alüminyum Tozu', 5, 'category.png'),28
+('Alev Geciktirici Dolgu', 5, 'category.png'),29
 
-('Polyester ve Poliüretan Renklendirici Pigmentler', 6, 'category.png'),
-('Titandioksitler', 6, 'category.png'),
-('Epoksi Reçine Pigmentler', 6, 'category.png'),
-('RTV-2 Kalıp Silikonu Pigmentleri', 6, 'category.png'),
+('Polyester ve Poliüretan Renklendirici Pigmentler', 6, 'category.png'),30
+('Titandioksitler', 6, 'category.png'),31
+('Epoksi Reçine Pigmentler', 6, 'category.png'),32
+('RTV-2 Kalıp Silikonu Pigmentleri', 6, 'category.png'),33
 
-('Fırçalar ve Rulolar', 7, 'category.png'),
-('Tulumlar ve Maskeler', 7, 'category.png'),
-('Jelkot Tabancaları', 7, 'category.png'),
-('Zımpara Makineleri ve Zımparalar', 7, 'category.png'),
-('Polyester Ezme Rulolar', 7, 'category.png'),
-('Bantlar', 7, 'category.png'),
-('Ölçüm ve Dozajlama Ekipmanları', 7, 'category.png');
+('Fırçalar ve Rulolar', 7, 'category.png'),34
+('Tulumlar ve Maskeler', 7, 'category.png'),35
+('Jelkot Tabancaları', 7, 'category.png'),36
+('Zımpara Makineleri ve Zımparalar', 7, 'category.png'),37
+('Polyester Ezme Rulolar', 7, 'category.png'),38
+('Bantlar', 7, 'category.png'),39
+('Ölçüm ve Dozajlama Ekipmanları', 7, 'category.png');40
 
 
 INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
-('Döküm Tipi Polyester Reçineler', 1),
-('Breton Tipi Polyester Reçineler', 1),
-('Kalıplama Polyester Reçineler', 1),
-('Genel Amaçlı (Elyaf Tip) Polyester Reçineler', 1),
-('CTP Tipi (Fitil Sarma) Polyester Reçineler', 1),
-('RTM/İnfüzyon Tipi Polyester Reçineler', 1),
-('Akrilik Tipi Polyester Reçineler', 1),
-('SMC/BMC Tipi Polyester Reçineler', 1),
-('Düğme Tipi Polyester Reçineler', 1),
-('Kimyasal Dayanımlı Polyester Reçineler', 1),  
-('Alev İlerletmeyen Polyester Reçineler', 1), 
-('Köpük Eritmeyen Polyester Reçineler', 1), 
-('Köpük Eritmeyen Polyester Reçineler', 1), 
+('Döküm Tipi Polyester Reçineler', 1),1
+('Breton Tipi Polyester Reçineler', 1),2
+('Kalıplama Polyester Reçineler', 1),3
+('Genel Amaçlı (Elyaf Tip) Polyester Reçineler', 1),4
+('CTP Tipi (Fitil Sarma) Polyester Reçineler', 1),5
+('RTM/İnfüzyon Tipi Polyester Reçineler', 1),6
+('Akrilik Tipi Polyester Reçineler', 1),7
+('SMC/BMC Tipi Polyester Reçineler', 1),8
+('Düğme Tipi Polyester Reçineler', 1),9
+('Kimyasal Dayanımlı Polyester Reçineler', 1),10  
+('Alev İlerletmeyen Polyester Reçineler', 1), 11
+('Köpük Eritmeyen Polyester Reçineler', 1), 12
+('Köpük Eritmeyen Polyester Reçineler', 1), 13
 
-('Bisfenol-A Vinilester Reçineler', 2), 
-('Novolak Vinilester Reçineler', 2), 
-('Bromine Vinilester Reçineler', 2), 
-('Amin Hızlandırıcılı Vinilester Reçineler', 2), 
-('Poliüretan Reçine', 2), 
-('Epoksi Reçineler', 2); 
+('Bisfenol-A Vinilester Reçineler', 2), 14
+('Novolak Vinilester Reçineler', 2), 15
+('Bromine Vinilester Reçineler', 2), 16
+('Amin Hızlandırıcılı Vinilester Reçineler', 2), 17
+('Poliüretan Reçine', 2), 18
+('Epoksi Reçineler', 2); 19
 
 
 -- Ürünler için INSERT sorguları
@@ -181,36 +181,36 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Turkuaz TP100 Döküm Tipi Polyester', 'Döküm Tipi Polyester Reçine', 100.00, 50, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 1),
 ('Camelyaf Resins CE80 Döküm Tipi Polyester', 'Döküm Tipi Polyester Reçine', 120.00, 30, 'assets/img/products/CAMELYAF 18 KG.png', 1, 1, 1),
 ('Poliya Polipol 3453 Döküm Tipi Polyester', 'Döküm Tipi Polyester Reçine', 110.00, 40, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 1),
-('Turkuaz TP182 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 140.00, 20, 'resim4.jpg', 1, 1, 2),
-('Poliya Polipol 357 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 150.00, 25, 'resim5.jpg', 1, 1, 2),
-('Turkuaz TP220 (Tİ-CO) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 130.00, 10, 'resim6.jpg', 1, 1, 4),
-('Turkuaz TP200 (Tİ-CO) Genel Amaçlı Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 135.00, 15, 'resim7.jpg', 1, 1, 4),
-('Camelyaf Resins CE92 N8 Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 125.00, 10, 'resim8.jpg', 1, 1, 4),
-('Poliya Polipol 3404 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'resim9.jpg', 1, 1, 4),
-('Poliya Polipol 3401 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'resim9.jpg', 1, 1, 4),
-('Poliya Polipol 320TA Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 160.00, 5, 'resim10.jpg', 1, 1, 3),
-('Poliya Polipol 321-Zero Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 165.00, 4, 'resim11.jpg', 1, 1, 3),
-('Turkuaz TP 1040 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'resim12.jpg', 1, 1, 5),
-('Turkuaz TP 1082 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'resim12.jpg', 1, 1, 5),
-('Poliya Polipol 3562 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'resim13.jpg', 1, 1, 5),
-('Poliya Polipol 3872-F CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'resim13.jpg', 1, 1, 5),
-('Turkuaz TP 260 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'resim14.jpg', 1, 1, 6),
-('Turkuaz TP 911-CO RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'resim14.jpg', 1, 1, 6),
-('Poliya Polipol 3387 Zero RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'resim15.jpg', 1, 1, 6),
-('Poliya Polipol 3382 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'resim15.jpg', 1, 1, 6),
-('Turkuaz TP 1300 Akrilik Tipi Dolgusuz Polyester', 'Akrilik Tipi Polyester Reçine', 190.00, 3, 'resim16.jpg', 1, 1, 7),
-('Poliya Polipol 341 Akrilik Tipi Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 1, 7),
-('Poliya Polipol 341-TA Akrilik Tipi Dolgulusuz Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 1, 7),
-('Poliya Polipol 342-TA D40 Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 1, 7),
-('Turkuaz TP 535 SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 1, 8),
-('Turkuaz TP 500 BMC Tipi Polyester', 'BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 1, 8),
-('Poliya Polipol 3417-V SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 1, 8),
-('Poliya Polipol 382 SMC/BMC Tipi Kimyasal Dayanımlı Polyester', 'SMC/BMC Tipi Kimyasal Dayanımlı Polyester Reçine', 210.00, 4, 'resim19.jpg', 1, 1, 8),
-('Poliya Polipol 3418 SMC/BMC Tipi Tam Maleik Polyester', 'SMC/BMC Tipi Kimyasal Dayanımlı Polyester Reçine', 210.00, 4, 'resim19.jpg', 1, 1, 8),
-('Turkuaz TP 400 (C) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 220.00, 6, 'resim20.jpg', 1, 1, 9),
-('Turkuaz TP 409 (C) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 220.00, 6, 'resim20.jpg', 1, 1, 9),
-('Poliya Polipol 3541 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 1, 9),
-('Poliya Polipol 3542 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 1, 9);
+('Turkuaz TP182 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 140.00, 20, 'resim4.jpg', 1, 2, 2),
+('Poliya Polipol 357 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 150.00, 25, 'resim5.jpg', 1, 2, 2),
+('Turkuaz TP220 (Tİ-CO) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 130.00, 10, 'resim6.jpg', 1, 4, 4),
+('Turkuaz TP200 (Tİ-CO) Genel Amaçlı Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 135.00, 15, 'resim7.jpg', 1, 4, 4),
+('Camelyaf Resins CE92 N8 Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 125.00, 10, 'resim8.jpg', 1, 4, 4),
+('Poliya Polipol 3404 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'resim9.jpg', 1, 4, 4),
+('Poliya Polipol 3401 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'resim9.jpg', 1, 4, 4),
+('Poliya Polipol 320TA Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 160.00, 5, 'resim10.jpg', 1, 3, 3),
+('Poliya Polipol 321-Zero Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 165.00, 4, 'resim11.jpg', 1, 3, 3),
+('Turkuaz TP 1040 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'resim12.jpg', 1, 5, 5),
+('Turkuaz TP 1082 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'resim12.jpg', 1, 5, 5),
+('Poliya Polipol 3562 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'resim13.jpg', 1, 5, 5),
+('Poliya Polipol 3872-F CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'resim13.jpg', 1, 5, 5),
+('Turkuaz TP 260 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'resim14.jpg', 1, 6, 6),
+('Turkuaz TP 911-CO RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'resim14.jpg', 1, 6, 6),
+('Poliya Polipol 3387 Zero RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'resim15.jpg', 1, 6, 6),
+('Poliya Polipol 3382 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'resim15.jpg', 1, 6, 6),
+('Turkuaz TP 1300 Akrilik Tipi Dolgusuz Polyester', 'Akrilik Tipi Polyester Reçine', 190.00, 3, 'resim16.jpg', 1, 7, 7),
+('Poliya Polipol 341 Akrilik Tipi Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 7, 7),
+('Poliya Polipol 341-TA Akrilik Tipi Dolgulusuz Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 7, 7),
+('Poliya Polipol 342-TA D40 Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 7, 7),
+('Turkuaz TP 535 SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 8, 8),
+('Turkuaz TP 500 BMC Tipi Polyester', 'BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 8, 8),
+('Poliya Polipol 3417-V SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 8, 8),
+('Poliya Polipol 382 SMC/BMC Tipi Kimyasal Dayanımlı Polyester', 'SMC/BMC Tipi Kimyasal Dayanımlı Polyester Reçine', 210.00, 4, 'resim19.jpg', 1, 8, 8),
+('Poliya Polipol 3418 SMC/BMC Tipi Tam Maleik Polyester', 'SMC/BMC Tipi Kimyasal Dayanımlı Polyester Reçine', 210.00, 4, 'resim19.jpg', 1, 8, 8),
+('Turkuaz TP 400 (C) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 220.00, 6, 'resim20.jpg', 1, 9, 9),
+('Turkuaz TP 409 (C) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 220.00, 6, 'resim20.jpg', 1, 9, 9),
+('Poliya Polipol 3541 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 9, 9),
+('Poliya Polipol 3542 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 9, 9);
 
 -- Alev İlerletmeyen Polyester Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -221,78 +221,83 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 -- Vinilester Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Poliya Polives 701 Yüksek Kimyasal Dayanımlı Performans Vinilester', 'Yüksek Kimyasal Dayanımlı Performans Vinilester', 180.00, 100, 'polives_701.jpg', 1, 2, 14),
-('Poliya Polives 702 RTM/İnfüzyon Tipi Vinilester', 'RTM/İnfüzyon Tipi Vinilester', 170.00, 150, 'polives_702.jpg', 1, 2, 14),
-('Poliya Polives 711 Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Yüksek Performans Vinilester', 190.00, 80, 'polives_711.jpg', 1, 2, 14),
-('Poliya Polives 709 Pultrüzyon Tipi Vinilester', 'Pultrüzyon Tipi Vinilester', 160.00, 120, 'polives_709.jpg', 1, 2, 14),
-('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'polives_710.jpg', 1, 2, 14),
-('Poliya Polives 721 Novolak Vinilester', 'Novolak Vinilester', 210.00, 70, 'polives_721.jpg', 1, 2, 15),
-('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'polives_710_rtm.jpg', 1, 2, 16),
-('Poliya Polives 710-I RTM/İnfüzyon Alev İlerletmeyen Vinilester', 'RTM/İnfüzyon Alev İlerletmeyen Vinilester', 220.00, 40, 'polives_710i.jpg', 1, 2, 16),
-('Poliya Polives 710-TA-LSE Alev İlerletmeyen ve Tiksotropik Düşük Stiren İçeren Vinilester', 'Tiksotropik Düşük Stiren İçeren Vinilester', 230.00, 60, 'polives_710_ta_lse.jpg', 1, 2, 16),
-('Poliya Polives 701-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 'Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 240.00, 55, 'polives_701_abp.jpg', 1, 2, 17),
-('Poliya Polives 711-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Amin Hızlandırıcılı Yüksek Performans Vinilester', 250.00, 45, 'polives_711_abp.jpg', 1, 2, 17);
+('Poliya Polives 701 Yüksek Kimyasal Dayanımlı Performans Vinilester', 'Yüksek Kimyasal Dayanımlı Performans Vinilester', 180.00, 100, 'polives_701.jpg', 2, 1, 14),
+('Poliya Polives 702 RTM/İnfüzyon Tipi Vinilester', 'RTM/İnfüzyon Tipi Vinilester', 170.00, 150, 'polives_702.jpg', 2, 1, 14),
+('Poliya Polives 711 Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Yüksek Performans Vinilester', 190.00, 80, 'polives_711.jpg', 2, 1, 14),
+('Poliya Polives 709 Pultrüzyon Tipi Vinilester', 'Pultrüzyon Tipi Vinilester', 160.00, 120, 'polives_709.jpg', 2, 1, 14),
+('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'polives_710.jpg', 2, 1, 14),
+('Poliya Polives 721 Novolak Vinilester', 'Novolak Vinilester', 210.00, 70, 'polives_721.jpg', 2, 2, 15),
+('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'polives_710_rtm.jpg', 2, 2, 16),
+('Poliya Polives 710-I RTM/İnfüzyon Alev İlerletmeyen Vinilester', 'RTM/İnfüzyon Alev İlerletmeyen Vinilester', 220.00, 40, 'polives_710i.jpg', 2, 2, 16),
+('Poliya Polives 710-TA-LSE Alev İlerletmeyen ve Tiksotropik Düşük Stiren İçeren Vinilester', 'Tiksotropik Düşük Stiren İçeren Vinilester', 230.00, 60, 'polives_710_ta_lse.jpg', 2, 2, 16),
+('Poliya Polives 701-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 'Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 240.00, 55, 'polives_701_abp.jpg', 2, 2, 17),
+('Poliya Polives 711-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Amin Hızlandırıcılı Yüksek Performans Vinilester', 250.00, 45, 'polives_711_abp.jpg', 2, 2, 17);
 
 -- Poliüretan Reçine
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Polipol ve İzosiyanat Poliüretan Reçine Sıvı Plastik', 'Sıvı Plastik Poliüretan Reçine', 300.00, 30, 'polipol_izosiyanat.jpg', 1, 4, 18);
+('Polipol ve İzosiyanat Poliüretan Reçine Sıvı Plastik', 'Sıvı Plastik Poliüretan Reçine', 300.00, 30, 'polipol_izosiyanat.jpg', 3, 1, 18);
 
 -- Epoksi Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('EpoXs İnce Döküm (Hediyelik) Tipi Epoksi', 'İnce Döküm (Hediyelik) Tipi Epoksi', 50.00, 200, 'epoxs_ince.jpg', 1, 4, 19),
-('EpoXs Kalın Döküm (Masa) Tipi Epoksi', 'Kalın Döküm (Masa) Tipi Epoksi', 120.00, 150, 'epoxs_kalin.jpg', 1, 4, 19),
-('EpoXs Teşbih Yapım Epoksisi', 'Teşbih Yapım Epoksisi', 80.00, 180, 'epoxs_tesbih.jpg', 1, 4, 19),
-('EpoXs Laminasyon (Kompozit) Tipi Epoksi', 'Laminasyon Tipi Epoksi', 110.00, 100, 'epoxs_laminasyon.jpg', 1, 4, 19);
+('EpoXs İnce Döküm (Hediyelik) Tipi Epoksi', 'İnce Döküm (Hediyelik) Tipi Epoksi', 50.00, 200, 'epoxs_ince.jpg', 4, 1, 19),
+('EpoXs Kalın Döküm (Masa) Tipi Epoksi', 'Kalın Döküm (Masa) Tipi Epoksi', 120.00, 150, 'epoxs_kalin.jpg', 4, 1, 19),
+('EpoXs Teşbih Yapım Epoksisi', 'Teşbih Yapım Epoksisi', 80.00, 180, 'epoxs_tesbih.jpg', 4, 1, 19),
+('EpoXs Laminasyon (Kompozit) Tipi Epoksi', 'Laminasyon Tipi Epoksi', 110.00, 100, 'epoxs_laminasyon.jpg', 4, 1, 19);
 
 
 -- Jelkotlar
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Poliya Polipol 3610 Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 6, NULL),
-('Turkuaz TP 1088 Jelkot', 'Genel Amaçlı Jelkot', 185.00, 12, 'resim16.jpg', 2, 6, NULL),
-('Turkuaz TP 2090 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 7, NULL),
-('Poliya Polipol 3615 Yüksek Performanslı Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL),
-('Poliya Polipol 3625 Zımparalanabilir Jelkot', 'Zımparalanabilir Jelkot', 240.00, 15, 'resim19.jpg', 2, 9, NULL),
-('Poliya Polipol 3630 Kalıplama Jelkot', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 10, NULL),
-('Turkuaz TP 2085 Marin Uygulama Jelkot', 'Marin Uygulama Jelkot', 270.00, 12, 'resim21.jpg', 2, 11, NULL),
-('Turkuaz TP 2120 Kimyasal Dayanımlı Jelkot', 'Kimyasal Dayanımlı Jelkot', 280.00, 10, 'resim22.jpg', 2, 12, NULL),
-('Turkuaz TP 2505 Alev İlerletmeyen Jelkot', 'Alev İlerletmeyen Jelkot', 300.00, 5, 'resim23.jpg', 2, 13, NULL),
+('Poliya Polipol 3610 Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 1, 1),
+('Turkuaz TP 1088 Jelkot', 'Genel Amaçlı Jelkot', 185.00, 12, 'resim16.jpg', 2, 1, 1),
+('Turkuaz TP 2090 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 2, 2),
+('Poliya Polipol 3615 Yüksek Performanslı Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 3, 3),
+('Poliya Polipol 3625 Zımparalanabilir Jelkot', 'Zımparalanabilir Jelkot', 240.00, 15, 'resim19.jpg', 2, 4, 4),
+('Poliya Polipol 3630 Kalıplama Jelkot', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 5, 5),
+('Turkuaz TP 2085 Marin Uygulama Jelkot', 'Marin Uygulama Jelkot', 270.00, 12, 'resim21.jpg', 2, 6, 6),
+('Turkuaz TP 2120 Kimyasal Dayanımlı Jelkot', 'Kimyasal Dayanımlı Jelkot', 280.00, 10, 'resim22.jpg', 2, 7, 7),
+('Turkuaz TP 2505 Alev İlerletmeyen Jelkot', 'Alev İlerletmeyen Jelkot', 300.00, 5, 'resim23.jpg', 2, 8, 8),
 
 -- Cam Elyaflar
-('Camelyaf 100 Keçe', 'Cam Elyaf Keçe', 150.00, 100, 'resim24.jpg', 3, 14, NULL),
-('Camelyaf 200 Keçe', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
-('Camelyaf Dokuma Kumaş 500g', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 15, NULL),
-('Camelyaf Dokuma Kumaş 800g', 'Cam Elyaf Dokuma Kumaş', 180.00, 60, 'resim27.jpg', 3, 15, NULL),
-('Karbon Elyaf 300g', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 16, NULL),
-('Karbon Elyaf 500g', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 16, NULL),
-('Fitil İp Elyaf', 'Fitil İp Elyaflar', 200.00, 30, 'resim30.jpg', 3, 17, NULL),
-('Kırpık Elyaf', 'Kırpık Elyaflar', 190.00, 25, 'resim31.jpg', 3, 18, NULL),
-('Yüzey Tülü (Kortel)', 'Yüzey Tülü', 210.00, 20, 'resim32.jpg', 3, 19, NULL),
-('Coremat 2mm', 'Coremat', 250.00, 15, 'resim33.jpg', 3, 20, NULL),
-('Coremat 3mm', 'Coremat', 270.00, 10, 'resim34.jpg', 3, 20, NULL),
+('Camelyaf 100 Keçe', 'Cam Elyaf Keçe', 150.00, 100, 'resim24.jpg', 3, 1, 1),
+('Camelyaf 200 Keçe', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 1, 1),
+('Camelyaf Dokuma Kumaş 500g', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 2, 2),
+('Camelyaf Dokuma Kumaş 800g', 'Cam Elyaf Dokuma Kumaş', 180.00, 60, 'resim27.jpg', 3, 2, 2),
+('Karbon Elyaf 300g', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 3, 3),
+('Karbon Elyaf 500g', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 3, 3),
+('Fitil İp Elyaf', 'Fitil İp Elyaflar', 200.00, 30, 'resim30.jpg', 3, 4, 4),
+('Kırpık Elyaf', 'Kırpık Elyaflar', 190.00, 25, 'resim31.jpg', 3, 5, 5),
+('Yüzey Tülü (Kortel)', 'Yüzey Tülü', 210.00, 20, 'resim32.jpg', 3, 6, 6),
+('Coremat 2mm', 'Coremat', 250.00, 15, 'resim33.jpg', 3, 7, 7),
+('Coremat 3mm', 'Coremat', 270.00, 10, 'resim34.jpg', 3, 7, 7),
 
 -- Kalıp Ayırıcılar
-('Poliya Polivaks SV-6', 'Vaks Kalıp Ayırıcılar', 90.00, 50, 'resim35.jpg', 4, 21, NULL),
-('Poliya Polivaks Ekonomik Vaks', 'Vaks Kalıp Ayırıcılar', 100.00, 60, 'resim36.jpg', 4, 21, NULL),
-('Poliya Polivaks N-Vaks', 'Vaks Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 21, NULL),
-('Viky Kalıp Ayırıcı Vaks', 'Vaks Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 21, NULL),
-
-('Poliya Polivaks PV-7 Performans Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL),
-('Best Sprey Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL),
-('Colorıum Yüksek Performans Sprey Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL),
-
-('Poliya Polivaks PVA Performans Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL),
-('Poliya Polivaks Eko PVA Ekonomik Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL),
-('Marbocote CEE277 Yüksek Performans Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL),
-
+('Vaks Kalıp Ayırıcı Sprey', 'Kalıp Ayırıcı', 90.00, 50, 'resim35.jpg', 4, 1, 1),
+('Sprey Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcı', 100.00, 60, 'resim36.jpg', 4, 2, 2),
+('Sıvı Kalıp Ayırıcı', 'Sıvı Kalıp Ayırıcı', 110.00, 40, 'resim37.jpg', 4, 3, 3),
 
 -- Dolgu Malzemeleri
-('Aksaray Kalsit 40 Mikron Beyaz Kalsit', 'Kalsit', 50.00, 120, 'resim38.jpg', 5, 24, NULL),
-('MerTaş 5 Mikron Beyaz Kalsit', 'Kalsit', 50.00, 120, 'resim38.jpg', 5, 24, NULL),
-('Aksaray Kalsit Kalın (Mıcır) Kalsit', 'Kalsit', 40.00, 130, 'resim39.jpg', 5, 24, NULL),
-('Talk Pudrası Extra', 'Talk Pudrası', 60.00, 110, 'resim40.jpg', 5, 25, NULL),
-('Wacker HDK N2O Aerosil Kıvamlaştırıcı', 'Aerosiller', 70.00, 100, 'resim41.jpg', 5, 26, NULL),
-('Ekonomik Aerosil Kıvamlaştırıcı', 'Aerosiller', 70.00, 100, 'resim41.jpg', 5, 26, NULL),
-('ATH APYRAL 16 Alev Geciktirici Dolgu', 'Alev Geciktirici Dolgu', 80.00, 90, 'resim42.jpg', 5, 29, NULL);
+('Kalsit 10kg', 'Kalsit', 50.00, 120, 'resim38.jpg', 5, 1, 1),
+('Talk Pudrası 5kg', 'Talk Pudrası', 40.00, 130, 'resim39.jpg', 5, 2, 2),
+('Aerosil 20kg', 'Aerosil', 60.00, 110, 'resim40.jpg', 5, 3, 3),
+('Alev Geciktirici Dolgu 15kg', 'Alev Geciktirici Dolgu', 70.00, 100, 'resim41.jpg', 5, 4, 4),
+('Çinko Streat 25kg', 'Çinko Streat', 80.00, 90, 'resim42.jpg', 5, 5, 5),
+('Alüminyum Tozu 10kg', 'Alüminyum Tozu', 120.00, 50, 'resim43.jpg', 5, 6, 6),
+
+-- Renklendiriciler
+('Polyester Pigment 1kg', 'Polyester Pigment', 15.00, 150, 'resim44.jpg', 6, 1, 1),
+('Epoksi Renklendirici 500g', 'Epoksi Renklendirici', 25.00, 140, 'resim45.jpg', 6, 2, 2),
+('Silikon Pigment 1kg', 'Silikon Pigment', 30.00, 130, 'resim46.jpg', 6, 3, 3),
+
+-- Sarf Malzemeleri
+('Fırça 100mm', 'Fırça', 8.00, 200, 'resim47.jpg', 7, 1, 1),
+('Fırça 200mm', 'Fırça', 10.00, 180, 'resim48.jpg', 7, 1, 1),
+('Tulum 1 adet', 'Tulum', 20.00, 150, 'resim49.jpg', 7, 2, 2),
+('Tulum 5 adet', 'Tulum', 90.00, 140, 'resim50.jpg', 7, 2, 2),
+('Zımpara Makinesi', 'Zımpara Makinesi', 250.00, 80, 'resim51.jpg', 7, 3, 3),
+('Zımpara Kağıdı', 'Zımpara Kağıdı', 5.00, 300, 'resim52.jpg', 7, 4, 4),
+('Bant 50mm', 'Bant', 3.00, 350, 'resim53.jpg', 7, 5, 5),
+('Bant 100mm', 'Bant', 5.00, 320, 'resim54.jpg', 7, 5, 5),
+('Dozajlama Ekipmanı', 'Dozajlama Ekipmanı', 60.00, 120, 'resim55.jpg', 7, 6, 6);
 
 
 -- --------------------------------------------------------
@@ -677,18 +682,6 @@ CREATE TABLE `tedarikcilerimiz` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-
-INSERT INTO tedarikcilerimiz (resim, guncellenme_tarihi)
-VALUES 
-    ('dashboard/uploads/tedarikcilerimiz/Logo_mobile.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/dyson.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/DuPont_tm_rgb.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/WACKER.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/JUSHI.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/AKPA.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/ŞİŞECAM.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/POLİYA LOGO.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/Turkuaz.png', CURRENT_TIMESTAMP());
 
 -- --------------------------------------------------------
 

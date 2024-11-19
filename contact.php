@@ -44,14 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'mustafaum538@gmail.com'; // Gönderen Gmail adresi
-            $mail->Password = 'pcoc wnaa giad jlkh'; // Gmail uygulama şifresi
+            $mail->Username = 'baranboya@gmail.com'; // Gönderen Gmail adresi
+            $mail->Password = 'lbzg cigc usyk zlwa'; // Gmail uygulama şifresi
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Gönderen ve Alıcı Bilgileri
             $mail->setFrom('your-email@gmail.com', 'Sender Name'); // Gönderen e-posta adresi
-            $mail->addAddress('mustafaum538@gmail.com'); // Alıcı e-posta adresi
+            $mail->addAddress('baranboya@gmail.com'); // Alıcı e-posta adresi
 
             // Mesaj İçeriği
             $mail->isHTML(true);
