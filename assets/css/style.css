@@ -3414,19 +3414,21 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 :: 27.0 ürünler alt kısım CSS
 ****************************** */
 /* Genel Kart Stili */
-.product-card-row{
+/* Kartlar */
+.product-card-row {
     display: flex;
-    flex-wrap: wrap;  /* Kartlar yatayda ve satırlara yayılır */
-    gap: 20px;  /* Kartlar arasındaki boşluk */
+    flex-wrap: wrap; /* Kartlar yatayda ve satırlara yayılır */
+    gap: 20px; /* Kartlar arasındaki boşluk */
 }
+
 .category-card, .subcategory-card, .product-card {
-    flex: 1 0 32%; /* Her satırda 3 kart, arada boşluk */
+    flex: 1 0 32%; /* Her satırda 3 kart */
     box-sizing: border-box;
     position: relative;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     height: 200px; /* Kart yüksekliği */
     display: flex;
     flex-direction: column;
@@ -3436,39 +3438,21 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     background-color: #f9f9f9; /* Varsayılan arka plan */
 }
 
-
 /* Hover Efekti */
 .category-card:hover, .subcategory-card:hover, .product-card:hover {
     transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20); /* Daha belirgin gölge */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
+    background-color: rgba(0, 0, 0, 0.6); /* Arka plan hafif karartılır */
 }
 
-/* Kategori, Alt Kategori ve Ürün Kutuları */
-.product-category-box {
-    position: relative;
-    width: 100%;
-    height: 100%; /* Kartın tamamını kaplar */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.01); /* Varsayılan arka plan rengi */
-}
-.product-a{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
 /* Resim */
-.category-img, .subcategory-img{
+.category-img, .subcategory-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Oranları koruyarak tam oturur */
+    object-fit: cover;
     transition: visibility 0.3s ease, opacity 0.3s ease;
     visibility: hidden; /* Varsayılan olarak görünmez */
     opacity: 0;
@@ -3480,8 +3464,8 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: scale-down; /* Oranları koruyarak tam oturur */
-    visibility: visible; /* Varsayılan olarak görünmez */
+    object-fit: scale-down;
+    visibility: visible; /* Varsayılan olarak görünür */
     z-index: 0; /* Arka planda kalır */
 }
 
@@ -3491,6 +3475,13 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 .product-card:hover .product-img {
     visibility: visible;
     opacity: 1;
+    filter: brightness(70%); /* Resmi karartır */
+    transition: filter 0.3s ease; /* Yumuşak geçiş efekti */
+}
+.subcategory-card:hover .product-category-box,
+.product-card:hover .product-item {
+    background-color: rgba(0, 0, 0, 0.7); /* Arka plan karartma */
+    transition: background-color 0.3s ease; /* Yumuşak geçiş efekti */
 }
 
 /* Metin Kutusu */
@@ -3502,14 +3493,25 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     font-weight: bold;
     text-align: center;
     transition: color 0.3s ease;
+    color: inherit !important; /* Varsayılan body rengini kullanmaz */
+
 }
 
-/* Hover Durumunda Metin Rengi Beyaz */
-.category-card:hover .product-category-box-text,
-.subcategory-card:hover .product-subcategory-box-text,
-.product-card:hover .product-item-text {
-    color: white;
+.subcategory-card .category-img,
+.product-card .product-img {
+    transition: filter 0.3s ease; /* Hover dışında da geçişi yumuşak yap */
 }
+
+
+.category-card:hover .product-category-box-text h5,
+.subcategory-card:hover .product-subcategory-box-text h5,
+.product-card:hover .product-item-text h5 {
+    color: white !important; /* Beyaz renge zorla değiştir */
+    z-index: 2;
+    transition: filter 0.3s ease; /* Hover dışında da geçişi yumuşak yap */
+
+}
+
 
 /* Responsive Tasarım */
 @media (max-width: 768px) {
@@ -3519,10 +3521,8 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     .product-category-box-text, .product-subcategory-box-text, .product-item-text {
         font-size: 16px; /* Daha küçük yazı boyutu */
     }
-    .product-img{
-
-    }
 }
+
 
 
 /* ******************************

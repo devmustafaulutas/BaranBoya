@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="breadcrumb-content text-center">
-                    <h2 class="text-white text-uppercase mb-3">Hizmet Alanlarımız ve Uygulama Yöntemlerimiz</h2>
+                    <h2 class="text-white text-uppercase mb-3">Blog</h2>
                     <ol class="breadcrumb d-flex justify-content-center">
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Ana Sayfa</a></li>
                         <li class="breadcrumb-item text-white active">Blog</li>
@@ -15,63 +15,46 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="container text-center">
+        <div class="row">
+            <div class="">
+                <div class="blog-page-blogs col-md-12">
+                    <div class="col-6">
+                        <div class="clearfix">
+                            <p>
+                                 meaningless phrases here to demonstrate how the columns interact here with the floated image.
+                            </p>
 
-<section class="container usage-areas">
-    <h2 class="section-title">Kullanım Alanları</h2>
-    <div class="row">
-        <?php
-        $usage_areas = [
-            ["HAVACILIK VE SAVUNMA SANAYİ", "assets/img/blog/havacilik.jpg", "Havacılık ve savunma sanayinde, dayanıklılık ve hassasiyet gerektiren uygulamalarda..."],
-            ["ENDÜSTRİYEL TASARIM", "assets/img/blog/endustriyel.jpg", "Endüstriyel tasarım süreçlerinde estetik ve dayanıklılık sağlayan çözümler..."],
-            ["CARBON FİBER ARABA", "assets/img/blog/carbon-fiber.jpg", "Araç üretiminde karbon fiber malzemelerle hafiflik ve dayanıklılık sağlıyoruz..."],
-            ["SANAT & HOBİ", "assets/img/blog/sanat-hobi.jpg", "Epoksi reçineler, sanat ve hobi alanında geniş uygulama alanı buluyor..."],
-            ["RÜZGAR TÜRBİN", "assets/img/blog/ruzgar-turbin.jpg", "Rüzgar türbinlerinde yapısal sağlamlık için dayanıklı malzemeler..."],
-            ["EPOKSİ MASALAR", "assets/img/blog/epoksi-masa.jpg", "Epoksi reçineler ile estetik ve dayanıklı masa tasarımları..."]
-        ];
+                            <p>
+                                As you can see the paragraphs gracefully wrap around the floated image. Now imagine how this would look with some actual content in here, rather than just this boring placeholder text that goes on and on, but actually conveys no tangible information at. It simply takes up space and should not really be read.
+                            </p>
 
-        foreach ($usage_areas as $area) {
-            echo "
-            <div class='col-12 blog-post'>
-                <div class='row'>
-                    <div class='col-md-5 image-container'>
-                        <img src='{$area[1]}' alt='{$area[0]}'>
+                            <p>
+                                And yet, here you are, still persevering in reading this placeholder text, hoping for some more insights, or some hidden easter egg of content. A joke, perhaps. Unfortunately, there's none of that here.
+                            </p>
+                        </div>
                     </div>
-                    <div class='col-md-7 content-container'>
-                        <h3>{$area[0]}</h3>
-                        <p>{$area[2]}</p>
-                    </div>
-                </div>
-            </div>";
-        }
-        ?>
-    </div>
-</section>
-
-<section class="container methods">
-    <h2 class="section-title">Boyamada Kullanılan Yöntemler</h2>
-    <div class="row">
-        <?php
-        $methods = [
-            ["İNFÜZYON", "assets/img/blog/infusyon.jpg", "İnfüzyon yöntemi, malzeme kalitesini artırmak için reçine infüzyon tekniklerini içerir..."],
-            ["FİLAMENT SARMA", "assets/img/blog/filament.jpg", "Filament sarma tekniği, yüksek dayanıklılık gerektiren projelerde tercih edilir..."],
-            ["EL YATIRMASI", "assets/img/blog/elyatirma.jpg", "El yatırması tekniği, uzman işçilik ile yapılan dayanıklı ve estetik sonuçlar sağlar..."]
-        ];
-
-        foreach ($methods as $method) {
-            echo "
-            <div class='col-12 blog-post'>
-                <div class='row'>
-                    <div class='col-md-5 image-container'>
-                        <img src='{$method[1]}' alt='{$method[0]}'>
-                    </div>
-                    <div class='col-md-7 content-container'>
-                        <h3>{$method[0]}</h3>
-                        <p>{$method[2]}</p>
+                    <div class="col-6">
+                        <div class="clearfix">
+                            <img src="assets/img/categorys/YAT 1.jpeg" class="col-md-6 float-md-end mb-3 ms-md-3" alt="...">
+                        </div>
                     </div>
                 </div>
-            </div>";
-        }
-        ?>
+                <!-- <div class="blog-page-blogs col-md-12">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
+                            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">.col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
+                            <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0">.col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0</div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
     </div>
 </section>
 
