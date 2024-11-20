@@ -684,6 +684,30 @@ CREATE TABLE `tedarikcilerimiz` (
 
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `sektörler`
+--
+
+CREATE TABLE `sektorler` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `sektor_adi` VARCHAR(255) NOT NULL,
+    `sektor_aciklama` TEXT NOT NULL,
+    `resim` VARCHAR(1000) NOT NULL,
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `sektorler`
+  `sektor_adi`
+  `sektor_aciklama`
+  `resim`
+VALUES 
+  (`Havacılık ve Savunma Sanayi`,``,`assets/img/baranboya/HAVACILIK VE SAVUNMA.png`),
+  (`Denizcilik`,``,`assets/img/baranboya/unnamed (8).png`),
+  (`Banyo`,``,`assets/img/baranboya/unnamed (5).png`),
+  (`Mutfak`,``,`assets/img/baranboya/unnamed (6).png`),
+
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `why_us`
@@ -846,10 +870,7 @@ ALTER TABLE `static`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `testimony`
---
-ALTER TABLE `testimony`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 
 --
 -- AUTO_INCREMENT for table `why_us`

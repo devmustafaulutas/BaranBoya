@@ -248,41 +248,48 @@ print "
                     <div class="col-12">
                         <h2>Sektörlerimiz</h2>
                         <p>
-                            Yenilikçi çözümlerimizle lider olduğumuz sektörel alanlarda sizlere en kaliteli hizmeti sunuyoruz. 
+                            Yenilikçi çözümlerimizle lider olduğumuz sektörel alanlarda sizlere en kaliteli hizmeti sunuyoruz.
                             Her bir sektördeki profesyonelliğimizle fark yaratıyoruz.
                         </p>
                     </div>
                 </div>
-
-                <!-- Sektörler -->
-                <div class="sector-row">
-                    <!-- Sektör Kartı 1 -->
-                    <div class="sector-card">
-                        <img src="assets/img/baranboya/HAVACILIK VE SAVUNMA.png">
-                        <h4 class="sector-card-title">Havacılık ve Savunma Sanayi</h4>
+                <!-- Sektör Kartları -->
+                <div class="row sektor-grid">
+                    <div class="col-4">
+                        <a href="sektor_detay.php?sector=Havac%C4%B1l%C4%B1k%20ve%20Savunma%20Sanayi" class="sector-link">
+                            <div class="sector-card">
+                                <img src="assets/img/baranboya/HAVACILIK VE SAVUNMA.png" alt="Havacılık ve Savunma">
+                                <h4 class="sector-card-title">Havacılık ve Savunma Sanayi</h4>
+                            </div>
+                        </a>
                     </div>
-
-                    <!-- Sektör Kartı 2 -->
-                    <div class="sector-card">
-                        <img src="assets/img/baranboya/unnamed (5).png">
-                        <h4 class="sector-card-title">Banyo</h4>
+                    <div class="col-8">
+                        <a href="sektor_detay.php?sector=Denizcilik" class="sector-link">
+                            <div class="sector-card">
+                                <img src="assets/img/baranboya/unnamed (8).png" alt="Denizcilik">
+                                <h4 class="sector-card-title">Denizcilik</h4>
+                            </div>
+                        </a>
                     </div>
-
-                    <!-- Sektör Kartı 3 -->
-                    <div class="sector-card">
-                        <img src="assets/img/baranboya/unnamed (6).png">
-                        <h4 class="sector-card-title">Mutfak</h4>
+                    <div class="col-8">
+                        <a href="sektor_detay.php?sector=Banyo" class="sector-link">
+                            <div class="sector-card">
+                                <img src="assets/img/baranboya/unnamed (5).png" alt="Banyo">
+                                <h4 class="sector-card-title">Banyo</h4>
+                            </div>
+                        </a>
                     </div>
-
-                   <!-- Sektör Kartı 4 -->
-                    <div class="sector-card">
-                        <img src="assets/img/baranboya/unnamed (8).png">
-                        <h4 class="sector-card-title">Denizcilik</h4>
+                    <div class="col-4">
+                        <a href="sektor_detay.php?sector=Mutfak" class="sector-link">
+                            <div class="sector-card">
+                                <img src="assets/img/baranboya/unnamed (6).png" alt="Mutfak">
+                                <h4 class="sector-card-title">Mutfak</h4>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
-
 
 
         <section id="review" class="section review-area bg-overlay ptb_100">
