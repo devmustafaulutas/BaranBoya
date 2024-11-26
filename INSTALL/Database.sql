@@ -59,7 +59,9 @@ INSERT INTO `admin` (`id`, `username`, `password`, `updated_at`) VALUES
 CREATE TABLE `kategoriler` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `isim` VARCHAR(255) NOT NULL,
-    `resim` VARCHAR(255) NOT NULL
+    `resim` VARCHAR(255) NOT NULL,
+    `kategori_id` INT,
+    FOREIGN KEY (`kategori_id`) REFERENCES `kategoriler`(`id`) ON DELETE CASCADE
 ) CHARACTER SET utf8mb4;
 
 -- Alt kategoriler tablosu, ana kategorilere bağlı
@@ -150,8 +152,9 @@ INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`, `resim`) VALUES
 ('Zımpara Makineleri ve Zımparalar', 7, 'category.png'),
 ('Polyester Ezme Rulolar', 7, 'category.png'),
 ('Bantlar', 7, 'category.png'),
-('Ölçüm ve Dozajlama Ekipmanları', 7, 'category.png');
+('Ölçüm ve Dozajlama Ekipmanları', 7, 'category.png'),
 
+('Temizleyici Solventler', 6, 'category.png');
 
 INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
 ('Döküm Tipi Polyester Reçineler', 1),
@@ -173,8 +176,11 @@ INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
 ('Bromine Vinilester Reçineler', 2), 
 ('Amin Hızlandırıcılı Vinilester Reçineler', 2), 
 ('Poliüretan Reçine', 2), 
-('Epoksi Reçineler', 2); 
+('Epoksi Reçineler', 2),
 
+('Mek Peroksitler (Polyester ve Jelkot Dondurucu)', 33),
+('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)', 33), 
+('İnceltici Monomerler ve Kıvamlaştırıcılar', 33);
 
 -- Ürünler için INSERT sorguları
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -255,46 +261,145 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Poliya Polipol 3630 Kalıplama Jelkot', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 10, NULL),
 ('Turkuaz TP 2085 Marin Uygulama Jelkot', 'Marin Uygulama Jelkot', 270.00, 12, 'resim21.jpg', 2, 11, NULL),
 ('Turkuaz TP 2120 Kimyasal Dayanımlı Jelkot', 'Kimyasal Dayanımlı Jelkot', 280.00, 10, 'resim22.jpg', 2, 12, NULL),
-('Turkuaz TP 2505 Alev İlerletmeyen Jelkot', 'Alev İlerletmeyen Jelkot', 300.00, 5, 'resim23.jpg', 2, 13, NULL),
+('Turkuaz TP 2505 Alev İlerletmeyen Jelkot', 'Alev İlerletmeyen Jelkot', 300.00, 5, 'resim23.jpg', 2, 13, NULL);
 
 -- Cam Elyaflar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Camelyaf 100 Keçe', 'Cam Elyaf Keçe', 150.00, 100, 'resim24.jpg', 3, 14, NULL),
 ('Camelyaf 200 Keçe', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
 ('Camelyaf Dokuma Kumaş 500g', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 15, NULL),
 ('Camelyaf Dokuma Kumaş 800g', 'Cam Elyaf Dokuma Kumaş', 180.00, 60, 'resim27.jpg', 3, 15, NULL),
 ('Karbon Elyaf 300g', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 16, NULL),
-('Karbon Elyaf 500g', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 16, NULL),
-('Fitil İp Elyaf', 'Fitil İp Elyaflar', 200.00, 30, 'resim30.jpg', 3, 17, NULL),
-('Kırpık Elyaf', 'Kırpık Elyaflar', 190.00, 25, 'resim31.jpg', 3, 18, NULL),
-('Yüzey Tülü (Kortel)', 'Yüzey Tülü', 210.00, 20, 'resim32.jpg', 3, 19, NULL),
+('Karbon Elyaf 500g', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 16, NULL);
+
+-- -- Fitil İp Elyaf
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Şişecam FWR6 2400 Tek Uçlu Fitil İp Elyaf', 'Fitil İp Elyaflar', 200.00, 30, 'resim30.jpg', 3, 17, NULL),
+('Şişecam FWR6 4800 Tek Uçlu Fitil İp Elyaf', 'Fitil İp Elyaflar', 200.00, 30, 'resim30.jpg', 3, 17, NULL),
+('Jushi 2400 Tek Uçlu Fitil İp Elyaf', 'Fitil İp Elyaflar', 200.00, 30, 'resim30.jpg', 3, 17, NULL);
+
+-- Kırpık Elyaf
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Jushı 6mm SMC/BMC Kırpık Elyaf', 'Kırpık Elyaflar', 190.00, 25, 'resim31.jpg', 3, 18, NULL);
+
+-- Yüzey Tülü (Kortel)
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Kortel Yüzey Tülü 26 gr/m²', 'Yüzey Tülü', 210.00, 20, 'resim32.jpg', 3, 19, NULL),
+('Kortel Yüzey Tülü 50 gr/m²', 'Yüzey Tülü', 210.00, 20, 'resim32.jpg', 3, 19, NULL);
+
+-- Corematlar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Coremat 2mm', 'Coremat', 250.00, 15, 'resim33.jpg', 3, 20, NULL),
-('Coremat 3mm', 'Coremat', 270.00, 10, 'resim34.jpg', 3, 20, NULL),
+('Coremat 3mm', 'Coremat', 270.00, 10, 'resim34.jpg', 3, 20, NULL);
 
 -- Kalıp Ayırıcılar
+-- Vaks Kalıp Ayırıcılar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Poliya Polivaks SV-6', 'Vaks Kalıp Ayırıcılar', 90.00, 50, 'resim35.jpg', 4, 21, NULL),
 ('Poliya Polivaks Ekonomik Vaks', 'Vaks Kalıp Ayırıcılar', 100.00, 60, 'resim36.jpg', 4, 21, NULL),
 ('Poliya Polivaks N-Vaks', 'Vaks Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 21, NULL),
-('Viky Kalıp Ayırıcı Vaks', 'Vaks Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 21, NULL),
+('Viky Kalıp Ayırıcı Vaks', 'Vaks Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 21, NULL);
+
+-- Sprey Kalıp Ayırıcılar
+
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 
 ('Poliya Polivaks PV-7 Performans Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL),
 ('Best Sprey Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL),
-('Colorıum Yüksek Performans Sprey Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL),
+('Colorıum Yüksek Performans Sprey Kalıp Ayırıcı', 'Sprey Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 22, NULL);
 
+-- Sıvı Kalıp Ayırıcılar
+
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Poliya Polivaks PVA Performans Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL),
 ('Poliya Polivaks Eko PVA Ekonomik Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL),
-('Marbocote CEE277 Yüksek Performans Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL),
+('Marbocote CEE277 Yüksek Performans Sıvı Ayırıcı', 'Sıvı Kalıp Ayırıcılar', 110.00, 40, 'resim37.jpg', 4, 23, NULL);
 
 
 -- Dolgu Malzemeleri
+
+-- Kalsitler (Mermer Tozları)
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Aksaray Kalsit 40 Mikron Beyaz Kalsit', 'Kalsit', 50.00, 120, 'resim38.jpg', 5, 24, NULL),
 ('MerTaş 5 Mikron Beyaz Kalsit', 'Kalsit', 50.00, 120, 'resim38.jpg', 5, 24, NULL),
 ('Aksaray Kalsit Kalın (Mıcır) Kalsit', 'Kalsit', 40.00, 130, 'resim39.jpg', 5, 24, NULL),
-('Talk Pudrası Extra', 'Talk Pudrası', 60.00, 110, 'resim40.jpg', 5, 25, NULL),
+('Talk Pudrası Extra', 'Talk Pudrası', 60.00, 110, 'resim40.jpg', 5, 25, NULL);
+
+-- erosiller
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Wacker HDK N2O Aerosil Kıvamlaştırıcı', 'Aerosiller', 70.00, 100, 'resim41.jpg', 5, 26, NULL),
-('Ekonomik Aerosil Kıvamlaştırıcı', 'Aerosiller', 70.00, 100, 'resim41.jpg', 5, 26, NULL),
+('Ekonomik Aerosil Kıvamlaştırıcı', 'Aerosiller', 70.00, 100, 'resim41.jpg', 5, 26, NULL);
+
+-- Alev Geciktirici Dolgu
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('ATH APYRAL 16 Alev Geciktirici Dolgu', 'Alev Geciktirici Dolgu', 80.00, 90, 'resim42.jpg', 5, 29, NULL);
 
+-- Talk Pudrası
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Talk Pudrası Extra', 'Talk Pudrası', 80.00, 90, 'resim42.jpg', 5, 25, NULL);
 
+-- RENKLENDİRİCİLER
+
+-- Polyester ve Poliüretan Pigmentler
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Poliya Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30),
+('Poliya Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30);
+
+-- Titandioksitler
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Dupond R902 Beyaz Titandioksit', 'Titandioksitler', 80.00, 90, 'resim42.jpg', 6, 31, NULL),
+('Ekonomik Beyaz Titandioksit', 'Titandioksitler', 80.00, 90, 'resim42.jpg', 6, 31, NULL),
+('Carbon Black ‘Siyah’ Titandioksit', 'Titandioksitler', 80.00, 90, 'resim42.jpg', 6, 31, NULL);
+
+-- Epoksi Reçine Pigmentler
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+
+('EpoXs Tone Opak Renkler’ Titandioksit', 'Epoksi Reçine Pigmentler', 80.00, 90, 'resim42.jpg', 6, 32, NULL),
+('EpoXs Tone Sedefli Renkler', 'Epoksi Reçine Pigmentler', 80.00, 90, 'resim42.jpg', 6, 32, NULL),
+('EpoXs Tone Saydam Renkler', 'Epoksi Reçine Pigmentler', 80.00, 90, 'resim42.jpg', 6, 32, NULL);
+
+-- RTV-2 Kalıp Silikonu Renkleri
+
+-- Mek Peroksitler 
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+
+('Akpa Kimya Mek Peroksit A1', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya Mek Peroksit A60', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya PK295 D50 (SMC/BMC)', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya AAP (Asetil Aseton Peroksit)', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya MIKP', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya BP50 Paste', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya BP50 Powder', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Akpa Kimya BP75 Powder', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Poliya M50 Butanox', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20),
+('Poliya M60 Butanox', 'Mek Peroksitler', 80.00, 90, 'resim42.jpg', 6, 33, 20);
+
+-- Kobalt Oktoatlar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+
+('Akpa Kimya SR6 Kobalt Oktoat', 'Kobalt Oktoatlar', 80.00, 90, 'resim42.jpg', 6, 33, 21),
+('Akpa Kimya KXC-6 Kobalt Oktoat', 'Kobalt Oktoatlar', 80.00, 90, 'resim42.jpg', 6, 33, 21),
+('Akpa Kimya %6 Kobalt Oktoat', 'Kobalt Oktoatlar', 80.00, 90, 'resim42.jpg', 6, 33, 21),
+('Akpa Kimya RC88 Şeffaf Kobalt', 'Kobalt Oktoatlar', 80.00, 90, 'resim42.jpg', 6, 33, 21);
+
+-- İnceltici Monomerler ve Kıvamlaştırıcılar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Turkuaz TPY001 Stiren Monomer (Polyester İnceltici)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
+('Poliya Polyester İnceltici Stiren', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
+('Poliya Jelkot İnceltici', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
+('Poliya MMA Monomer (Metil Metakrilat)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
+('Poliya D-32 Parafin Reçine Kıvamlaştırıcı (Thixo)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
+('RTV-2 Kalıp Silikonu Kıvamlaştırıcı (Thixo)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 41, 22);
+
+
+-- TEMİZLEYİCİ SOLVENTLER
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+
+('Turkuaz TPY003 Polyester Temizleyici (Aseton)', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL),
+('Poliya Kalıp Temizleyici Çözelti', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL),
+('Mobel Selülozik Tiner', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL),
+('Genç Selülozik Tiner', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL),
+('Dewilux Selülozik Tiner', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL);
 -- --------------------------------------------------------
 
 
@@ -452,6 +557,16 @@ VALUES
 --
 -- Table structure for table `service`
 --
+CREATE TABLE IF NOT EXISTS contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(50),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+COMMIT;
 
 CREATE TABLE `service` (
   `id` int(11) NOT NULL,
@@ -477,36 +592,51 @@ INSERT INTO `service` (
     `upadated_at`
 ) 
 
-VALUES
-(
-    2, 
-    '81 İLE HIZLI TESLİMAT', 
-    '',
-    '',
-    '<i class="material-icons">local_shipping</i>',
-    '5645portrait-happy-young-black-woman-posing-office_116547-21539.webp', 
-    '2022-07-17 21:19:37'
-),
-(
-    3, 
-    'TEKNİK DESTEK', 
-    '',
-    '',
-    '<i class="material-icons">build</i>', 
-    '9668788-7884680_hero-headshot-sitting-hd-png-download.jpg', 
-    '2022-07-17 21:20:13'
-),
-(
-    4, 
-    'YÜKSEK ÜRÜN KALİTESİ', 
-    '',
-    '',    
-    '<i class="material-icons">percent</i>', 
-    '648Eternity.jpg', 
-    '2022-07-17 21:20:46'
-);
+VALUES  
+(  
+    2,   
+    '81 İLE HIZLI TESLİMAT',   
+    'Türkiye genelindeki 81 ile hızlı ve güvenilir teslimat hizmeti sunuyoruz. Siparişleriniz güvenli şekilde adresinize teslim edilir.',  
+    '',  
+    '<i class="material-icons">local_shipping</i>',  
+    '5645portrait-happy-young-black-woman-posing-office_116547-21539.webp',   
+    '2022-07-17 21:19:37'  
+),  
+(  
+    3,   
+    'TEKNİK DESTEK',   
+    'Her türlü teknik sorununuzda uzman ekibimiz yanınızda. Sorunlarınıza hızlı ve etkili çözümler sunuyoruz.',  
+    '',  
+    '<i class="material-icons">build</i>',   
+    '9668788-7884680_hero-headshot-sitting-hd-png-download.jpg',   
+    '2022-07-17 21:20:13'  
+),  
+(  
+    4,   
+    'YÜKSEK ÜRÜN KALİTESİ',   
+    'Sizlere en iyi ürün deneyimini sunmak için yüksek kalite standartlarında üretim yapıyoruz. Ürünlerimiz güvenilir ve dayanıklıdır.',  
+    '',  
+    '<i class="material-icons">percent</i>',   
+    '648Eternity.jpg',   
+    '2022-07-17 21:20:46'  
+);  
+
 
 -- --------------------------------------------------------
+CREATE TABLE `sektorler` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `sektor_adi` VARCHAR(255) NOT NULL,
+    `sektor_aciklama` TEXT NOT NULL,
+    `resim` VARCHAR(1000) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `sektorler` (`sektor_adi`, `sektor_aciklama`, `resim`)
+VALUES 
+  ('Havacılık ve Savunma Sanayi', '', 'assets/img/baranboya/HAVACILIK VE SAVUNMA.png'),
+  ('Denizcilik', '', 'assets/img/baranboya/unnamed (8).png'),
+  ('Banyo', '', 'assets/img/baranboya/unnamed (5).png'),
+  ('Mutfak', '', 'assets/img/baranboya/unnamed (6).png');
 
 --
 -- Table structure for table `siteconfig`
@@ -695,20 +825,6 @@ VALUES
 --
 -- Table structure for table `sektörler`
 --
-CREATE TABLE `sektorler` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `sektor_adi` VARCHAR(255) NOT NULL,
-    `sektor_aciklama` TEXT NOT NULL,
-    `resim` VARCHAR(1000) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
-
-INSERT INTO `sektorler` (`sektor_adi`, `sektor_aciklama`, `resim`)
-VALUES 
-  ('Havacılık ve Savunma Sanayi', '', 'assets/img/baranboya/HAVACILIK VE SAVUNMA.png'),
-  ('Denizcilik', '', 'assets/img/baranboya/unnamed (8).png'),
-  ('Banyo', '', 'assets/img/baranboya/unnamed (5).png'),
-  ('Mutfak', '', 'assets/img/baranboya/unnamed (6).png');
 
 --
 -- Table structure for table `why_us`
@@ -878,8 +994,5 @@ ALTER TABLE `static`
 --
 ALTER TABLE `why_us`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

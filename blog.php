@@ -1,4 +1,10 @@
 <?php include "header.php"; ?>
+<?php
+// Blog yazılarını hazırlıklı ifade ile alın
+$stmt = $con->prepare("SELECT * FROM blog_posts ORDER BY created_at DESC");
+$stmt->execute();
+$result = $stmt->get_result();
+?>
 
 <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
     <div class="container">
@@ -20,6 +26,7 @@
         <div class="row">
             <div class="">
                 <div class="blog-page-blogs col-md-12">
+                    <?php while ($post = $result->fetch_assoc()) { ?>
                     <div class="col-6">
                         <div class="clearfix">
                             <p>
@@ -40,6 +47,7 @@
                             <img src="assets/img/categorys/YAT 1.jpeg" class="col-md-6 float-md-end mb-3 ms-md-3" alt="...">
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <!-- <div class="blog-page-blogs col-md-12">
                     <div class="container text-center">

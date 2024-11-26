@@ -96,13 +96,13 @@ CREATE TABLE `urunler` (
 
 INSERT INTO `kategoriler` (`isim`,`resim`) VALUES
 
-('Reçineler','category.png'),
-('Jelkotlar','category.png'),
-('Cam Elyaflar','category.png'),
-('Kalıp Ayırıcılar','category.png'),
-('Dolgu Malzemeleri','category.png'),
-('Renklendiriciler','category.png'),
-('Sarf Malzemeleri','category.png');
+('Reçineler','category.png'),1
+('Jelkotlar','category.png'),2
+('Cam Elyaflar','category.png'),3
+('Kalıp Ayırıcılar','category.png'),4
+('Dolgu Malzemeleri','category.png'),5
+('Renklendiriciler','category.png'),6
+('Sarf Malzemeleri','category.png');7
 
 INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`, `resim`) VALUES
 ('Polyester Reçineler', 1, 'assets/img/categorys/YAT 1.jpeg'),1
@@ -152,6 +152,8 @@ INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`, `resim`) VALUES
 ('Bantlar', 7, 'category.png'),39
 ('Ölçüm ve Dozajlama Ekipmanları', 7, 'category.png');40
 
+('Temizleyici Solventler', 6, 'category.png'),41
+
 
 INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
 ('Döküm Tipi Polyester Reçineler', 1),1
@@ -173,7 +175,13 @@ INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
 ('Bromine Vinilester Reçineler', 2), 16
 ('Amin Hızlandırıcılı Vinilester Reçineler', 2), 17
 ('Poliüretan Reçine', 2), 18
-('Epoksi Reçineler', 2); 19
+('Epoksi Reçineler', 2) 19
+
+
+('Mek Peroksitler (Polyester ve Jelkot Dondurucu)', 33) 20
+('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)', 33) 21
+('İnceltici Monomerler ve Kıvamlaştırıcılar', 33) 22
+
 
 
 -- Ürünler için INSERT sorguları

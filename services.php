@@ -1,4 +1,4 @@
- <?php include "header.php";?>
+<?php include "header.php";?>
         <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
             <div class="container">
                 <div class="row">
@@ -42,16 +42,26 @@
                 <div class="row">
 
                 <?php
-				   $qs="SELECT * FROM  service ORDER BY id DESC";
+				   $q = "SELECT * FROM service ORDER BY id DESC";
+                   $stmt = $con->prepare($q);
+                   $stmt->execute();
+                   $result = $stmt->get_result();
 
+                   // Şifreleme ve Deşifreleme Fonksiyonları
+                   function encrypt_id($id) {
+                       $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
+                       return urlencode(base64_encode(openssl_encrypt($id, 'AES-128-ECB', $key, OPENSSL_RAW_DATA)));
+                   }
 
- $r1 = mysqli_query($con,$qs);
+                   function decrypt_id($encrypted_id) {
+                       $key = 'gizli-anahtar';
+                       return openssl_decrypt(base64_decode(urldecode($encrypted_id)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+                   }
 
-while($rod = mysqli_fetch_array($r1))
-{
-	$id="$rod[id]";
-	$serviceg="$rod[service_title]";
-	$service_desc="$rod[service_desc]";
+                   while ($rod = $result->fetch_assoc()) {
+                       $id = $rod['id'];
+                       $serviceg = $rod['service_title'];
+                       $service_desc = $rod['service_desc'];
 
 print "
 <div class='col-12 col-md-6 col-lg-4'>
@@ -59,7 +69,7 @@ print "
 <div class='single-service p-4'  style='border: solid 1px #788282;'>
     <h3 class='my-3'>$serviceg</h3>
     <p>$service_desc</p>
-    <a class='service-btn mt-3' href='servicedetail.php?id=$id'>Learn More</a>
+    <a class='service-btn mt-3' href='servicedetail.php?id=".encrypt_id($id)."'>Learn More</a>
 </div>
 </div>
 
@@ -196,65 +206,47 @@ print "
            $status = "OK"; //initial status
 $msg="";
            if(ISSET($_POST['save'])){
-$name = mysqli_real_escape_string($con,$_POST['name']);
-$email = mysqli_real_escape_string($con,$_POST['email']);
-$phone = mysqli_real_escape_string($con,$_POST['phone']);
-$message = mysqli_real_escape_string($con,$_POST['message']);
+$name = trim($_POST['name']);
+$email = trim($_POST['email']);
+$phone = trim($_POST['phone']);
+$message = trim($_POST['message']);
 
- if ( strlen($name) < 5 ){
-$msg=$msg."Name Must Be More Than 5 Char Length.<BR>";
-$status= "NOTOK";}
- if ( strlen($email) < 9 ){
-$msg=$msg."Email Must Be More Than 10 Char Length.<BR>";
-$status= "NOTOK";}
-if ( strlen($message) < 10 ){
-    $msg=$msg."Message Must Be More Than 10 Char Length.<BR>";
-    $status= "NOTOK";}
+$status = "OK";
+$msg = "";
 
-if ( strlen($phone) < 8 ){
-  $msg=$msg."Phone Must Be More Than 8 Char Length.<BR>";
-  $status= "NOTOK";}
+if (strlen($name) < 5) {
+    $msg .= "İsim en az 5 karakter olmalı.<br>";
+    $status = "NOTOK";
+}
+if (strlen($email) < 9) {
+    $msg .= "Email en az 10 karakter olmalı.<br>";
+    $status = "NOTOK";
+}
+if (strlen($message) < 10) {
+    $msg .= "Mesaj en az 10 karakter olmalı.<br>";
+    $status = "NOTOK";
+}
+if (strlen($phone) < 8) {
+    $msg .= "Telefon en az 8 karakter olmalı.<br>";
+    $status = "NOTOK";
+}
 
-  if($status=="OK")
-  {
+if ($status == "OK") {
+    $recipient = "ornek@example.com";
+    $formcontent = "NAME: $name\nEMAIL: $email\nPHONE: $phone\nMESSAGE: $message";
+    $subject = "Yeni bir mesaj var";
+    $mailheader = "From: noreply@domain.com\r\n";
 
-$recipient="awolu_faith@live.com";
-
-$formcontent="NAME:$name \n EMAIL: $email  \n PHONE: $phone  \n MESSAGE: $message";
-
-$subject = "New Enquiry from Vogue Website";
-$mailheader = "From: noreply@vogue.com \r\n";
-$result= mail($recipient, $subject, $formcontent);
-
-          if($result){
-                  $errormsg= "
-  <div class='alert alert-success alert-dismissible alert-outline fade show'>
-                   Enquiry Sent Successfully. We shall get back to you ASAP.
-                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    </div>
-   "; //printing error if found in validation
-
-          }
-      }
-
-          elseif ($status!=="OK") {
-              $errormsg= "
-  <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                       ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-
-
-      }
-      else{
-              $errormsg= "
-        <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                   Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
-                   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                   </div>"; //printing error if found in validation
-
-
-          }
-             }
-             ?>
+    if (mail($recipient, $subject, $formcontent, $mailheader)) {
+        $errormsg = "<div class='alert alert-success'>Mesajınız başarıyla gönderildi.</div>";
+    } else {
+        $errormsg = "<div class='alert alert-danger'>Mesaj gönderilirken bir hata oluştu.</div>";
+    }
+} else {
+    $errormsg = "<div class='alert alert-danger'>$msg</div>";
+}
+}
+?>
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 						{

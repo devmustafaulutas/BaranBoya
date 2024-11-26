@@ -1,16 +1,24 @@
 <?php
-// $con = new mysqli("localhost", "truvaayv_root", "kerem.1234", "truvaayv_scriptdb");
+// Veritabanı bağlantısını çevresel değişkenlerden alın
+$db_host = getenv('DB_HOST');
+$db_user = getenv('DB_USER');
+$db_pass = getenv('DB_PASS');
+$db_name = getenv('DB_NAME');
 
-$con = new mysqli("localhost", "root", "12345678", "script");
+
+$db_host = 'localhost';
+$db_user = 'root';
+$db_pass = '12345678';
+$db_name = 'script';
+
+$con = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 if ($con->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    echo "Failed to connect to MySQL: (" . $con->connect_errno . ") " . $con->connect_error;
 }
 
 //Your Website URL Goes Here
-// $url="https://ornek.truva-software.com/vogue";
-$url="http://localhost/vogue1/vogue";
-
+$url = "http://localhost/vogue1/vogue";
 
 //Set Blog Activation Bonus Here (It must be only Number)
 $blog_bonus ="10";
@@ -20,4 +28,6 @@ $art_bonus="10";
 $login_bonus="10";
 //Set Currency Symbol for daily login bonus Here
 $money="$";
+
+
 ?>

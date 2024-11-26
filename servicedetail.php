@@ -1,6 +1,20 @@
 <?php
 include "header.php";
-$todo= mysqli_real_escape_string($con,$_GET["id"]);
+
+// Şifreleme ve Deşifreleme Fonksiyonları
+function encrypt_id($id) {
+    $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
+    return urlencode(base64_encode(openssl_encrypt($id, 'AES-128-ECB', $key, OPENSSL_RAW_DATA)));
+}
+
+function decrypt_id($encrypted_id) {
+    $key = 'gizli-anahtar';
+    return openssl_decrypt(base64_decode(urldecode($encrypted_id)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+}
+
+// Hizmet ID'yi al
+$service_id = isset($_GET['service_id']) ? intval(decrypt_id($_GET['service_id'])) : 0;
+
 ?>
         <!-- ***** Breadcrumb Area Start ***** -->
         <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
@@ -24,12 +38,15 @@ $todo= mysqli_real_escape_string($con,$_GET["id"]);
 
 
         <?php
-    $rt=mysqli_query($con,"SELECT * FROM service where id='$todo'");
-    $tr = mysqli_fetch_array($rt);
-    $service_title = "$tr[service_title]";
-    $service_detail = "$tr[service_detail]";
-    $upadated_at = "$tr[upadated_at]";
-    $ufile = "$tr[ufile]";
+    $stmt = $con->prepare("SELECT * FROM service WHERE id = ?");
+    $stmt->bind_param("i", $service_id);
+    $stmt->execute();
+    $tr = $stmt->get_result()->fetch_assoc();
+
+    $service_title = $tr['service_title'];
+    $service_detail = $tr['service_detail'];
+    $upadated_at = $tr['upadated_at'];
+    $ufile = $tr['ufile'];
 ?>
 
 

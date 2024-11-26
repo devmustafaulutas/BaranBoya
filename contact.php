@@ -37,6 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Eğer doğrulama başarılıysa e-posta gönderimi
     if ($status == "OK") {
+        // Mesajı veritabanına kaydetmek için hazırlıklı ifade kullanın
+        $stmt = $con->prepare("INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $name, $email, $phone, $message);
+        $stmt->execute();
+
         $mail = new PHPMailer(true);
 
         try {
@@ -215,4 +220,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!--====== Map Area End ======-->
         <?php include "footer.php";?>
-        

@@ -2,36 +2,43 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <?php
-    $rrs=mysqli_query($con,"SELECT * FROM section_title Where id=1");
-$rs = mysqli_fetch_array($rrs);
-$test_title = "$rs[test_title]";
-$test_text="$rs[test_text]";
-$enquiry_title="$rs[enquiry_title]";
-$enquiry_text="$rs[enquiry_text]";
-$enquiry_text="$rs[enquiry_text]";
-$contact_title="$rs[contact_title]";
-$contact_text="$rs[contact_text]";
-$port_title="$rs[port_title]";
-$port_text="$rs[port_text]";
-$service_title="$rs[service_title]";
-$service_text="$rs[service_text]";
-$why_title="$rs[why_title]";
-$why_text="$rs[why_text]";
-$about_title="$rs[about_title]";
-$about_text="$rs[about_text]";
+    // section_title tablosundan verileri hazırlıklı ifadelerle alın
+    $stmt = $con->prepare("SELECT * FROM section_title WHERE id = ?");
+    $id = 1;
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $rs = $stmt->get_result()->fetch_assoc();
+    $test_title = $rs['test_title'];
+    $test_text = $rs['test_text'];
+    $enquiry_title = $rs['enquiry_title'];
+    $enquiry_text = $rs['enquiry_text'];
+    $contact_title = $rs['contact_title'];
+    $contact_text = $rs['contact_text'];
+    $port_title = $rs['port_title'];
+    $port_text = $rs['port_text'];
+    $service_title = $rs['service_title'];
+    $service_text = $rs['service_text'];
+    $why_title = $rs['why_title'];
+    $why_text = $rs['why_text'];
+    $about_title = $rs['about_title'];
+    $about_text = $rs['about_text'];
 ?>
 
 
 
 <?php
-    $rt=mysqli_query($con,"SELECT * FROM sitecontact where id=1");
-    $tr = mysqli_fetch_array($rt);
-    $phone1 = "$tr[phone1]";
-    $phone2 = "$tr[phone2]";
-    $email1 = "$tr[email1]";
-    $email2 = "$tr[email2]";
-    $longitude = "$tr[longitude]";
-    $latitude = "$tr[latitude]";
+    // sitecontact tablosundan verileri hazırlıklı ifadelerle alın
+    $stmt = $con->prepare("SELECT * FROM sitecontact WHERE id = ?");
+    $id = 1;
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $tr = $stmt->get_result()->fetch_assoc();
+    $phone1 = $tr['phone1'];
+    $phone2 = $tr['phone2'];
+    $email1 = $tr['email1'];
+    $email2 = $tr['email2'];
+    $longitude = $tr['longitude'];
+    $latitude = $tr['latitude'];
 ?>
 <head>
     <meta charset="UTF-8">
@@ -42,12 +49,16 @@ $about_text="$rs[about_text]";
     <meta name="description" content="">
     <meta name="author" content="Themeland">
     <?php
-    $rr=mysqli_query($con,"SELECT * FROM siteconfig where id=1");
-    $r = mysqli_fetch_array($rr);
-    $site_title = "$r[site_title]";
-    $site_about = "$r[site_about]";
-    $site_footer = "$r[site_footer]";
-    $follow_text = "$r[follow_text]";
+    // siteconfig tablosundan verileri hazırlıklı ifadelerle alın
+    $stmt = $con->prepare("SELECT * FROM siteconfig WHERE id = ?");
+    $id = 1;
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $r = $stmt->get_result()->fetch_assoc();
+    $site_title = $r['site_title'];
+    $site_about = $r['site_about'];
+    $site_footer = $r['site_footer'];
+    $follow_text = $r['follow_text'];
 ?>
     <!-- Title  -->
     <title>Baran Boya - <?php print $site_title ?></title>
@@ -56,6 +67,7 @@ $about_text="$rs[about_text]";
     <link rel="icon" href="assets/img/favicon.png">
 
     <!-- ***** All CSS Files ***** -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -174,7 +186,7 @@ $about_text="$rs[about_text]";
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <?php while ($category = mysqli_fetch_array($categories_query)) { ?>
                                     <div class="dropdown-submenu">
-                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>">
+                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo encrypt_id($category['id']); ?>">
                                             <?php echo $category['isim']; ?>
                                         </a>
                                         <?php
@@ -185,7 +197,7 @@ $about_text="$rs[about_text]";
                                             <ul class="dropdown-menu">
                                                 <?php while ($subcategory = mysqli_fetch_array($subcategories_query)) { ?>
                                                     <li class="dropdown-submenu">
-                                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo $category['id']; ?>&alt_kategori_id=<?php echo $subcategory['id']; ?>">
+                                                        <a class="dropdown-item menu-link" href="urunler.php?kategori_id=<?php echo encrypt_id($category['id']); ?>&alt_kategori_id=<?php echo encrypt_id($subcategory['id']); ?>">
                                                             <?php echo $subcategory['isim']; ?>
                                                         </a>
                                                     </li>
@@ -219,4 +231,6 @@ $about_text="$rs[about_text]";
         </nav>
     </header>
             <!-- ***** Header End ***** -->
+
+
 

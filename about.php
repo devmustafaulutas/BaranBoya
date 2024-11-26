@@ -1,5 +1,17 @@
-
 <?php include "header.php"; ?>
+<?php
+// Hakkımızda verilerini veritabanından çekin
+$stmt = $con->prepare("SELECT * FROM about_us WHERE id = ?");
+$id = 1;
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$data = $result->fetch_assoc();
+
+$about_content = $data['about_content'];
+$vision_content = $data['vision_content'];
+$mission_content = $data['mission_content'];
+?>
         <!-- ***** Breadcrumb Area Start ***** -->
         <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
             <div class="container">
@@ -27,19 +39,15 @@
                 <div class="about-content row justify-content-between align-items-center">
                     <div id="hakkimizda">
                         <h5 id="about-baslik" class="text-white text-uppercase mb-3">HAKKIMIZDA</h5>
-                        <p>Baran Boya ailesi olarak çalışma alanımızın ağırlığı mobilya, kompozit ve sanayi sektörüne yönelik Polyester Reçineler, Vinilester Reçineler, Epoksi Reçineler ,Cam Elyaf Takviyeleri, RTV-2 Kalıp Silikonu, Poliüretan Reçine ve yardımcı malzemeleridir.</p>
+                        <p><?php echo $about_content; ?></p>
                     </div>
                     <div id="vizyon">
                         <h5 id="about-baslik" class="text-white text-uppercase mb-3">VİZYONUMUZ</h5>
-                        <p>
-                            Değerlerimiz, bilgimiz ve çalışanlarımızla, müşterilerimizin ve tedarikçilerimizin memnuniyetini sağlamak ve gelişime pararel olarak kaliteli ve güvenilir ürünler sunmak temel amacımızdır.
-                        </p>
+                        <p><?php echo $vision_content; ?></p>
                     </div>
                     <div id="misyon">
                         <h5 id="about-baslik" class="text-white text-uppercase mb-3">MİSYONUMUZ</h5>
-                        <p>
-                            Sürekli gelişim anlayışı ile bilgi ve tecrübemizden yararlanarak, ürün ve hizmetlerimizi müşterilerimizin beklentilerine uygun hale getirmek. Müşterilerimiz ve tedarikçilerimizle köklü ve uzun süreli ilişkiler kurmak. Tüm çalışanlarımızı teşvik etmek ve başarılarını desteklemek. Olası tüm fırsatları değerlendirerek ortaklarımıza ve yatırımcılarımıza ekonomik değer katmak.
-                        </p>
+                        <p><?php echo $mission_content; ?></p>
                     </div>
                 </div>
             </div>

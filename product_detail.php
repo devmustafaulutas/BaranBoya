@@ -2,13 +2,27 @@
 include "z_db.php";
 include "header.php";
 
+// Şifreleme ve Deşifreleme Fonksiyonları
+function encrypt_id($id) {
+    $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
+    return urlencode(base64_encode(openssl_encrypt($id, 'AES-128-ECB', $key, OPENSSL_RAW_DATA)));
+}
+
+function decrypt_id($encrypted_id) {
+    $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
+    $decrypted = openssl_decrypt(base64_decode($encrypted_id), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+    return intval($decrypted);
+}
+
 // Ürün ID'yi al
-$urun_id = isset($_GET['urun_id']) ? (int)$_GET['urun_id'] : 0;
+$urun_id = isset($_GET['urun_id']) ? decrypt_id($_GET['urun_id']) : 0;
 
 // Ürün bilgilerini al
-$product_query = "SELECT * FROM urunler WHERE id = $urun_id";
-$product_result = mysqli_query($con, $product_query);
-$product = mysqli_fetch_array($product_result);
+$stmt = $con->prepare("SELECT * FROM urunler WHERE id = ?");
+$stmt->bind_param("i", $urun_id);
+$stmt->execute();
+$product_result = $stmt->get_result();
+$product = $product_result->fetch_assoc();
 
 // Ürün bulunamadıysa yönlendirme yap
 if (!$product) {
@@ -40,7 +54,7 @@ if ($subcategory) {
 }
 
 // Alt alt kategoriyi al
-$subSubcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE id = $alt_kategori_id");
+$subSubcategory_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE id = $alt_kategori_alt_id");
 $subSubcategory = mysqli_fetch_array($subSubcategory_query);
 if ($subSubcategory) {
     $subSubcategory_name = $subSubcategory['isim'];
@@ -99,7 +113,7 @@ if ($subSubcategory) {
                             if (mysqli_num_rows($subcategories_query) > 0) {
                                 echo '<ul>';
                                 while ($subcategory = mysqli_fetch_array($subcategories_query)) {
-                                    echo '<li><a class="dropdown-item" href="urunler.php?kategori_id='.$kategori_id.'&alt_kategori_id='.$subcategory['id'].'">'.$subcategory['isim'].'</a></li>';
+                                    echo '<li><a class="dropdown-item" href="urunler.php?kategori_id='.encrypt_id($kategori_id).'&alt_kategori_id='.encrypt_id($subcategory['id']).'">'.$subcategory['isim'].'</a></li>';
                                 }
                                 echo '</ul>';
                             }
@@ -134,7 +148,7 @@ if ($subSubcategory) {
                             if (mysqli_num_rows($subcategories_query) > 0) {
                                 echo '<ul>';
                                 while ($subcategory = mysqli_fetch_array($subcategories_query)) {
-                                    echo '<li><a class="dropdown-item" href="urunler.php?kategori_id='.$kategori_id.'&alt_kategori_id='.$subcategory['id'].'">'.$subcategory['isim'].'</a></li>';
+                                    echo '<li><a class="dropdown-item" href="urunler.php?kategori_id='.encrypt_id($kategori_id).'&alt_kategori_id='.encrypt_id($subcategory['id']).'">'.$subcategory['isim'].'</a></li>';
                                 }
                                 echo '</ul>';
                             }
@@ -169,7 +183,7 @@ if ($subSubcategory) {
                             if (mysqli_num_rows($subSubcategories_query) > 0) {
                                 echo '<ul>';
                                 while ($subSubcategory = mysqli_fetch_array($subSubcategories_query)) {
-                                    echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id='.$kategori_id.'&alt_kategori_id='.$alt_kategori_id.'&alt_kategori_alt_id='.$subSubcategory['id'].'">'.$subSubcategory['isim'].'</a></li>';
+                                    echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id='.encrypt_id($kategori_id).'&alt_kategori_id='.encrypt_id($alt_kategori_id).'&alt_kategori_alt_id='.encrypt_id($subSubcategory['id']).'">'.$subSubcategory['isim'].'</a></li>';
                                 }
                                 echo '</ul>';
                             }

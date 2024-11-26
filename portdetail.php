@@ -1,6 +1,18 @@
+<?php include "header.php"; ?>
 <?php
-include "header.php";
-$todo= mysqli_real_escape_string($con,$_GET["id"]);
+// Portföy ID'sini güvenli bir şekilde alın
+$port_id = isset($_GET['port_id']) ? intval($_GET['port_id']) : 0;
+
+// Portföy detaylarını hazırlıklı ifade ile alın
+$stmt = $con->prepare("SELECT * FROM portfolio WHERE id = ?");
+$stmt->bind_param("i", $port_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$portfolio = $result->fetch_assoc();
+
+$port_title = $portfolio['port_title'];
+$port_detail = $portfolio['port_detail'];
+$ufile = $portfolio['ufile'];
 ?>
         <!-- ***** Breadcrumb Area Start ***** -->
         <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
@@ -21,15 +33,6 @@ $todo= mysqli_real_escape_string($con,$_GET["id"]);
             </div>
         </section>
         <!-- ***** Breadcrumb Area End ***** -->
-
-
-        <?php
-    $rt=mysqli_query($con,"SELECT * FROM portfolio where id='$todo'");
-    $tr = mysqli_fetch_array($rt);
-    $port_title = "$tr[port_title]";
-    $port_detail = "$tr[port_detail]";
-    $ufile = "$tr[ufile]";
-?>
 
 
         <!-- ***** About Area Start ***** -->

@@ -2,6 +2,21 @@
 <?php
 // Veritabanı bağlantısı
 include "z_db.php";
+
+// Şifreleme ve Deşifreleme Fonksiyonları
+function encrypt_id($id) {
+    $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
+    return urlencode(base64_encode(openssl_encrypt($id, 'AES-128-ECB', $key, OPENSSL_RAW_DATA)));
+}
+
+function decrypt_id($encrypted_id) {
+    $key = 'gizli-anahtar';
+    return openssl_decrypt(base64_decode(urldecode($encrypted_id)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+}
+
+// Sektör ID'yi al
+$sektor_id = isset($_GET['sektor_id']) ? intval(decrypt_id($_GET['sektor_id'])) : 0;
+
 // URL'den 'sector' parametresini alalım
 $sektor_adi = isset($_GET['sector']) ? $_GET['sector'] : '';
 
