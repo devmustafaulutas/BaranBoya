@@ -1,4 +1,4 @@
-.env
-INSTALL/
-z_db.php
-vendor
+git rm --cached .env
+git rm --cached -r INSTALL/
+git rm --cached z_db.php
+git rm --cached -r vendor/
