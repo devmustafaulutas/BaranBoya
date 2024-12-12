@@ -1,0 +1,4 @@
+.env
+INSTALL/
+z_db.php
+vendor
