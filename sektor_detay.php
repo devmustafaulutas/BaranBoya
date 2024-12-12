@@ -1,70 +1,85 @@
-<?php include("header.php"); ?>
 <?php
-// Veritabanı bağlantısı
-include "z_db.php";
+include "header.php";
+error_reporting(E_ALL); // Tüm hataları ve uyarıları göster
 
-// Şifreleme ve Deşifreleme Fonksiyonları
-function encrypt_id($id) {
-    $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
-    return urlencode(base64_encode(openssl_encrypt($id, 'AES-128-ECB', $key, OPENSSL_RAW_DATA)));
+require 'dashboard/PHPMailer/src/SMTP.php';
+require 'z_db.php'; // Veritabanı bağlantısını dahil et
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$errormsg = "";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $status = "OK"; // Başlangıç durumu
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $phone = htmlspecialchars($_POST['phone']);
+    $message = htmlspecialchars($_POST['message']);
+
+    // Form alanı doğrulama
+    if (strlen($name) < 5) {
+        $errormsg = "İsim en az 5 karakter olmalıdır.";
+        $status = "NOTOK";
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errormsg = "Geçersiz email formatı.";
+        $status = "NOTOK";
+    }
+    if (strlen($message) < 10) {
+        $errormsg = "Mesaj en az 10 karakter olmalıdır.";
+        $status = "NOTOK";
+    }
+
+    if ($status == "OK") {
+        // PHPMailer ile email gönderme işlemi
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.example.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'your-email@example.com';
+            $mail->Password = 'your-email-password';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('your-email@example.com', 'Your Name');
+            $mail->addAddress($email, $name);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Yeni Mesaj';
+            $mail->Body    = "İsim: $name<br>Email: $email<br>Telefon: $phone<br>Mesaj: $message";
+
+            $mail->send();
+            echo 'Mesaj başarıyla gönderildi.';
+        } catch (Exception $e) {
+            echo "Mesaj gönderilemedi. Hata: {$mail->ErrorInfo}";
+        }
+    } else {
+        echo $errormsg;
+    }
 }
 
-function decrypt_id($encrypted_id) {
-    $key = 'gizli-anahtar';
-    return openssl_decrypt(base64_decode(urldecode($encrypted_id)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
-}
-
-// Sektör ID'yi al
-$sektor_id = isset($_GET['sektor_id']) ? intval(decrypt_id($_GET['sektor_id'])) : 0;
-
-// URL'den 'sector' parametresini alalım
-$sektor_adi = isset($_GET['sector']) ? $_GET['sector'] : '';
-
-// Veritabanından sektör bilgilerini alalım
-$sektor_query = "SELECT sektor_adi, sektor_aciklama, resim FROM sektorler WHERE sektor_adi = '$sektor_adi'";
-$sektor_data = mysqli_query($con, $sektor_query);
-
-// Eğer sektör bulunursa, detayları gösterelim
-if ($sektor = mysqli_fetch_array($sektor_data)) {
-    $sektor_adi = $sektor['sektor_adi'];
-    $sektor_aciklama = $sektor['sektor_aciklama'];
-    $sektor_resim = $sektor['resim'];
-} else {
-    echo "Sektör bulunamadı.";
-    exit;
-}
+// Veritabanından hizmet bilgilerini alalım
+$services_query = "SELECT * FROM services";
+$services_result = mysqli_query($con, $services_query);
 ?>
-<section class="section breadcrumb-area overlay-dark d-flex align-items-center">
+
+<!-- Hizmetler Bölümü -->
+<section class="section services-area">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb-content d-flex flex-column align-items-center text-center">
-                    <h2 class="text-white text-uppercase mb-3">Sektörler</h2>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home"><?php echo $sektor_adi ?></a></li>
-                    </ol>
+            <?php while ($service = mysqli_fetch_assoc($services_result)): ?>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service">
+                    <h3><?= htmlspecialchars($service['name']); ?></h3>
+                    <p><?= htmlspecialchars($service['description']); ?></p>
+                    <a href="servicedetail.php?service_id=<?= urlencode(encrypt_id($service['id'])); ?>" class="btn btn-primary">Detaylar</a>
                 </div>
             </div>
+            <?php endwhile; ?>
         </div>
     </div>
 </section>
-<section class="sektor-detay">
-    <div class="container">
-        <div class="sektor-detay-baslik-container">
-            <h4 class="sektor-detay-baslik">Sektörler</h4>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <div class="sektor-detay-img">
-                    <img src="<?php echo $sektor_resim; ?>" alt="<?php echo $sektor_adi; ?>" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-md-7">
-                <h4><?php echo $sektor_adi; ?></h4>
-                <p><?php echo $sektor_aciklama; ?></p>
-            </div>
-        </div>
-    </div>
-</section>
-<?php include("footer.php"); ?>
+
+<?php include "footer.php"; ?>

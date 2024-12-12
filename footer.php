@@ -129,6 +129,9 @@
 
     <!-- Plugins js -->
     <script src="assets/js/plugins/plugins.min.js"></script>
+    
+    <!-- Animations js -->
+    <script src="assets/js/animations.js"></script>
 
     <!-- Active js -->
     <script src="assets/js/active.js"></script>

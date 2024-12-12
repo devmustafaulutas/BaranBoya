@@ -61,6 +61,7 @@
     <!-- Title  -->
     <title><?php echo htmlspecialchars($site_title, ENT_QUOTES, 'UTF-8'); ?></title>
 
+    <link rel="stylesheet" href="assets/css/new-section.css">
     <!-- Favicon  -->
     <link rel="icon" href="assets/img/favicon.png">
 
@@ -72,7 +73,6 @@
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>

@@ -175,18 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </section>
-        <!-- ***** Promo Area Start ***** -->
         
-        <!-- ***** Promo Area End ***** -->
-
-        <!-- ***** Content Area Start ***** -->
-
-        <!-- ***** Content Area End ***** -->
-
-        <!-- ***** Content Area Start ***** -->
-
-        <!-- ***** Content Area End ***** -->
-
         <!-- ***** Service Area End ***** -->
 
         <section id="service" class="section service-area bg-grey ptb_150">
@@ -261,16 +250,85 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </section>
         <!-- ***** Service Area End ***** -->
+        <!-- Özellikler Bölümü -->
+        <section class="index-industrial-paint-features-section">
+            <div class="container">
+                <h2 class="index-features-section-title fade-in">Özelliklerimiz</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="index-feature-card">
+                            <div class="index-feature-icon">
+                                <i class="fas fa-paint-roller"></i>
+                            </div>
+                            <h3 class="index-feature-title">Yüksek Kalite</h3>
+                            <p class="index-feature-description">En kaliteli malzemelerle üstün performans sağlar.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="index-feature-card">
+                            <div class="index-feature-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3 class="index-feature-title">Çevre Dostu</h3>
+                            <p class="index-feature-description">Doğa dostu formüllerle çevreye zarar vermez.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="index-feature-card">
+                            <div class="index-feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="index-feature-title">Dayanıklılık</h3>
+                            <p class="index-feature-description">Uzun ömürlü koruma sağlayarak bakım ihtiyacını azaltır.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- ***** Portfolio Area Start ***** -->
-        
-        <!-- ***** Portfolio Area End ***** -->
-
-        <!-- ***** Price Plan Area Start ***** -->
-
-        <!-- ***** Price Plan Area End ***** -->
-
-        <!-- ***** Review Area Start ***** -->
+       <!-- Ürün Vitrin Bölümü -->
+        <section class="index-industrial-paint-product-showcase">
+            <div class="container">
+                <h2 class="index-product-showcase-title fade-in">Ürün Vitrinimiz</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="index-product-card">
+                            <div class="index-product-image" style="background-image: url('assets/img/products/25KG_SILIKON.png');">
+                                <div class="index-product-overlay">
+                                    <h3 class="index-product-title">Endüstriyel Boya A</h3>
+                                    <p class="index-product-description">Yüksek dayanıklılığa sahip endüstriyel boya.</p>
+                                    <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="index-product-card">
+                            <div class="index-product-image" style="background-image: url('assets/img/products/product2.jpg');">
+                                <div class="index-product-overlay">
+                                    <h3 class="index-product-title">Endüstriyel Boya B</h3>
+                                    <p class="index-product-description">Çevre dostu formülüyle öne çıkan boya.</p>
+                                    <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="index-product-card">
+                            <div class="index-product-image" style="background-image: url('assets/img/products/product3.jpg');">
+                                <div class="index-product-overlay">
+                                    <h3 class="index-product-title">Endüstriyel Boya C</h3>
+                                    <p class="index-product-description">Uzun ömürlü koruma sağlayan boya çözümü.</p>
+                                    <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Daha fazla ürün kartı ekleyebilirsiniz -->
+                </div>
+            </div>
+        </section>
+        <!-- ***** Sektor Area Start ***** -->
         <section id="sektorler">
             <div class="container">
               <div class="row text-center mb-5">
