@@ -1,0 +1,23 @@
+To Install;
+
+-  Import the "database.sql" file into your phpmyadmin
+-  Update the ".env" file for database connection
+-  Run your site in the browser.
+
+
+Default Admin
+
+- https://sitename.com/dashboard
+Username: admin
+Password: admin
+
+
+Supports PHP Versions 7.43 and above.
+
+If you like to have offer for projects like this contact :
+
+Whatsapp +905422550564
+Github: https://github.com/devmustafaulutas
+Linkedin: https://www.linkedin.com/in/mustafa-uluta%C5%9F-59aa82297/
+Email: devmustafaum538@gmail.com
+

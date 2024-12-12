@@ -48,19 +48,19 @@ $ufile = $r[0];
               </li>
 
               <li class="nav-item">
-                            <a class="nav-link menu-link" href="blog.php" role="button" aria-expanded="true" aria-controls="sidebarLanding">
+                            <a class="nav-link menu-link" href="blog" role="button" aria-expanded="true" aria-controls="sidebarLanding">
                                 <i class="ri-file-list-3-line"></i> <span data-key="t-landing">Blog Ayarları</span>
                             </a>
                         </li>
 
               <li class="nav-item">
-                            <a class="nav-link menu-link" href="services.php"  role="button" aria-expanded="true" aria-controls="sidebarLanding">
+                            <a class="nav-link menu-link" href="services"  role="button" aria-expanded="true" aria-controls="sidebarLanding">
                                 <i class="ri-checkbox-multiple-line"></i> <span data-key="t-landing">Servis Ayarları</span>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="socials.php"  role="button" aria-expanded="true" aria-controls="sidebarLanding">
+                            <a class="nav-link menu-link" href="socials"  role="button" aria-expanded="true" aria-controls="sidebarLanding">
                                 <i class="ri-chrome-fill"></i> <span data-key="t-landing">Sosyal Medya</span>
                             </a>
                         </li>

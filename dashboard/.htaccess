@@ -1,6 +1,6 @@
 RewriteEngine On    # Turn on the rewriting engine
 php_flag display_errors on
-RewriteBase /vogue1/vogue/dashboard/
+RewriteBase /vogue/dashboard/
 # RewriteBase /vogue/dashboard/
 
 
@@ -25,7 +25,6 @@ RewriteRule    ^why/?$    why-us.php    [NC,L]
 RewriteRule    ^logo/?$    updatelogo.php    [NC,L]
 
 RewriteRule    ^createblog/?$    add-blog.php    [NC,L]
-RewriteRule    ^blog/?$    bloglist.php    [NC,L]
 
 RewriteRule    ^createslide/?$    add-slider.php    [NC,L]
 RewriteRule    ^slider/?$    sliderlist.php    [NC,L]
@@ -33,8 +32,10 @@ RewriteRule    ^static/?$    static-home.php    [NC,L]
 RewriteRule    ^contact/?$    updatecontact.php    [NC,L]
 
 RewriteRule    ^productlist/?$    productlist.php    [NC,L]
+RewriteRule    ^blog/?$    blog.php    [NC,L]
 RewriteRule    ^productadd/?$    productadd.php    [NC,L]
 RewriteRule    ^productdel/?$    productdel.php    [NC,L]
 RewriteRule    ^productupdate/?$    productupdate.php    [NC,L]
 RewriteRule    ^products/?$    products.php    [NC,L]
 RewriteRule    ^categorys/?$    categorys.php    [NC,L]
+RewriteRule    ^sitesettings?action=site_config/?$    sitesettings.php?action=site_config   [NC,L]
