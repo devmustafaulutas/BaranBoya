@@ -1,5 +1,13 @@
 <?php include "header.php"; ?>
 <?php
+    error_reporting(E_ALL); // Tüm hataları ve uyarıları göster
+    ini_set('display_errors', 0); // Hataları ekrana yazdırma (güvenlik için kapalı)
+    ini_set('log_errors', 1); // Hataları log dosyasına yaz
+    ini_set('error_log', __DIR__ . '/error.log'); // Hataları kaydedeceğiniz log dosyasının yolu (__DIR__ geçerli dizini belirtir)
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
@@ -93,12 +101,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Welcome Intro Start -->
                     <div class="col-12 col-md-12">
                     <?php
-    $stmt = $con->prepare("SELECT * FROM static");
+    $stmt = $con->prepare("SELECT id, stitle, stext FROM static");
     $stmt->execute();
-    $result = $stmt->get_result();
-    $r = $result->fetch_assoc();
-    $stitle = $r['stitle'];
-    $stext = $r['stext'];
+    $stmt->bind_result($id, $stitle, $stext); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
+
+    while ($stmt->fetch()) {
+        $result[] = [
+            'id' => $id,
+            'stitle' => $stitle,
+            'stext' => $stext
+        ];
+    }
+
+    // $service_title ve $service_text değişkenlerini tanımlayın
+    $service_title = "Hizmetlerimiz"; // Örnek statik değer
+    $service_text = "Sunulan hizmetler hakkında kısa açıklama."; // Örnek statik değer
+
+    // $contact_title ve $contact_text değişkenlerini tanımlayın
+    $contact_title = "İletişim"; // Örnek statik değer
+    $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz."; // Örnek statik değer
+
+    // Veya veritabanından çekmek için aşağıdaki satırları kullanabilirsiniz:
+    /*
+    $stmt_service = $con->prepare("SELECT service_title, service_text FROM services_table LIMIT 1");
+    $stmt_service->execute();
+    $result_service = $stmt_service->get_result();
+    $service = $result_service->fetch_assoc();
+    $service_title = $service['service_title'];
+    $service_text = $service['service_text'];
+
+    $stmt_contact = $con->prepare("SELECT contact_title, contact_text FROM contact_table LIMIT 1");
+    $stmt_contact->execute();
+    $result_contact = $stmt_contact->get_result();
+    $contact = $result_contact->fetch_assoc();
+    $contact_title = $contact['contact_title'];
+    $contact_text = $contact['contact_text'];
+    */
 ?>
 
                         <div class="welcome-intro">
@@ -173,15 +211,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row">
 
                 <?php
-                $stmt = $con->prepare("SELECT * FROM service ORDER BY id DESC LIMIT 6");
+                $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id DESC LIMIT 6");
                 $stmt->execute();
-                $r1 = $stmt->get_result();
+                $stmt->bind_result($id, $serviceg, $service_desc, $icon); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
 
-                while ($rod = $r1->fetch_assoc()) {
-                    $id = $rod['id'];
-                    $serviceg = $rod['service_title'];
-                    $service_desc = $rod['service_desc'];
-                    $icon = $rod['icon'];
+                while ($stmt->fetch()) {
+                    $services[] = [
+                        'id' => $id,
+                        'service_title' => $serviceg,
+                        'service_desc' => $service_desc,
+                        'icon' => $icon
+                    ];
+                }
+
+                foreach ($services as $service) {
+                    $id = $service['id'];
+                    $serviceg = $service['service_title'];
+                    $service_desc = $service['service_desc'];
+                    $icon = $service['icon'];
 
                     // HTML çıktısını oluştur
                     print "
@@ -388,17 +435,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Client Logos -->
                     <div id="client-logos" class="client-logos d-flex flex-wrap justify-content-center">
                         <?php
-                        $stmt = $con->prepare("SELECT * FROM tedarikcilerimiz ORDER BY id DESC LIMIT 8");
+                        $stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id DESC LIMIT 8");
                         $stmt->execute();
-                        $r123 = $stmt->get_result();
+                        $stmt->bind_result($id, $resim); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
 
-                        while ($ro = $r123->fetch_assoc()) {
-                            $resim = $ro['resim'];
+                        while ($stmt->fetch()) {
+                            $tedarikciler[] = [
+                                'id' => $id,
+                                'resim' => $resim
+                            ];
+                        }
+
+                        foreach ($tedarikciler as $tedarikci) {
+                            $resim = $tedarikci['resim'];
 
                             // Resimleri yatayda göstermek için HTML çıktısı
                             print "
                             <div class='single-logo p-3'>
-                                <img class='img-fluid' src='$resim' alt='Tedarikçi Logosu'>
+                                <img class='img-fluid' src='assets/img/tedarikcilerimiz/$resim' >
                             </div>
                             ";
                         }
@@ -429,8 +483,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </li>
                                 <li class="contact-info color-3 bg-hover active hover-bottom text-center p-5 m-3">
                                     <span><i class="fas fa-envelope-open-text fa-3x"></i></span>
-                                    <a class="d-none d-sm-block my-2" href="mailto:<?php print $email1 ?>">
-                                        <h3><?php print $email1 ?></h3>
+                                    <a class="d-none d-sm-block my-2" href="mailto:<?php print $email ?>">
+                                        <h3><?php print $email ?></h3>
                                     </a>
                                 </li>
                             </ul>

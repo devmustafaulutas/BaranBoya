@@ -311,12 +311,12 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 -- --------------------------------------------------------
 
 
-CREATE TABLE `blog` (
+CREATE TABLE IF NOT EXISTS `blog` (
   `id` int(11) NOT NULL,
   `blog_title` varchar(300) NOT NULL,
   `blog_desc` varchar(300) NOT NULL,
   `blog_detail` varchar(2000) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
+  `logo` varchar(1000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -329,7 +329,7 @@ INSERT INTO `blog` (
     `blog_title`, 
     `blog_desc`, 
     `blog_detail`, 
-    `ufile`, 
+    `logo`, 
     `updated_at`
 ) 
 VALUES
@@ -339,7 +339,7 @@ VALUES
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem.', 
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.',
     '', 
-    '2022-07-15 12:47:45'
+    CURRENT_TIMESTAMP()
 ),
 (
     2, 
@@ -347,7 +347,7 @@ VALUES
     'We provide the best digital servicesWe provide the best digital servicesWe provide the best digital services', 
     'We provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital services', 
     '60936059d354562031616499540.png', 
-    '2022-07-16 05:49:44'
+    CURRENT_TIMESTAMP()
 );
 
 -- --------------------------------------------------------
@@ -358,8 +358,7 @@ VALUES
 
 CREATE TABLE `logo` (
   `id` int(11) NOT NULL,
-  `xfile` varchar(1000) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
+  `logo` varchar(1000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -367,8 +366,8 @@ CREATE TABLE `logo` (
 -- Dumping data for table `logo`
 --
 
-INSERT INTO `logo` (`id`, `xfile`, `ufile`, `updated_at`) VALUES
-(1, '5122favicon.png', '5122favicon.png', '2024-11-01 16:17:29');
+INSERT INTO `logo` (`id`, `logo`, `updated_at`) VALUES
+(1, '5122favicon.png', '2024-11-01 16:17:29');
 
 -- --------------------------------------------------------
 
@@ -575,10 +574,7 @@ CREATE TABLE `sitecontact` (
   `id` int(11) NOT NULL,
   `phone1` varchar(150) NOT NULL,
   `phone2` varchar(150) NOT NULL,
-  `email1` varchar(100) NOT NULL,
-  `email2` varchar(100) NOT NULL,
-  `longitude` varchar(100) NOT NULL,
-  `latitude` varchar(150) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -586,7 +582,7 @@ CREATE TABLE `sitecontact` (
 -- Dumping data for table `sitecontact`
 --
 
-INSERT INTO `sitecontact` (`id`, `phone1`, `phone2`, `email1`, `email2`, `longitude`, `latitude`, `updated_at`) VALUES
+INSERT INTO `sitecontact` (`id`, `phone1`, `phone2`, `email`, `email2`, `longitude`, `latitude`, `updated_at`) VALUES
 (1, '+90 0312 394 44 21', '+90 0312 350 39 50', 'baranboya@gmail.com', 'baranboya@gmail.com', '7.099737483', '7.63734634', '2024-03-11 11:05:25');
 
 -- --------------------------------------------------------
@@ -748,10 +744,7 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `blog`
---
-ALTER TABLE `blog`
-  ADD PRIMARY KEY (`id`);
+
 
 --
 -- Indexes for table `logo`
@@ -790,10 +783,6 @@ ALTER TABLE `sitecontact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `slider`
---
-ALTER TABLE `slider`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `social`

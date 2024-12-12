@@ -10,6 +10,14 @@ use PHPMailer\PHPMailer\Exception;
 
 $errormsg = "";
 
+// Değişkenlerin tanımlı olduğundan emin olun
+if (!isset($contact_title)) {
+    $contact_title = "İletişim";
+}
+if (!isset($contact_text)) {
+    $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.";
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = "OK"; // Başlangıç durumu
     $name = htmlspecialchars($_POST['name']);
@@ -99,6 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="col-12">
                         <!-- Breamcrumb Content -->
                         <div class="breadcrumb-content text-center">
+                            <h2 class="text-white text-uppercase mb-3">İLETİŞİM</h2>
+
                             <ol class="breadcrumb d-flex justify-content-center">
                                 <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Home</a></li>
                                 <li class="breadcrumb-item text-white active">İletişim</li>
@@ -114,9 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!--====== Contact Area Start ======-->
         <section id="contact" class="contact-area ptb_100">
             <div class="container">
-                <div class="contact-baslik-container">
-                    <h5 id="contact-baslik" class="text-white text-uppercase mb-3 text-center">İLETİŞİM</h5>
-                </div>
                 <div class="row justify-content-between align-items-center">
                     <div class="col-12 col-lg-5">
                         <div class="section-heading text-center mb-3">
@@ -133,8 +140,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </li>
                                 <li class="contact-info color-3 bg-hover active hover-bottom text-center p-5 m-3">
                                     <span><i class="fas fa-envelope-open-text fa-3x"></i></span>
-                                    <a class="d-none d-sm-block my-2" href="mailto:<?php print $email1 ?>">
-                                        <h3><?php print $email1 ?></h3>
+                                    <a class="d-none d-sm-block my-2" href="mailto:<?php print $email?>">
+                                        <h3><?php print $email ?></h3>
                                     </a>
                                 </li>
                             </ul>

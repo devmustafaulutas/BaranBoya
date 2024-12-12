@@ -1,10 +1,5 @@
 <?php include "header.php"; ?>
-<?php
-// Blog yazılarını hazırlıklı ifade ile alın
-$stmt = $con->prepare("SELECT * FROM blog_posts ORDER BY created_at DESC");
-$stmt->execute();
-$result = $stmt->get_result();
-?>
+<?php include "z_db.php" ?>
 
 <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
     <div class="container">
@@ -21,49 +16,43 @@ $result = $stmt->get_result();
         </div>
     </div>
 </section>
+
 <section>
-    <div class="container text-center">
-        <div class="row">
-            <div class="">
-                <div class="blog-page-blogs col-md-12">
-                    <?php while ($post = $result->fetch_assoc()) { ?>
-                    <div class="col-6">
-                        <div class="clearfix">
-                            <p>
-                                 meaningless phrases here to demonstrate how the columns interact here with the floated image.
-                            </p>
+    <div class="container">
+        <div class="row" style="padding:40px;">
+            <?php
+            // Fetch blog posts from the database
+            $query = "SELECT * FROM blog ORDER BY updated_at DESC";
+            $result = mysqli_query($con, $query);
 
-                            <p>
-                                As you can see the paragraphs gracefully wrap around the floated image. Now imagine how this would look with some actual content in here, rather than just this boring placeholder text that goes on and on, but actually conveys no tangible information at. It simply takes up space and should not really be read.
-                            </p>
-
-                            <p>
-                                And yet, here you are, still persevering in reading this placeholder text, hoping for some more insights, or some hidden easter egg of content. A joke, perhaps. Unfortunately, there's none of that here.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="clearfix">
-                            <img src="assets/img/categorys/YAT 1.jpeg" class="col-md-6 float-md-end mb-3 ms-md-3" alt="...">
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-                <!-- <div class="blog-page-blogs col-md-12">
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
-                            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">.col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
-                            <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0">.col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0</div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '<div class="blog-post shadow-sm">';
+                    
+                    // Blog Thumbnail
+                    echo '<div class="blog-post-thumbnail" style="background-image: url(\'' . htmlspecialchars($row['logo']) . '\');"></div>';
+                    
+                    echo '<div class="blog-post-content p-3">';
+                    echo '<h3 class="blog-post-title">' . htmlspecialchars($row['blog_title']) . '</h3>';
+                    echo '<p class="blog-post-desc">' . htmlspecialchars(substr($row['blog_desc'], 0, 150)) . '...</p>';
+                    echo '<div class="blog-post-footer d-flex justify-content-between align-items-center">';
+                    echo '<a href="blog_post.php?id=' . htmlspecialchars($row['id']) . '" class="read-more">Read More</a>';
+                    echo '<button class="like-btn" data-id="' . $row['id'] . '"><i class="fas fa-thumbs-up"></i> Like</button>';
+                    echo '</div>'; // blog-post-footer
+                    echo '</div>'; // blog-post-content
+                    
+                    echo '</div>'; // blog-post
+                    echo '</div>'; // col-md-4
+                }
+            } else {
+                echo '<p>No blog posts found.</p>';
+            }
+            ?>
         </div>
     </div>
 </section>
+
+
 
 <?php include "footer.php"; ?>

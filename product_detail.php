@@ -18,17 +18,32 @@ function decrypt_id($encrypted_id) {
 $urun_id = isset($_GET['urun_id']) ? decrypt_id($_GET['urun_id']) : 0;
 
 // Ürün bilgilerini al
-$stmt = $con->prepare("SELECT * FROM urunler WHERE id = ?");
+$stmt = $con->prepare("SELECT id, isim, fiyat, resim, kategori_id, alt_kategori_id, alt_kategori_alt_id FROM urunler WHERE id = ?");
 $stmt->bind_param("i", $urun_id);
 $stmt->execute();
+// Değişiklik Başlangıcı
+/*
 $product_result = $stmt->get_result();
 $product = $product_result->fetch_assoc();
-
-// Ürün bulunamadıysa yönlendirme yap
-if (!$product) {
+*/
+$stmt->bind_result($id, $isim, $fiyat, $resim, $kategori_id, $alt_kategori_id, $alt_kategori_alt_id /*, diğer alanlar */);
+if ($stmt->fetch()) {
+    $product = [
+        'id' => $id,
+        'isim' => $isim,
+        'fiyat' => $fiyat,
+        'resim' => $resim,
+        'kategori_id' => $kategori_id,
+        'alt_kategori_id' => $alt_kategori_id,
+        'alt_kategori_alt_id' => $alt_kategori_alt_id
+        // ...diğer alanlar...
+    ];
+} else {
     echo "<p>Ürün bulunamadı.</p>";
     exit;
 }
+// Değişiklik Bitişi
+$stmt->close();
 
 // Kategori ve alt kategori bilgilerini almak için sorgular
 $kategori_id = $product['kategori_id'];
@@ -74,12 +89,14 @@ if ($subSubcategory) {
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Ana Sayfa</a></li>
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php">Ürünler</a></li>
                         <?php if ($category_name) { ?>
-                            <li class="breadcrumb-item text-white"><?php echo $category_name; ?></li>
+                            <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php?kategori_id=<?php echo encrypt_id($kategori_id); ?>"><?php echo $category_name; ?></a></li>
                         <?php } ?>
                         <?php if ($subcategory_name) { ?>
-                            <li class="breadcrumb-item text-white"><?php echo $subcategory_name; ?></li>
+                            <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php?kategori_id=<?php echo encrypt_id($kategori_id); ?>&alt_kategori_id=<?php echo encrypt_id($alt_kategori_id); ?>"><?php echo $subcategory_name; ?></a></li>
                         <?php } ?>
-                        <li class="breadcrumb-item text-white active"><?php echo $product['isim']; ?></li>
+                        <?php if ($subSubcategory_name) { ?>
+                            <li class="breadcrumb-item text-white"><?php echo $subSubcategory_name; ?></li>
+                        <?php } ?>
                     </ol>
                 </div>
             </div>

@@ -358,39 +358,6 @@ $(document).ready(function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".slide");
-    const totalSlides = slides.length;
-
-    function showSlide(index) {
-        // Slide'ları doğru sırada göstermek için translateX kullanıyoruz
-        slides.forEach((slide, i) => {
-            slide.style.transform = `translateX(-${index * 100}%)`;
-        });
-    }
-
-    function prevSlide() {
-        slideIndex = (slideIndex > 0) ? slideIndex - 1 : totalSlides - 1;
-        showSlide(slideIndex);
-    }
-
-    function nextSlide() {
-        slideIndex = (slideIndex < totalSlides - 1) ? slideIndex + 1 : 0;
-        showSlide(slideIndex);
-    }
-
-    function autoSlide() {
-        nextSlide();
-        setTimeout(autoSlide, 4000); // Otomatik geçiş süresi 4 saniye
-    }
-
-    document.querySelector(".prev").addEventListener("click", prevSlide);
-    document.querySelector(".next").addEventListener("click", nextSlide);
-
-    showSlide(slideIndex);
-    autoSlide();
-});
 
 document.addEventListener('DOMContentLoaded', function () {
     // Sayfa yüklendiğinde parametreye göre kategori ve alt kategoriyi kontrol et

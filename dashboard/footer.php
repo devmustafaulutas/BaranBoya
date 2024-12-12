@@ -1,4 +1,3 @@
-
     <footer class="footer">
         <div class="container-fluid">
             <div class="row">
@@ -7,7 +6,9 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="text-sm-end d-none d-sm-block">
-                        Design & Develop by Hillsofts Technology.
+                        <a href="https://github.com/devmustafaulutas/vogue">
+                            Design & Develop by Adeus.
+                        </a>
                     </div>
                 </div>
             </div>

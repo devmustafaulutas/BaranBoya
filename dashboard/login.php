@@ -79,12 +79,12 @@ $errormsg= "
 <head>
 
   <meta charset="utf-8" />
-  <title>Sign In | Diamond</title>
+  <title>Giriş | Baran Boya</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
   <meta content="Themesbrand" name="author" />
   <!-- App favicon -->
-  <link rel="shortcut icon" href="assets/images/favicon.ico">
+  <link rel="shortcut icon" href="assets/images/favicon.icon">
 
   <!-- Layout config Js -->
   <script src="assets/js/layout.js"></script>
@@ -117,12 +117,12 @@ $errormsg= "
                     <div class="position-relative h-100 d-flex flex-column">
                       <div class="mb-4">
                       <?php
-    $rr=mysqli_query($con,"SELECT ufile FROM logo");
+    $rr=mysqli_query($con,"SELECT logo FROM logo");
 $r = mysqli_fetch_row($rr);
 $ufile = $r[0];
 ?>
                         <a href="index" class="d-block">
-                          <img src="uploads/logo/<?php print $ufile;?>" alt="" height="18">
+                          <img src="../assets/img/logo/<?php print $ufile;?>" height="18">
                         </a>
                       </div>
 
@@ -134,8 +134,8 @@ $ufile = $r[0];
                 <div class="col-lg-6">
                   <div class="p-lg-5 p-4">
                     <div>
-                      <h5 class="text-primary">Welcome Back !</h5>
-                      <p class="text-muted">Sign in to continue into your dashboard.</p>
+                      <h5 class="text-primary">Hoşgeldiniz !</h5>
+                      <p class="text-muted">Admin paneline girmek için giriş yapın.</p>
                     </div>
 
                     <div class="mt-4">
@@ -147,15 +147,15 @@ $ufile = $r[0];
 						?>
                                     <form class="user" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, "utf-8"); ?>" method="post">
                         <div class="mb-3">
-                          <label for="username" class="form-label">Username</label>
-                          <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                          <label for="username" class="form-label">Kullanıcı adı</label>
+                          <input type="text" class="form-control" id="username" name="username" placeholder="Kullanıcı adı girin">
                         </div>
 
                         <div class="mb-3">
 
-                          <label class="form-label" for="password-input">Password</label>
+                          <label class="form-label" for="password-input">Şifre</label>
                           <div class="position-relative auth-pass-inputgroup mb-3">
-                            <input type="password" class="form-control pe-5" name="password" placeholder="Enter password"
+                            <input type="password" class="form-control pe-5" name="password" placeholder="Şifre girin"
                               id="password-input">
 
                           </div>
@@ -164,7 +164,7 @@ $ufile = $r[0];
 
 
                         <div class="mt-4">
-                          <button class="btn btn-success w-100" type="submit">Sign In</button>
+                          <button class="btn btn-success w-100" type="submit">Giriş</button>
                         </div>
 
 

@@ -6,12 +6,12 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Velzon - Admin & Dashboard Template</title>
+    <title>Baran Boya Giriş</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../assets/images/favicon.icon">
 
     <!-- Layout config Js -->
     <script src="../assets/js/layout.js"></script>
@@ -56,8 +56,8 @@
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Velzon.</p>
+                                            <h5 class="text-primary">Hoşgeldiniz !</h5>
+                                            <p class="text-muted">Giriş yapın</p>
                                         </div>
 
                                         <div class="mt-4">

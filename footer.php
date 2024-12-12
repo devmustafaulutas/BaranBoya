@@ -22,17 +22,13 @@
                                 <ul>
 
  <?php
-    // service tablosundan verileri hazırlıklı ifadelerle alın
-    $stmt = $con->prepare("SELECT * FROM service ORDER BY id DESC LIMIT ?");
+    $stmt = $con->prepare("SELECT id, service_title FROM service ORDER BY id DESC LIMIT ?");
     $limit = 5;
     $stmt->bind_param("i", $limit);
     $stmt->execute();
-    $r123 = $stmt->get_result();
+    $stmt->bind_result($id, $service_title);
 
-    while ($ro = $r123->fetch_assoc()) {
-        $id = $ro['id'];
-        $service_title = $ro['service_title'];
-
+    while ($stmt->fetch()) {
         print "
         <li class='py-2'><a class='text-black-50' href='servicedetail.php?id=$id'>$service_title</a></li>
         ";
@@ -54,18 +50,13 @@
                                 <ul class="social-icons list-inline pt-2">
 
                                 <?php
-    // social tablosundan verileri hazırlıklı ifadelerle alın
-    $stmt = $con->prepare("SELECT * FROM social ORDER BY id DESC LIMIT ?");
+    $stmt = $con->prepare("SELECT id, fa, social_link FROM social ORDER BY id DESC LIMIT ?");
     $limit = 5;
     $stmt->bind_param("i", $limit);
     $stmt->execute();
-    $r123 = $stmt->get_result();
+    $stmt->bind_result($id, $fa, $social_link);
 
-    while ($ro = $r123->fetch_assoc()) {
-        $id = $ro['id'];
-        $fa = $ro['fa'];
-        $social_link = $ro['social_link'];
-
+    while ($stmt->fetch()) {
         print "
         <li class='list-inline-item px-1'><a href='$social_link'><i class='fab $fa'></i></a></li>
         ";
@@ -146,18 +137,4 @@
 
 <!-- Mirrored from theme-land.com/digimx/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 15:13:02 GMT -->
 </html>
-<?php
-// ...existing code...
 
-// Örnek: Sosyal medya linklerini veritabanından almak için
-$stmt = $con->prepare("SELECT * FROM social WHERE id = ?");
-$id = 1;
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$links = $result->fetch_assoc();
-
-// Linkleri kullanırken
-// ...existing code...
-?>
-<!-- ...existing code... -->

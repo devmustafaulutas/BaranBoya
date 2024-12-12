@@ -18,12 +18,12 @@ $username=$_SESSION['username'];
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Dashboard</h4>
+                        <h4 class="mb-sm-0">Admin Paneli</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Paneller</a></li>
+                                <li class="breadcrumb-item active">Admin Paneli</li>
                             </ol>
                         </div>
 
@@ -40,12 +40,11 @@ $username=$_SESSION['username'];
                             <div class="col-12">
                                 <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                     <div class="flex-grow-1">
-                                        <h4 class="fs-16 mb-1">Howdy, <?php print $username;?>!</h4>
-                                        <p class="text-muted mb-0">Welcome back to your dashboard.</p>
+                                        <h4 class="fs-16 mb-1">İyi günler, <?php print $username;?>!</h4>
+                                        <p class="text-muted mb-0">Admin paneline tekrar hoşgeldiniz.</p>
                                     </div>
                                     <div class="mt-3 mt-lg-0">
                                         <form action="javascript:void(0);">
-
                                         </form>
                                     </div>
                                 </div><!-- end card header -->
@@ -72,32 +71,8 @@ $numrows = $row[0];
 
 ?>
 
-                                                        <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Services</p>
+                                                        <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Toplam Servisler </p>
                                                         <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $numrows; ?>"></span></h4>
-                                                    </div>
-
-                                                </div>
-                                            </div><!-- end card body -->
-                                        </div><!-- end card -->
-                                    </div><!-- end col -->
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-light text-primary rounded-circle fs-3">
-                                                            <i class="ri-server-line"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                    <?php
-$result = mysqli_query($con,"SELECT count(*) FROM portfolio");
-$rowx = mysqli_fetch_row($result);
-$nux = $rowx[0];
-
-?>
-                                                        <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Portfolio</p>
-                                                        <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $nux; ?>"></span></h4>
                                                     </div>
 
                                                 </div>
@@ -120,7 +95,7 @@ $rod = mysqli_fetch_row($result);
 $nud = $rod[0];
 
 ?>
-                                                        <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total Blog</p>
+                                                        <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Toplam Blog</p>
                                                         <h4 class=" mb-0"><span class="counter-value" data-target="<?php print $nud; ?>"></span></h4>
                                                     </div>
 
@@ -141,4 +116,4 @@ $nud = $rod[0];
         <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-    <?php include"footer.php";?>
+<?php include"footer.php";?>

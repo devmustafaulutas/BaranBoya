@@ -2,6 +2,11 @@
 include "z_db.php";
 include "header.php";
 
+// Hata Raporlamayı Etkinleştirme
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Şifreleme ve Deşifreleme Fonksiyonları
 function encrypt_id($id) {
     $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
@@ -9,8 +14,9 @@ function encrypt_id($id) {
 }
 
 function decrypt_id($encrypted_id) {
-    $key = 'gizli-anahtar';
-    return openssl_decrypt(base64_decode(urldecode($encrypted_id)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+    $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
+    $decrypted = openssl_decrypt(base64_decode($encrypted_id), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+    return intval($decrypted);
 }
 
 // Kategori ve alt kategori parametrelerini alın
@@ -25,42 +31,59 @@ $subSubcategory_name = '';
 
 // Eğer kategori id varsa, kategori adını al
 if ($kategori_id) {
-    $stmt = $con->prepare("SELECT * FROM kategoriler WHERE id = ?");
-    $stmt->bind_param("i", $kategori_id);
-    $stmt->execute();
-    $category = $stmt->get_result()->fetch_assoc();
-    if ($category) {
-        $category_name = $category['isim'] ?? '';
+    $stmt = $con->prepare("SELECT id, isim FROM kategoriler WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $kategori_id);
+        $stmt->execute();
+        $stmt->bind_result($id, $isim);
+        if ($stmt->fetch()) {
+            $category_name = $isim ?? '';
+        } else {
+            $category_name = 'Kategori Bulunamadı';
+        }
+        $stmt->close();
     } else {
-        $category_name = 'Kategori Bulunamadı';
+        // Hazırlama hatasını kontrol et
+        echo "Hata: " . $con->error;
     }
-    $stmt->close();
 }
 
 if ($alt_kategori_id) {
-    $stmt = $con->prepare("SELECT * FROM alt_kategoriler WHERE id = ?");
-    $stmt->bind_param("i", $alt_kategori_id);
-    $stmt->execute();
-    $subcategory = $stmt->get_result()->fetch_assoc();
-    if ($subcategory) {
-        $subcategory_name = $subcategory['isim'] ?? '';
+    $stmt = $con->prepare("SELECT id, isim FROM alt_kategoriler WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $alt_kategori_id);
+        $stmt->execute();
+        $stmt->bind_result($id, $isim);
+        if ($stmt->fetch()) {
+            $subcategory_name = $isim ?? '';
+        } else {
+            $subcategory_name = 'Alt Kategori Bulunamadı';
+        }
+        $stmt->close();
     } else {
-        $subcategory_name = 'Alt Kategori Bulunamadı';
+        // Hazırlama hatasını kontrol et
+        echo "Hata: " . $con->error;
     }
-    $stmt->close();
 }
 
+// Satır 58'deki hatayı düzeltme
 if ($alt_kategori_alt_id) {
-    $stmt = $con->prepare("SELECT * FROM alt_kategoriler_alt WHERE id = ?");
-    $stmt->bind_param("i", $alt_kategori_alt_id);
-    $stmt->execute();
-    $subSubcategory = $stmt->get_result()->fetch_assoc();
-    if ($subSubcategory) {
-        $subSubcategory_name = $subSubcategory['isim'] ?? '';
+    $stmt = $con->prepare("SELECT id, isim FROM alt_kategoriler_alt WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $alt_kategori_alt_id);
+        $stmt->execute();
+        // SELECT ifadesinde iki sütun seçildiğinden bind_result da iki değişken kullanılmalı
+        $stmt->bind_result($id, $isim);
+        if ($stmt->fetch()) {
+            $subSubcategory_name = $isim ?? '';
+        } else {
+            $subSubcategory_name = 'Alt Alt Kategori Bulunamadı';
+        }
+        $stmt->close();
     } else {
-        $subSubcategory_name = 'Alt Kategori Alt Bulunamadı';
+        // Hazırlama hatasını kontrol et
+        echo "Hata: " . $con->error;
     }
-    $stmt->close();
 }
 
 
@@ -77,12 +100,15 @@ if ($alt_kategori_alt_id) {
                     <h2 class="text-white text-uppercase mb-3">Ürünler</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item text-white active">Ürünler</li>
+                        <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php">Ürünler</a></li>
                         <?php if ($category_name) { ?>
-                            <li class="breadcrumb-item text-white"><?php echo $category_name; ?></li>
+                            <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php?kategori_id=<?php echo encrypt_id($kategori_id); ?>"><?php echo $category_name; ?></a></li>
                         <?php } ?>
                         <?php if ($subcategory_name) { ?>
-                            <li class="breadcrumb-item text-white"><?php echo $subcategory_name; ?></li>
+                            <li class="breadcrumb-item"><a class="text-uppercase text-white" href="urunler.php?kategori_id=<?php echo encrypt_id($kategori_id); ?>&alt_kategori_id=<?php echo encrypt_id($alt_kategori_id); ?>"><?php echo $subcategory_name; ?></a></li>
+                        <?php } ?>
+                        <?php if ($subSubcategory_name) { ?>
+                            <li class="breadcrumb-item text-white"><?php echo $subSubcategory_name; ?></li>
                         <?php } ?>
                     </ol>
                 </div>

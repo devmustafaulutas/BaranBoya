@@ -3847,6 +3847,11 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 /* ******************************
 :: 26.0 index.php CSS
 ****************************** */
+#tedarikcilerimiz-baslik{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .client-logos {
     display: flex;
     flex-wrap: wrap; /* Logoların alt satıra geçmesini sağlar */
@@ -3984,115 +3989,97 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 /* ******************************
 :: 26.0 blog.php CSS
 ****************************** */
-
-/* Genel düzenler */
-.container {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    max-width: 1200px;
-}
-
-/* Başlıklar */
-.section-title {
-    display: inline-block;
-    font-size: 2.5rem;
-    line-height: 1.2em;
-    letter-spacing: -1.6px;
-    background-image: linear-gradient(45deg, #40E0D0 15%, #000080 65%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Kullanım Alanları ve Yöntemler arasındaki farklılık */
-.usage-areas, .methods {
-    padding: 30px;
-    border-radius: 10px;
-    margin-top: 40px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.usage-areas {
-    background-color: #f9f9f9;
-}
-
-.methods {
-    background-color: #eef4ff;
-}
-
-/* Blog post tasarımı */
+/* Genel Ayarlar */
 .blog-post {
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.blog-post .row {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    height: 100%;
-}
-
-.image-container {
-    max-width: 350px;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.blog-post img {
-    width: 100%;
-    height: auto;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-.content-container {
-    padding-left: 30px;
+/* Thumbnail */
+.blog-post-thumbnail {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
 }
 
-.blog-post h3 {
-    font-size: 1.8rem;
+/* İçerik */
+.blog-post-content {
+    padding: 20px;
+}
+.blog-post-title {
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #4158d0;
-    text-transform: uppercase;
+    color: #416CD0;
     margin-bottom: 10px;
 }
-
-.blog-post p {
+.blog-post-desc {
     font-size: 1rem;
-    color: #333;
-    line-height: 1.6;
-}
-#review > div > div.row.justify-content-center > div > div > h2 {
-    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
-
+    color: #666;
+    margin-bottom: 15px;
 }
 
-/* Responsive ayarları */
+/* Footer */
+.blog-post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+/* Read More Link */
+.read-more {
+    font-weight: bold;
+    color: #416CD0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.read-more:hover {
+    color: #23479e;
+}
+
+/* Like Button */
+.like-btn {
+    color: #E04B50;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: ease-in-out 0.3s ease;
+}
+.like-btn i {
+    font-size: 1rem;
+}
+.like-btn:hover {
+    border: 2px solid #E04B50;
+    border-radius: 15px;
+}
+
+/* Mobil Uyum */
 @media (max-width: 768px) {
-    .blog-post .row {
-        flex-direction: column;
+    .blog-post-thumbnail {
+        height: 150px;
     }
-
-    .image-container, .content-container {
-        padding: 0;
-        max-width: 100%;
+    .blog-post-title {
+        font-size: 1.2rem;
     }
-
-    .blog-post img {
-        margin-bottom: 15px;
-        width: 100%;
-        height: auto;
+    .blog-post-desc {
+        font-size: 0.9rem;
     }
 }
+
 /* SEKTÖRLERİMİZ SECTİON */
 /* Genel Sektörlerim tasarımı */
 #sektorler {
@@ -4190,10 +4177,12 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 }
 
 .sector-link:hover {
-    transition: transform 0.3s ease-in-out;
-    transform: translateY(-10px); /* Hover animasyonu */
-    color:#4158d0;
-}   
+    transition: transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+    transform: scale(1.1); /* Hafif büyüme */
+    box-shadow: 0 4px 15px rgba(65, 88, 208, 0.3); /* Yumuşak gölge */
+    color: #4158d0; /* Renk değişimi */
+}
+
 /* Ana başlık ve açıklama stil düzenlemeleri */
 .sector-main-title {
     font-size: 3rem; /* Başlık boyutunu büyüttük */

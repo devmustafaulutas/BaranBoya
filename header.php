@@ -1,44 +1,39 @@
 <?php include "z_db.php";?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 <?php
-    // section_title tablosundan verileri hazırlıklı ifadelerle alın
-    $stmt = $con->prepare("SELECT * FROM section_title WHERE id = ?");
-    $id = 1;
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $rs = $stmt->get_result()->fetch_assoc();
-    $test_title = $rs['test_title'];
-    $test_text = $rs['test_text'];
-    $enquiry_title = $rs['enquiry_title'];
-    $enquiry_text = $rs['enquiry_text'];
-    $contact_title = $rs['contact_title'];
-    $contact_text = $rs['contact_text'];
-    $port_title = $rs['port_title'];
-    $port_text = $rs['port_text'];
-    $service_title = $rs['service_title'];
-    $service_text = $rs['service_text'];
-    $why_title = $rs['why_title'];
-    $why_text = $rs['why_text'];
-    $about_title = $rs['about_title'];
-    $about_text = $rs['about_text'];
-?>
+    // encrypt_id() fonksiyonunu sadece tanımlanmamışsa tanımlayın
+    if (!function_exists('encrypt_id')) {
+        function encrypt_id($id) {
+            $key = "your-encryption-key"; // Güvenli bir anahtar kullanın
+            return openssl_encrypt($id, 'AES-128-ECB', $key);
+        }
+    }
 
-
-
-<?php
     // sitecontact tablosundan verileri hazırlıklı ifadelerle alın
-    $stmt = $con->prepare("SELECT * FROM sitecontact WHERE id = ?");
+    $stmt = $con->prepare("SELECT phone1, phone2, email FROM sitecontact WHERE id = ?");
+    if (!$stmt) {
+        die("Sorgu hazırlanamadı: (" . $con->errno . ") " . $con->error);
+    }
     $id = 1;
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $tr = $stmt->get_result()->fetch_assoc();
-    $phone1 = $tr['phone1'];
-    $phone2 = $tr['phone2'];
-    $email1 = $tr['email1'];
-    $email2 = $tr['email2'];
-    $longitude = $tr['longitude'];
-    $latitude = $tr['latitude'];
+    $stmt->bind_result($phone1, $phone2, $email);
+    $stmt->fetch();
+    $stmt->close();
+
+    // siteconfig tablosundan verileri hazırlıklı ifadelerle alın
+    $stmt = $con->prepare("SELECT site_title, site_about, site_footer, follow_text FROM siteconfig WHERE id = ?");
+    if (!$stmt) {
+        die("Sorgu hazırlanamadı: (" . $con->errno . ") " . $con->error);
+    }
+    $id = 1;
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->bind_result($site_title, $site_about, $site_footer, $follow_text);
+    $stmt->fetch();
+    $stmt->close();
 ?>
 <head>
     <meta charset="UTF-8">
@@ -46,22 +41,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- SEO Meta Description -->
-    <meta name="description" content="">
+    <meta name="description" content="<?php echo htmlspecialchars($site_description, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($site_keywords, ENT_QUOTES, 'UTF-8'); ?>">
     <meta name="author" content="Themeland">
-    <?php
-    // siteconfig tablosundan verileri hazırlıklı ifadelerle alın
-    $stmt = $con->prepare("SELECT * FROM siteconfig WHERE id = ?");
-    $id = 1;
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $r = $stmt->get_result()->fetch_assoc();
-    $site_title = $r['site_title'];
-    $site_about = $r['site_about'];
-    $site_footer = $r['site_footer'];
-    $follow_text = $r['follow_text'];
-?>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="<?php echo htmlspecialchars($site_title, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($site_description, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:image" content="path/to/image.jpg">
+    <meta property="og:url" content="<?php echo htmlspecialchars($siteconfig['site_url'], ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($site_title, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($site_description, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="twitter:image" content="path/to/image.jpg">
+    
     <!-- Title  -->
-    <title>Baran Boya - <?php print $site_title ?></title>
+    <title><?php echo htmlspecialchars($site_title, ENT_QUOTES, 'UTF-8'); ?></title>
 
     <!-- Favicon  -->
     <link rel="icon" href="assets/img/favicon.png">
@@ -77,10 +75,7 @@
 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
 </head>
-
 <body>
     <!--====== Preloader Area Start ======-->
     <div id="preloader">
@@ -140,13 +135,21 @@
         <nav data-aos="zoom-out" data-aos-delay="800" class="navbar navbar-expand">
             <div id="header-container" class="container header">
                 <?php
-                $rt = mysqli_query($con, "SELECT ufile FROM logo WHERE id=1");
-                $tr = mysqli_fetch_array($rt);
-                $ufile = "$tr[ufile]";
+                // Logo verilerini hazırlıklı ifadelerle alın
+                $stmt = $con->prepare("SELECT logo FROM logo WHERE id = ?");
+                if (!$stmt) {
+                    die("Sorgu hazırlanamadı: (" . $con->errno . ") " . $con->error);
+                }
+                $id = 1;
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $stmt->bind_result($ufile);
+                $stmt->fetch();
+                $stmt->close();
                 ?>
                 <a class="navbar-brand" href="home">
-                    <img class="navbar-brand-regular" id="header-logo1" src="dashboard/uploads/logo/<?php print $ufile ?>" alt="brand-logo">
-                    <img class="navbar-brand-sticky" id="header-logo2" src="dashboard/uploads/logo/<?php print $ufile ?>" alt="sticky brand-logo">
+                    <img class="navbar-brand-regular" id="header-logo1" src="assets/img/logo/<?php echo htmlspecialchars($ufile, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img class="navbar-brand-sticky" id="header-logo2" src="assets/img/logo/<?php echo htmlspecialchars($ufile, ENT_QUOTES, 'UTF-8'); ?>">
                 </a>
                 <div class="ml-auto">
                     <?php

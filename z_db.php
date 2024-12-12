@@ -1,33 +1,12 @@
 <?php
-// Veritabanı bağlantısını çevresel değişkenlerden alın
-$db_host = getenv('DB_HOST');
-$db_user = getenv('DB_USER');
-$db_pass = getenv('DB_PASS');
-$db_name = getenv('DB_NAME');
+require __DIR__ . '/vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '12345678';
-$db_name = 'script';
+$con = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASS'], $_ENV['DB_NAME']);
 
-$con = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-if ($con->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $con->connect_errno . ") " . $con->connect_error;
+if (mysqli_connect_errno()) {
+    die("Veritabanı bağlantı hatası: " . mysqli_connect_error());
 }
-
-//Your Website URL Goes Here
-$url = "http://localhost/vogue1/vogue";
-
-//Set Blog Activation Bonus Here (It must be only Number)
-$blog_bonus ="10";
-//Set Article Activation Bonus Here (It must be only Number)
-$art_bonus="10";
-//Set Daily Login Bonus Here (It must be only Number)
-$login_bonus="10";
-//Set Currency Symbol for daily login bonus Here
-$money="$";
-
-
 ?>

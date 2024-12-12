@@ -1,5 +1,5 @@
 <?php
-include "z_db.php";
+include "../z_db.php";
 
 
 session_start();
@@ -40,7 +40,7 @@ if (isset($_SESSION['username'])) {
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/favicon.icon">
 
     <!-- jsvectormap css -->
     <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
@@ -57,7 +57,7 @@ if (isset($_SESSION['username'])) {
     <!-- App Css-->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/custom.min.css" rel="stylesheet" />
 
 </head>
 

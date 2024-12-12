@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(150) NOT NULL,
   `password` varchar(150) NOT NULL,
@@ -156,31 +156,31 @@ INSERT INTO `alt_kategoriler` (`isim`, `kategori_id`, `resim`) VALUES
 
 ('Temizleyici Solventler', 6, 'category.png');
 
-INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
-('Döküm Tipi Polyester Reçineler', 1),
-('Breton Tipi Polyester Reçineler', 1),
-('Kalıplama Polyester Reçineler', 1),
-('Genel Amaçlı (Elyaf Tip) Polyester Reçineler', 1),
-('CTP Tipi (Fitil Sarma) Polyester Reçineler', 1),
-('RTM/İnfüzyon Tipi Polyester Reçineler', 1),
-('Akrilik Tipi Polyester Reçineler', 1),
-('SMC/BMC Tipi Polyester Reçineler', 1),
-('Düğme Tipi Polyester Reçineler', 1),
-('Kimyasal Dayanımlı Polyester Reçineler', 1),  
-('Alev İlerletmeyen Polyester Reçineler', 1), 
-('Köpük Eritmeyen Polyester Reçineler', 1), 
-('Köpük Eritmeyen Polyester Reçineler', 1), 
+INSERT INTO `alt_kategoriler_alt` (`isim`,`resim`, `alt_kategori_id`) VALUES
+('Döküm Tipi Polyester Reçineler','alt_category_alt.png', 1),
+('Breton Tipi Polyester Reçineler','alt_category_alt.png', 1),
+('Kalıplama Polyester Reçineler','alt_category_alt.png', 1),
+('Genel Amaçlı (Elyaf Tip) Polyester Reçineler','alt_category_alt.png', 1),
+('CTP Tipi (Fitil Sarma) Polyester Reçineler','alt_category_alt.png', 1),
+('RTM/İnfüzyon Tipi Polyester Reçineler','alt_category_alt.png', 1),
+('Akrilik Tipi Polyester Reçineler','alt_category_alt.png', 1),
+('SMC/BMC Tipi Polyester Reçineler','alt_category_alt.png', 1),
+('Düğme Tipi Polyester Reçineler','alt_category_alt.png', 1),
+('Kimyasal Dayanımlı Polyester Reçineler','alt_category_alt.png', 1),  
+('Alev İlerletmeyen Polyester Reçineler','alt_category_alt.png', 1), 
+('Köpük Eritmeyen Polyester Reçineler','alt_category_alt.png', 1), 
+('Köpük Eritmeyen Polyester Reçineler','alt_category_alt.png', 1), 
 
-('Bisfenol-A Vinilester Reçineler', 2), 
-('Novolak Vinilester Reçineler', 2), 
-('Bromine Vinilester Reçineler', 2), 
-('Amin Hızlandırıcılı Vinilester Reçineler', 2), 
-('Poliüretan Reçine', 2), 
-('Epoksi Reçineler', 2),
+('Bisfenol-A Vinilester Reçineler','alt_category_alt.png', 2), 
+('Novolak Vinilester Reçineler','alt_category_alt.png', 2), 
+('Bromine Vinilester Reçineler','alt_category_alt.png', 2), 
+('Amin Hızlandırıcılı Vinilester Reçineler','alt_category_alt.png', 2), 
+('Poliüretan Reçine','alt_category_alt.png', 2), 
+('Epoksi Reçineler','alt_category_alt.png', 2),
 
-('Mek Peroksitler (Polyester ve Jelkot Dondurucu)', 33),
-('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)', 33), 
-('İnceltici Monomerler ve Kıvamlaştırıcılar', 33);
+('Mek Peroksitler (Polyester ve Jelkot Dondurucu)','alt_category_alt.png', 33),
+('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)','alt_category_alt.png', 33), 
+('İnceltici Monomerler ve Kıvamlaştırıcılar','alt_category_alt.png', 33);
 
 -- Ürünler için INSERT sorguları
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -245,10 +245,10 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 -- Epoksi Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('EpoXs İnce Döküm (Hediyelik) Tipi Epoksi', 'İnce Döküm (Hediyelik) Tipi Epoksi', 50.00, 200, 'epoxs_ince.jpg', 1, 4, 19),
-('EpoXs Kalın Döküm (Masa) Tipi Epoksi', 'Kalın Döküm (Masa) Tipi Epoksi', 120.00, 150, 'epoxs_kalin.jpg', 1, 4, 19),
-('EpoXs Teşbih Yapım Epoksisi', 'Teşbih Yapım Epoksisi', 80.00, 180, 'epoxs_tesbih.jpg', 1, 4, 19),
-('EpoXs Laminasyon (Kompozit) Tipi Epoksi', 'Laminasyon Tipi Epoksi', 110.00, 100, 'epoxs_laminasyon.jpg', 1, 4, 19);
+('EpoXs İnce Döküm (Hediyelik) Tipi Epoksi', 'İnce Döküm (Hediyelik) Tipi Epoksi', 50.00, 200, 'epoxs_ince.jpg', 1, 3, 19),
+('EpoXs Kalın Döküm (Masa) Tipi Epoksi', 'Kalın Döküm (Masa) Tipi Epoksi', 120.00, 150, 'epoxs_kalin.jpg', 1, 3, 19),
+('EpoXs Teşbih Yapım Epoksisi', 'Teşbih Yapım Epoksisi', 80.00, 180, 'epoxs_tesbih.jpg', 1, 3, 19),
+('EpoXs Laminasyon (Kompozit) Tipi Epoksi', 'Laminasyon Tipi Epoksi', 110.00, 100, 'epoxs_laminasyon.jpg', 1, 3, 19);
 
 
 -- Jelkotlar
@@ -403,12 +403,13 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 -- --------------------------------------------------------
 
 
-CREATE TABLE `blog` (
+
+CREATE TABLE IF NOT EXISTS `blog` (
   `id` int(11) NOT NULL,
   `blog_title` varchar(300) NOT NULL,
   `blog_desc` varchar(300) NOT NULL,
   `blog_detail` varchar(2000) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
+  `logo` varchar(1000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -421,7 +422,7 @@ INSERT INTO `blog` (
     `blog_title`, 
     `blog_desc`, 
     `blog_detail`, 
-    `ufile`, 
+    `logo`, 
     `updated_at`
 ) 
 VALUES
@@ -431,7 +432,7 @@ VALUES
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem.', 
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.',
     '', 
-    '2022-07-15 12:47:45'
+    CURRENT_TIMESTAMP()
 ),
 (
     2, 
@@ -439,8 +440,9 @@ VALUES
     'We provide the best digital servicesWe provide the best digital servicesWe provide the best digital services', 
     'We provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital services', 
     '60936059d354562031616499540.png', 
-    '2022-07-16 05:49:44'
+    CURRENT_TIMESTAMP()
 );
+
 
 -- --------------------------------------------------------
 
@@ -448,10 +450,9 @@ VALUES
 -- Table structure for table `logo`
 --
 
-CREATE TABLE `logo` (
+CREATE TABLE IF NOT EXISTS`logo` (
   `id` int(11) NOT NULL,
-  `xfile` varchar(1000) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
+  `logo` varchar(1000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -459,45 +460,11 @@ CREATE TABLE `logo` (
 -- Dumping data for table `logo`
 --
 
-INSERT INTO `logo` (`id`, `xfile`, `ufile`, `updated_at`) VALUES
-(1, '5122favicon.png', '5122favicon.png', '2024-11-01 16:17:29');
+INSERT INTO `logo` (`id`, `logo`, `updated_at`) VALUES
+(1, 'logo.png', CURRENT_TIMESTAMP());
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `portfolio`
---
-
-CREATE TABLE `portfolio` (
-  `id` int(11) NOT NULL,
-  `port_title` varchar(500) NOT NULL,
-  `port_desc` varchar(1000) NOT NULL,
-  `port_detail` varchar(2000) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `portfolio`
---
-
-INSERT INTO `portfolio` (
-    `id`, 
-    `port_title`, 
-    `port_desc`, 
-    `port_detail`, 
-    `ufile`, 
-    `updated_at`
-) 
-VALUES
-(
-    3, 
-    'App Development', 
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 
-    '926070de04f0-df57-11ec-85a8-bda8f2c6ca77-rimg-w720-h720-gmir.jpg', 
-    '2022-07-18 14:48:54'
-);
 
 -- --------------------------------------------------------
 
@@ -557,18 +524,18 @@ VALUES
 --
 -- Table structure for table `service`
 --
-CREATE TABLE IF NOT EXISTS contact_messages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    phone VARCHAR(50),
-    message TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS `contact_messages` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255),
+    `email` VARCHAR(255),
+    `phone` VARCHAR(50),
+    `message` TEXT,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 COMMIT;
 
-CREATE TABLE `service` (
+CREATE TABLE IF NOT EXISTS `service` (
   `id` int(11) NOT NULL,
   `service_title` varchar(500) NOT NULL,
   `service_desc` varchar(1000) NOT NULL,
@@ -586,9 +553,7 @@ INSERT INTO `service` (
     `id`, 
     `service_title`, 
     `service_desc`, 
-    `service_detail`, 
     `icon`,
-    `ufile`, 
     `upadated_at`
 ) 
 
@@ -597,52 +562,30 @@ VALUES
     2,   
     '81 İLE HIZLI TESLİMAT',   
     'Türkiye genelindeki 81 ile hızlı ve güvenilir teslimat hizmeti sunuyoruz. Siparişleriniz güvenli şekilde adresinize teslim edilir.',  
-    '',  
     '<i class="material-icons">local_shipping</i>',  
-    '5645portrait-happy-young-black-woman-posing-office_116547-21539.webp',   
-    '2022-07-17 21:19:37'  
-),  
+    CURRENT_TIMESTAMP()
+    ),  
 (  
     3,   
     'TEKNİK DESTEK',   
     'Her türlü teknik sorununuzda uzman ekibimiz yanınızda. Sorunlarınıza hızlı ve etkili çözümler sunuyoruz.',  
-    '',  
     '<i class="material-icons">build</i>',   
-    '9668788-7884680_hero-headshot-sitting-hd-png-download.jpg',   
-    '2022-07-17 21:20:13'  
+    CURRENT_TIMESTAMP()
 ),  
 (  
     4,   
     'YÜKSEK ÜRÜN KALİTESİ',   
     'Sizlere en iyi ürün deneyimini sunmak için yüksek kalite standartlarında üretim yapıyoruz. Ürünlerimiz güvenilir ve dayanıklıdır.',  
-    '',  
     '<i class="material-icons">percent</i>',   
-    '648Eternity.jpg',   
-    '2022-07-17 21:20:46'  
+    CURRENT_TIMESTAMP()
 );  
 
 
--- --------------------------------------------------------
-CREATE TABLE `sektorler` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `sektor_adi` VARCHAR(255) NOT NULL,
-    `sektor_aciklama` TEXT NOT NULL,
-    `resim` VARCHAR(1000) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `sektorler` (`sektor_adi`, `sektor_aciklama`, `resim`)
-VALUES 
-  ('Havacılık ve Savunma Sanayi', '', 'assets/img/baranboya/HAVACILIK VE SAVUNMA.png'),
-  ('Denizcilik', '', 'assets/img/baranboya/unnamed (8).png'),
-  ('Banyo', '', 'assets/img/baranboya/unnamed (5).png'),
-  ('Mutfak', '', 'assets/img/baranboya/unnamed (6).png');
-
---
 -- Table structure for table `siteconfig`
 --
 
-CREATE TABLE `siteconfig` (
+CREATE TABLE IF NOT EXISTS `siteconfig` (
   `id` int(11) NOT NULL,
   `site_keyword` varchar(1000) NOT NULL,
   `site_desc` varchar(500) NOT NULL,
@@ -692,10 +635,7 @@ CREATE TABLE `sitecontact` (
   `id` int(11) NOT NULL,
   `phone1` varchar(150) NOT NULL,
   `phone2` varchar(150) NOT NULL,
-  `email1` varchar(100) NOT NULL,
-  `email2` varchar(100) NOT NULL,
-  `longitude` varchar(100) NOT NULL,
-  `latitude` varchar(150) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -703,8 +643,8 @@ CREATE TABLE `sitecontact` (
 -- Dumping data for table `sitecontact`
 --
 
-INSERT INTO `sitecontact` (`id`, `phone1`, `phone2`, `email1`, `email2`, `longitude`, `latitude`, `updated_at`) VALUES
-(1, '+90 0312 394 44 21', '+90 0312 350 39 50', 'baranboya@gmail.com', 'baranboya@gmail.com', '7.099737483', '7.63734634', '2024-03-11 11:05:25');
+INSERT INTO `sitecontact` (`id`, `phone1`, `phone2`, `email`, `updated_at`) VALUES
+(1, '+90 0312 394 44 21', '+90 0312 350 39 50', 'baranboya@gmail.com', '2024-03-11 11:05:25');
 
 -- --------------------------------------------------------
 
@@ -712,33 +652,8 @@ INSERT INTO `sitecontact` (`id`, `phone1`, `phone2`, `email1`, `email2`, `longit
 -- Table structure for table `slider`
 --
 
-CREATE TABLE `slider` (
-  `id` int(11) NOT NULL,
-  `slide_title` varchar(150) NOT NULL,
-  `slide_text` varchar(500) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `slider`
---
 
-INSERT INTO `slider` (
-    `id`, 
-    `slide_title`, 
-    `slide_text`, 
-    `ufile`, 
-    `updated_at`
-) 
-VALUES
-(
-    1, 
-    'Baran Boya', 
-    '', 
-    '58806059d354562031616499540.png', 
-    '2024-11-07 14:23:07'
-);
 
 -- --------------------------------------------------------
 
@@ -746,7 +661,7 @@ VALUES
 -- Table structure for table `social`
 --
 
-CREATE TABLE `social` (
+CREATE TABLE IF NOT EXISTS `social` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
   `fa` varchar(150) NOT NULL,
@@ -770,7 +685,7 @@ VALUES
 -- Table structure for table `static`
 --
 
-CREATE TABLE `static` (
+CREATE TABLE IF NOT EXISTS `static` (
   `id` int(11) NOT NULL,
   `stitle` varchar(150) NOT NULL,
   `stext` varchar(500) NOT NULL,
@@ -800,7 +715,7 @@ VALUES
 -- Table structure for table `tedariciklerimiz`
 --
 
-CREATE TABLE `tedarikcilerimiz` (
+CREATE TABLE IF NOT EXISTS `tedarikcilerimiz` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `resim` VARCHAR(1000) NOT NULL,  -- Resim dosya yolu veya adı
   `guncellenme_tarihi` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
@@ -810,15 +725,15 @@ CREATE TABLE `tedarikcilerimiz` (
 
 INSERT INTO tedarikcilerimiz (resim, guncellenme_tarihi)
 VALUES 
-    ('dashboard/uploads/tedarikcilerimiz/Logo_mobile.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/dyson.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/DuPont_tm_rgb.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/WACKER.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/JUSHI.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/AKPA.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/ŞİŞECAM.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/POLİYA LOGO.png', CURRENT_TIMESTAMP()),
-    ('dashboard/uploads/tedarikcilerimiz/Turkuaz.png', CURRENT_TIMESTAMP());
+    ('Logo_mobile.png', CURRENT_TIMESTAMP()),
+    ('dyson.png', CURRENT_TIMESTAMP()),
+    ('DuPont_tm_rgb.png', CURRENT_TIMESTAMP()),
+    ('WACKER.png', CURRENT_TIMESTAMP()),
+    ('JUSHI.png', CURRENT_TIMESTAMP()),
+    ('AKPA.png', CURRENT_TIMESTAMP()),
+    ('ŞİŞECAM.png', CURRENT_TIMESTAMP()),
+    ('POLİYA LOGO.png', CURRENT_TIMESTAMP()),
+    ('Turkuaz.png', CURRENT_TIMESTAMP());
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -830,21 +745,10 @@ VALUES
 -- Table structure for table `why_us`
 --
 
-CREATE TABLE `why_us` (
-  `id` int(11) NOT NULL,
-  `title` varchar(200) NOT NULL,
-  `detail` varchar(500) NOT NULL,
-  `updated_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Dumping data for table `why_us`
 --
 
-INSERT INTO `why_us` (`id`, `title`, `detail`, `updated_on`) VALUES
-(3, 'Keyword ranking', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur provident unde ex eligendi magni sit impedit iusto, sed ad fuga minima, dignissimos ducimus autem molestias, nostrum nesciunt enim? Ea, non hic voluptates dolorum impedit eveniet dolorem temporibus illo incidunt quis minima facere doloribus sit maiores, blanditiis labore quasi, accusantium quaerat!', '2022-07-17 18:43:07'),
-(4, 'Social media', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur provident unde ex eligendi magni sit impedit iusto, sed ad fuga minima, dignissimos ducimus autem molestias, nostrum nesciunt enim? Ea, non hic voluptates dolorum impedit eveniet dolorem temporibus illo incidunt quis minima facere doloribus sit maiores, blanditiis labore quasi, accusantium quaerat!', '2022-07-17 18:44:19'),
-(5, 'trend design', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur provident unde ex eligendi magni sit impedit iusto, sed ad fuga minima, dignissimos ducimus autem molestias, nostrum nesciunt enim? Ea, non hic voluptates dolorum impedit eveniet dolorem temporibus illo incidunt quis minima facere doloribus sit maiores, blanditiis labore quasi, accusantium quaerat!', '2022-07-17 18:44:33');
 
 --
 -- Indexes for dumped tables
@@ -868,11 +772,6 @@ ALTER TABLE `blog`
 ALTER TABLE `logo`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `portfolio`
---
-ALTER TABLE `portfolio`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `section_title`
@@ -899,10 +798,6 @@ ALTER TABLE `sitecontact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `slider`
---
-ALTER TABLE `slider`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `social`
@@ -917,10 +812,6 @@ ALTER TABLE `static`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `why_us`
---
-ALTER TABLE `why_us`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -945,10 +836,6 @@ ALTER TABLE `logo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `portfolio`
---
-ALTER TABLE `portfolio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `section_title`
@@ -969,10 +856,6 @@ ALTER TABLE `sitecontact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `slider`
---
-ALTER TABLE `slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `social`
@@ -987,12 +870,5 @@ ALTER TABLE `static`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
-
-
---
--- AUTO_INCREMENT for table `why_us`
---
-ALTER TABLE `why_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 
