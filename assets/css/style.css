@@ -4223,3 +4223,23 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 }
 
 
+.sector-main-title{
+    font-family: 'Poppins', sans-serif; /* Daha modern bir font */
+    font-size: 3rem; /* Başlık boyutunu daha büyük yaparak dikkat çekici hale getir */
+    font-weight: 700; /* Kalın ama çok aşırı değil */
+    color: white; /* Mavi tonunda dikkat çekici bir renk */
+    letter-spacing: 2px; /* Harfler arasında hafif boşluk */
+    text-transform: uppercase; /* Başlık metnini büyük harflere dönüştür */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2), 
+                 -1px -1px 4px rgba(255, 255, 255, 0.3); /* Derinlik için hafif gölge */
+    border-bottom: 3px solid transparent; /* Alt çizgi ekle, ancak şimdilik şeffaf */
+    padding-bottom: 10px; /* Alt çizgi için biraz boşluk ekle */
+    transition: all 0.4s ease-in-out; /* Yumuşak geçiş efekti */
+}
+.sector-main-title:hover {
+    color: #40e0d0; /* Hoverda mavi yerine turkuaz renk */
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), 
+                 -2px -2px 5px rgba(255, 255, 255, 0.4); /* Hoverda gölge daha belirgin */
+    border-bottom-color: #40e0d0; /* Hoverda alt çizgi rengini turkuaz yap */
+    transform: scale(1.05); /* Hoverda biraz büyüme efekti */
+}
