@@ -1,156 +1,292 @@
-/* SEKTÖRLERİMİZ SECTİON */
-/* Genel Sektörlerim tasarımı */
-#sektorler {
+/* SEKTÖRLERİMİZ BÖLÜMÜ */
+
+.index-sektorler-section {
     background: linear-gradient(to right, #40e0d0, #1e90ff); /* Ana mavi arka plan */
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 100px; /* Azaltıldı: 120px'ten 100px'e */
+    padding-bottom: 100px; /* Azaltıldı: 120px'ten 100px'e */
     color: white;
     font-family: 'Arial', sans-serif;
     text-align: center;
 }
-#sektor-item-container{
-    width: 100%;
+
+.index-sector-main-title {
+    font-size: 3rem; /* Başlık boyutu */
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px; /* Azaltıldı: 25px'ten 20px'e */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
-.sector-item {
+
+.index-sector-main-description {
+    font-size: 1.4rem; /* Azaltıldı: 1.5rem'den 1.4rem'e */
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6; /* Azaltıldı: 1.8'den 1.6'ya */
+    font-family: 'Verdana', sans-serif;
+    margin: 0 auto;
+    max-width: 800px;
+    padding-bottom: 30px; /* Azaltıldı: 40px'ten 30px'e */
+}
+
+.index-sektor-item {
+    display: flex;
+    align-items: stretch; /* Eşit yükseklik */
+    justify-content: center;
+    margin-bottom: 30px; /* Azaltıldı: 40px'ten 30px'e */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    height: 400px; /* Sabit yükseklik eklendi */
+}
+
+.index-sektor-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.index-sector-image-container {
+    flex: 1;
+    padding: 10px; /* Azaltıldı: 15px'ten 10px'e */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
+    height: 100%; /* Yüksekliği tam sarması için */
 }
 
-.sector-image {
-    width: 100%;
-    height: 300px; /* Tüm resimler eşit boyutta olacak */
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Gölgelendirme */
-    transition: transform 0.3s ease;
-    z-index: 0; /* Resmin z-index değerini sıfırladık */
-}
-
-.sector-image:hover {
-    transform: scale(1.05); /* Hover efekti */
-}
-
-.sector-content-wrap {
-    width: 100%;
-    position: relative;
-    z-index: 1; /* İçeriği z-index ile resmin üstüne çıkartıyoruz */
-}
-
-.sector-content {
-    width: 100%;
-    min-width: 100%;
-    background-color: rgb(255 255 255 / 21%); /* %21 şeffaf beyaz arka plan */
-    padding: 30px;
-    border-radius: 15px; /* Yuvarlak kenarlar */
-    border: 2px solid rgba(255, 255, 255, 0.6); /* Hafif beyaz border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hafif gölgelendirme */
-    transition: transform 0.3s ease;
-    z-index: 2; /* İçeriğin z-index değerini arttırdık */
-    height: 300px; /* İçeriğin yüksekliği resimle aynı */
+.index-sector-content-wrap, .index-sector-image-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* İçeriği yukarı ve aşağıya yerleştir */
-    text-align: center;
+    justify-content: center;
+    flex: 1;
+    padding: 10px; /* Azaltıldı: 15px'ten 10px'e */
+    height: 100%; /* Yüksekliği tam sarması için */
 }
 
+.index-sector-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    z-index: 0;
+}
 
+.index-sector-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
 
-.sector-title {
-    font-size: 2rem; /* Başlık boyutu büyütüldü */
-    font-weight: 700; /* Başlık fontu kalın yapıldı */
-    color: white; /* Başlık rengi beyaz */
+.index-sector-content {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px; /* Azaltıldı: 30px'ten 20px'e */
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, background 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%; /* Yüksekliği tam sarması için */
+}
+
+.index-sector-icon {
+    margin-bottom: 10px; /* Azaltıldı: 15px'ten 10px'e */
+    font-size: 2.5rem; /* Azaltıldı: 3rem'den 2.5rem'e */
+    color: #00bcd4;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.index-sector-content:hover .index-sector-icon {
+    color: #1e88e5;
+    transform: rotate(20deg);
+}
+
+.index-sector-title {
+    font-size: 1.8rem; /* Azaltıldı: 2rem'den 1.8rem'e */
+    font-weight: 700;
+    color: white;
     margin-top: 0;
     transition: color 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
-.sector-title:hover {
-    color: #1f3c8c; /* Hoverda başlık rengi değişecek */
+.index-sector-title:hover {
+    color: #1f3c8c;
 }
 
-.sector-description {
-    color: white; /* Yazılar beyaz olacak */
-    font-size: 1.2rem; /* Yazı boyutu büyütüldü */
-    margin: 15px 0;
-    line-height: 1.5; /* Satır aralığını açtık */
-    font-family: 'Verdana', sans-serif; /* Daha okunabilir bir font */
+.index-sector-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem; /* Azaltıldı: 1.2rem'den 1.1rem'e */
+    margin: 10px 0; /* Azaltıldı: 15px'ten 10px'e */
+    line-height: 1.4; /* Azaltıldı: 1.6'dan 1.4'e */
+    font-family: 'Verdana', sans-serif;
 }
 
-.sector-link {
-    display: flex;
-    align-self: center;
-    width: 120px;
+.index-sector-link {
+    display: inline-block;
+    background-color: #00bcd4;
+    color: #ffffff;
+    padding: 10px 20px; /* Azaltıldı: 12px 25px'ten 10px 20px'e */
+    border-radius: 30px;
     text-decoration: none;
-    color: white; /* Link rengi beyaz olacak */
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Linki ortaladık */
-    transition: color 0.3s ease;
-    margin-top: auto; /* Linki alt kısma itiyoruz */
-    font-size: 18px;
-    border: 1px solid white;
-    border-radius: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px; /* Azaltıldı: 15px'ten 10px'e */
+    font-size: 0.9rem; /* Azaltıldı: 1rem'den 0.9rem'e */
+    border: none;
 }
 
-.sector-link:hover {
-    transition: transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
-    transform: scale(1.1); /* Hafif büyüme */
-    box-shadow: 0 4px 15px rgba(65, 88, 208, 0.3); /* Yumuşak gölge */
-    color: #4158d0; /* Renk değişimi */
+.index-sector-link:hover {
+    background-color: #1e88e5;
+    transform: translateY(-2px); /* Azaltıldı: -3px'ten -2px'e */
+    box-shadow: 0 4px 15px rgba(65, 88, 208, 0.3);
 }
 
-/* Ana başlık ve açıklama stil düzenlemeleri */
-.sector-main-title {
-    font-size: 3rem; /* Başlık boyutunu büyüttük */
-    font-weight: 700; /* Başlık kalın oldu */
-    color: white; /* Beyaz renk */
-    margin-bottom: 20px; /* Başlık ile açıklama arasına boşluk */
-    text-transform: uppercase; /* Başlık büyük harflerle */
-    letter-spacing: 2px; /* Harfler arasında biraz boşluk */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Başlık için hafif gölge efekti */
+.index-sector-link:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
-.sector-main-description {
-    font-size: 1.3rem; /* Açıklama boyutu büyütüldü */
-    color: rgba(255, 255, 255, 0.8); /* Beyaz, ama biraz daha şeffaf */
-    line-height: 1.8; /* Satır aralığı artırıldı */
-    font-family: 'Verdana', sans-serif; /* Daha modern ve okunaklı font */
-    margin: 0 auto;
-    max-width: 800px; /* Açıklama kısmının genişliğini sınırladık */
-    padding-bottom: 20px;
+/* Animasyonlar */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-.sector-icon {
-    margin-right: 10px;
-    font-size: 2.5rem; /* Icon boyutu büyütüldü */
-    color: white; /* Iconlar beyaz olacak */
-    transition: transform 0.3s ease;
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.sector-icon:hover {
-    transform: scale(1.1); /* Icon hover efekti */
-}
+/* ************************************************************
+:: Responsive Ayarlar
+************************************************************ */
 
-@media (max-width: 768px) {
-    .sector-item {
-        flex-direction: column; /* Mobilde dikey hizalama */
+/* Mobil Cihazlar (max-width: 767.98px) */
+@media (max-width: 767.98px) {
+    .index-sektorler-section {
+        padding: 50px 15px; /* Azaltıldı: 60px 20px'ten 50px 15px'e */
     }
 
-    .sector-image {
-        width: 100%; /* Resim boyutunun col-4'e uyması için */
-        height: auto; /* Yükseklik otomatik olacak */
+    .index-sector-main-title {
+        font-size: 2.2rem; /* Azaltıldı: 2.5rem'den 2.2rem'e */
+        margin-bottom: 15px; /* Azaltıldı: 20px'ten 15px'e */
+    }
+
+    .index-sector-main-description {
+        font-size: 1rem; /* Azaltıldı: 1.1rem'den 1rem'e */
+        padding-bottom: 20px; /* Azaltıldı: 30px'ten 20px'e */
+    }
+
+    .index-sektor-item {
+        flex-direction: column;
+        text-align: center;
+        height: auto; /* Mobilde sabit yükseklik kaldırıldı */
+    }
+
+    .index-sector-image-container {
+        margin-bottom: 15px; /* Azaltıldı: 20px'ten 15px'e */
+    }
+
+    .index-sector-content, .index-sector-image {
+        height: auto;
+        max-height: none;
+    }
+
+    .index-sector-title {
+        font-size: 1.3rem; /* Azaltıldı: 1.5rem'den 1.3rem'e */
+    }
+
+    .index-sector-description {
+        font-size: 0.9rem; /* Azaltıldı: 1rem'den 0.9rem'e */
+    }
+
+    .index-sector-icon {
+        font-size: 2rem; /* Azaltıldı: 2.5rem'den 2rem'e */
+    }
+
+    .index-sector-link {
+        padding: 8px 15px; /* Azaltıldı: 10px 20px'ten 8px 15px'e */
+        font-size: 0.8rem; /* Azaltıldı: 0.9rem'den 0.8rem'e */
+    }
+
+    .index-sector-image {
+        max-height: 180px; /* Azaltıldı: 200px'ten 180px'e */
     }
 }
 
-@media (max-width: 992px) {
-    .sector-item {
-        flex-direction: row; /* Tablet ve üstü için satır düzeni */
+/* Tablet Cihazlar (min-width: 768px) ve (max-width: 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .index-sektorler-section {
+        padding: 70px 30px; /* Azaltıldı: 80px 40px'ten 70px 30px'e */
     }
 
-    .sector-image {
-        width: 100%; /* Resim boyutunun col-4'e uyması için */
-        height: 300px; /* Yükseklik sabit olacak */
+    .index-sector-main-title {
+        font-size: 2.8rem; /* Azaltıldı: 3rem'den 2.8rem'e */
+        margin-bottom: 20px; /* Azaltıldı: 25px'ten 20px'e */
+    }
+
+    .index-sector-main-description {
+        font-size: 1.1rem; /* Aynı kaldı */
+        padding-bottom: 25px; /* Azaltıldı: 35px'ten 25px'e */
+    }
+
+    .index-sektor-item {
+        height: 400px; /* Sabit yükseklik eklendi */
+        display: flex;
+        align-items: stretch; /* Eşit yükseklik */
+    }
+
+    .index-sector-image-container {
+        flex: 1;
+        padding: 10px; /* Azaltıldı: 15px'ten 10px'e */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%; /* Yüksekliği tam sarması için */
+    }
+
+    .index-sector-content-wrap, .index-sector-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        padding: 10px; /* Azaltıldı: 15px'ten 10px'e */
+        height: 100%; /* Yüksekliği tam sarması için */
+    }
+
+    .index-sector-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        z-index: 0;
+    }
+
+    .index-sector-title {
+        font-size: 1.6rem; /* Azaltıldı: 1.8rem'den 1.6rem'e */
+    }
+
+    .index-sector-description {
+        font-size: 1rem; /* Azaltıldı: 1.1rem'den 1rem'e */
+    }
+
+    .index-sector-icon {
+        font-size: 2.5rem; /* Azaltıldı: 2.8rem'den 2.5rem'e */
+    }
+
+    .index-sector-link {
+        padding: 9px 18px; /* Azaltıldı: 11px 22px'ten 9px 18px'e */
+        font-size: 0.9rem; /* Azaltıldı: 1rem'den 0.9rem'e */
+    }
+
+    .index-sector-image {
+        max-height: 220px; /* Azaltıldı: 250px'ten 220px'e */
     }
 }

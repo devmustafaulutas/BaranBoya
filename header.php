@@ -62,6 +62,7 @@
     <title><?php echo htmlspecialchars($site_title, ENT_QUOTES, 'UTF-8'); ?></title>
 
     <link rel="stylesheet" href="assets/css/new-section.css">
+    <link rel="stylesheet" href="assets/css/sektor.css">
     <!-- Favicon  -->
     <link rel="icon" href="assets/img/favicon.png">
 
