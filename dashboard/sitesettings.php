@@ -3,6 +3,11 @@ include "header.php";
 include "sidebar.php";
 include "../z_db.php";
 
+require '../vendor/autoload.php'; // Kök dizindeki vendor klasörünü dahil edin
+
+use Sonata\GoogleAuthenticator\GoogleAuthenticator;
+use Sonata\GoogleAuthenticator\GoogleQrUrl;
+
 // CRUD İşlemleri
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
@@ -320,6 +325,9 @@ if ($action == 'delete_logo' && isset($_GET['id'])) {
         </li>
         <li class="nav-item">
             <a class="nav-link <?php echo ($action == 'edit_logo') ? 'active' : ''; ?>" href="sitesettings.php?action=edit_logo">Logolar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php echo ($action == 'setup_2fa.php') ? 'active' : ''; ?>" href="sitesettings.php?action=setup_2fa.php">2 Aşamalı Doğrulama</a>
         </li>
         <li class="nav-item">
             <a class="nav-link <?php echo ($action == 'edit_static' || $action == 'add_static') ? 'active' : ''; ?>" href="sitesettings.php?action=edit_static">Statik İçerikler</a>
@@ -668,9 +676,52 @@ if ($action == 'delete_logo' && isset($_GET['id'])) {
                                 </table>
                             </div>
                         </div>
+                    
+                        <?php
+                    break;
+                    case 'setup_2fa.php':
+                        ?>
+                    <?php
+                    if ($action == 'setup_2fa.php'):
+                        ?>
+                        <?php
+                            if (session_status() == PHP_SESSION_NONE) {
+                                session_start();
+                            }
+                            $g = new GoogleAuthenticator();
+                            $secret = $g->generateSecret();
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                $username = $_SESSION['username'];
+                                $query = "UPDATE admin SET 2fa_secret = '$secret' WHERE username = '$username'";
+                                if (mysqli_query($con, $query)) {
+                                    echo "<div class='alert alert-success'>2FA başarıyla etkinleştirildi.</div>";
+                                } else {
+                                    echo "<div class='alert alert-danger'>2FA etkinleştirilirken bir hata oluştu.</div>";
+                                }
+                                exit;
+                                }
+                            $username = $_SESSION['username'];
+                            $qrCodeUrl = GoogleQrUrl::generate($username, $secret, 'YourAppName');
+                            ?>
+                            <div class="card mt-4">
+                                <div class="card-header">
+                                    <h5 class="card-title">2FA Kurulumu</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Google Authenticator uygulamasını kullanarak aşağıdaki QR kodunu tarayın:</p>
+                                    <img src="<?php echo $qrCodeUrl; ?>" alt="QR Code">
+                                    <form method="post">
+                                        <input type="hidden" name="secret" value="<?php echo $secret; ?>">
+                                        <button type="submit" class="btn btn-primary " style="margin:20px;">2FA'yı Etkinleştir</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php
+                    endif;
+                    ?>
                     <?php
                     break;
-
+                    
                     case 'delete_logo':
                         // Logo silme işlemi
                         $logo_query = "SELECT logo FROM logo WHERE id = 1";
@@ -805,7 +856,7 @@ if ($action == 'delete_logo' && isset($_GET['id'])) {
                 </div>
                 <?php
                 break;
-
+                
             default:
                 echo "<h3>Hoşgeldiniz! Ayarları düzenlemek için yukarıdaki sekmeleri kullanınız.</h3>";
                 break;
