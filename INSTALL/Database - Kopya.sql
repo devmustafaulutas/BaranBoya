@@ -174,13 +174,12 @@ INSERT INTO `alt_kategoriler_alt` (`isim`, `alt_kategori_id`) VALUES
 ('Novolak Vinilester Reçineler', 2), 15
 ('Bromine Vinilester Reçineler', 2), 16
 ('Amin Hızlandırıcılı Vinilester Reçineler', 2), 17
-('Poliüretan Reçine', 2), 18
-('Epoksi Reçineler', 2) 19
 
 
-('Mek Peroksitler (Polyester ve Jelkot Dondurucu)', 33) 20
-('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)', 33) 21
-('İnceltici Monomerler ve Kıvamlaştırıcılar', 33) 22
+
+('Mek Peroksitler (Polyester ve Jelkot Dondurucu)', 33) 18
+('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)', 33) 19
+('İnceltici Monomerler ve Kıvamlaştırıcılar', 33) 20
 
 
 

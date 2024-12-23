@@ -170,14 +170,13 @@ INSERT INTO `alt_kategoriler_alt` (`isim`,`resim`, `alt_kategori_id`) VALUES
 ('Kimyasal Dayanımlı Polyester Reçineler','alt_category_alt.png', 1),  
 ('Alev İlerletmeyen Polyester Reçineler','alt_category_alt.png', 1), 
 ('Köpük Eritmeyen Polyester Reçineler','alt_category_alt.png', 1), 
-('Köpük Eritmeyen Polyester Reçineler','alt_category_alt.png', 1), 
+('Cila Tipi Köpük Eritmeyen Polyester Reçineler','alt_category_alt.png', 1), 
 
 ('Bisfenol-A Vinilester Reçineler','alt_category_alt.png', 2), 
 ('Novolak Vinilester Reçineler','alt_category_alt.png', 2), 
 ('Bromine Vinilester Reçineler','alt_category_alt.png', 2), 
 ('Amin Hızlandırıcılı Vinilester Reçineler','alt_category_alt.png', 2), 
-('Poliüretan Reçine','alt_category_alt.png', 2), 
-('Epoksi Reçineler','alt_category_alt.png', 2),
+
 
 ('Mek Peroksitler (Polyester ve Jelkot Dondurucu)','alt_category_alt.png', 33),
 ('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)','alt_category_alt.png', 33), 
@@ -218,6 +217,11 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Turkuaz TP 409 (C) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 220.00, 6, 'resim20.jpg', 1, 1, 9),
 ('Poliya Polipol 3541 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 1, 9),
 ('Poliya Polipol 3542 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 1, 9);
+-- Kimyasal Dayanımlı Polyester Reçineler
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Turkuaz TP1071 Kimyasal Dayanımlı Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 220.00, 6, 'resim20.jpg', 1, 1, 10),
+('Poliya Polipol 381 Kimyasal Dayanımlı Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 220.00, 6, 'resim20.jpg', 1, 1, 10),
+('Poliya Polipol 391 Yüksek Kimyasal ve Işık Dayanımlı Bisfenolik Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 230.00, 3, 'resim21.jpg', 1, 1, 10);
 
 -- Alev İlerletmeyen Polyester Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -253,25 +257,62 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 
 -- Jelkotlar
+
+-- Genel Amaçlı Jelkotlar
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Poliya Polipol 3610 Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 6, NULL),
-('Turkuaz TP 1088 Jelkot', 'Genel Amaçlı Jelkot', 185.00, 12, 'resim16.jpg', 2, 6, NULL),
-('Turkuaz TP 2090 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 7, NULL),
-('Poliya Polipol 3615 Yüksek Performanslı Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL),
-('Poliya Polipol 3625 Zımparalanabilir Jelkot', 'Zımparalanabilir Jelkot', 240.00, 15, 'resim19.jpg', 2, 9, NULL),
-('Poliya Polipol 3630 Kalıplama Jelkot', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 10, NULL),
-('Turkuaz TP 2085 Marin Uygulama Jelkot', 'Marin Uygulama Jelkot', 270.00, 12, 'resim21.jpg', 2, 11, NULL),
-('Turkuaz TP 2120 Kimyasal Dayanımlı Jelkot', 'Kimyasal Dayanımlı Jelkot', 280.00, 10, 'resim22.jpg', 2, 12, NULL),
-('Turkuaz TP 2505 Alev İlerletmeyen Jelkot', 'Alev İlerletmeyen Jelkot', 300.00, 5, 'resim23.jpg', 2, 13, NULL);
+('Turkuaz TP600 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 6, NULL),
+('Poliya Polijel 206 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 6, NULL),
+('Poliya Polijel 208 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 185.00, 12, 'resim16.jpg', 2, 6, NULL);
+
+-- Performans Jelkot
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Turkuaz TP900 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 7, NULL),
+('Poliya Polijel 211 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 7, NULL);
+
+-- Yüksek Performans Jelkotlar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Turkuaz TP1000 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL),
+('Poliya Polijel 213 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL),
+('Poliya Polijel 215 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL);
+
+-- Kimyasal Dayanımlı Jelktolar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Poliya Polijel 271 Kimyasal ve Işık Dayanımlı Jelkot', 'Kimyasal Dayanımlı Jelkot', 280.00, 10, 'resim22.jpg', 2, 12, NULL);
+
+-- Zımparalanabilir Jelkotlar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Poliya Polijel 209-Z Zımparalanabilir Jelkot', 'Zımparalanabilir Jelkot', 240.00, 15, 'resim19.jpg', 2, 9, NULL),
+('Poliya Polijel 2089-Z Yüksek Isıl Dayanımlı Zımparalanabilir Jelkot', 'Zımparalanabilir Jelkot', 240.00, 15, 'resim19.jpg', 2, 9, NULL);
+
+-- Kalıp Yapımı Jelkotlar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Poliya Polijel 220 Kalıp Jelkotu', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 10, NULL),
+('Poliya Polijel 291 Yüksek Isıl ve Kimyasal Dayanımlı Kalıp Jelkotu', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 10, NULL),
+('Poliya Polijel 240 Kalıp Tamir Jelkotu', 'Kalıplama Jelkot', 230.00, 20, 'resim20.jpg', 2, 10, NULL);
+
+-- Alev İlerletmeyen Jelkotlar
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+('Poliya Polijel F-345 FR Alev İlerletmeyen Jelkot', 'Alev İlerletmeyen Jelkot', 300.00, 5, 'resim23.jpg', 2, 13, NULL),
+
+('Turkuaz TP 2085 Marin Uygulama Jelkot', 'Marin Uygulama Jelkot', 270.00, 12, 'resim21.jpg', 2, 11, NULL);
 
 -- Cam Elyaflar
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Camelyaf 100 Keçe', 'Cam Elyaf Keçe', 150.00, 100, 'resim24.jpg', 3, 14, NULL),
-('Camelyaf 200 Keçe', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
-('Camelyaf Dokuma Kumaş 500g', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 15, NULL),
-('Camelyaf Dokuma Kumaş 800g', 'Cam Elyaf Dokuma Kumaş', 180.00, 60, 'resim27.jpg', 3, 15, NULL),
-('Karbon Elyaf 300g', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 16, NULL),
-('Karbon Elyaf 500g', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 16, NULL);
+('Şişecam Cam Elyaf E-Mat1 300 gr/m²', 'Cam Elyaf Keçe', 150.00, 100, 'resim24.jpg', 3, 14, NULL),
+('Şişecam Cam Elyaf E-Mat1 450 gr/m²', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
+('Şişecam Cam Elyaf E-Mat1 600 gr/m²', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
+('Şişecam Cam Elyaf Mat8 300 gr/m²', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
+('Şişecam Cam Elyaf Mat8 450 gr/m²', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
+('Jushi Sıvı (Mumlu) Elyaf 450gr/m²', 'Cam Elyaf Keçe', 160.00, 80, 'resim25.jpg', 3, 14, NULL),
+('Dokuma (Örgü) Elyaf 100 gr/m²', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 15, NULL),
+('Fiber Flex Dokuma (Örgü) Elyaf 300 gr/m²', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 15, NULL),
+('Fiber Flex Dokuma (Örgü) Elyaf 500 gr/m²', 'Cam Elyaf Dokuma Kumaş', 170.00, 70, 'resim26.jpg', 3, 15, NULL),
+('Fiber Flex Dokuma (Örgü) Elyaf 800 gr/m²', 'Cam Elyaf Dokuma Kumaş', 180.00, 60, 'resim27.jpg', 3, 15, NULL),
+('Karbon Elyaf Plain 200 gr/m²', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 16, NULL),
+('Karbon Elyaf Twill 200 gr/m²', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 16, NULL),
+('Karbon Elyaf Plain 245 gr/m²', 'Karbon Elyaf Dokuma Kumaş', 220.00, 50, 'resim28.jpg', 3, 16, NULL),
+('Karbon Elyaf Twill 245 gr/m²', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 16, NULL),
+('Karbon Elyaf Forged', 'Karbon Elyaf Dokuma Kumaş', 240.00, 40, 'resim29.jpg', 3, 16, NULL);
 
 -- -- Fitil İp Elyaf
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -344,7 +385,7 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 -- Polyester ve Poliüretan Pigmentler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
 ('Poliya Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30),
-('Poliya Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30);
+('Turkuaz Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30);
 
 -- Titandioksitler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -390,7 +431,7 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Poliya Jelkot İnceltici', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
 ('Poliya MMA Monomer (Metil Metakrilat)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
 ('Poliya D-32 Parafin Reçine Kıvamlaştırıcı (Thixo)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22),
-('RTV-2 Kalıp Silikonu Kıvamlaştırıcı (Thixo)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 41, 22);
+('RTV-2 Kalıp Silikonu Kıvamlaştırıcı (Thixo)', 'İnceltici Monomerler ve Kıvamlaştırıcılar', 80.00, 90, 'resim42.jpg', 6, 33, 22);
 
 
 -- TEMİZLEYİCİ SOLVENTLER
@@ -401,6 +442,14 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Mobel Selülozik Tiner', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL),
 ('Genç Selülozik Tiner', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL),
 ('Dewilux Selülozik Tiner', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 6, 41, NULL);
+
+
+INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
+
+('Melos Çinko Streat', 'TEMİZLEYİCİ SOLVENTLER', 80.00, 90, 'resim42.jpg', 5, 27, NULL);
+
+
+
 -- --------------------------------------------------------
 
 
