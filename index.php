@@ -143,9 +143,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <h1><?php print $stitle?></h1>
                             <p class="text-white my-4"><?php print $stext?></p>
                             <!-- Buttons -->
-                            <div class="button-group">
-                                <a href="about" class="btn btn-bordered-white d-none d-sm-inline-block">Biz Kimiz</a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,22 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </svg>
             </div>
         </section>
-        <!-- ***** Welcome Area End ***** -->
-        <section class="whoarewe">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <h2 class="whoarewe-title">Şirketimiz</h2>
-                    <div class="whoarewe-content col-md-12">
-                        <p>
-                        Baran Boya Kompozit Reçineler, kompozit sektörüne yönelik geniş ürün yelpazesiyle polyester reçineler, cam elyaf takviyeler, jelkotlar, pigment pastalar, epoksi reçineler, poliüretan reçineler ve kalıp silikonları tedarik etmektedir.
-                        Müşterilerine kaliteli ürünler sunarak, hızlı tedarik çözümleri ve rekabetçi fiyatlarla sektörde fark yaratmaktadır.
-                        Teknik bilgi birikimiyle üretim süreçlerine destek olmakta ve müşterilerinin ihtiyaçlarına özel çözümler geliştirmektedir.
-                        Sektördeki yenilikçi gelişmeleri yakından takip ederek, genişleyen ürün çeşitliliğiyle kompozit hammadde kullanımını artırmayı hedefleyen Baran Boya, güvenilirliği ve profesyonel hizmet anlayışıyla müşterilerinin yanında yer almaktadır.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+       
         
         <!-- ***** Service Area End ***** -->
 

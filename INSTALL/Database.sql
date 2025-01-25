@@ -3,13 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2022 at 12:30 PM
+-- Generation Time: Ocak , 2025 at 12:30 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+SET NAMES 'utf8mb4';
+SET CHARACTER SET utf8mb4;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -33,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `password` varchar(150) NOT NULL,
   `2fa_secret`  VARCHAR(255) NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -63,7 +65,7 @@ CREATE TABLE `kategoriler` (
     `resim` VARCHAR(255) NOT NULL,
     `kategori_id` INT,
     FOREIGN KEY (`kategori_id`) REFERENCES `kategoriler`(`id`) ON DELETE CASCADE
-) CHARACTER SET utf8mb4;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 -- Alt kategoriler tablosu, ana kategorilere bağlı
 CREATE TABLE `alt_kategoriler` (
@@ -72,7 +74,7 @@ CREATE TABLE `alt_kategoriler` (
     `resim` VARCHAR(255) NOT NULL,
     `kategori_id` INT,
     FOREIGN KEY (`kategori_id`) REFERENCES `kategoriler`(`id`) ON DELETE CASCADE
-) CHARACTER SET utf8mb4;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 -- Alt kategorilerin alt kategorileri, alt kategorilere bağlı
 CREATE TABLE `alt_kategoriler_alt` (
@@ -81,7 +83,7 @@ CREATE TABLE `alt_kategoriler_alt` (
     `resim` VARCHAR(255) NOT NULL,
     `alt_kategori_id` INT,
     FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
-) CHARACTER SET utf8mb4;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 -- Ürünler tablosu, alt kategorilere bağlı
 CREATE TABLE `urunler` (
@@ -95,7 +97,7 @@ CREATE TABLE `urunler` (
     `alt_kategori_id`  INT DEFAULT NULL,
     `alt_kategori_alt_id` INT DEFAULT NULL,
     FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
-) CHARACTER SET utf8mb4;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 INSERT INTO `kategoriler` (`isim`,`resim`) VALUES
 
@@ -187,30 +189,30 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Turkuaz TP100 Döküm Tipi Polyester', 'Döküm Tipi Polyester Reçine', 100.00, 50, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 1),
 ('Camelyaf Resins CE80 Döküm Tipi Polyester', 'Döküm Tipi Polyester Reçine', 120.00, 30, 'assets/img/products/CAMELYAF 18 KG.png', 1, 1, 1),
 ('Poliya Polipol 3453 Döküm Tipi Polyester', 'Döküm Tipi Polyester Reçine', 110.00, 40, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 1),
-('Turkuaz TP182 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 140.00, 20, 'resim4.jpg', 1, 1, 2),
-('Poliya Polipol 357 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 150.00, 25, 'resim5.jpg', 1, 1, 2),
-('Turkuaz TP220 (Tİ-CO) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 130.00, 10, 'resim6.jpg', 1, 1, 4),
-('Turkuaz TP200 (Tİ-CO) Genel Amaçlı Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 135.00, 15, 'resim7.jpg', 1, 1, 4),
-('Camelyaf Resins CE92 N8 Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 125.00, 10, 'resim8.jpg', 1, 1, 4),
-('Poliya Polipol 3404 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'resim9.jpg', 1, 1, 4),
-('Poliya Polipol 3401 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'resim9.jpg', 1, 1, 4),
-('Poliya Polipol 320TA Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 160.00, 5, 'resim10.jpg', 1, 1, 3),
-('Poliya Polipol 321-Zero Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 165.00, 4, 'resim11.jpg', 1, 1, 3),
-('Turkuaz TP 1040 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'resim12.jpg', 1, 1, 5),
-('Turkuaz TP 1082 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'resim12.jpg', 1, 1, 5),
-('Poliya Polipol 3562 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'resim13.jpg', 1, 1, 5),
-('Poliya Polipol 3872-F CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'resim13.jpg', 1, 1, 5),
-('Turkuaz TP 260 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'resim14.jpg', 1, 1, 6),
-('Turkuaz TP 911-CO RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'resim14.jpg', 1, 1, 6),
-('Poliya Polipol 3387 Zero RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'resim15.jpg', 1, 1, 6),
-('Poliya Polipol 3382 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'resim15.jpg', 1, 1, 6),
+('Turkuaz TP182 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 140.00, 20, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 2),
+('Poliya Polipol 357 Kuvars Kompoze Taş Polyester', 'Breton Tipi Polyester Reçine', 150.00, 25, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 2),
+('Turkuaz TP220 (Tİ-CO) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 130.00, 10, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 4),
+('Turkuaz TP200 (Tİ-CO) Genel Amaçlı Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 135.00, 15, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 4),
+('Camelyaf Resins CE92 N8 Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 125.00, 10, 'assets/img/products/CAMELYAF 18 KG.png', 1, 1, 4),
+('Poliya Polipol 3404 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 4),
+('Poliya Polipol 3401 (TA-LSE-H20/40/60/100) Elyaf Tipi Polyester', 'Genel Amaçlı Elyaf Tipi Polyester Reçine', 140.00, 8, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 4),
+('Poliya Polipol 320TA Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 160.00, 5, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 3),
+('Poliya Polipol 321-Zero Kalıp Yapımı Polyester', 'Kalıplama Polyester Reçine', 165.00, 4, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 3),
+('Turkuaz TP 1040 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 5),
+('Turkuaz TP 1082 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 170.00, 12, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 5),
+('Poliya Polipol 3562 CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 5),
+('Poliya Polipol 3872-F CTP Fitil Sarma Polyester', 'CTP Tipi Polyester Reçine', 175.00, 10, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 5),
+('Turkuaz TP 260 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 6),
+('Turkuaz TP 911-CO RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 180.00, 7, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 6),
+('Poliya Polipol 3387 Zero RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 6),
+('Poliya Polipol 3382 RTM Tipi Polyester', 'RTM/İnfüzyon Tipi Polyester Reçine', 185.00, 6, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 6),
 ('Turkuaz TP 1300 Akrilik Tipi Dolgusuz Polyester', 'Akrilik Tipi Polyester Reçine', 190.00, 3, 'resim16.jpg', 1, 1, 7),
-('Poliya Polipol 341 Akrilik Tipi Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 1, 7),
-('Poliya Polipol 341-TA Akrilik Tipi Dolgulusuz Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 1, 7),
-('Poliya Polipol 342-TA D40 Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'resim17.jpg', 1, 1, 7),
+('Poliya Polipol 341 Akrilik Tipi Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 7),
+('Poliya Polipol 341-TA Akrilik Tipi Dolgulusuz Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 7),
+('Poliya Polipol 342-TA D40 Dolgulu Polyester', 'Akrilik Tipi Polyester Reçine', 195.00, 2, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 7),
 ('Turkuaz TP 535 SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 1, 8),
 ('Turkuaz TP 500 BMC Tipi Polyester', 'BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 1, 8),
-('Poliya Polipol 3417-V SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'resim18.jpg', 1, 1, 8),
+('Poliya Polipol 3417-V SMC/BMC Tipi Polyester', 'SMC/BMC Tipi Polyester Reçine', 200.00, 5, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 8),
 ('Poliya Polipol 382 SMC/BMC Tipi Kimyasal Dayanımlı Polyester', 'SMC/BMC Tipi Kimyasal Dayanımlı Polyester Reçine', 210.00, 4, 'resim19.jpg', 1, 1, 8),
 ('Poliya Polipol 3418 SMC/BMC Tipi Tam Maleik Polyester', 'SMC/BMC Tipi Kimyasal Dayanımlı Polyester Reçine', 210.00, 4, 'resim19.jpg', 1, 1, 8),
 ('Turkuaz TP 400 (C) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 220.00, 6, 'resim20.jpg', 1, 1, 9),
@@ -384,8 +386,8 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 -- Polyester ve Poliüretan Pigmentler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Poliya Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30),
-('Turkuaz Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, 30);
+('Poliya Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, NULL),
+('Turkuaz Polipigment Polyester ve Poliüretan Renklendiriciler', 'Polyester ve Poliüretan Pigmentler', 80.00, 90, 'resim42.jpg', 6, 30, NULL);
 
 -- Titandioksitler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -461,7 +463,7 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `blog_detail` varchar(2000) NOT NULL,
   `logo` varchar(1000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `blog`
@@ -504,7 +506,7 @@ CREATE TABLE IF NOT EXISTS`logo` (
   `id` int(11) NOT NULL,
   `logo` varchar(1000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `logo`
@@ -538,7 +540,7 @@ CREATE TABLE `section_title` (
   `contact_text` varchar(1000) NOT NULL,
   `enquiry_title` varchar(500) NOT NULL,
   `enquiry_text` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `section_title`
@@ -581,7 +583,7 @@ CREATE TABLE IF NOT EXISTS `contact_messages` (
     `phone` VARCHAR(50),
     `message` TEXT,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 COMMIT;
 
@@ -593,7 +595,7 @@ CREATE TABLE IF NOT EXISTS `service` (
   `ufile` varchar(1000) NOT NULL,
   `icon` varchar(200) NOT NULL,
   `upadated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `service`
@@ -645,7 +647,7 @@ CREATE TABLE IF NOT EXISTS `siteconfig` (
   `follow_text` varchar(1000) NOT NULL,
   `site_url` varchar(50) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `siteconfig`
@@ -687,7 +689,7 @@ CREATE TABLE `sitecontact` (
   `phone2` varchar(150) NOT NULL,
   `email` varchar(100) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `sitecontact`
@@ -716,7 +718,7 @@ CREATE TABLE IF NOT EXISTS `social` (
   `name` varchar(150) NOT NULL,
   `fa` varchar(150) NOT NULL,
   `social_link` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `social`
@@ -740,7 +742,7 @@ CREATE TABLE IF NOT EXISTS `static` (
   `stitle` varchar(150) NOT NULL,
   `stext` varchar(500) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `static`

@@ -11,10 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
     $msg = "";
     $username = mysqli_real_escape_string($con, $_POST['username']); //fetching details through post method
     $password = mysqli_real_escape_string($con, $_POST['password']);
+    $code = isset($_POST['2fa_code']) ? $_POST['2fa_code'] : '';
 
     if ($status == "OK") {
         // Retrieve username and password from database according to user's input, preventing sql injection
-        $query = "SELECT * FROM admin WHERE (username = '". mysqli_real_escape_string($con, $_POST['username']) . "') AND (password = '" . mysqli_real_escape_string($con, $_POST['password']) . "')";
+        $query = "SELECT id, username, password, secret FROM admin WHERE (username = '". mysqli_real_escape_string($con, $_POST['username']) . "') AND (password = '" . mysqli_real_escape_string($con, $_POST['password']) . "')";
         if ($stmt = mysqli_prepare($con, $query)) {
             /* execute query */
             mysqli_stmt_execute($stmt);
@@ -26,23 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
                 mysqli_stmt_bind_result($stmt, $id, $username, $password, $secret);
                 mysqli_stmt_fetch($stmt);
 
-                if (isset($_POST['2fa_code'])) {
-                    $g = new GoogleAuthenticator();
-                    $code = $_POST['2fa_code'];
-                    if ($g->checkCode($secret, $code)) {
-                        // 2FA doğrulaması başarılı
-                        $_SESSION['username'] = $username;
-                        header("Location: dashboard.php");
-                        exit;
-                    } else {
-                        $msg = "2FA kodu geçersiz.";
-                    }
-                } else {
-                    // 2FA kodu isteniyor
+                $g = new GoogleAuthenticator();
+                if ($g->checkCode($secret, $code)) {
+                    // 2FA doğrulaması başarılı
                     $_SESSION['username'] = $username;
-                    $_SESSION['2fa_secret'] = $secret;
-                    header("Location: verify_2fa.php");
+                    $_SESSION['authenticated'] = true;
+                    header("Location: dashboard/index.php");
                     exit;
+                } else {
+                    $msg = "2FA kodu geçersiz.";
                 }
             } else {
                 $msg = "Kullanıcı adı veya şifre yanlış.";
@@ -96,12 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
                                             <label for="password" class="form-label">Şifre:</label>
                                             <input type="password" id="password" name="password" class="form-control" required>
                                         </div>
-                                        <?php if (isset($_SESSION['username']) && isset($_SESSION['2fa_secret'])): ?>
                                         <div class="mb-3">
                                             <label for="2fa_code" class="form-label">2FA Kodu:</label>
                                             <input type="text" id="2fa_code" name="2fa_code" class="form-control" required>
                                         </div>
-                                        <?php endif; ?>
                                         <div class="mt-3 d-grid">
                                             <button type="submit" class="btn btn-primary">Giriş</button>
                                         </div>

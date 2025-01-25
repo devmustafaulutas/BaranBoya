@@ -13,18 +13,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $code = $_POST['2fa_code'];
     $username = $_SESSION['username'];
 
-    $query = "SELECT 2fa_secret FROM admin WHERE username = '$username'";
+    $query = "SELECT secret FROM admin WHERE username = '$username'";
     $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-    $secret = $row['2fa_secret'];
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $secret = $row['secret'];
 
-    $g = new GoogleAuthenticator();
-    if ($g->checkCode($secret, $code)) {
-        // 2FA doğrulaması başarılı
-        header("Location: index.php");
-        exit;
+        $g = new GoogleAuthenticator();
+        if ($g->checkCode($secret, $code)) {
+            // 2FA doğrulaması başarılı
+            $_SESSION['authenticated'] = true;
+            header("Location: dashboard/index.php");
+            exit;
+        } else {
+            $msg = "2FA kodu geçersiz.";
+        }
     } else {
-        $msg = "2FA kodu geçersiz.";
+        $msg = "Kullanıcı bulunamadı.";
     }
 }
 ?>
