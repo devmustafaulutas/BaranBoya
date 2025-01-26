@@ -31,7 +31,7 @@
             <div class="flip-card-inner">
             <div class="flip-card-front">
                 <div class="blog-img-wrapper">
-                <img src="<?php echo htmlspecialchars($row['logo']); ?>" alt="<?php echo htmlspecialchars($row['blog_title']); ?>">
+                <img src="assets/img/blog/<?php echo htmlspecialchars($row['logo']); ?>" alt="<?php echo htmlspecialchars($row['blog_title']); ?>">
                 </div>
                 <div class="flip-front-content">
                 <h3><?php echo htmlspecialchars($row['blog_title'], ENT_QUOTES, 'UTF-8'); ?></h3>

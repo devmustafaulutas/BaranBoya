@@ -458,10 +458,10 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 CREATE TABLE IF NOT EXISTS `blog` (
   `id` int(11) NOT NULL,
-  `blog_title` varchar(300) NOT NULL,
-  `blog_desc` varchar(300) NOT NULL,
-  `blog_detail` varchar(2000) NOT NULL,
-  `logo` varchar(1000) NOT NULL,
+  `blog_title` varchar(1000) NOT NULL,
+  `blog_desc` varchar(1000) NOT NULL,
+  `blog_detail` varchar(5000) NOT NULL,
+  `logo` varchar(2000) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
 
@@ -480,21 +480,52 @@ INSERT INTO `blog` (
 VALUES
 (
     1, 
-    'We provide the best digital services', 
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem.', 
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.',
-    '', 
+    'Endüstriyel Boya Kullanım Alanları', 
+    'Endüstriyel boyaların farklı kullanım alanları hakkında bilgi.', 
+    'Endüstriyel boyalar, otomotiv, inşaat, denizcilik ve daha birçok sektörde kullanılmaktadır. Bu boyalar, dayanıklılık ve uzun ömürlülük sağlamak için özel olarak formüle edilmiştir. Endüstriyel boyaların kullanım alanları ve avantajları hakkında daha fazla bilgi edinin.', 
+    'EL YATIRMASI 1.jpg', 
     CURRENT_TIMESTAMP()
 ),
 (
     2, 
-    'We provide the best digital services', 
-    'We provide the best digital servicesWe provide the best digital servicesWe provide the best digital services', 
-    'We provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital servicesWe provide the best digital services', 
-    '60936059d354562031616499540.png', 
+    'Endüstriyel Boya Seçiminde Dikkat Edilmesi Gerekenler', 
+    'Endüstriyel boya seçerken nelere dikkat etmelisiniz?', 
+    'Endüstriyel boya seçimi, projenizin başarısı için kritik öneme sahiptir. Doğru boyayı seçmek, yüzeyin korunması ve estetik görünümün sağlanması açısından önemlidir. Bu blog yazısında, endüstriyel boya seçiminde dikkat edilmesi gereken faktörleri ele alıyoruz.', 
+    'ENDÜSTRİYEL TASARIM.jpg', 
+    CURRENT_TIMESTAMP()
+),
+(
+    3, 
+    'Endüstriyel Boya Uygulama Teknikleri', 
+    'Endüstriyel boyaların doğru uygulanması için teknikler.', 
+    'Endüstriyel boyaların doğru uygulanması, yüzeyin dayanıklılığı ve estetik görünümü için önemlidir. Bu yazıda, endüstriyel boya uygulama teknikleri ve püf noktaları hakkında bilgi veriyoruz. Profesyonel uygulama yöntemleri ile en iyi sonuçları elde edin.', 
+    'EL YATIRMASI 1.jpg', 
+    CURRENT_TIMESTAMP()
+),
+(
+    4, 
+    'Endüstriyel Boyaların Çevresel Etkileri', 
+    'Endüstriyel boyaların çevre üzerindeki etkileri ve sürdürülebilirlik.', 
+    'Endüstriyel boyaların çevresel etkileri, günümüzde önemli bir konudur. Bu yazıda, endüstriyel boyaların çevre üzerindeki etkilerini ve sürdürülebilirlik açısından neler yapılabileceğini ele alıyoruz. Çevre dostu boyalar ve uygulama yöntemleri hakkında bilgi edinin.', 
+    'ENDÜSTRİYEL TASARIM.jpg', 
+    CURRENT_TIMESTAMP()
+),
+(
+    5, 
+    'Endüstriyel Boya ve Korozyon Koruması', 
+    'Endüstriyel boyaların korozyon korumasındaki rolü.', 
+    'Endüstriyel boyalar, metal yüzeylerin korozyona karşı korunmasında önemli bir rol oynar. Bu yazıda, endüstriyel boyaların korozyon korumasındaki etkilerini ve doğru boya seçimi ile nasıl koruma sağlanabileceğini ele alıyoruz. Korozyon önleyici boyalar hakkında bilgi edinin.', 
+    'EL YATIRMASI 1.jpg', 
+    CURRENT_TIMESTAMP()
+),
+(
+    6, 
+    'Endüstriyel Boya ve Güvenlik Önlemleri', 
+    'Endüstriyel boya uygulamalarında güvenlik önlemleri.', 
+    'Endüstriyel boya uygulamaları sırasında güvenlik önlemleri almak, iş sağlığı ve güvenliği açısından önemlidir. Bu yazıda, endüstriyel boya uygulamalarında alınması gereken güvenlik önlemlerini ve dikkat edilmesi gereken noktaları ele alıyoruz. Güvenli uygulama yöntemleri hakkında bilgi edinin.', 
+    'ENDÜSTRİYEL TASARIM.jpg', 
     CURRENT_TIMESTAMP()
 );
-
 
 -- --------------------------------------------------------
 
