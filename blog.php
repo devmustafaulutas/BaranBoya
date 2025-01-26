@@ -17,42 +17,63 @@
     </div>
 </section>
 
-<section>
-    <div class="container">
-        <div class="row" style="padding:40px;">
-            <?php
-            // Fetch blog posts from the database
-            $query = "SELECT * FROM blog ORDER BY updated_at DESC";
-            $result = mysqli_query($con, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="col-md-4 mb-4">';
-                    echo '<div class="blog-post shadow-sm">';
-                    
-                    // Blog Thumbnail
-                    echo '<div class="blog-post-thumbnail" style="background-image: url(\'' . htmlspecialchars($row['logo']) . '\');"></div>';
-                    
-                    echo '<div class="blog-post-content p-3">';
-                    echo '<h3 class="blog-post-title">' . htmlspecialchars($row['blog_title']) . '</h3>';
-                    echo '<p class="blog-post-desc">' . htmlspecialchars(substr($row['blog_desc'], 0, 150)) . '...</p>';
-                    echo '<div class="blog-post-footer d-flex justify-content-between align-items-center">';
-                    echo '<a href="blog_post.php?id=' . htmlspecialchars($row['id']) . '" class="read-more">Read More</a>';
-                    echo '<button class="like-btn" data-id="' . $row['id'] . '"><i class="fas fa-thumbs-up"></i> Like</button>';
-                    echo '</div>'; // blog-post-footer
-                    echo '</div>'; // blog-post-content
-                    
-                    echo '</div>'; // blog-post
-                    echo '</div>'; // col-md-4
-                }
-            } else {
-                echo '<p>No blog posts found.</p>';
-            }
-            ?>
+<section id="body">
+    <section id="blog-list" class="blog-page container pt-5">
+    <div class="row blog-cards">
+        <?php
+        $query = "SELECT * FROM blog ORDER BY updated_at DESC";
+        $result = mysqli_query($con, $query);
+        if ($result && mysqli_num_rows($result) > 0):
+        while ($row = mysqli_fetch_assoc($result)):
+        ?>
+        <div class="col-md-4 mb-4 scroll-fade">
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="blog-img-wrapper">
+                <img src="<?php echo htmlspecialchars($row['logo']); ?>" alt="<?php echo htmlspecialchars($row['blog_title']); ?>">
+                </div>
+                <div class="flip-front-content">
+                <h3><?php echo htmlspecialchars($row['blog_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                <p><?php echo htmlspecialchars(substr($row['blog_desc'], 0, 80), ENT_QUOTES, 'UTF-8'); ?>...</p>
+                </div>
+            </div>
+            <div class="flip-card-back">
+                <button class="close-flip" onclick="event.stopPropagation(); flipCard(this)">×</button>
+                <h4><?php echo htmlspecialchars($row['blog_title'], ENT_QUOTES, 'UTF-8'); ?></h4>
+                <p><?php echo nl2br(htmlspecialchars($row['blog_desc'], ENT_QUOTES, 'UTF-8')); ?></p>
+            </div>
+            </div>
         </div>
+        </div>
+        <?php
+        endwhile;
+        else:
+        echo '<p>Hiç blog yazısı bulunamadı.</p>';
+        endif;
+        ?>
     </div>
+    </section>
 </section>
 
+<script>
+// Kayan kartlar için IntersectionObserver
+const scrollFadeEls = document.querySelectorAll(".scroll-fade");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.1 });
+scrollFadeEls.forEach(el => observer.observe(el));
 
+// Flip Card fonksiyonu
+function flipCard(el) {
+  let parent = el.classList.contains("flip-card") ? el : el.closest(".flip-card");
+  parent.classList.toggle("flipped");
+  event.stopPropagation();
+}
+</script>
 
 <?php include "footer.php"; ?>

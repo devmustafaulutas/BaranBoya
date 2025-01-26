@@ -79,9 +79,9 @@
                                 <!-- Copyright Left -->
 
                                 <?php
-    // $site_footer değişkenini XSS saldırılarına karşı koruyun
-    $site_footer = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
-?>
+                                    // $site_footer değişkenini XSS saldırılarına karşı korundu
+                                    $site_footer = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
+                                ?>
 
                                 <div class="copyright-left"><?php print $site_footer ?></div>   
                                 <!-- Copyright Right -->

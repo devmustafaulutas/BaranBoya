@@ -72,7 +72,7 @@
                         <div class="section-heading text-center m-0">   
                             <div class="about-content-contact">
                                 <a href="index.php">
-                                    <img src="dashboard/uploads/logo/<?php print $ufile?>" alt="brand-logo">
+                                    <img src="assets/img/logo/<?php print $ufile?>" alt="brand-logo">
                                 </a>
                             </div>
                             <p class="text-white d-none d-sm-block mt-4">İletişim ve daha detaylı bilgi için</p>

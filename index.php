@@ -275,9 +275,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="index-product-card">
-                            <div class="index-product-image" style="background-image: url('assets/img/products/25KG_SILIKON.png');">
+                            <div class="index-product-image" style="background-image: url('assets/img/products/POLİYA 18 KG.png'); background-size: contain; background-repeat: no-repeat;">
                                 <div class="index-product-overlay">
-                                    <h3 class="index-product-title">Endüstriyel Boya A</h3>
+                                    <h3 class="index-product-title">Poliya Polipol 3453 Döküm Tipi Polyester</h3>
                                     <p class="index-product-description">Yüksek dayanıklılığa sahip endüstriyel boya.</p>
                                     <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
                                 </div>
@@ -286,9 +286,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="index-product-card">
-                            <div class="index-product-image" style="background-image: url('assets/img/products/product2.jpg');">
+                            <div class="index-product-image" style="background-image: url('assets/img/products/TURKUAZ 18 KG.png');">
                                 <div class="index-product-overlay">
-                                    <h3 class="index-product-title">Endüstriyel Boya B</h3>
+                                    <h3 class="index-product-title">Turkuaz TP100 Döküm Tipi Polyester</h3>
                                     <p class="index-product-description">Çevre dostu formülüyle öne çıkan boya.</p>
                                     <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
                                 </div>
@@ -297,9 +297,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="index-product-card">
-                            <div class="index-product-image" style="background-image: url('assets/img/products/product3.jpg');">
+                            <div class="index-product-image" style="background-image: url('assets/img/products/CAMELYAF 18 KG.png'); background-size: contain; background-repeat: no-repeat;">
                                 <div class="index-product-overlay">
-                                    <h3 class="index-product-title">Endüstriyel Boya C</h3>
+                                    <h3 class="index-product-title">Camelyaf Resins CE80 Döküm Tipi Polyester</h3>
                                     <p class="index-product-description">Uzun ömürlü koruma sağlayan boya çözümü.</p>
                                     <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
                                 </div>
@@ -552,7 +552,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-bordered active btn-block mt-3">
+                                        <button id="contact-button" type="submit" class="btn btn-bordered-white mt-4">
                                             <span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>Send Message
                                         </button>
                                     </div>

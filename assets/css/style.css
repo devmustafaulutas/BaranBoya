@@ -3990,98 +3990,127 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 :: 26.0 blog.php CSS
 ****************************** */
 /* Genel Ayarlar */
-.blog-post {
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.blog-post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
 
-/* Thumbnail */
-.blog-post-thumbnail {
-    height: 200px;
-    background-size: cover;
-    background-position: center;
+#body{
+    margin: 0px;
+    padding: 0px;
     width: 100%;
+    height: auto;
+    background-color: #10102df5;
 }
-
-/* İçerik */
-.blog-post-content {
-    padding: 20px;
-}
-.blog-post-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #416CD0;
-    margin-bottom: 10px;
-}
-.blog-post-desc {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 15px;
-}
-
-/* Footer */
-.blog-post-footer {
+  /* Blog Container */
+  .blog-page {
+    padding: 40px;
+  }
+  .blog-cards {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    margin-top: 10px;
-}
-
-/* Read More Link */
-.read-more {
-    font-weight: bold;
-    color: #416CD0;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-.read-more:hover {
-    color: #23479e;
-}
-
-/* Like Button */
-.like-btn {
-    color: #E04B50;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Flip Card Tasarımı */
+  .flip-card {
+    width: 100%;
+    height: 340px;
+    perspective: 1000px;
     cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: ease-in-out 0.3s ease;
-}
-.like-btn i {
-    font-size: 1rem;
-}
-.like-btn:hover {
-    border: 2px solid #E04B50;
-    border-radius: 15px;
-}
-
-/* Mobil Uyum */
-@media (max-width: 768px) {
-    .blog-post-thumbnail {
-        height: 150px;
+    position: relative;
+  }
+  .flip-card-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    position: relative;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .flip-card-front {
+    background: #f4f4f4;
+  }
+  .flip-front-content {
+    padding: 15px;
+  }
+  .flip-card-back {
+    background: #fafafa;
+    transform: rotateY(180deg);
+    padding: 15px;
+    color: #333;
+  }
+  .close-flip {
+    background: #b53737;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    float: right;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+  }
+  .close-flip:hover {
+    background: #8e2a2a;
+  }
+  
+  /* Blog Image Wrapper */
+  .blog-img-wrapper {
+    height: 180px;
+    overflow: hidden;
+  }
+  .blog-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease;
+  }
+  .flip-card-front:hover .blog-img-wrapper img {
+    transform: scale(1.1);
+  }
+  
+  /* Kayan kartlar için başlangıç animasyonu */
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s, transform 1s;
+  }
+  .scroll-fade.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Keyframe */
+  @keyframes fadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-15px);
     }
-    .blog-post-title {
-        font-size: 1.2rem;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .blog-post-desc {
-        font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 32px;
     }
-}
-
-
-
+    .flip-card {
+      height: 300px;
+    }
+  }
 
 /* SEKTÖRLERİMİZ DETAY SECTİON */
 /* Genel Ayarlar */
@@ -4242,4 +4271,11 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
                  -2px -2px 5px rgba(255, 255, 255, 0.4); /* Hoverda gölge daha belirgin */
     border-bottom-color: #40e0d0; /* Hoverda alt çizgi rengini turkuaz yap */
     transform: scale(1.05); /* Hoverda biraz büyüme efekti */
+}
+
+
+#contact-button {
+    color: white;
+    border: 2px solid white;
+    background-color: rgb(4, 152, 205);
 }
