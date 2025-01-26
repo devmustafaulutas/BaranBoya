@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $code = $_POST['2fa_code'];
     $username = $_SESSION['username'];
 
-    $query = "SELECT secret FROM admin WHERE username = '$username'";
+    $query = "SELECT 2fa_secret FROM admin WHERE username = '$username'";
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);

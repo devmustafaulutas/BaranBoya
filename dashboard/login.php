@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
 
     if ($status == "OK") {
         // Retrieve username and password from database according to user's input, preventing sql injection
-        $query = "SELECT id, username, password, secret FROM admin WHERE (username = '". mysqli_real_escape_string($con, $_POST['username']) . "') AND (password = '" . mysqli_real_escape_string($con, $_POST['password']) . "')";
+        $query = "SELECT id, username, password, 2fa_secret FROM admin WHERE (username = '". mysqli_real_escape_string($con, $_POST['username']) . "') AND (password = '" . mysqli_real_escape_string($con, $_POST['password']) . "')";
         if ($stmt = mysqli_prepare($con, $query)) {
             /* execute query */
             mysqli_stmt_execute($stmt);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
             $num = mysqli_stmt_num_rows($stmt);
 
             if ($num > 0) {
-                mysqli_stmt_bind_result($stmt, $id, $username, $password, $secret);
+                mysqli_stmt_bind_result($stmt, $id, $username, $password, $secret); // secret burada 2fa_secret değerini tutacaktır.
                 mysqli_stmt_fetch($stmt);
 
                 $g = new GoogleAuthenticator();
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
                     // 2FA doğrulaması başarılı
                     $_SESSION['username'] = $username;
                     $_SESSION['authenticated'] = true;
-                    header("Location: dashboard/index.php");
+                    header("Location: index.php");
                     exit;
                 } else {
                     $msg = "2FA kodu geçersiz.";
@@ -40,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
             } else {
                 $msg = "Kullanıcı adı veya şifre yanlış.";
             }
+        } else {
+            $msg = "Veritabanı sorgusu başarısız: " . mysqli_error($con);
         }
     }
 }

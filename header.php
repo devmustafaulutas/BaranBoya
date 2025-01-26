@@ -148,7 +148,7 @@
                 $stmt->fetch();
                 $stmt->close();
                 ?>
-                <a class="navbar-brand" href="home">
+                <a class="navbar-brand" href="home" style="margin-left: 30px;">
                     <img class="navbar-brand-regular" id="header-logo1" src="assets/img/logo/<?php echo htmlspecialchars($ufile, ENT_QUOTES, 'UTF-8'); ?>">
                     <img class="navbar-brand-sticky" id="header-logo2" src="assets/img/logo/<?php echo htmlspecialchars($ufile, ENT_QUOTES, 'UTF-8'); ?>">
                 </a>
