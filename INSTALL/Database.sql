@@ -221,34 +221,34 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 ('Poliya Polipol 3542 (T) Santrifuj ve Çubuk Düğme Tipi Polyester', 'Düğme Tipi Polyester Reçine', 230.00, 3, 'resim21.jpg', 1, 1, 9);
 -- Kimyasal Dayanımlı Polyester Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Turkuaz TP1071 Kimyasal Dayanımlı Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 220.00, 6, 'resim20.jpg', 1, 1, 10),
-('Poliya Polipol 381 Kimyasal Dayanımlı Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 220.00, 6, 'resim20.jpg', 1, 1, 10),
-('Poliya Polipol 391 Yüksek Kimyasal ve Işık Dayanımlı Bisfenolik Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 230.00, 3, 'resim21.jpg', 1, 1, 10);
+('Turkuaz TP1071 Kimyasal Dayanımlı Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 220.00, 6, 'assets/img/products/TURKUAZ 18 KG.png', 1, 1, 10),
+('Poliya Polipol 381 Kimyasal Dayanımlı Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 220.00, 6, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 10),
+('Poliya Polipol 391 Yüksek Kimyasal ve Işık Dayanımlı Bisfenolik Polyester', 'Kimyasal Dayanımlı Polyester Reçineler', 230.00, 3, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 10);
 
 -- Alev İlerletmeyen Polyester Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Poliya Polipol 345-FR', 'Alev İlerletmeyen Polyester Reçine', 150.00, 100, 'polipol_345_fr.jpg', 1, 1, 11),
+('Poliya Polipol 345-FR', 'Alev İlerletmeyen Polyester Reçine', 150.00, 100, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 11),
 ('Boytek BRE 400 Stratford Köpüğü Eritmeyen Polyester', 'Köpüğü Eritmeyen Polyester Reçine', 120.00, 200, 'boytek_bre_400.jpg', 1, 1, 12),
-('Poliya Polipol 3515 Polistiren Köpüğü Eritmeyen Polyester', 'Polistiren Köpüğü Eritmeyen Polyester Reçine', 130.00, 150, 'polipol_3515.jpg', 1, 1, 12),
+('Poliya Polipol 3515 Polistiren Köpüğü Eritmeyen Polyester', 'Polistiren Köpüğü Eritmeyen Polyester Reçine', 130.00, 150, 'assets/img/products/POLİYA 18 KG.png', 1, 1, 12),
 ('İlkalem İlkester P1020 Cila Tipi Polyester', 'Cila Tipi Polyester Reçine', 110.00, 80, 'ilkester_p1020.jpg', 1, 1, 13);
 
 -- Vinilester Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Poliya Polives 701 Yüksek Kimyasal Dayanımlı Performans Vinilester', 'Yüksek Kimyasal Dayanımlı Performans Vinilester', 180.00, 100, 'polives_701.jpg', 1, 2, 14),
-('Poliya Polives 702 RTM/İnfüzyon Tipi Vinilester', 'RTM/İnfüzyon Tipi Vinilester', 170.00, 150, 'polives_702.jpg', 1, 2, 14),
-('Poliya Polives 711 Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Yüksek Performans Vinilester', 190.00, 80, 'polives_711.jpg', 1, 2, 14),
-('Poliya Polives 709 Pultrüzyon Tipi Vinilester', 'Pultrüzyon Tipi Vinilester', 160.00, 120, 'polives_709.jpg', 1, 2, 14),
-('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'polives_710.jpg', 1, 2, 14),
-('Poliya Polives 721 Novolak Vinilester', 'Novolak Vinilester', 210.00, 70, 'polives_721.jpg', 1, 2, 15),
-('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'polives_710_rtm.jpg', 1, 2, 16),
-('Poliya Polives 710-I RTM/İnfüzyon Alev İlerletmeyen Vinilester', 'RTM/İnfüzyon Alev İlerletmeyen Vinilester', 220.00, 40, 'polives_710i.jpg', 1, 2, 16),
-('Poliya Polives 710-TA-LSE Alev İlerletmeyen ve Tiksotropik Düşük Stiren İçeren Vinilester', 'Tiksotropik Düşük Stiren İçeren Vinilester', 230.00, 60, 'polives_710_ta_lse.jpg', 1, 2, 16),
-('Poliya Polives 701-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 'Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 240.00, 55, 'polives_701_abp.jpg', 1, 2, 17),
-('Poliya Polives 711-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Amin Hızlandırıcılı Yüksek Performans Vinilester', 250.00, 45, 'polives_711_abp.jpg', 1, 2, 17);
+('Poliya Polives 701 Yüksek Kimyasal Dayanımlı Performans Vinilester', 'Yüksek Kimyasal Dayanımlı Performans Vinilester', 180.00, 100, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 14),
+('Poliya Polives 702 RTM/İnfüzyon Tipi Vinilester', 'RTM/İnfüzyon Tipi Vinilester', 170.00, 150, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 14),
+('Poliya Polives 711 Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Yüksek Performans Vinilester', 190.00, 80, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 14),
+('Poliya Polives 709 Pultrüzyon Tipi Vinilester', 'Pultrüzyon Tipi Vinilester', 160.00, 120, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 14),
+('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 14),
+('Poliya Polives 721 Novolak Vinilester', 'Novolak Vinilester', 210.00, 70, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 15),
+('Poliya Polives 710 RTM Alev İlerletmeyen Vinilester', 'Alev İlerletmeyen RTM Vinilester', 200.00, 50, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 16),
+('Poliya Polives 710-I RTM/İnfüzyon Alev İlerletmeyen Vinilester', 'RTM/İnfüzyon Alev İlerletmeyen Vinilester', 220.00, 40, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 16),
+('Poliya Polives 710-TA-LSE Alev İlerletmeyen ve Tiksotropik Düşük Stiren İçeren Vinilester', 'Tiksotropik Düşük Stiren İçeren Vinilester', 230.00, 60, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 16),
+('Poliya Polives 701-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 'Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Vinilester', 240.00, 55, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 17),
+('Poliya Polives 711-ABP Amin Hızlandırıcılı Yüksek Kimyasal Dayanımlı Yüksek Performans Vinilester', 'Amin Hızlandırıcılı Yüksek Performans Vinilester', 250.00, 45, 'assets/img/products/POLİYA 18 KG.png', 1, 2, 17);
 
 -- Poliüretan Reçine
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Polipol ve İzosiyanat Poliüretan Reçine Sıvı Plastik', 'Sıvı Plastik Poliüretan Reçine', 300.00, 30, 'polipol_izosiyanat.jpg', 1, 4, 18);
+('Polipol ve İzosiyanat Poliüretan Reçine Sıvı Plastik', 'Sıvı Plastik Poliüretan Reçine', 300.00, 30, 'assets/img/products/POLİYA 18 KG.png', 1, 4, 18);
 
 -- Epoksi Reçineler
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -262,20 +262,20 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 -- Genel Amaçlı Jelkotlar
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Turkuaz TP600 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 6, NULL),
-('Poliya Polijel 206 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'resim15.jpg', 2, 6, NULL),
-('Poliya Polijel 208 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 185.00, 12, 'resim16.jpg', 2, 6, NULL);
+('Turkuaz TP600 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'assets/img/products/TURKUAZ 18 KG.png', 2, 6, NULL),
+('Poliya Polijel 206 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 190.00, 18, 'assets/img/products/POLİYA 18 KG.png', 2, 6, NULL),
+('Poliya Polijel 208 Genel Amaçlı Jelkot', 'Genel Amaçlı Jelkot', 185.00, 12, 'assets/img/products/POLİYA 18 KG.png', 2, 6, NULL);
 
 -- Performans Jelkot
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Turkuaz TP900 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 7, NULL),
-('Poliya Polijel 211 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'resim17.jpg', 2, 7, NULL);
+('Turkuaz TP900 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'assets/img/products/TURKUAZ 18 KG.png', 2, 7, NULL),
+('Poliya Polijel 211 Performans Jelkot', 'Performans Jelkot', 220.00, 10, 'assets/img/products/POLİYA 18 KG.png', 2, 7, NULL);
 
 -- Yüksek Performans Jelkotlar
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
-('Turkuaz TP1000 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL),
-('Poliya Polijel 213 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL),
-('Poliya Polijel 215 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'resim18.jpg', 2, 8, NULL);
+('Turkuaz TP1000 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'assets/img/products/TURKUAZ 18 KG.png', 2, 8, NULL),
+('Poliya Polijel 213 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'assets/img/products/POLİYA 18 KG.png', 2, 8, NULL),
+('Poliya Polijel 215 Yüksek Performans Jelkot', 'Yüksek Performanslı Jelkot', 250.00, 8, 'assets/img/products/POLİYA 18 KG.png', 2, 8, NULL);
 
 -- Kimyasal Dayanımlı Jelktolar
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
