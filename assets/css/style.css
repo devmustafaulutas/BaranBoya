@@ -582,13 +582,12 @@ img:hover {
     opacity: 0.95;
     z-index: -1;
 }
-
 .overlay-dark::after {
-    background-color: rgba(16, 16, 45, 1);
-    opacity: 0.95;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
-    z-index: -1;
+    background: linear-gradient(to bottom, #000050, #1eb4ff); /* İstediğin renk geçişi */
+    opacity: 0.95; /* Şeffaflık korunabilir */
+    z-index: -1; /* Katman düzeni */
 }
+
 
 /*BACKGROUND COLORS*/
 .color-1 {
@@ -658,7 +657,7 @@ img:hover {
 }
 
 .bg-overlay::after {
-    background: linear-gradient(to right, #40e0d0, #1e90ff); /* Turkuaz ve mavi geçiş */
+    background: linear-gradient(to bottom, #000050, #1eb4ff); /* İstediğin renk geçişi */
 }
 
 
@@ -1115,7 +1114,7 @@ header {
 
 .navbar-expand.navbar-sticky .navbar-nav .nav-link,
 .navbar-expand.navbar-light .navbar-nav .nav-link {
-    color: #2c2e30;
+    color:white;
 }
 
 .navbar-expand .navbar-nav .dropdown-menu .nav-link {
@@ -1255,7 +1254,7 @@ header {
 :: 8.0 WELCOME AREA CSS
 ****************************** */
 .welcome-area {
-    height: 800px;
+    height: 550px;
     z-index: 1;
 }
 
@@ -1271,7 +1270,7 @@ header {
 }
 
 .welcome-area {
-    height: 800px;
+    height: 550px;
     z-index: 1;
 }
 
@@ -2544,18 +2543,28 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 }
 
 .breadcrumb-content > h2 {
-    display: inline-block;
-    font-size: 60px;
-    font-weight: 900;
-    line-height: 1em;
-    letter-spacing: -1.6px;
-    background-image: -webkit-linear-gradient(45deg, #40E0D0  15%, #000080 65%);
-    background-image: linear-gradient(45deg, #40E0D0  15%, #000080 65%);
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 70px;                        /* Büyütülmüş yazı boyutu */
+    font-weight: 700;                       /* Kalın yazı tipi */
+    line-height: 1.2em;
+    color: #40E0D0;                         /* Canlı mavi-yeşil tonları */
+    text-transform: uppercase;              /* Yazıyı büyük harfe dönüştür */
+    letter-spacing: 2px;                    /* Harfler arasında boşluk */
+    text-align: center;                     /* Yazıyı ortala */
+    background-color: rgb(255, 255, 255);
+    -webkit-background-clip: text;          /* Yazıya geçişi uygula */
+    -moz-background-clip: text;             /* Firefox desteği */
+    background-clip: text;                  /* Yazı rengini geçiş yapacak şekilde ayarla */
+    -webkit-text-fill-color: transparent;   /* Arka plan renklerinin yazıya yansıması */
+    padding: 20px;                          /* Yazıya biraz iç boşluk ekle */
+    transition: all 0.3s ease;              /* Geçiş efekti */
 }
+
+.breadcrumb-content > h2:hover {
+    color: #ffffff;                        /* Hoverda beyaz yazı rengi */
+    transform: scale(1.05);                 /* Hoverda büyüme efekti */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15); /* Hoverda güçlü gölge */
+}
+
 /* Başlık kapsayıcısı */
 #about-container {
     text-align: center; /* Kapsayıcıyı merkeze ayarlıyoruz */
@@ -2582,7 +2591,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 #about-content p {
     font-family: 'Verdana', sans-serif;
     font-size: 1.1em;
-    color: #000000;
+    color: white;
     line-height: 1.8;
     text-align: justify;
     margin: 20px 0;
@@ -2994,6 +3003,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     display:flex;
     
 }
+
 .footer-area .social-icons a {
     font-size: 22px;
 }
@@ -3996,7 +4006,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     padding: 0px;
     width: 100%;
     height: auto;
-    border:50px solid #10102df5;
+    background: linear-gradient(to right, #40e0d0, #1e90ff);
 }
   /* Blog Container */
   .blog-page {
@@ -4213,7 +4223,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     font-family: 'Poppins', sans-serif; /* Daha modern bir font */
     font-size: 3rem; /* Başlık boyutunu daha büyük yaparak dikkat çekici hale getir */
     font-weight: 700; /* Kalın ama çok aşırı değil */
-    color: #1ea5ff; /* Mavi tonunda dikkat çekici bir renk */
+    color: #ffffff; /* Mavi tonunda dikkat çekici bir renk */
     letter-spacing: 2px; /* Harfler arasında hafif boşluk */
     text-transform: uppercase; /* Başlık metnini büyük harflere dönüştür */
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2), 
@@ -4224,10 +4234,10 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 }
 
 .whoarewe-title:hover {
-    color: #40e0d0; /* Hoverda mavi yerine turkuaz renk */
+    color: #ffffff; /* Hoverda mavi yerine turkuaz renk */
     text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), 
                  -2px -2px 5px rgba(255, 255, 255, 0.4); /* Hoverda gölge daha belirgin */
-    border-bottom-color: #40e0d0; /* Hoverda alt çizgi rengini turkuaz yap */
+    border-bottom-color: #ffffff; /* Hoverda alt çizgi rengini turkuaz yap */
     transform: scale(1.05); /* Hoverda biraz büyüme efekti */
 }
 #home > div.container > div > div > div > h1 {
@@ -4279,4 +4289,80 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     color: white;
     border: 2px solid white;
     background-color: rgb(4, 152, 205);
+}
+/* FOOOOOOOOOOOOOOOOOTERRRRRRRRRRRRRRRRR */
+/* FOOTER BACKGROUND OVERLAY */
+/* FOOTER BACKGROUND COLOR */
+.footer-area {
+    background: linear-gradient(to top, #000050, #1eb4ff); /* İstediğin renk geçişi */
+    position: relative;
+    z-index: 0;
+    color:white;
+    
+}
+
+/* İçerik alanını öne almak için */
+.footer-area .container {
+    position: relative;
+    z-index: 1; /* İçeriği öne alıyoruz */
+    padding: 50px 0; /* Alan düzenlemesi */
+}
+.footer-bottom{
+    border-top: 2px solid white;
+}
+body > footer > div.footer-top.ptb_25 > div > div > div > div > h3{
+    color: white;
+}
+body > footer > div.footer-top.ptb_25 > div > div > div > div > p{
+    color: white;
+}
+body > footer > div.footer-top.ptb_25 > div > div > div:nth-child(2) > div > ul > li > a {
+    color: white !important;
+}
+body > div.main.overflow-hidden > footer > div.footer-top.ptb_25 > div > div > div > div > p{
+    color :white;
+}
+body > div.main.overflow-hidden > footer > div.footer-top.ptb_25 > div > div > div > div > h3{
+    color : white;
+}
+body > div.main.overflow-hidden > footer > div.footer-top.ptb_25 > div > div > div:nth-child(2) > div > ul > li > a{
+    color: white !important;
+}
+section{
+    background-color: #1eb4ff;
+}
+#contact > div > div > div.col-12.col-lg-5 > div.section-heading.text-center.mb-3 > h2{
+    color:white;
+}
+#contact > div > div > div.col-12.col-lg-5 > div.section-heading.text-center.mb-3 > p{
+    color:white;
+}
+#contact > div > div > div.col-12.col-lg-5 > div.contact-us > ul > li.contact-info.color-1.bg-hover.active.hover-bottom.text-center.p-5.m-3 > a > h3{
+    color:white;
+}
+#contact > div > div > div.col-12.col-lg-5 > div.contact-us > ul > li.contact-info.color-3.bg-hover.active.hover-bottom.text-center.p-5.m-3 > a > h3{
+    color:white;
+
+}
+body > div.main.overflow-hidden > section.section.map-area > div > div > div > div.contact-map-info > h5{
+    font-weight: 700;
+    color:white;
+}
+#service{
+    background-color:#1eb4ff ;
+}
+.map-area{
+    padding-bottom: 50px;
+}
+#phone-contact > ul > li > a > h3{
+    color: white;
+}
+body > div.main.overflow-hidden > section.index-industrial-paint-features-section > div > div > div > div > div > svg{
+    color:white;
+}
+#header > nav{
+    background-color: transparent;
+}
+#menu > div > div > div.menu.modal-body > div > div > ul > li.nav-item.dropdown > button{
+    outline: none;
 }

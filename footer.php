@@ -3,7 +3,7 @@
   <!--====== Footer Area Start ======-->
   <footer class="section footer-area">
             <!-- Footer Top -->
-            <div class="footer-top ptb_100">
+            <div class="footer-top ptb_25">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-4">
@@ -20,26 +20,22 @@
                                 <!-- Footer Title -->
                                 <h3 class="footer-title text-uppercase mb-2">Servislerimiz</h3>
                                 <ul>
+                                <?php
+                                    $stmt = $con->prepare("SELECT id, service_title FROM service ORDER BY id DESC LIMIT ?");
+                                    $limit = 5;
+                                    $stmt->bind_param("i", $limit);
+                                    $stmt->execute();
+                                    $stmt->bind_result($id, $service_title);
 
- <?php
-    $stmt = $con->prepare("SELECT id, service_title FROM service ORDER BY id DESC LIMIT ?");
-    $limit = 5;
-    $stmt->bind_param("i", $limit);
-    $stmt->execute();
-    $stmt->bind_result($id, $service_title);
-
-    while ($stmt->fetch()) {
-        print "
-        <li class='py-2'><a class='text-black-50' href='servicedetail.php?id=$id'>$service_title</a></li>
-        ";
-    }
-?>
-
-
+                                    while ($stmt->fetch()) {
+                                        print "
+                                        <li class='py-2'><a class='text-black-50' href='servicedetail.php?id=$id'>$service_title</a></li>
+                                        ";
+                                    }
+                                ?>
                                 </ul>
                             </div>
                         </div>
-
                         <div class="col-12 col-sm-6 col-lg-4">
                             <!-- Footer Items -->
                             <div class="footer-items">
@@ -48,56 +44,38 @@
                                 <p class="mb-2">Bizi sosyal medya hesaplarımızdan takip edebilirsiniz.</p>
                                 <!-- Social Icons -->
                                 <ul class="social-icons list-inline pt-2">
-
                                 <?php
-    $stmt = $con->prepare("SELECT id, fa, social_link FROM social ORDER BY id DESC LIMIT ?");
-    $limit = 5;
-    $stmt->bind_param("i", $limit);
-    $stmt->execute();
-    $stmt->bind_result($id, $fa, $social_link);
+                                    $stmt = $con->prepare("SELECT id, fa, social_link FROM social ORDER BY id DESC LIMIT ?");
+                                    $limit = 5;
+                                    $stmt->bind_param("i", $limit);
+                                    $stmt->execute();
+                                    $stmt->bind_result($id, $fa, $social_link);
 
-    while ($stmt->fetch()) {
-        print "
-        <li class='list-inline-item px-1'><a href='$social_link'><i class='fab $fa'></i></a></li>
-        ";
-    }
-?>
-
+                                    while ($stmt->fetch()) {
+                                        print "
+                                        <li class='list-inline-item px-1 text-white'><a href='$social_link'><i class='fab $fa'></i></a></li>
+                                        ";
+                                    }
+                                ?>
                                 </ul>
+                                
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Footer Bottom -->
-            <div class="footer-bottom bg-grey">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- Copyright Area -->
-                            <div class="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
-                                <!-- Copyright Left -->
-
-                                <?php
-                                    // $site_footer değişkenini XSS saldırılarına karşı korundu
-                                    $site_footer = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
-                                ?>
-
-                                <div class="copyright-left"><?php print $site_footer ?></div>   
-                                <!-- Copyright Right -->
-                                <div class="copyright-right">Made with <i class="fas fa-heart"></i> By <a href="https://facebook.com/hillsoftsnetwork">Adeus</a></div>
-                            </div>
-                        </div>
+                    <div class="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
+                        <!-- Copyright Left -->
+                        <?php
+                        // $site_footer değişkenini XSS saldırılarına karşı korundu
+                        $site_footer = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
+                        ?>
+                        <div class="copyright-left"><?php print $site_footer ?></div>   
+                        <!-- Copyright Right -->
+                        <div class="copyright-right">Made with <i class="fas fa-heart"></i> By <a href="https://facebook.com/hillsoftsnetwork">Adeus</a></div>
                     </div>
                 </div>
             </div>
         </footer>
         <!--====== Footer Area End ======-->
-
-        <!--====== Modal Search Area Start ======-->
-
-        <!--====== Modal Search Area End ======-->
-
         <!--====== Modal Responsive Menu Area Start ======-->
         <div id="menu" class="modal fade p-0">
             <div class="modal-dialog dialog-animated">

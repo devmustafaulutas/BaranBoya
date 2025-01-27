@@ -1,4 +1,6 @@
 <?php include("header.php");?>
+<?php include "z_db.php"; ?>
+
 <?php
 
 require  'dashboard/PHPMailer/src/Exception.php';
@@ -147,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </ul>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 pt-4 pt-lg-0">
+                    <div class="col-12 col-lg-6 pt-6">
                         <div class="contact-box text-center">
                             <?php if (!empty($errormsg)) echo $errormsg; ?>
                             <form action="" method="post" enctype="multipart/form-data">
@@ -169,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-bordered active btn-block mt-3">
+                                        <button id="contact-button" type="submit" class="btn btn-bordered-white mt-4">
                                             <span class="text-white pr-3"><i class="fas fa-paper-plane"></i></span>Send Message
                                         </button>
                                     </div>

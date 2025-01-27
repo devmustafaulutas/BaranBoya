@@ -56,6 +56,24 @@
     </section>
 </section>
 
+<section class="section cta-area bg-overlay ptb_100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10">
+                        <!-- Section Heading -->
+                        <div class="section-heading text-center m-0">   
+                            <div class="about-content-contact">
+                                <a href="index.php">
+                                    <img src="assets/img/logo/<?php print $ufile?>" alt="brand-logo">
+                                </a>
+                            </div>
+                            <p class="text-white d-none d-sm-block mt-4">İletişim ve daha detaylı bilgi için</p>
+                            <a href="contact" class="btn btn-bordered-white mt-4">Bize Ulaşın</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 <script>
 // Kayan kartlar için IntersectionObserver
 const scrollFadeEls = document.querySelectorAll(".scroll-fade");

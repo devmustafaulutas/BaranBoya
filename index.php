@@ -101,43 +101,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Welcome Intro Start -->
                     <div class="col-12 col-md-12">
                     <?php
-    $stmt = $con->prepare("SELECT id, stitle, stext FROM static");
-    $stmt->execute();
-    $stmt->bind_result($id, $stitle, $stext); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
+                        $stmt = $con->prepare("SELECT id, stitle, stext FROM static");
+                        $stmt->execute();
+                        $stmt->bind_result($id, $stitle, $stext); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
 
-    while ($stmt->fetch()) {
-        $result[] = [
-            'id' => $id,
-            'stitle' => $stitle,
-            'stext' => $stext
-        ];
-    }
+                        while ($stmt->fetch()) {
+                            $result[] = [
+                                'id' => $id,
+                                'stitle' => $stitle,
+                                'stext' => $stext
+                            ];
+                        }
 
-    // $service_title ve $service_text değişkenlerini tanımlayın
-    $service_title = "Hizmetlerimiz"; // Örnek statik değer
-    $service_text = "Sunulan hizmetler hakkında kısa açıklama."; // Örnek statik değer
+                        // $service_title ve $service_text değişkenlerini tanımlayın
+                        $service_title = "Hizmetlerimiz"; // Örnek statik değer
+                        $service_text = "Sunulan hizmetler hakkında kısa açıklama."; // Örnek statik değer
 
-    // $contact_title ve $contact_text değişkenlerini tanımlayın
-    $contact_title = "İletişim"; // Örnek statik değer
-    $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz."; // Örnek statik değer
+                        // $contact_title ve $contact_text değişkenlerini tanımlayın
+                        $contact_title = "İletişim"; // Örnek statik değer
+                        $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz."; // Örnek statik değer
 
-    // Veya veritabanından çekmek için aşağıdaki satırları kullanabilirsiniz:
-    /*
-    $stmt_service = $con->prepare("SELECT service_title, service_text FROM services_table LIMIT 1");
-    $stmt_service->execute();
-    $result_service = $stmt_service->get_result();
-    $service = $result_service->fetch_assoc();
-    $service_title = $service['service_title'];
-    $service_text = $service['service_text'];
 
-    $stmt_contact = $con->prepare("SELECT contact_title, contact_text FROM contact_table LIMIT 1");
-    $stmt_contact->execute();
-    $result_contact = $stmt_contact->get_result();
-    $contact = $result_contact->fetch_assoc();
-    $contact_title = $contact['contact_title'];
-    $contact_text = $contact['contact_text'];
-    */
-?>
+                    ?>
 
                         <div class="welcome-intro">
                             <h1><?php print $stitle?></h1>
@@ -147,20 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
-            <!-- Shape Bottom -->
-            <div class="shape shape-bottom">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
-                    <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
-        c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
-        c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
-                </svg>
-            </div>
+
         </section>
        
         
         <!-- ***** Service Area End ***** -->
 
-        <section id="service" class="section service-area bg-grey ptb_150">
+        <section id="service" class="section service-area bg-grey ptb_50">
             <!-- Shape Top -->
             <div class="shape shape-top">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
@@ -458,7 +436,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
         <!-- ***** Sektor Area End ***** -->
                 
-        <section id="review" class="section review-area bg-overlay ptb_100">
+        <section id="review" class="section review-area ptb_100">
             <div class="container">
                 <hr>
                 <div class="row justify-content-center">
