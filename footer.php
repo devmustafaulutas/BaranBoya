@@ -1,7 +1,7 @@
 <?php include "z_db.php"; ?>
 
   <!--====== Footer Area Start ======-->
-  <footer class="section footer-area">
+  <footer id="custom-bg-down" class="section footer-area">
             <!-- Footer Top -->
             <div class="footer-top ptb_25">
                 <div class="container">
@@ -70,7 +70,7 @@
                         ?>
                         <div class="copyright-left"><?php print $site_footer ?></div>   
                         <!-- Copyright Right -->
-                        <div class="copyright-right">Made with <i class="fas fa-heart"></i> By <a href="https://facebook.com/hillsoftsnetwork">Adeus</a></div>
+                        <div class="copyright-right">Made with <i class="fas fa-heart"></i> By <a href="https://github.com/devmustafaulutas">Adeus</a></div>
                     </div>
                 </div>
             </div>
@@ -114,6 +114,7 @@
 
     <!-- Active js -->
     <script src="assets/js/active.js"></script>
+    <script src="assets/js/background.js"></script>
 </body>
 
 

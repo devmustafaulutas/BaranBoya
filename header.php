@@ -63,6 +63,7 @@
 
     <link rel="stylesheet" href="assets/css/new-section.css">
     <link rel="stylesheet" href="assets/css/sektor.css">
+    <link rel="stylesheet" href="assets/css/background.css">
     <!-- Favicon  -->
     <link rel="icon" href="assets/img/favicon.png">
 

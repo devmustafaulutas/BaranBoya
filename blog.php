@@ -56,7 +56,7 @@
     </section>
 </section>
 
-<section class="section cta-area bg-overlay ptb_100">
+<section class="section cta-area bg-overlay-1 ptb_100">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10">

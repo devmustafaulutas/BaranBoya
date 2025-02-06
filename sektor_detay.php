@@ -60,26 +60,84 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Veritabanından hizmet bilgilerini alalım
-$services_query = "SELECT * FROM services";
-$services_result = mysqli_query($con, $services_query);
-?>
 
-<!-- Hizmetler Bölümü -->
-<section class="section services-area">
+$selectedSector = isset($_GET['sector']) ? urldecode($_GET['sector']) : '';
+$sectorName = "";
+$sectorDescription = "";
+
+if ($selectedSector === "Havacılık ve Savunma Sanayi") {
+    $sectorName = "Havacılık ve Savunma Sanayi";
+    $sectorDescription = "Havacılık ve savunma alanında endüstriyel boyanın önemi büyüktür. Uçak, helikopter ve savunma araçlarının yüksek sıcaklık, basınç ve kimyasal etkilere dayanıklı olması gerekir. Endüstriyel boyalar sayesinde düzenli bakım sıklığı azalır, korozyon önlenir ve güvenlik artırılır. Bunun yanı sıra askeri teçhizatlarda görünmezlik ve radar soğurucu boyalar kullanılarak stratejik avantaj elde edilir. Böylece havacılık ve savunma sektörü, ileri teknolojiye dayalı endüstriyel boyalarla güçlenir.";
+} elseif ($selectedSector === "Denizcilik") {
+    $sectorName = "Denizcilik";
+    $sectorDescription = "Denizcilik sektöründe endüstriyel boyaların amacı korozyonla mücadele, gemi ve deniz araçlarını uzun süreli korumaktır. Tuzlu su, UV ışınları ve sert hava koşulları gibi çevresel faktörler göz önüne alındığında, doğru seçilen endüstriyel boyalarla gemilerin bakımı kolaylaşır, operasyonel maliyetler düşer. Su altı kaplamaları, teknelerin yakıt verimliliğini artırırken deniz canlılarının tutunmasını da azaltır.";
+} elseif ($selectedSector === "Banyo") {
+    $sectorName = "Banyo";
+    $sectorDescription = "Banyo sektöründe endüstriyel boyalar, su ve neme karşı yüksek dayanım sağlamasıyla ön plana çıkar. Bu ortamlar için geliştirilmiş boyalar, küflenme ve lekelenmeye karşı dirençli olur. Aynı zamanda dekoratif etkiler katılarak, banyolarda estetik görünüm ve uzun ömürlü kaplama elde edilir. Böylece hem hijyeni hem de şıklığı bir arada sunar.";
+} elseif ($selectedSector === "Mutfak") {
+    $sectorName = "Mutfak";
+    $sectorDescription = "Mutfaklarda endüstriyel boyaların kullanımı, yüksek ısıya ve yağ lekelerine karşı dayanıklılık açısından önem taşır. Fırın çevresi, ocak arkası gibi sıcak noktalarda rengin solmaması, kir tutmaması ve kolay temizlenmesi için özel boyalar tercih edilir. Böylece mutfakta konforlu bir çalışma alanı yaratılır.";
+} elseif ($selectedSector === "Hobi ve Tasarım") {
+    $sectorName = "Hobi ve Tasarım";
+    $sectorDescription = "Hobi ve tasarım alanında endüstriyel boyalar, yaratıcılığı sınırlamadan farklı malzemelerde üstün koruma sağlar. Ahşap, metal veya kompozit yüzeylerde kullanılan çok amaçlı boyalar, hem canlı renkler hem de dayanıklılık sunar. Böylece sanatsal projeler ve tasarım uygulamaları daha uzun ömürlü olur.";
+} else {
+    $sectorName = "";
+    $sectorDescription = "";
+}
+
+?>
+<section class="section breadcrumb-area overlay-dark d-flex align-items-center">
     <div class="container">
         <div class="row">
-            <?php while ($service = mysqli_fetch_assoc($services_result)): ?>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="single-service">
-                    <h3><?= htmlspecialchars($service['name']); ?></h3>
-                    <p><?= htmlspecialchars($service['description']); ?></p>
-                    <a href="servicedetail.php?service_id=<?= urlencode(encrypt_id($service['id'])); ?>" class="btn btn-primary">Detaylar</a>
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="text-white text-uppercase mb-3"><?= htmlspecialchars($sectorName, ENT_QUOTES, 'UTF-8') ?></h2>
+                    <ol class="breadcrumb d-flex justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-uppercase text-white" href="home">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item text-white active">Blog</li>
+                    </ol>
                 </div>
             </div>
-            <?php endwhile; ?>
         </div>
+    </div>
+</section>
+<!-- Hizmetler Bölümü -->
+<section class="section sector-detail-area">
+    <div class="container">
+        <?php if ($sectorName): ?>
+            <h2><?= htmlspecialchars($sectorName, ENT_QUOTES, 'UTF-8') ?></h2>
+            <p><?= htmlspecialchars($sectorDescription, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php else: ?>
+            <p>Sektör bilgisi bulunamadı.</p>
+        <?php endif; ?>
     </div>
 </section>
 
 <?php include "footer.php"; ?>
+
+<script>
+// ...existing code...
+
+document.addEventListener("DOMContentLoaded", function() {
+  const sectorDetailArea = document.querySelector(".sector-detail-area");
+  // Basit hover animasyonu örneği
+  sectorDetailArea.addEventListener("mouseenter", () => {
+    sectorDetailArea.style.transform = "scale(1.01)";
+    sectorDetailArea.style.transition = "transform 0.5s";
+  });
+  sectorDetailArea.addEventListener("mouseleave", () => {
+    sectorDetailArea.style.transform = "scale(1)";
+  });
+
+  // Ekstra animasyonlar için ikonları ekleyin
+  const icons = document.createElement('div');
+  icons.innerHTML = `
+    <div class="animated-icon"></div>
+    <div class="animated-icon"></div>
+    <div class="animated-icon"></div>
+    <div class="animated-icon"></div>
+  `;
+  sectorDetailArea.appendChild(icons);
+});
+// ...existing code...
+</script>

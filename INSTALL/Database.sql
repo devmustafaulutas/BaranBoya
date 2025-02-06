@@ -702,7 +702,7 @@ VALUES
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.', 
     'Vogue Website', 
     'Young coders can use events to coordinate timing and communication between different sprites or pieces of their story. For instance, the when _ key pressed block is an event that starts code whenever the corresponding key on the keyboard is pressed.', 
-    '© 2022 All Rights Reserved', 
+    '© 2025 All Rights Reserved', 
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias.', 
     'https://ornek.truva-software.com/vogue/', 
     '2022-07-17 19:52:12'
