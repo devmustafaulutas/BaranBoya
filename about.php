@@ -23,7 +23,7 @@
             <!-- ***** Breadcrumb Area End ***** -->
             
         <!-- ***** About Area Start ***** -->
-        <section class="section about-area ptb_100">
+        <section id="custom-bg" class="section about-area ptb_100">
             <div id="about-content" class="container">
                 <div class="about-content row justify-content-between align-items-center">
                     <div id="hakkimizda">
@@ -64,7 +64,7 @@
 ?>
 
 
-        <section class="section-contact cta-area bg-overlay-1 ptb_100">
+        <section  class="section-contact cta-area bg-overlay-1 ptb_100">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10">

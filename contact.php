@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         <!--====== Contact Area Start ======-->
-        <section id="contact" class="contact-area ptb_100">
+        <section id="custom-bg" id="contact" class="contact-area ptb_100">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-12 col-lg-5">
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         <!--====== Map Area Start ======-->
-        <section class="section map-area">
+        <section id="custom-bg"  class="section map-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 d-flex flex-column"> <!-- Flexbox için d-flex ve flex-column kullanıldı -->

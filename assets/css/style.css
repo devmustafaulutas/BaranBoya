@@ -583,8 +583,11 @@ img:hover {
     z-index: -1;
 }
 .overlay-dark::after {
-    background: linear-gradient(to bottom, #000050, #1eb4ff); /* İstediğin renk geçişi */
-    opacity: 0.95; /* Şeffaflık korunabilir */
+    background: linear-gradient(to bottom, #000050, #1eb4ff), 
+                url("https://www.transparenttextures.com/patterns/brick-wall.png");
+    background-blend-mode: overlay; /* Gradient ve deseni harmanlar */
+    background-position: center center; /* Desenin merkezde görünmesini sağlar */
+    opacity: 1; /* Şeffaflık korunabilir */
     z-index: -1; /* Katman düzeni */
 }
 
@@ -3384,23 +3387,54 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     transform: rotate(180deg); /* Ok simgesi aşağı kayar */
 }
 
-/* Menü başlangıçta gizli */
-/* Menü öğeleri başlangıçta gizli olacak */
+.products-category-box {
+    position: relative; /* Dropdown’un bağlı olduğu kutuyu referans alması için */
+}
+
 .products-dropdown-menu {
     display: none;
+    position: absolute; /* Sayfanın akışını bozmadan açılmasını sağlar */
+    top: 100%; /* Tam olarak elementin altına yapışır */
+    left: 0;
+    width: 100%; /* Kutu genişliği kadar olacak */
+    background: #fff; /* Arka plan rengi */
+    z-index: 1000; /* Üstte kalmasını sağlar */
     opacity: 0;
-    max-height: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    max-height: 400px; /* Çok uzun olursa sınırlamak için */
+    overflow-y: auto; /* İçerik taşarsa scrollbar ekle */
+    border-radius: 10px;
+    margin-top:2px;
+    
 }
 
 /* Menü açıldığında gösterilecek */
 .products-dropdown-menu.show {
     display: block;
     opacity: 1;
-    max-height: 500px;
     visibility: visible;
 }
+/* Dropdown menu scroll bar */
+.products-dropdown-menu::-webkit-scrollbar {
+    width: 8px; /* Scroll bar genişliği */
+}
+
+.products-dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scroll thumb rengi */
+    border-radius: 10px; /* Köşeleri yuvarlat */
+    transition: background-color 0.3s ease;
+}
+
+.products-dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Hoverda renk değişimi */
+}
+
+.products-dropdown-menu::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track rengi */
+    border-radius: 10px; /* Köşeleri yuvarlat */
+}
+
 
 /* Menü öğeleri */
 .products-dropdown-item {
@@ -3836,7 +3870,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 .dropdown-submenu:hover > .dropdown-menu {
     visibility: visible;
     opacity: 1;
-    margin-left: 3px;
+    margin-left:3px;
 }
 
 .dropdown:hover > .dropdown-menu {
@@ -4424,7 +4458,6 @@ body > div.main.overflow-hidden > section.section.cta-area.bg-overlay-1.ptb_100:
     padding: 60px 0;
     background-color: #1eb4ff; /* Arka plan rengi */
     overflow: hidden;
-    border-radius: 10px;
 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     color: #fff; /* Metin rengini beyaz yap */
@@ -4565,4 +4598,61 @@ body > div.main.overflow-hidden > section.section.cta-area.bg-overlay-1.ptb_100:
 #custom-bg > div > div > div.col-12.col-lg-5 > div.contact-us > ul > li.contact-info.color-1.bg-hover.active.hover-bottom.text-center.p-5.m-3 > a>h3{
     color:white;
 
+}
+
+#body{
+    background-color: #1eb4ff;
+    background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png);
+}
+#blog-list{
+    background-color: #1eb4ff !important;
+    background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
+}
+body > div.main.overflow-hidden > section.product-list-area
+{
+    background-color: #1eb4ff !important;
+    background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
+}
+body > div.main.overflow-hidden > section.section.products-area.ptb_50
+{
+    background-color: #1eb4ff !important;
+    background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
+
+}
+body > div.main.overflow-hidden > section.section.product-detail-area.ptb_25{
+    background-color: #1eb4ff !important;
+    background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
+
+}
+.product-info-item h2,p,strong{
+    color:white;
+}
+.product-info-item > p >strong{
+
+    color:white;
+}
+.ambalaj-detail{
+    color:white;
+}
+.ambalaj{
+    color:white;
+}
+#paint-bucket-with-paint-mess{
+    color:white;
+}
+.product-detail-box{
+    padding: 20px;
+}
+.product-detail-about-content{
+    color:white;
+}
+.breadcrumb-item a ,
+body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center > div > div > div > div > ol > li.breadcrumb-item.text-white.active,
+body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center > div > div > div > div > ol > li.breadcrumb-item.text-white.active,
+body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center > div > div > div > div > ol > li.breadcrumb-item.text-white{
+    font-size: 18px !important;
+}
+#paint-bucket-with-paint-mess{
+    color:white;
+    background-color: white;
 }

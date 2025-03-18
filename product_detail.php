@@ -262,10 +262,12 @@ if ($subSubcategory) {
                 </div>
             </div>
         </div>
-        <div class="product-detail-about">
-            <div class="product-detail-about-content">Açıklama</div>
-            <div class="product-detail-about-content">Uyarı</div>
-        </div>
+        <div class="product-detail-box">
+            <div class="product-detail-about">
+                <div class="product-detail-about-content">Açıklama</div>
+                <div class="product-detail-about-content">Uyarı</div>
+            </div>
+        </div>    
     </div>
 </section>
 

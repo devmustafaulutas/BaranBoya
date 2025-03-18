@@ -136,7 +136,7 @@ if ($alt_kategori_alt_id) {
                         </div>
                         <div class="text-alan">
                             <small>Kategori</small>
-                            <?php echo $category_name; ?>
+                            <?php echo htmlspecialchars($category_name); ?>
                         </div>
                         <span class="dropdown-toggle" id="dropdownToggle1"></span>
                     </h3>
@@ -147,7 +147,7 @@ if ($alt_kategori_alt_id) {
                             if (mysqli_num_rows($subcategories_query) > 0) {
                                 echo '<ul>';
                                 while ($subcategory = mysqli_fetch_array($subcategories_query)) {
-                                    echo '<li><a class="dropdown-item" href="urunler.php?kategori_id='.encrypt_id($kategori_id).'&alt_kategori_id='.encrypt_id($subcategory['id']).'">'.$subcategory['isim'].'</a></li>';
+                                    echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id=' . encrypt_id($kategori_id) . '&alt_kategori_id=' . encrypt_id($subcategory['id']) . '">' . htmlspecialchars($subcategory['isim']) . '</a></li>';
                                 }
                                 echo '</ul>';
                             }
@@ -160,8 +160,6 @@ if ($alt_kategori_alt_id) {
             <!-- İkinci Kategori -->
             <div class="col-md-5">
                 <div class="products-category-box">
-                    <!-- SVG İkon -->
-                    <!-- Kategori Başlığı -->
                     <h3>
                         <div class="icon-container">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 41.644 41.644">
@@ -170,19 +168,18 @@ if ($alt_kategori_alt_id) {
                         </div>
                         <div class="text-alan">
                             <small>Alt Kategori</small>
-                            <?php echo $subcategory_name; ?>
+                            <?php echo htmlspecialchars($subcategory_name); ?>
                         </div>
                         <span class="dropdown-toggle" id="dropdownToggle2"></span>
                     </h3>
-                    <!-- Alt Kategoriler -->
-                    <div class="products-dropdown-menu" aria-labelledby="dropdownToggle1">
+                    <div class="products-dropdown-menu" aria-labelledby="dropdownToggle2">
                         <?php
                         if ($kategori_id) {
-                            $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = $kategori_id");
+                            $subcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler WHERE kategori_id = " . intval($kategori_id));
                             if (mysqli_num_rows($subcategories_query) > 0) {
                                 echo '<ul>';
                                 while ($subcategory = mysqli_fetch_array($subcategories_query)) {
-                                    echo '<li><a class="dropdown-item" href="urunler.php?kategori_id='.encrypt_id($kategori_id).'&alt_kategori_id='.encrypt_id($subcategory['id']).'">'.$subcategory['isim'].'</a></li>';
+                                    echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id=' . encrypt_id($kategori_id) . '&alt_kategori_id=' . encrypt_id($subcategory['id']) . '">' . htmlspecialchars($subcategory['isim']) . '</a></li>';
                                 }
                                 echo '</ul>';
                             }
@@ -191,7 +188,6 @@ if ($alt_kategori_alt_id) {
                     </div>
                 </div>
             </div>
-
 
             <!-- Üçüncü Kategori -->
             <div class="col-md-4">
@@ -204,29 +200,27 @@ if ($alt_kategori_alt_id) {
                         </div>
                         <div class="text-alan">
                             <small>Döküm Tipi</small>
-                            <?php echo $subSubcategory_name; ?>
+                            <?php echo htmlspecialchars($subSubcategory_name); ?>
                         </div>
                         <span class="dropdown-toggle" id="dropdownToggle3"></span>
                     </h3>
                     <div class="products-dropdown-menu" aria-labelledby="dropdownToggle3">
-                        <ul>
-                            <div class="products-dropdown-menu" aria-labelledby="dropdownToggle2">
-                            <?php
-                            if ($kategori_id && $alt_kategori_id) {
-                                $subSubcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = $alt_kategori_id");
-                                if (mysqli_num_rows($subSubcategories_query) > 0) {
-                                    echo '<ul>';
-                                    while ($subSubcategory = mysqli_fetch_array($subSubcategories_query)) {
-                                        echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id='.encrypt_id($kategori_id).'&alt_kategori_id='.encrypt_id($alt_kategori_id).'&alt_kategori_alt_id='.encrypt_id($subSubcategory['id']).'">'.$subSubcategory['isim'].'</a></li>';
-                                    }
-                                    echo '</ul>';
+                        <?php
+                        if ($kategori_id && $alt_kategori_id) {
+                            $subSubcategories_query = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt WHERE alt_kategori_id = " . intval($alt_kategori_id));
+                            if (mysqli_num_rows($subSubcategories_query) > 0) {
+                                echo '<ul>';
+                                while ($subSubcategory = mysqli_fetch_array($subSubcategories_query)) {
+                                    echo '<li><a class="products-dropdown-item" href="urunler.php?kategori_id=' . encrypt_id($kategori_id) . '&alt_kategori_id=' . encrypt_id($alt_kategori_id) . '&alt_kategori_alt_id=' . encrypt_id($subSubcategory['id']) . '">' . htmlspecialchars($subSubcategory['isim']) . '</a></li>';
                                 }
+                                echo '</ul>';
                             }
-                            ?>
-                        </ul>
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
