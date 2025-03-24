@@ -1,154 +1,130 @@
-
 <?php include "header.php"; ?>
-        <!-- ***** Breadcrumb Area Start ***** -->
-        <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
+<!-- ***** Breadcrumb Area Start ***** -->
+<section class="section breadcrumb-area overlay-dark d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Breamcrumb Content -->
+                <div class="breadcrumb-content d-flex flex-column align-items-center text-center">
+                    <h2 class="text-white text-uppercase mb-3">Hakkımızda</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-uppercase text-white" href="index.php">Ana Sayfa</a>
+                        </li>
+                        <li class="breadcrumb-item text-white active">Hakkımızda</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+</section>
+<!-- ***** Breadcrumb Area End ***** -->
+
+<!-- ***** About Area Start ***** -->
+<section id="custom-bg" class="section about-area ptb_100">
+    <div id="about-content" class="container">
+        <div class="about-content row justify-content-between align-items-center">
             <div class="container">
+                <h5 id="about-baslik" class="text-white text-uppercase mb-3 text-center">HAKKIMIZDA</h5>
                 <div class="row">
-                    <div class="col-12">
-                        <!-- Breamcrumb Content -->
-                        <div class="breadcrumb-content d-flex flex-column align-items-center text-center">
-                            <h2 class="text-white text-uppercase mb-3">Hakkımızda</h2>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class="text-uppercase text-white" href="index.php">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item text-white active">Hakkımızda</li>
-                            </ol>
+                    <div class="col-md-6">
+                        <div class="box p-3">
+                            <p style="height: auto; min-height: 300px;">
+                                Baran Boya Kompozit olarak kuruluşumuz 1998 itibari ile CTP (Camelyaf Takviyeli
+                                Polyester) sektörüne vermiş olduğumuz katkılarla ön plana çıkmaktayız. 25 yılı aşkın
+                                sektör tecrübemiz ile güvenilir, yenilikçi, modern ve geniş hizmet ağımızla sektördeki
+                                konumumuzu koruyarak arttırmaktayız.
+                                Ankara’da kurulan firmamız İvedik OSB ve Siteler’de aktif olarak müşteri ve iş
+                                ortaklarına hizmet vermeye devam etmektedir. 2023 Mayıs ayından itibaren taşınmış
+                                olduğumuz yeni merkezimizde (İvedik OSB) 1.000m² alanda sizlere genişleyen
+                                stok/ürün çeşitliliğimiz ile daha kaliteli hizmetler sunmak için çalışmalarımıza hız
+                                kesmeden devam etmekteyiz.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box p-3">
+                            <p style="height: auto; min-height: 300px;">
+                                Başlıca satış ve tedariğini yaptığımız ürünler: Polyester Reçineler, Vinilester
+                                Reçineler, Alev İlerletmeyen Reçineler, Mek Peroksitler, Kobalt Oktoatlar, Epoksi
+                                Reçineler, Jelkotlar ve Topkotlar, Cam Elyaflar (Keçe Elyaflar E-Mat/Mat,
+                                Dokuma/Hasır/Örgü, İp Elyaflar, Kırpık Elyaf, Karbon Elyaf), Stiren Monomerler
+                                (Polyester İnceltici), Temizleyiciler (Aseton ve Tiner), Kalıp Ayırıcılar, RTV-2 Kalıp
+                                Silikonları, Poliüretan Reçine, Yardımcı Ürünler, Pigment Renklendiriciler, Dolgu
+                                Malzemeleri ve Hırdavat Grubu Yardımcılar. Daha detaylı bilgi için bizlerle iletişime
+                                geçebilirsiniz.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- ***** Breadcrumb Area End ***** -->
-            
-        <!-- ***** About Area Start ***** -->
-        <section id="custom-bg" class="section about-area ptb_100">
-            <div id="about-content" class="container">
-                <div class="about-content row justify-content-between align-items-center">
-                    <div id="hakkimizda">
-                        <!-- <h5 id="about-baslik" class="text-white text-uppercase mb-3">HAKKIMIZDA</h5>
-                        <p>Baran Boya Kompozit olarak kuruluşumuz 1998 itibari ile CTP (Camelyaf Takviyeli
-                            Polyester) sektörüne vermiş olduğumuz katkılarla ön plana çıkmaktayız. 25 yılı aşkın
-                            sektör tecrübemiz ile güvenilir, yenilikçi, modern ve geniş hizmet ağımızla sektördeki
-                            konumumuzu koruyarak arttırmaktayız.
-                        </p>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box p-3">
+                        <h5 id="about-baslik" class="text-white text-uppercase mb-3 text-center">VİZYONUMUZ</h5>
                         <p>
-                            Ankara’da kurulan firmamız İvedik OSB ve Siteler ’de aktif olarak müşteri ve iş
-                            ortaklarına hizmet vermeye devam etmektedir. 2023 Mayıs ayından itibaren taşınmış
-                            olduğumuz yeni merkezimizde (İvedik OSB) 1.000m² alanda sizlere genişleyen
-                            stok/ürün çeşitliliğimiz ile daha kaliteli hizmetler sunmak için çalışmalarımıza hız
-                            kesmeden devam etmekteyiz.
-                        </p>
-                        <p>
-                            Sektörümüzün öncülerinden olan Turkuaz Polyester , Poliya Polyester ve Akpa
-                            Kimya bayiliklerimizle yüksek ürün kalitesi, etkin hizmet ağı, satış sonrası teknik
-                            destek hizmetleri, sektördeki tecrübeleri ve geniş ürün yelpazeleri ile siz değerli iş
-                            ortaklarımıza güvenilir, kaliteli ve hızlı hizmetler sunmaktayız.                        
-                        </p>
-                        <p>
-                            2022 yılından itibaren kurmuş olduğumuz e-ticaret sistemimiz ile yenilikçi ve modern
-                            teknolojiye ayak uydurarak erişim ağımızı genişletmekteyiz. E-ticaret ağında EpoXs
-                            markamız ile epoksi reçineler, kalıplama silikonları, poliüretan reçineler kısmındaki
-                            ürünlerimizin satışlarını çeşitlendirmeyi ve arttırmayı büyük bir gayretle
-                            sürdürmekteyiz.
-                        </p>
-                        <p>
-                            Başlıca satış ve tedariğini yaptığımız ürünler ; Polyester Reçineler, Vinilester
-                            Reçineler, Alev İlerletmeyen Reçineler, Mek Peroksitler , Kobalt Oktoatlar, Epoksi
-                            Reçineler, Jelkotllar ve Topkotlar, Cam Elyaflar (Keçe Elyaflar E-Mat/Mat,
-                            Dokuma/Hasır/Örgü, İp Elyaflar, Kırpık Elyaf, Karbon Elyaf) , Stiren Monomerler
-                            (Polyester İnceltici), Temizleyiciler ( Aseton ve Tiner ) , Kalıp Ayırıcılar ( Vaks Ayırıcı,
-                            Sıvı Ayırıcı, Sprey Ayırıcı, Yüksek Performans Kompozit Ayırıcı), RTV-2 Kalıp
-                            Silikonları , Poliüretan Reçine (Sıvı Plastik/Tahta Tipi), Yardımcı Ürünler ( Kıvam
-                            Arttırıcılar, Kalıp Temizleyiciler, UV Stabilizörler vs.) , Pigment Renklendiriciler, Dolgu
-                            Malzemeleri ( Kalstiler, Talk Pudrası, Aerosil, Çinko Streart, Alüminyum Tozu vs.),
-                            Hırdavat Grubu Yardımcılar ( Polyester Rulo ve Fırçalar, Dozajlama Ekipmanları,
-                            Zımpara Çeşitleri, Polyester Ezme Rulosu, Maskeleme Bantları vs) bunlar olup daha
-                            detaylı bilgi için bizlerle iletişime geçebilirsiniz.                        
-                        </p> -->
-                        <h5 id="about-baslik" class="text-white text-uppercase mb-3">HAKKIMIZDA</h5>
-                        <p>
-                            Baran Boya Kompozit olarak kuruluşumuz 1998 itibari ile CTP (Camelyaf Takviyeli
-                            Polyester) sektörüne vermiş olduğumuz katkılarla ön plana çıkmaktayız. 25 yılı aşkın
-                            sektör tecrübemiz ile güvenilir, yenilikçi, modern ve geniş hizmet ağımızla sektördeki
-                            konumumuzu koruyarak arttırmaktayız. 
-                            Ankara’da kurulan firmamız İvedik OSB ve Siteler ’de aktif olarak müşteri ve iş
-                            ortaklarına hizmet vermeye devam etmektedir. 2023 Mayıs ayından itibaren taşınmış
-                            olduğumuz yeni merkezimizde (İvedik OSB) 1.000m² alanda sizlere genişleyen
-                            stok/ürün çeşitliliğimiz ile daha kaliteli hizmetler sunmak için çalışmalarımıza hız
-                            kesmeden devam etmekteyiz. 
-                            Sektörümüzün öncülerinden olan Turkuaz Polyester , Poliya Polyester ve Akpa
-                            Kimya bayiliklerimizle yüksek ürün kalitesi, etkin hizmet ağı, satış sonrası teknik
-                            destek hizmetleri, sektördeki tecrübeleri ve geniş ürün yelpazeleri ile siz değerli iş
-                            ortaklarımıza güvenilir, kaliteli ve hızlı hizmetler sunmaktayız.
-                            2022 yılından itibaren kurmuş olduğumuz e-ticaret sistemimiz ile yenilikçi ve modern
-                            teknolojiye ayak uydurarak erişim ağımızı genişletmekteyiz. E-ticaret ağında EpoXs
-                            markamız ile epoksi reçineler, kalıplama silikonları, poliüretan reçineler kısmındaki
-                            ürünlerimizin satışlarını çeşitlendirmeyi ve arttırmayı büyük bir gayretle
-                            sürdürmekteyiz.
-                            Başlıca satış ve tedariğini yaptığımız ürünler ; Polyester Reçineler, Vinilester
-                            Reçineler, Alev İlerletmeyen Reçineler, Mek Peroksitler , Kobalt Oktoatlar, Epoksi
-                            Reçineler, Jelkotllar ve Topkotlar, Cam Elyaflar (Keçe Elyaflar E-Mat/Mat,
-                            Dokuma/Hasır/Örgü, İp Elyaflar, Kırpık Elyaf, Karbon Elyaf) , Stiren Monomerler
-                            (Polyester İnceltici), Temizleyiciler ( Aseton ve Tiner ) , Kalıp Ayırıcılar ( Vaks Ayırıcı,
-                            Sıvı Ayırıcı, Sprey Ayırıcı, Yüksek Performans Kompozit Ayırıcı), RTV-2 Kalıp
-                            Silikonları , Poliüretan Reçine (Sıvı Plastik/Tahta Tipi), Yardımcı Ürünler ( Kıvam
-                            Arttırıcılar, Kalıp Temizleyiciler, UV Stabilizörler vs.) , Pigment Renklendiriciler, Dolgu
-                            Malzemeleri ( Kalstiler, Talk Pudrası, Aerosil, Çinko Streart, Alüminyum Tozu vs.),
-                            Hırdavat Grubu Yardımcılar ( Polyester Rulo ve Fırçalar, Dozajlama Ekipmanları,
-                            Zımpara Çeşitleri, Polyester Ezme Rulosu, Maskeleme Bantları vs) bunlar olup daha
-                            detaylı bilgi için bizlerle iletişime geçebilirsiniz.
+                            Değerlerimiz, bilgimiz ve çalışanlarımızla, müşterilerimizin ve tedarikçilerimizin
+                            memnuniyetini
+                            sağlamak ve gelişime paralel olarak kaliteli ve güvenilir ürünler sunmak temel amacımızdır.
                         </p>
                     </div>
-                    <div id="vizyon">
-                        <h5 id="about-baslik" class="text-white text-uppercase mb-3">VİZYONUMUZ</h5>
+                </div>
+                <div id class="col-md-12 mt-3">
+                    <div class="box p-3">
+                        <h5 id="about-baslik" class="text-white text-uppercase mb-3 text-center">MİSYONUMUZ</h5>
                         <p>
-                            Değerlerimiz, bilgimiz ve çalışanlarımızla, müşterilerimizin ve tedarikçilerimizin memnuniyetini sağlamak ve gelişime pararel olarak kaliteli ve güvenilir ürünler sunmak temel amacımızdır.
-                        </p>
-                    </div>
-                    <div id="misyon">
-                        <h5 id="about-baslik" class="text-white text-uppercase mb-3">MİSYONUMUZ</h5>
-                        <p>
-                            Sürekli gelişim anlayışı ile bilgi ve tecrübemizden yararlanarak, ürün ve hizmetlerimizi müşterilerimizin beklentilerine uygun hale getirmek. Müşterilerimiz ve tedarikçilerimizle köklü ve uzun süreli ilişkiler kurmak. Tüm çalışanlarımızı teşvik etmek ve başarılarını desteklemek. Olası tüm fırsatları değerlendirerek ortaklarımıza ve yatırımcılarımıza ekonomik değer katmak.
+                            Sürekli gelişim anlayışı ile bilgi ve tecrübemizden yararlanarak, ürün ve hizmetlerimizi
+                            müşterilerimizin beklentilerine uygun hale getirmek. Müşterilerimiz ve tedarikçilerimizle
+                            köklü ve
+                            uzun süreli ilişkiler kurmak. Tüm çalışanlarımızı teşvik etmek ve başarılarını desteklemek.
+                            Olası
+                            tüm fırsatları değerlendirerek ortaklarımıza ve yatırımcılarımıza ekonomik değer katmak.
                         </p>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- ***** About Area End ***** -->
+        </div>
+
+    </div>
+</section>
+<!-- ***** About Area End ***** -->
 
 
-        <!-- ***** Our Goal Area End ***** -->
+<!-- ***** Our Goal Area End ***** -->
 
-        <!-- ***** Team Area Start ***** -->
+<!-- ***** Team Area Start ***** -->
 
-        <!-- ***** Team Area End ***** -->
+<!-- ***** Team Area End ***** -->
 
-        <!--====== Contact Area Start ======-->
-    
+<!--====== Contact Area Start ======-->
 
-        <!--====== Call To Action Area Start ======-->
-                    <?php
-    $rt=mysqli_query($con,"SELECT logo FROM logo where id=1");
-    $tr = mysqli_fetch_array($rt);
-    $ufile = "$tr[logo]";
+
+<!--====== Call To Action Area Start ======-->
+<?php
+$rt = mysqli_query($con, "SELECT logo FROM logo where id=1");
+$tr = mysqli_fetch_array($rt);
+$ufile = "$tr[logo]";
 ?>
 
 
-        <section  class="section-contact cta-area bg-overlay-1 ptb_100">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10">
-                        <!-- Section Heading -->
-                        <div class="section-heading text-center m-0">   
-                            <div class="about-content-contact">
-                                <a href="index.php">
-                                    <img src="assets/img/logo/<?php print $ufile?>" alt="brand-logo">
-                                </a>
-                            </div>
-                            <p class="text-white d-none d-sm-block mt-4">İletişim ve daha detaylı bilgi için</p>
-                            <a href="contact" class="btn btn-bordered-white mt-4">Bize Ulaşın</a>
-                        </div>
+<section class="section-contact cta-area bg-overlay-1 ptb_100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <!-- Section Heading -->
+                <div class="section-heading text-center m-0">
+                    <div class="about-content-contact">
+                        <a href="index.php">
+                            <img src="assets/img/logo/<?php print $ufile ?>" alt="brand-logo">
+                        </a>
                     </div>
+                    <p class="text-white d-none d-sm-block mt-4">İletişim ve daha detaylı bilgi için</p>
+                    <a href="contact" class="btn btn-bordered-white mt-4">Bize Ulaşın</a>
                 </div>
             </div>
-        </section>
-        <!--====== Call To Action Area End ======-->
+        </div>
+    </div>
+</section>
+<!--====== Call To Action Area End ======-->
 <?php include "footer.php"; ?>

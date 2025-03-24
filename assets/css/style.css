@@ -4679,3 +4679,8 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     padding: 0 20px; /* Sağdan soldan padding ayarı */
     
 }
+#about-content > div.about-content.row.justify-content-between.align-items-center > div > div > div:nth-child(2) > div > p
+{
+    border-left: none !important;
+    border-right: 5px solid #40E0D0;
+}
