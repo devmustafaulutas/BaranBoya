@@ -3,7 +3,7 @@
   <!--====== Footer Area Start ======-->
   <footer id="custom-bg-down" class="section footer-area">
             <!-- Footer Top -->
-            <div class="footer-top ptb_25">
+            <div class="footer-top ptb_25 " style="border-top : 2px solid white">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-4">

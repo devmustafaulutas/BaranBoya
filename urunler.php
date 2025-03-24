@@ -66,7 +66,6 @@ if ($alt_kategori_id) {
     }
 }
 
-// Satır 58'deki hatayı düzeltme
 if ($alt_kategori_alt_id) {
     $stmt = $con->prepare("SELECT id, isim FROM alt_kategoriler_alt WHERE id = ?");
     if ($stmt) {

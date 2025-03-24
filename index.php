@@ -113,30 +113,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
     }
 
-    // $service_title ve $service_text değişkenlerini tanımlayın
     $service_title = "Hizmetlerimiz"; // Örnek statik değer
     $service_text = "Sunulan hizmetler hakkında kısa açıklama."; // Örnek statik değer
 
-    // $contact_title ve $contact_text değişkenlerini tanımlayın
     $contact_title = "İletişim"; // Örnek statik değer
     $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz."; // Örnek statik değer
 
-    // Veya veritabanından çekmek için aşağıdaki satırları kullanabilirsiniz:
-    /*
-    $stmt_service = $con->prepare("SELECT service_title, service_text FROM services_table LIMIT 1");
-    $stmt_service->execute();
-    $result_service = $stmt_service->get_result();
-    $service = $result_service->fetch_assoc();
-    $service_title = $service['service_title'];
-    $service_text = $service['service_text'];
-
-    $stmt_contact = $con->prepare("SELECT contact_title, contact_text FROM contact_table LIMIT 1");
-    $stmt_contact->execute();
-    $result_contact = $stmt_contact->get_result();
-    $contact = $result_contact->fetch_assoc();
-    $contact_title = $contact['contact_title'];
-    $contact_text = $contact['contact_text'];
-    */
 ?>
 
                         <div class="welcome-intro">
@@ -150,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
        
         
+
         <!-- ***** Service Area End ***** -->
 
         <section id="custom-bg" id="service" class="section service-area bg-grey ptb_150">
@@ -252,7 +235,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </section>
-
        <!-- Ürün Vitrin Bölümü -->
         <section id="custom-bg" class="index-industrial-paint-product-showcase">
             <div class="container">
@@ -264,7 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="index-product-overlay">
                                     <h3 class="index-product-title">Poliya Polipol 3453 Döküm Tipi Polyester</h3>
                                     <p class="index-product-description">Yüksek dayanıklılığa sahip endüstriyel boya.</p>
-                                    <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
+                                    <a href="/product_detail?urun_id=1" class="btn btn-light index-product-link">Detaylı Bilgi</a>
                                 </div>
                             </div>
                         </div>

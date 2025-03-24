@@ -12,10 +12,6 @@
                                 <li class="breadcrumb-item"><a class="text-uppercase text-white" href="index.php">Ana Sayfa</a></li>
                                 <li class="breadcrumb-item text-white active">Hakkımızda</li>
                             </ol>
-                            <p>
-                                
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -27,7 +23,79 @@
             <div id="about-content" class="container">
                 <div class="about-content row justify-content-between align-items-center">
                     <div id="hakkimizda">
-                        <p>Baran Boya ailesi olarak çalışma alanımızın ağırlığı mobilya, kompozit ve sanayi sektörüne yönelik Polyester Reçineler, Vinilester Reçineler, Epoksi Reçineler ,Cam Elyaf Takviyeleri, RTV-2 Kalıp Silikonu, Poliüretan Reçine ve yardımcı malzemeleridir.</p>
+                        <!-- <h5 id="about-baslik" class="text-white text-uppercase mb-3">HAKKIMIZDA</h5>
+                        <p>Baran Boya Kompozit olarak kuruluşumuz 1998 itibari ile CTP (Camelyaf Takviyeli
+                            Polyester) sektörüne vermiş olduğumuz katkılarla ön plana çıkmaktayız. 25 yılı aşkın
+                            sektör tecrübemiz ile güvenilir, yenilikçi, modern ve geniş hizmet ağımızla sektördeki
+                            konumumuzu koruyarak arttırmaktayız.
+                        </p>
+                        <p>
+                            Ankara’da kurulan firmamız İvedik OSB ve Siteler ’de aktif olarak müşteri ve iş
+                            ortaklarına hizmet vermeye devam etmektedir. 2023 Mayıs ayından itibaren taşınmış
+                            olduğumuz yeni merkezimizde (İvedik OSB) 1.000m² alanda sizlere genişleyen
+                            stok/ürün çeşitliliğimiz ile daha kaliteli hizmetler sunmak için çalışmalarımıza hız
+                            kesmeden devam etmekteyiz.
+                        </p>
+                        <p>
+                            Sektörümüzün öncülerinden olan Turkuaz Polyester , Poliya Polyester ve Akpa
+                            Kimya bayiliklerimizle yüksek ürün kalitesi, etkin hizmet ağı, satış sonrası teknik
+                            destek hizmetleri, sektördeki tecrübeleri ve geniş ürün yelpazeleri ile siz değerli iş
+                            ortaklarımıza güvenilir, kaliteli ve hızlı hizmetler sunmaktayız.                        
+                        </p>
+                        <p>
+                            2022 yılından itibaren kurmuş olduğumuz e-ticaret sistemimiz ile yenilikçi ve modern
+                            teknolojiye ayak uydurarak erişim ağımızı genişletmekteyiz. E-ticaret ağında EpoXs
+                            markamız ile epoksi reçineler, kalıplama silikonları, poliüretan reçineler kısmındaki
+                            ürünlerimizin satışlarını çeşitlendirmeyi ve arttırmayı büyük bir gayretle
+                            sürdürmekteyiz.
+                        </p>
+                        <p>
+                            Başlıca satış ve tedariğini yaptığımız ürünler ; Polyester Reçineler, Vinilester
+                            Reçineler, Alev İlerletmeyen Reçineler, Mek Peroksitler , Kobalt Oktoatlar, Epoksi
+                            Reçineler, Jelkotllar ve Topkotlar, Cam Elyaflar (Keçe Elyaflar E-Mat/Mat,
+                            Dokuma/Hasır/Örgü, İp Elyaflar, Kırpık Elyaf, Karbon Elyaf) , Stiren Monomerler
+                            (Polyester İnceltici), Temizleyiciler ( Aseton ve Tiner ) , Kalıp Ayırıcılar ( Vaks Ayırıcı,
+                            Sıvı Ayırıcı, Sprey Ayırıcı, Yüksek Performans Kompozit Ayırıcı), RTV-2 Kalıp
+                            Silikonları , Poliüretan Reçine (Sıvı Plastik/Tahta Tipi), Yardımcı Ürünler ( Kıvam
+                            Arttırıcılar, Kalıp Temizleyiciler, UV Stabilizörler vs.) , Pigment Renklendiriciler, Dolgu
+                            Malzemeleri ( Kalstiler, Talk Pudrası, Aerosil, Çinko Streart, Alüminyum Tozu vs.),
+                            Hırdavat Grubu Yardımcılar ( Polyester Rulo ve Fırçalar, Dozajlama Ekipmanları,
+                            Zımpara Çeşitleri, Polyester Ezme Rulosu, Maskeleme Bantları vs) bunlar olup daha
+                            detaylı bilgi için bizlerle iletişime geçebilirsiniz.                        
+                        </p> -->
+                        <h5 id="about-baslik" class="text-white text-uppercase mb-3">HAKKIMIZDA</h5>
+                        <p>
+                            Baran Boya Kompozit olarak kuruluşumuz 1998 itibari ile CTP (Camelyaf Takviyeli
+                            Polyester) sektörüne vermiş olduğumuz katkılarla ön plana çıkmaktayız. 25 yılı aşkın
+                            sektör tecrübemiz ile güvenilir, yenilikçi, modern ve geniş hizmet ağımızla sektördeki
+                            konumumuzu koruyarak arttırmaktayız. 
+                            Ankara’da kurulan firmamız İvedik OSB ve Siteler ’de aktif olarak müşteri ve iş
+                            ortaklarına hizmet vermeye devam etmektedir. 2023 Mayıs ayından itibaren taşınmış
+                            olduğumuz yeni merkezimizde (İvedik OSB) 1.000m² alanda sizlere genişleyen
+                            stok/ürün çeşitliliğimiz ile daha kaliteli hizmetler sunmak için çalışmalarımıza hız
+                            kesmeden devam etmekteyiz. 
+                            Sektörümüzün öncülerinden olan Turkuaz Polyester , Poliya Polyester ve Akpa
+                            Kimya bayiliklerimizle yüksek ürün kalitesi, etkin hizmet ağı, satış sonrası teknik
+                            destek hizmetleri, sektördeki tecrübeleri ve geniş ürün yelpazeleri ile siz değerli iş
+                            ortaklarımıza güvenilir, kaliteli ve hızlı hizmetler sunmaktayız.
+                            2022 yılından itibaren kurmuş olduğumuz e-ticaret sistemimiz ile yenilikçi ve modern
+                            teknolojiye ayak uydurarak erişim ağımızı genişletmekteyiz. E-ticaret ağında EpoXs
+                            markamız ile epoksi reçineler, kalıplama silikonları, poliüretan reçineler kısmındaki
+                            ürünlerimizin satışlarını çeşitlendirmeyi ve arttırmayı büyük bir gayretle
+                            sürdürmekteyiz.
+                            Başlıca satış ve tedariğini yaptığımız ürünler ; Polyester Reçineler, Vinilester
+                            Reçineler, Alev İlerletmeyen Reçineler, Mek Peroksitler , Kobalt Oktoatlar, Epoksi
+                            Reçineler, Jelkotllar ve Topkotlar, Cam Elyaflar (Keçe Elyaflar E-Mat/Mat,
+                            Dokuma/Hasır/Örgü, İp Elyaflar, Kırpık Elyaf, Karbon Elyaf) , Stiren Monomerler
+                            (Polyester İnceltici), Temizleyiciler ( Aseton ve Tiner ) , Kalıp Ayırıcılar ( Vaks Ayırıcı,
+                            Sıvı Ayırıcı, Sprey Ayırıcı, Yüksek Performans Kompozit Ayırıcı), RTV-2 Kalıp
+                            Silikonları , Poliüretan Reçine (Sıvı Plastik/Tahta Tipi), Yardımcı Ürünler ( Kıvam
+                            Arttırıcılar, Kalıp Temizleyiciler, UV Stabilizörler vs.) , Pigment Renklendiriciler, Dolgu
+                            Malzemeleri ( Kalstiler, Talk Pudrası, Aerosil, Çinko Streart, Alüminyum Tozu vs.),
+                            Hırdavat Grubu Yardımcılar ( Polyester Rulo ve Fırçalar, Dozajlama Ekipmanları,
+                            Zımpara Çeşitleri, Polyester Ezme Rulosu, Maskeleme Bantları vs) bunlar olup daha
+                            detaylı bilgi için bizlerle iletişime geçebilirsiniz.
+                        </p>
                     </div>
                     <div id="vizyon">
                         <h5 id="about-baslik" class="text-white text-uppercase mb-3">VİZYONUMUZ</h5>

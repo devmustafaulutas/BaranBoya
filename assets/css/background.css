@@ -1,9 +1,9 @@
 #custom-bg {
-    background-color: #1eb4ff;
+    background-color: #0aadff;
     background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
 }
 #custom-bg-down {
-    background: linear-gradient(to top, #000050, #1eb4ff), url(https://www.transparenttextures.com/patterns/brick-wall.png);
+    background: linear-gradient(to top, #000050, #0aadff), url(https://www.transparenttextures.com/patterns/brick-wall.png);
     background-blend-mode: overlay;
     background-position: center center;
 }

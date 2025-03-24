@@ -583,7 +583,7 @@ img:hover {
     z-index: -1;
 }
 .overlay-dark::after {
-    background: linear-gradient(to bottom, #000050, #1eb4ff), 
+    background: linear-gradient(to bottom, #000050, #0aadff), 
                 url("https://www.transparenttextures.com/patterns/brick-wall.png");
     background-blend-mode: overlay; /* Gradient ve deseni harmanlar */
     background-position: center center; /* Desenin merkezde görünmesini sağlar */
@@ -660,7 +660,7 @@ img:hover {
 }
 
 .bg-overlay::after {
-    background: linear-gradient(to bottom, #000050, #1eb4ff), 
+    background: linear-gradient(to bottom, #000050, #0aadff), 
                 url("https://www.transparenttextures.com/patterns/brick-wall.png");
     background-blend-mode: overlay; /* Gradient ve deseni harmanlar */
     background-position: center center; /* Desenin merkezde görünmesini sağlar */
@@ -4046,7 +4046,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     padding: 0px;
     width: 100%;
     height: auto;
-    background-color:  #1eb4ff;
+    background-color:  #0aadff;
     padding-top: 100px;
     padding-bottom: 100px;
 }
@@ -4340,7 +4340,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 /* FOOTER BACKGROUND OVERLAY */
 /* FOOTER BACKGROUND COLOR */
 .footer-area {
-    background: linear-gradient(to top, #000050, #1eb4ff); /* İstediğin renk geçişi */
+    background: linear-gradient(to top, #000050, #0aadff); /* İstediğin renk geçişi */
     position: relative;
     z-index: 0;
     color:white;
@@ -4375,7 +4375,7 @@ body > div.main.overflow-hidden > footer > div.footer-top.ptb_25 > div > div > d
     color: white !important;
 }
 section{
-    background-color: #1eb4ff;
+    background-color: #0aadff;
 }
 #contact > div > div > div.col-12.col-lg-5 > div.section-heading.text-center.mb-3 > h2{
     color:white;
@@ -4395,7 +4395,7 @@ body > div.main.overflow-hidden > section.section.map-area > div > div > div > d
     color:white;
 }
 #service{
-    background-color:#1eb4ff ;
+    background-color:#0aadff ;
 }
 .map-area{
     padding-bottom: 50px;
@@ -4456,7 +4456,7 @@ body > div.main.overflow-hidden > section.section.cta-area.bg-overlay-1.ptb_100:
 .sector-detail-area {
     position: relative;
     padding: 60px 0;
-    background-color: #1eb4ff; /* Arka plan rengi */
+    background-color: #0aadff; /* Arka plan rengi */
     overflow: hidden;
 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -4601,26 +4601,26 @@ body > div.main.overflow-hidden > section.section.cta-area.bg-overlay-1.ptb_100:
 }
 
 #body{
-    background-color: #1eb4ff;
+    background-color: #0aadff;
     background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png);
 }
 #blog-list{
-    background-color: #1eb4ff !important;
+    background-color: #0aadff !important;
     background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
 }
 body > div.main.overflow-hidden > section.product-list-area
 {
-    background-color: #1eb4ff !important;
+    background-color: #0aadff !important;
     background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
 }
 body > div.main.overflow-hidden > section.section.products-area.ptb_50
 {
-    background-color: #1eb4ff !important;
+    background-color: #0aadff !important;
     background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
 
 }
 body > div.main.overflow-hidden > section.section.product-detail-area.ptb_25{
-    background-color: #1eb4ff !important;
+    background-color: #0aadff !important;
     background-image: url(https://www.transparenttextures.com/patterns/brick-wall.png) !important;
 
 }
@@ -4652,7 +4652,30 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center > div > div > div > div > ol > li.breadcrumb-item.text-white{
     font-size: 18px !important;
 }
-#paint-bucket-with-paint-mess{
-    color:white;
-    background-color: white;
+.flip-front-content > p{
+    color:black;
+}
+div.flip-card-back > p
+{
+    color: black;
+}
+#home,
+body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center,
+#body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center,
+body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d-flex.align-items-center
+{
+    border-bottom: 2px solid white;
+}
+.container {
+    margin: 0 auto !important; /* Ortalayıp ekstra marginleri kaldırır */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+
+    max-width: 1600px; /* İçeriğin genişliğini belirler */
+    width: 90%; /* Ekrana göre ayarlanır */
+    margin: 0 auto !important; /* Ortalar */
+    padding: 0 20px; /* Sağdan soldan padding ayarı */
+    
 }
