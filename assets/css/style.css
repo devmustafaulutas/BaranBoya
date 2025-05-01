@@ -1131,7 +1131,7 @@ header {
     color: #2c2e30;
     padding: 0.625rem 1.25rem;
 }
-
+/* Genel Menü Stilleri */
 .menu .items {
     width: calc(100% + 15px);
 }
@@ -1140,13 +1140,12 @@ header {
     line-height: 1;
 }
 
+/* Dropdown Menü Stilleri */
 .menu .dropdown .dropdown-menu {
-    margin: 10px 0 15px 0;
-    padding: 0 0 0 15px;
-    -webkit-box-shadow: none;
+    margin: 10px 0 15px;
+    padding-left: 15px;
     box-shadow: none;
     display: none;
-    visibility: visible;
     opacity: 1;
 }
 
@@ -1156,10 +1155,9 @@ header {
 
 .menu .dropdown-menu .dropdown-menu {
     position: relative;
-    top: initial;
-    left: initial;
 }
 
+/* Navbar Link Stilleri */
 .menu .nav-link {
     margin: 0 5px;
     padding: 10px 5px;
@@ -1172,47 +1170,40 @@ header {
     padding: 0;
 }
 
+/* İlk Nav-Link Stili */
 .menu .nav-link:first-child {
-    padding-left: 0;
-    padding-right: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    padding: 0;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: 600;
     color: #2c2e30;
 }
 
+/* Modal Stilleri */
 .modal-open {
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .dialog-animated {
     min-height: 100%;
-    margin: 0 0 0 auto;
+    margin-left: auto;
 }
 
+/* Modal Animasyonu */
 .modal.fade .modal-dialog.dialog-animated {
-    -webkit-transform: translate(100%, 0)scale(1);
-    transform: translate(100%, 0)scale(1);
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%) scale(1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     height: 100%;
 }
 
 .modal.fade.show .modal-dialog.dialog-animated {
+    transform: translateX(0);
     height: 100%;
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
 }
 
+/* Modal İçerik ve Header Stilleri */
 .modal-content {
     border: none;
     border-radius: 0;
@@ -1220,13 +1211,11 @@ header {
 }
 
 .modal-header {
-    -webkit-box-align: center;
-    -ms-flex-align: center;
+    display: flex;
     align-items: center;
     padding: 2rem;
     border: none;
     font-weight: 600;
-    border-radius: 0;
 }
 
 .modal-header .icon-close {
@@ -1234,24 +1223,24 @@ header {
     cursor: pointer;
 }
 
+/* Modal Body */
 .modal-body {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     padding: 2rem;
 }
 
+/* Arama Başlığı */
 .search-title {
     font-size: 45px;
     font-weight: 700;
     line-height: 1em;
     letter-spacing: -1.6px;
 }
+
+/* Responsive Header Ayarı */
 @media (min-width: 1200px) {
-    #header-container{
+    #header-container {
         max-width: 1340px;
     }
 }
@@ -4683,4 +4672,8 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 {
     border-left: none !important;
     border-right: 5px solid #40E0D0;
+}
+#menu > div > div > div.menu.modal-body > div > div > ul > li.nav-item.dropdown
+{
+    text-align: start !important;
 }

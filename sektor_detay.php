@@ -67,23 +67,45 @@ $sectorDescription = "";
 
 if ($selectedSector === "Havacılık ve Savunma Sanayi") {
     $sectorName = "Havacılık ve Savunma Sanayi";
-    $sectorDescription = "Havacılık ve savunma alanında endüstriyel boyanın önemi büyüktür. Uçak, helikopter ve savunma araçlarının yüksek sıcaklık, basınç ve kimyasal etkilere dayanıklı olması gerekir. Endüstriyel boyalar sayesinde düzenli bakım sıklığı azalır, korozyon önlenir ve güvenlik artırılır. Bunun yanı sıra askeri teçhizatlarda görünmezlik ve radar soğurucu boyalar kullanılarak stratejik avantaj elde edilir. Böylece havacılık ve savunma sektörü, ileri teknolojiye dayalı endüstriyel boyalarla güçlenir.";
-} elseif ($selectedSector === "Denizcilik") {
+    $sectorDescription = "Havacılık ve savunma alanında endüstriyel boyanın önemi büyüktür. Uçak, helikopter ve savunma araçlarının yüksek sıcaklık, basınç ve kimyasal etkilere dayanıklı olması gerekir. Endüstriyel boyalar sayesinde düzenli bakım sıklığı azalır, korozyon önlenir ve güvenlik artırılır. Bunun yanı sıra askeri teçhizatlarda görünmezlik ve radar soğurucu boyalar kullanılarak stratejik avantaj elde edilir.";
+}
+elseif ($selectedSector === "Denizcilik") {
     $sectorName = "Denizcilik";
-    $sectorDescription = "Denizcilik sektöründe endüstriyel boyaların amacı korozyonla mücadele, gemi ve deniz araçlarını uzun süreli korumaktır. Tuzlu su, UV ışınları ve sert hava koşulları gibi çevresel faktörler göz önüne alındığında, doğru seçilen endüstriyel boyalarla gemilerin bakımı kolaylaşır, operasyonel maliyetler düşer. Su altı kaplamaları, teknelerin yakıt verimliliğini artırırken deniz canlılarının tutunmasını da azaltır.";
-} elseif ($selectedSector === "Banyo") {
+    $sectorDescription = "Denizcilik sektöründe endüstriyel boyaların amacı korozyonla mücadele, gemi ve deniz araçlarını uzun süreli korumaktır. Tuzlu su, UV ışınları ve sert hava koşulları gibi çevresel faktörler göz önüne alındığında, doğru seçilen endüstriyel boyalarla gemilerin bakımı kolaylaşır, operasyonel maliyetler düşer.";
+}
+elseif ($selectedSector === "Banyo") {
     $sectorName = "Banyo";
-    $sectorDescription = "Banyo sektöründe endüstriyel boyalar, su ve neme karşı yüksek dayanım sağlamasıyla ön plana çıkar. Bu ortamlar için geliştirilmiş boyalar, küflenme ve lekelenmeye karşı dirençli olur. Aynı zamanda dekoratif etkiler katılarak, banyolarda estetik görünüm ve uzun ömürlü kaplama elde edilir. Böylece hem hijyeni hem de şıklığı bir arada sunar.";
-} elseif ($selectedSector === "Mutfak") {
+    $sectorDescription = "Banyo sektöründe endüstriyel boyalar, su ve neme karşı yüksek dayanım sağlamasıyla ön plana çıkar. Bu ortamlar için geliştirilmiş boyalar, küflenme ve lekelenmeye karşı dirençli olur. Aynı zamanda dekoratif etkiler katılarak, banyolarda estetik görünüm ve uzun ömürlü kaplama elde edilir.";
+}
+elseif ($selectedSector === "Mutfak") {
     $sectorName = "Mutfak";
-    $sectorDescription = "Mutfaklarda endüstriyel boyaların kullanımı, yüksek ısıya ve yağ lekelerine karşı dayanıklılık açısından önem taşır. Fırın çevresi, ocak arkası gibi sıcak noktalarda rengin solmaması, kir tutmaması ve kolay temizlenmesi için özel boyalar tercih edilir. Böylece mutfakta konforlu bir çalışma alanı yaratılır.";
-} elseif ($selectedSector === "Hobi ve Tasarım") {
+    $sectorDescription = "Mutfaklarda endüstriyel boyaların kullanımı, yüksek ısıya ve yağ lekelerine karşı dayanıklılık açısından önem taşır. Fırın çevresi, ocak arkası gibi sıcak noktalarda rengin solmaması, kir tutmaması ve kolay temizlenmesi için özel boyalar tercih edilir.";
+}
+elseif ($selectedSector === "Hobi ve Tasarım") {
     $sectorName = "Hobi ve Tasarım";
-    $sectorDescription = "Hobi ve tasarım alanında endüstriyel boyalar, yaratıcılığı sınırlamadan farklı malzemelerde üstün koruma sağlar. Ahşap, metal veya kompozit yüzeylerde kullanılan çok amaçlı boyalar, hem canlı renkler hem de dayanıklılık sunar. Böylece sanatsal projeler ve tasarım uygulamaları daha uzun ömürlü olur.";
-} else {
+    $sectorDescription = "Hobi ve tasarım alanında endüstriyel boyalar, yaratıcılığı sınırlamadan farklı malzemelerde üstün koruma sağlar. Ahşap, metal veya kompozit yüzeylerde kullanılan çok amaçlı boyalar, hem canlı renkler hem de dayanıklılık sunar.";
+}
+elseif ($selectedSector === "Otomotiv ve Ulaşım") {
+    $sectorName = "Otomotiv ve Ulaşım";
+    $sectorDescription = "Otomotiv sektöründe kullanılan endüstriyel boyalar, araç yüzeylerinde üstün koruma sağlar. Çizilmelere, UV ışınlarına ve kimyasal etkilere dayanıklı formulasyonları sayesinde boyanın ömrü uzar, araç estetiği uzun süre korunur. Ayrıca korozyona karşı özel kaplamalar, taşıtların ömrünü ve güvenilirliğini artırır.";
+}
+elseif ($selectedSector === "İnşaat ve Mimari Tasarım") {
+    $sectorName = "İnşaat ve Mimari Tasarım";
+    $sectorDescription = "İnşaat ve mimari tasarım projelerinde endüstriyel boyalar, cephe, iç mekan ve mimari detaylarda estetik ve dayanıklılığı bir arada sunar. Su geçirmezlik, ısı yalıtımı ve UV direnci gibi özellikleriyle yapı ömrünü uzatır, bakım maliyetlerini düşürür.";
+}
+elseif ($selectedSector === "Heykel ve Sanat") {
+    $sectorName = "Heykel ve Sanat";
+    $sectorDescription = "Heykel ve sanat atölyelerinde kullanılan endüstriyel boyalar, yaratıcılığı destekleyecek geniş renk seçenekleri ve yüksek örtücülük sunar. Farklı doku ve yüzeylerde güçlü yapışma, çatlama ve solmaya karşı uzun ömürlü koruma sağlar.";
+}
+elseif ($selectedSector === "Enerji ve Sürdürülebilirlik") {
+    $sectorName = "Enerji ve Sürdürülebilirlik";
+    $sectorDescription = "Enerji sektöründe kullanılan endüstriyel boyalar, rüzgâr türbinleri, güneş panelleri ve endüstriyel tesislerde korozyon önleyici ve UV korumalı çözümler sunar. Çevre dostu formüllerle sürdürülebilirlik hedeflerine katkı sağlar.";
+}
+else {
     $sectorName = "";
     $sectorDescription = "";
 }
+
 
 ?>
 <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
