@@ -134,155 +134,86 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
 
         <!-- ***** Service Area End ***** -->
+        <!-- ***** Service Area End ***** -->
 
-        <section id="custom-bg" id="service" class="section service-area bg-grey ptb_150">
+        </section>
+            <section id="custom-bg" class="index-industrial-paint-features-section">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-10 col-lg-7">
-                        <!-- Section Heading -->
-                        <div class="section-heading text-center" data-text="<?php echo $service_title; ?>">
+                <div class="section-heading text-center" data-text="<?php echo $service_title; ?>">
                             <h2 class="whoarewe-title" ><?php echo $service_title; ?></h2>
                             <p class="d-none d-sm-block mt-4"><?php echo $service_text; ?></p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-
+                <div class="row gx-4 gy-4">  <!-- gx‑4: yatay boşluk, gy‑4: dikey boşluk -->
                 <?php
-                $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id DESC LIMIT 6");
-                $stmt->execute();
-                $stmt->bind_result($id, $serviceg, $service_desc, $icon); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
-
-                while ($stmt->fetch()) {
-                    $services[] = [
-                        'id' => $id,
-                        'service_title' => $serviceg,
-                        'service_desc' => $service_desc,
-                        'icon' => $icon
-                    ];
-                }
-
-                foreach ($services as $service) {
-                    $id = $service['id'];
-                    $serviceg = $service['service_title'];
-                    $service_desc = $service['service_desc'];
-                    $icon = $service['icon'];
-
-                    // HTML çıktısını oluştur
-                    print "
-                    <div class='col-12 col-md-6 col-lg-4'>
-                        <!-- Single Service -->
-                        <div class='single-service p-4' style='border: solid 1px #788282;'>
-                            <h3 class='my-3'>$serviceg</h3>
-                            <p>$service_desc</p>
-                            <div class='index-icon-container'>
-                                <a class='service-btn' href='#'>Learn More</a>
-                                <a href='#'>
-                                    $icon
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    ";
-                }
+                    $stmt = $con->prepare("
+                    SELECT service_title, service_desc, icon
+                    FROM service
+                    ORDER BY id DESC
+                    LIMIT 6
+                    ");
+                    $stmt->execute();
+                    $stmt->bind_result($title, $desc, $iconHtml);
+                    while ($stmt->fetch()):
                 ?>
+                    <div class="col-12 col-md-6 col-lg-4 d-flex mb-4">  <!-- mb‑4 ile ekstra dikey boşluk -->
+                    <div class="index-feature-card flex-fill d-flex flex-column">
+                        <div class="index-feature-icon mb-3">
+                        <?php echo $iconHtml; ?>
+                        </div>
+                        <h3 class="index-feature-title"><?php echo htmlspecialchars($title, ENT_QUOTES); ?></h3>
+                        <p class="index-feature-description mt-auto">
+                        <?php echo htmlspecialchars($desc, ENT_QUOTES); ?>
+                        </p>
+                    </div>
+                    </div>
+                <?php endwhile; ?>
+                <!-- --- Opsiyonel Statik Kartlar (Eğer gerçekten gerekliyse) --- -->
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="index-feature-card h-100 w-100">
+                    <div class="index-feature-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3 class="index-feature-title">Yüksek Kalite</h3>
+                    <p class="index-feature-description">
+                        En kaliteli malzemelerle üstün performans sağlar.
+                    </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="index-feature-card h-100 w-100">
+                    <div class="index-feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="index-feature-title">Çevre Dostu</h3>
+                    <p class="index-feature-description">
+                        Doğa dostu formüllerle çevreye zarar vermez.
+                    </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="index-feature-card h-100 w-100">
+                    <div class="index-feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="index-feature-title">Dayanıklılık</h3>
+                    <p class="index-feature-description">
+                        Uzun ömürlü koruma sağlayarak bakım ihtiyacını azaltır.
+                    </p>
+                    </div>
+                </div>
+                <!-- --- Statik Kart Sonu --- -->
 
                 </div>
             </div>
-            <!-- Shape Bottom -->
-            <div class="shape shape-bottom">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
-                    <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
-        c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
-        c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
-                </svg>
-            </div>
-        </section>
-        <!-- ***** Service Area End ***** -->
-        <!-- Özellikler Bölümü -->
-        <section id="custom-bg" class="index-industrial-paint-features-section">
-                
-            <div class="container">
-                <h2 class="index-features-section-title fade-in">Özelliklerimiz</h2>
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="index-feature-card">
-                            <div class="index-feature-icon">
-                                <i class="fas fa-paint-roller"></i>
-                            </div>
-                            <h3 class="index-feature-title">Yüksek Kalite</h3>
-                            <p class="index-feature-description">En kaliteli malzemelerle üstün performans sağlar.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="index-feature-card">
-                            <div class="index-feature-icon">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <h3 class="index-feature-title">Çevre Dostu</h3>
-                            <p class="index-feature-description">Doğa dostu formüllerle çevreye zarar vermez.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="index-feature-card">
-                            <div class="index-feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <h3 class="index-feature-title">Dayanıklılık</h3>
-                            <p class="index-feature-description">Uzun ömürlü koruma sağlayarak bakım ihtiyacını azaltır.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-       <!-- Ürün Vitrin Bölümü -->
-        <section id="custom-bg" class="index-industrial-paint-product-showcase">
-            <div class="container">
-                <h2 class="index-product-showcase-title fade-in">Ürün Vitrinimiz</h2>
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="index-product-card">
-                            <div class="index-product-image" style="background-image: url('assets/img/products/POLİYA 18 KG.png'); background-size: contain; background-repeat: no-repeat;">
-                                <div class="index-product-overlay">
-                                    <h3 class="index-product-title">Poliya Polipol 3453 Döküm Tipi Polyester</h3>
-                                    <p class="index-product-description">Yüksek dayanıklılığa sahip endüstriyel boya.</p>
-                                    <a href="/product_detail?urun_id=1" class="btn btn-light index-product-link">Detaylı Bilgi</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="index-product-card">
-                            <div class="index-product-image" style="background-image: url('assets/img/products/TURKUAZ 18 KG.png');">
-                                <div class="index-product-overlay">
-                                    <h3 class="index-product-title">Turkuaz TP100 Döküm Tipi Polyester</h3>
-                                    <p class="index-product-description">Çevre dostu formülüyle öne çıkan boya.</p>
-                                    <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="index-product-card">
-                            <div class="index-product-image" style="background-image: url('assets/img/products/CAMELYAF 18 KG.png'); background-size: contain; background-repeat: no-repeat;">
-                                <div class="index-product-overlay">
-                                    <h3 class="index-product-title">Camelyaf Resins CE80 Döküm Tipi Polyester</h3>
-                                    <p class="index-product-description">Uzun ömürlü koruma sağlayan boya çözümü.</p>
-                                    <a href="#" class="btn btn-light index-product-link">Detaylı Bilgi</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Daha fazla ürün kartı ekleyebilirsiniz -->
-                </div>
-            </div>
-        </section>
+            </section>
+
+       
         <!-- ***** Sektor Area Start ***** -->
         <section id="custom-bg" class="index-sektorler-section">
             <div class="container">
                 <div class="row text-center mb-5">
-                    <div class="col-12">
-                        <h2 class="index-sector-main-title fade-in">Sektörlerimiz</h2>
+                    <div class="section-heading text-center col-12" data-text="<?php echo $service_title; ?>">
+                        <h2 class="whoarewe-title" >SEKTÖRLERİMİZ</h2>
                         <p class="index-sector-main-description fade-in">Yenilikçi çözümlerimizle lider olduğumuz sektörel alanlarda sizlere en kaliteli hizmeti sunuyoruz.</p>
                     </div>
                 </div>

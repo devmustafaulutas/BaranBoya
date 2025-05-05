@@ -66,6 +66,7 @@
     <link rel="stylesheet" href="assets/css/background.css">
     <!-- Favicon  -->
     <link rel="icon" href="assets/img/favicon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- ***** All CSS Files ***** -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">

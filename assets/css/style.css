@@ -2563,77 +2563,89 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15); /* Hoverda güçlü gölge */
 }
 
-/* Başlık kapsayıcısı */
-#about-container {
-    text-align: center; /* Kapsayıcıyı merkeze ayarlıyoruz */
-    padding: 20px;
-}
+/* ── HAKKIMIZDA Yeni İyileştirilmiş Stil ── */
 
-#about-baslik {
-    display: inline-block;
-    font-size: 60px;
-    font-weight: 900;
-    line-height: 1em;
-    letter-spacing: -1.6px;
-    color: #ffffff; /* Beyaz renk */
-    background: none; /* Arka plan rengini devre dışı bırakıyoruz */
-    transition: transform 0.3s ease;
-}
-#about-baslik:hover {
-    color: #f0f0f0; /* Hafif bir beyaz tonu (ince fark) */
-    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.6); /* Parlama efekti */
-    transform: scale(1.1); /* Hafif büyüme */
-}
+/* Bölüm arka planını hafifçe tonla, metni öne çıkar */
+#custom-bg.about-area {
+    backdrop-filter: blur(4px);
+  }
+  
+  /* Başlık: gradient yerine düz parlak beyaz + alt çizgi */
+  #about-baslik {
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    background: none !important;
+    letter-spacing: -1px;
+    margin-bottom: 0.5em;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    transition: none !important;
+  }
+  #about-baslik::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #40E0D0;
+    margin: 0.5em auto 0;
+    border-radius: 2px;
+  }
+  
+  /* Metin kutusu: daha hafif zemin, yumuşak köşeler, padding artırıldı */
+  #about-content .box {
+    border-left: 4px solid #40E0D0 !important;
+    border-radius: 10px !important;
+    padding: 30px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+    transition: none !important;
+  }
+  
+  /* Paragraf metni: okunaklı ve stabilleştirilmiş */
+  #about-content .box p {
+    font-size: 1.4rem !important;
+    font-weight: 500 !important;
+    color: #f5f5f5 !important;
+    line-height: 1.8 !important;
+    margin: 0 !important;
+    background: none !important;
+    transition: none !important;
+  }
+  
+  /* Drop‑cap’i biraz küçült, daha dengeli olsun */
+  #about-content .box p::first-letter {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #40E0D0;
+    margin-right: 8px;
+    float: left;
+    line-height: 1;
+    text-shadow: none;
+  }
+  
+  /* Küçük ekranlarda metin boyutunu azalt */
+  @media (max-width: 767px) {
+    #about-baslik {
+      font-size: 2.5rem !important;
+    }
+    #about-content .box p {
+      font-size: 1rem !important;
+    }
+    #about-content .box p::first-letter {
+      font-size: 2.2rem;
+      margin-right: 6px;
+    }
+  }
+  
 
-#about-content{
-    text-align: center;
-}
-#about-content p {
-    font-family: 'Verdana', sans-serif;
-    font-size: 1.1em;
-    color: white;
-    line-height: 1.8;
-    text-align: justify;
-    margin: 20px 0;
-    padding: 15px;
-    background: linear-gradient(135deg, rgba(64, 224, 208, 0.15), rgba(0, 0, 128, 0.15));
-    border-left: 5px solid #40E0D0;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-#about-content p:hover {
-    transform: scale(1.02);
-    background: linear-gradient(135deg, rgba(64, 224, 208, 0.3), rgba(0, 0, 128, 0.3));
-}
-
-
-#hakkimizda > h5{
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
-#vizyon > h5{
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-#misyon > h5{
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
-.about-content-contact img{
-    width: 200px;
-    transition: transform 0.3s ease;
-}
-.about-content-contact img:hover{
-    transform: scale(1.1);
-}
-
-
-
-
+/* CTA bölümündeki logo ikonunu küçült ve hover ölçeklemeyi iptal et */
+.section-contact .about-content-contact img {
+    width: 300px !important;    /* istediğin genişlik */
+    height: auto !important;
+    max-width: 100%;
+    transform: none !important;  /* önceki scale efektini kaldır */
+    transition: none !important; /* hover geçişini kaldır */
+  }
+  
 
 
 
@@ -4677,3 +4689,12 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 {
     text-align: start !important;
 }
+/* Özelliklerimiz bölümündeki .row’a mutlaka dikey boşluk uygula */
+#index-industrial-paint-features-section .row,
+#index-industrial-paint-features-section .gx-4.gy-4 {
+  row-gap: 1.5rem !important; /* veya istediğin px/rem değeri */
+}
+#custom-bg.index-industrial-paint-features-section .row {
+    row-gap: 1.5rem !important;
+  }
+  

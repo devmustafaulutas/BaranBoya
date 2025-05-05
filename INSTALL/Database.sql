@@ -645,21 +645,21 @@ VALUES
     2,   
     '81 İLE HIZLI TESLİMAT',   
     'Türkiye genelindeki 81 ile hızlı ve güvenilir teslimat hizmeti sunuyoruz. Siparişleriniz güvenli şekilde adresinize teslim edilir.',  
-    '<i class="material-icons">local_shipping</i>',  
+    '<i class="fas fa-truck"></i>',  
     CURRENT_TIMESTAMP()
     ),  
 (  
     3,   
     'TEKNİK DESTEK',   
     'Her türlü teknik sorununuzda uzman ekibimiz yanınızda. Sorunlarınıza hızlı ve etkili çözümler sunuyoruz.',  
-    '<i class="material-icons">build</i>',   
+    '<i class="fas fa-tools"></i>',   
     CURRENT_TIMESTAMP()
 ),  
 (  
     4,   
     'YÜKSEK ÜRÜN KALİTESİ',   
     'Sizlere en iyi ürün deneyimini sunmak için yüksek kalite standartlarında üretim yapıyoruz. Ürünlerimiz güvenilir ve dayanıklıdır.',  
-    '<i class="material-icons">percent</i>',   
+    '<i class="fas fa-percentage"></i>',   
     CURRENT_TIMESTAMP()
 );  
 
