@@ -640,28 +640,43 @@ INSERT INTO `service` (
     `upadated_at`
 ) 
 
-VALUES  
-(  
-    2,   
-    '81 İLE HIZLI TESLİMAT',   
-    'Türkiye genelindeki 81 ile hızlı ve güvenilir teslimat hizmeti sunuyoruz. Siparişleriniz güvenli şekilde adresinize teslim edilir.',  
-    '<i class="fas fa-truck"></i>',  
-    CURRENT_TIMESTAMP()
-    ),  
-(  
-    3,   
-    'TEKNİK DESTEK',   
-    'Her türlü teknik sorununuzda uzman ekibimiz yanınızda. Sorunlarınıza hızlı ve etkili çözümler sunuyoruz.',  
-    '<i class="fas fa-tools"></i>',   
-    CURRENT_TIMESTAMP()
-),  
-(  
-    4,   
-    'YÜKSEK ÜRÜN KALİTESİ',   
-    'Sizlere en iyi ürün deneyimini sunmak için yüksek kalite standartlarında üretim yapıyoruz. Ürünlerimiz güvenilir ve dayanıklıdır.',  
-    '<i class="fas fa-percentage"></i>',   
-    CURRENT_TIMESTAMP()
-);  
+VALUES
+  (2, 
+   'Dayanıklılık', 
+   'Yüksek dayanıklılığı sayesinde uzun süreli koruma sunar ve bakım ihtiyacını kolayca azaltır.', 
+   '<i class="fas fa-shield-alt"></i>', 
+   CURRENT_TIMESTAMP()
+  ),
+  (3, 
+   'Çevre Dostu', 
+   'Doğa dostu formüllerimizle çevreye zarar vermeden etkili bakım ve atık oluşumunu azaltır.', 
+   '<i class="fas fa-leaf"></i>', 
+   CURRENT_TIMESTAMP()
+  ),
+  (4, 
+   'Yüksek Kalite', 
+   'En kaliteli malzemelerle üstün performans sunar, sürekli olarak beklentileri karşılayan ürünler üretir.', 
+   '<i class="fas fa-paint-roller"></i>', 
+   CURRENT_TIMESTAMP()
+  ),
+  (5, 
+   'YÜKSEK ÜRÜN KALİTESİ', 
+   'Yüksek kalite standartlarında üretim yaparak üstün performans garantisi verir ve güvenilirlik sunar.', 
+   '<i class="fas fa-percentage"></i>', 
+   CURRENT_TIMESTAMP()
+  ),
+  (6, 
+   'TEKNİK DESTEK', 
+   'Her türlü teknik sorununuzda uzman ekibimizle 7/24 iletişim kurup hızlı çözüm sağlar.', 
+   '<i class="fas fa-tools"></i>', 
+   CURRENT_TIMESTAMP()
+  ),
+  (7, 
+   '81 İLE HIZLI TESLİMAT', 
+   'Türkiye geneline 81 ilde hızlı teslimat yaparak güvenli ve zamanında hizmet sunar.', 
+   '<i class="fas fa-truck"></i>', 
+   CURRENT_TIMESTAMP()
+  );
 
 
 

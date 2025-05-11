@@ -4697,4 +4697,18 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 #custom-bg.index-industrial-paint-features-section .row {
     row-gap: 1.5rem !important;
   }
+.index-icon-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* CTA bölümündeki logo ikonunu küçült ve hover ölçeklemeyi iptal et */
+body > div.main.overflow-hidden > section.section.cta-area.bg-overlay-1.ptb_100 > div > div > div > div > div > a > img{
+    width: 300px !important;    /* istediğin genişlik */
+    height: auto !important;
+    max-width: 100%;
+    transform: none !important;  /* önceki scale efektini kaldır */
+    transition: none !important; /* hover geçişini kaldır */
+  }
   
