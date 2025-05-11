@@ -2910,6 +2910,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
     font-size: 15px;
     border: 1px solid #e5e5e5;
     height: 150px;
+    
 }
 
 /* ******************************
@@ -4335,7 +4336,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 #contact-button {
     color: white;
     border: 2px solid white;
-    background-color: rgb(4, 152, 205);
+
 }
 /* FOOOOOOOOOOOOOOOOOTERRRRRRRRRRRRRRRRR */
 /* FOOTER BACKGROUND OVERLAY */
@@ -4711,4 +4712,98 @@ body > div.main.overflow-hidden > section.section.cta-area.bg-overlay-1.ptb_100 
     transform: none !important;  /* önceki scale efektini kaldır */
     transition: none !important; /* hover geçişini kaldır */
   }
-  
+#custom-bg > div > div > div.col-12.col-lg-6.pt-6 > div > form > div > div:nth-child(1) > div:nth-child(1) > input{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+    
+
+}
+
+#custom-bg input::placeholder {
+    color: #ffffff99; /* beyaz ama yarı saydam placeholder */
+}
+#custom-bg > div > div > div.col-12.col-lg-6.pt-6 > div > form > div > div:nth-child(1) > div:nth-child(2) > input{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}
+#custom-bg > div > div > div.col-12.col-lg-6.pt-6 > div > form > div > div:nth-child(1) > div:nth-child(3) > input{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}
+#custom-bg > div > div > div.col-12.col-lg-6.pt-6 > div > form > div > div:nth-child(2) > div > textarea{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}
+#custom-bg textarea::placeholder {
+    color: #ffffff99; /* yarı saydam beyaz */
+}
+#custom-bg > div > div > div.col-12.col-lg-6.pt-4.pt-lg-0 > div > form > div > div:nth-child(1) > div:nth-child(1) > input{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}
+#custom-bg > div > div > div.col-12.col-lg-6.pt-4.pt-lg-0 > div > form > div > div:nth-child(1) > div:nth-child(2) > input{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}   
+#custom-bg > div > div > div.col-12.col-lg-6.pt-4.pt-lg-0 > div > form > div > div:nth-child(1) > div:nth-child(3) > input{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}
+#custom-bg > div > div > div.col-12.col-lg-6.pt-4.pt-lg-0 > div > form > div > div:nth-child(2) > div > textarea{
+    background-color: transparent;
+    border: 1px solid #ffffff; /* beyaz kenarlık */
+    color: #ffffff; /* yazı rengi */
+    padding: 10px;
+    border-radius: 5px;
+}
+#custom-bg > div > div:nth-child(10) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a{
+    font-size: large;
+}
+#custom-bg > div > div:nth-child(5) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(4) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(2) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(3) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #fff;
+}
+#custom-bg > div > div:nth-child(6) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(7) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(8) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(9) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
+#custom-bg > div > div:nth-child(10) > div.col-lg-8.col-md-6.col-sm-12.index-sector-content-wrap.fade-in.visible > div > a:hover{
+    color: #ffff;
+}
