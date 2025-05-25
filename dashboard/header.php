@@ -28,47 +28,54 @@ if (isset($_SESSION['username'])) {
 
 ?>
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
-
-
-<!-- Mirrored from themesbrand.com/velzon/html/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 Jun 2022 20:35:42 GMT -->
+<html lang="tr"  
+      data-layout="vertical" 
+      data-topbar="light" 
+      data-sidebar="dark" 
+      data-sidebar-size="lg" 
+      data-sidebar-image="none">
 <head>
+  <meta charset="utf-8" />
+  <title>Dashboard | Vogue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ▶▶▶ Sayfa yüklenir yüklenmez saklı modu uygula -->
+<script>
+  (function(){
+    const saved = localStorage.getItem('layoutMode') || 'light';
+    document.documentElement.setAttribute('data-layout-mode', saved);
+  })();
+</script>
 
-    <meta charset="utf-8" />
-    <title>Dashboard | Vogue</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.icon">
+  <!-- Boxicons & Remixicon -->
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"/>
 
-    <!-- jsvectormap css -->
-    <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+  <!-- ▶▶▶ Temayı hemen uygula (CSS flash’ını önlemek için) -->
 
-    <!--Swiper slider css-->
-    <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Layout config Js -->
-    <script src="assets/js/layout.js"></script>
-    <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/blog.css" rel="stylesheet" type="text/css" />
-    <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" />
 
-</head>
+  <!-- Core CSS’ler -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="assets/css/icons.min.css"     rel="stylesheet"/>
+  <link href="assets/css/app.min.css"       rel="stylesheet"/>
+  <link href="assets/css/blog.css"          rel="stylesheet"/>
+  <link href="assets/css/custom.min.css"    rel="stylesheet"/>
+
+  <!-- Diğer kütüphane CSS’leri -->
+  <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet"/>
+  <link href="assets/libs/swiper/swiper-bundle.min.css"       rel="stylesheet"/>
+
+  <!-- Layout config -->
+  <script src="assets/js/dashboard.js"></script>
+  </head>
+<body>
 
 <body>
 
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        <header id="page-topbar">
-    <div class="layout-width">
+    <header id="page-topbar">
         <div class="navbar-header">
             <div class="d-flex">
                 <!-- LOGO -->
@@ -130,12 +137,12 @@ if (isset($_SESSION['username'])) {
 
 
 
-                <div class="ms-1 header-item d-none d-sm-flex">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                <!-- Fullscreen butonu -->
+                <button type="button"
+                        class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         data-toggle="fullscreen">
-                        <i class='bx bx-fullscreen fs-22'></i>
-                    </button>
-                </div>
+                    <i class='bx bx-fullscreen fs-22'></i>
+                </button>
 
                 <div class="ms-1 header-item d-none d-sm-flex">
                     <button type="button"

@@ -44,7 +44,7 @@ $ufile = $r[0];
 
 
         <li class="nav-item">
-                <a href="" class="nav-link" data-key="t-analytics">  <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards"> Admin Paneli </span></a>
+                <a href="home" class="nav-link" data-key="t-analytics">  <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards"> Admin Paneli </span></a>
               </li>
 
               <li class="nav-item">

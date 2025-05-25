@@ -37,3 +37,15 @@
 [11-May-2025 17:49:34 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 217
 [11-May-2025 17:49:34 Europe/Berlin] PHP Notice:  Undefined variable: contact_title in C:\xampp\htdocs\vogue\index.php on line 413
 [11-May-2025 17:49:34 Europe/Berlin] PHP Notice:  Undefined variable: contact_text in C:\xampp\htdocs\vogue\index.php on line 414
+[12-May-2025 20:04:05 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 145
+[12-May-2025 20:04:05 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 146
+[12-May-2025 20:04:05 Europe/Berlin] PHP Notice:  Undefined variable: service_text in C:\xampp\htdocs\vogue\index.php on line 147
+[12-May-2025 20:04:05 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 205
+[12-May-2025 20:04:05 Europe/Berlin] PHP Notice:  Undefined variable: contact_title in C:\xampp\htdocs\vogue\index.php on line 401
+[12-May-2025 20:04:05 Europe/Berlin] PHP Notice:  Undefined variable: contact_text in C:\xampp\htdocs\vogue\index.php on line 402
+[12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 145
+[12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: service_text in C:\xampp\htdocs\vogue\index.php on line 146
+[12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: service_text in C:\xampp\htdocs\vogue\index.php on line 147
+[12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 204
+[12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: contact_title in C:\xampp\htdocs\vogue\index.php on line 400
+[12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: contact_text in C:\xampp\htdocs\vogue\index.php on line 401

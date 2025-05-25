@@ -149,7 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="row">
-
                 <?php
                 $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id DESC LIMIT 6");
                 $stmt->execute();

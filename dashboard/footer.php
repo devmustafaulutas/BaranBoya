@@ -69,8 +69,9 @@
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>
-</body>
 
+</body>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Mirrored from themesbrand.com/velzon/html/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 Jun 2022 20:37:39 GMT -->
 

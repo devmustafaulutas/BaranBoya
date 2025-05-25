@@ -51,3 +51,65 @@ body {
         transform: translateY(0);
     }
 }
+/* Tema değişkenleri */
+:root {
+    --bg: #ffffff;
+    --fg: #000000;
+    --card-bg: #f8f9fa;
+    --menu-bg: #ffffff;
+    --header-bg: #ffffff;
+    --footer-bg: #ffffff;
+  }
+  
+  /* Koyu tema değerleri */
+  [data-theme="dark"] {
+    --bg: #1e1e2f;
+    --fg: #dde2ff;
+    --card-bg: #2a2a3c;
+    --menu-bg: #2a2a3c;
+    --header-bg: #2a2a3c;
+    --footer-bg: #21212b;
+  }
+  
+  /* Temel elemanları değiştir */
+  body {
+    background-color: var(--bg) !important;
+    color:            var(--fg) !important;
+  }
+  
+  /* Sidebar/Menu */
+  .app-menu,
+  .navbar-menu,
+  [data-sidebar="dark"] .app-menu {
+    background-color: var(--menu-bg) !important;
+  }
+  
+  /* Üst bar */
+  #page-topbar {
+    background-color: var(--header-bg) !important;
+  }
+  
+  /* Kartlar */
+  .card {
+    background-color: var(--card-bg) !important;
+    border-color:     rgba(255,255,255,0.05) !important;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: var(--footer-bg) !important;
+  }
+  
+  /* Link, buton vb. */
+  a,
+  .btn {
+    color: var(--fg) !important;
+  }
+  
+  /* İsteğe bağlı: form alanları, input arka planları */
+  .form-control {
+    background-color: var(--bg) !important;
+    color:            var(--fg) !important;
+    border:           1px solid rgba(255,255,255,0.1) !important;
+  }
+  

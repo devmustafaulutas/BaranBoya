@@ -18,7 +18,7 @@ function decrypt_id($encrypted_id) {
 $urun_id = isset($_GET['urun_id']) ? decrypt_id($_GET['urun_id']) : 0;
 
 // Ürün bilgilerini al
-$stmt = $con->prepare("SELECT id, isim, fiyat, resim, kategori_id, alt_kategori_id, alt_kategori_alt_id FROM urunler WHERE id = ?");
+$stmt = $con->prepare("SELECT id, isim, resim, kategori_id, alt_kategori_id, alt_kategori_alt_id FROM urunler WHERE id = ?");
 $stmt->bind_param("i", $urun_id);
 $stmt->execute();
 // Değişiklik Başlangıcı
@@ -26,12 +26,11 @@ $stmt->execute();
 $product_result = $stmt->get_result();
 $product = $product_result->fetch_assoc();
 */
-$stmt->bind_result($id, $isim, $fiyat, $resim, $kategori_id, $alt_kategori_id, $alt_kategori_alt_id /*, diğer alanlar */);
+$stmt->bind_result($id, $isim, $resim, $kategori_id, $alt_kategori_id, $alt_kategori_alt_id /*, diğer alanlar */);
 if ($stmt->fetch()) {
     $product = [
         'id' => $id,
         'isim' => $isim,
-        'fiyat' => $fiyat,
         'resim' => $resim,
         'kategori_id' => $kategori_id,
         'alt_kategori_id' => $alt_kategori_id,
@@ -232,7 +231,7 @@ if ($subSubcategory) {
                 </div>
                 <div class="product-info-item">
                    <p><strong>Kimyasal Yapı </strong></p>
-                   <p><?php echo $product['fiyat']; ?> TL</p>
+                   <p> </p>
                 </div>
                 <div class="product-info-item">
                     <p><strong>Renk</strong></p>

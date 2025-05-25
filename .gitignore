@@ -2,3 +2,4 @@ git rm --cached .env
 git rm --cached -r INSTALL/
 git rm --cached z_db.php
 git rm --cached -r vendor/
+git rm --cached error.log
