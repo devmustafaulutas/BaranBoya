@@ -454,6 +454,10 @@ INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_i
 
 -- --------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS page_visits (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  visited_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 
 CREATE TABLE IF NOT EXISTS `blog` (

@@ -2,8 +2,9 @@
 include "../z_db.php";
 
 
-session_start();
-// Check, if username session is NOT set then this page will jump to login page
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}// Check, if username session is NOT set then this page will jump to login page
 
 if (!isset($_SESSION['username'])) {
         print "
@@ -38,21 +39,10 @@ if (isset($_SESSION['username'])) {
   <meta charset="utf-8" />
   <title>Dashboard | Vogue</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- ▶▶▶ Sayfa yüklenir yüklenmez saklı modu uygula -->
-<script>
-  (function(){
-    const saved = localStorage.getItem('layoutMode') || 'light';
-    document.documentElement.setAttribute('data-layout-mode', saved);
-  })();
-</script>
 
-  <!-- Boxicons & Remixicon -->
+
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"/>
-
-  <!-- ▶▶▶ Temayı hemen uygula (CSS flash’ını önlemek için) -->
-
-
 
   <!-- Core CSS’ler -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>

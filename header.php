@@ -85,15 +85,10 @@ $stmt->close();
 </head>
 
 <body>
-    <!--====== Preloader Area Start ======-->
     <div id="preloader">
-        <!-- Digimax Preloader -->
         <div id="digimax-preloader" class="digimax-preloader">
-            <!-- Preloader Animation -->
             <div class="preloader-animation">
-                <!-- Spinner -->
                 <div class="spinner"></div>
-                <!-- Loader -->
                 <div class="loader">
                     <span data-text-preloader="B" class="animated-letters">B</span>
                     <span data-text-preloader="A" class="animated-letters">A</span>
@@ -110,19 +105,15 @@ $stmt->close();
             <!-- Loader Animation -->
             <div class="loader-animation">
                 <div class="row h-100">
-                    <!-- Single Loader -->
                     <div class="col-3 single-loader p-0">
                         <div class="loader-bg"></div>
                     </div>
-                    <!-- Single Loader -->
                     <div class="col-3 single-loader p-0">
                         <div class="loader-bg"></div>
                     </div>
-                    <!-- Single Loader -->
                     <div class="col-3 single-loader p-0">
                         <div class="loader-bg"></div>
                     </div>
-                    <!-- Single Loader -->
                     <div class="col-3 single-loader p-0">
                         <div class="loader-bg"></div>
                     </div>
@@ -130,14 +121,9 @@ $stmt->close();
             </div>
         </div>
     </div>
-    <!--====== Preloader Area End ======-->
-
-    <!--====== Scroll To Top Area Start ======-->
     <div id="scrollUp" title="Scroll To Top">
         <i class="fas fa-arrow-up"></i>
     </div>
-    <!--====== Scroll To Top Area End ======-->
-
     <div class="main overflow-hidden">
         <header id="header">
             <nav data-aos="zoom-out" data-aos-delay="800" class="navbar navbar-expand">
@@ -201,7 +187,7 @@ $stmt->close();
                             }
                             ?>
                             <li class="nav-item dropdown mega-dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">All Products</a>
+                                <a href="#" class="nav-link dropdown-toggle">Ürünler</a>
                                 <div class="mega-menu">
                                     <div class="mega-menu-col categories">
                                         <ul>
@@ -283,9 +269,7 @@ $stmt->close();
                                             <ul class="submenu">
                                                 <?php foreach ($subcats[$cat['id']] as $sc): ?>
                                                     <li>
-                                                        <a href="urunler.php?
-                    kategori_id=<?= rawurlencode(encrypt_id($cat['id'])) ?>&
-                    alt_kategori_id=<?= rawurlencode(encrypt_id($sc['id'])) ?>">
+                                                        <a href="urunler.php?kategori_id=<?= rawurlencode(encrypt_id($cat['id'])) ?>&alt_kategori_id=<?= rawurlencode(encrypt_id($sc['id'])) ?>">
                                                             <?= htmlspecialchars($sc['isim']) ?>
                                                         </a>
                                                     </li>
@@ -297,10 +281,8 @@ $stmt->close();
                             </ul>
                         </li>
 
-                        <li> <a href="https://www.kalipsilikonu.com/" target="_blank" class="nav-link">Online
-                                Alışveriş</a></li>
-                        <li> <a href="https://tahsilat.baranboya.com/Payment/UnAuthenticatedPayment?notAut=True"
-                                target="_blank" class="nav-link">Online Tahsilat</a></li>
+                        <li> <a href="https://www.kalipsilikonu.com/" target="_blank" class="nav-link">Online Alışveriş</a></li>
+                        <li> <a href="https://tahsilat.baranboya.com/Payment/UnAuthenticatedPayment?notAut=True"target="_blank" class="nav-link">Online Tahsilat</a></li>
                         <li><a href="contact">İletişim</a></li>
                     </ul>
                 </div>
