@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [11-May-2025 17:44:02 Europe/Berlin] PHP Notice:  Undefined variable: services in C:\xampp\htdocs\vogue\index.php on line 156
 [11-May-2025 17:44:02 Europe/Berlin] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\vogue\index.php on line 156
 [11-May-2025 17:44:02 Europe/Berlin] PHP Notice:  Undefined variable: services in C:\xampp\htdocs\vogue\index.php on line 169
@@ -49,3 +50,7 @@
 [12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: service_title in C:\xampp\htdocs\vogue\index.php on line 204
 [12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: contact_title in C:\xampp\htdocs\vogue\index.php on line 400
 [12-May-2025 20:05:23 Europe/Berlin] PHP Notice:  Undefined variable: contact_text in C:\xampp\htdocs\vogue\index.php on line 401
+=======
+[11-May-2025 18:03:06 Europe/Berlin] PHP Warning:  require(dashboard/PHPMailer/src/Exception.php): failed to open stream: No such file or directory in C:\xampp\htdocs\vogue\index.php on line 12
+[11-May-2025 18:03:06 Europe/Berlin] PHP Fatal error:  require(): Failed opening required 'dashboard/PHPMailer/src/Exception.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\vogue\index.php on line 12
+>>>>>>> b12754676ce9ed13a03d6c47a9c5a321927dbdc0
