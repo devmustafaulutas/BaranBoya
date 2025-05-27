@@ -1,144 +1,277 @@
 <?php
-include 'header.php'; // Header dosyasını dahil ediyoruz
-include 'sidebar.php'; // Sidebar dosyasını dahil ediyoruz
-include '../z_db.php'; // Veritabanı bağlantısı
+include '../z_db.php';
 
-// İşlem ve tablo belirleme
-$action = isset($_GET['action']) ? $_GET['action'] : '';
-$table = isset($_GET['table']) ? $_GET['table'] : '';
-
-if ($action == 'delete') {
-    $id = $_GET['id'];
-    if ($table == 'kategoriler') {
-        $sql = "DELETE FROM kategoriler WHERE id = ?";
-    } elseif ($table == 'alt_kategoriler') {
-        $sql = "DELETE FROM alt_kategoriler WHERE id = ?";
-    } elseif ($table == 'alt_kategoriler_alt') {
-        $sql = "DELETE FROM alt_kategoriler_alt WHERE id = ?";
-    }
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("i", $id);
+// DELETE işlemi
+$action = $_GET['action'] ?? '';
+$table = $_GET['table'] ?? '';
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+if ($action === 'delete' && in_array($table, ['kategoriler', 'alt_kategoriler', 'alt_kategoriler_alt'])) {
+    $stmt = $con->prepare("DELETE FROM `$table` WHERE id = ?");
+    $stmt->bind_param('i', $id);
     $stmt->execute();
     header('Location: categorys.php');
+    exit;
 }
 
-// Kategorileri Listeleme
-$sql_kategoriler = "SELECT * FROM kategoriler";
-$result_kategoriler = $con->query($sql_kategoriler);
+// ADD/UPDATE işlemi
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $tbl = $_POST['table'];
+    $is_edit = !empty($_POST['id']);
+    $isim = $_POST['isim'];
+    $resim = '';
 
-// Alt Kategorileri Listeleme
-$sql_alt_kategoriler = "SELECT ak.*, k.isim AS kategori_isim FROM alt_kategoriler ak JOIN kategoriler k ON ak.kategori_id = k.id";
-$result_alt_kategoriler = $con->query($sql_alt_kategoriler);
+    // Resim upload
+    if (isset($_FILES['resim']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
+        $dir = '../assets/img/categorys/';
+        $tmp = $_FILES['resim']['tmp_name'];
+        $ext = pathinfo($_FILES['resim']['name'], PATHINFO_EXTENSION);
+        $file = uniqid('cat_', true) . ".{$ext}";
+        move_uploaded_file($tmp, "$dir{$file}");
+        $resim = $file;
+    }
 
-// Alt Kategorilerin Altını Listeleme
-$sql_alt_kategoriler_alt = "SELECT aka.*, ak.isim AS alt_kategori_isim FROM alt_kategoriler_alt aka JOIN alt_kategoriler ak ON aka.alt_kategori_id = ak.id";
-$result_alt_kategoriler_alt = $con->query($sql_alt_kategoriler_alt);
+    // Parent ID (alt- and alt-alt için)
+    $parent = $_POST['parent_id'] ?? null;
 
-// HTML ve Formlar
+    // Sorgu hazırlığı
+    if ($tbl === 'kategoriler') {
+        if ($is_edit) {
+            $sql = 'UPDATE kategoriler SET isim = ?, resim = ? WHERE id = ?';
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param('ssi', $isim, $resim, $_POST['id']);
+        } else {
+            $sql = 'INSERT INTO kategoriler (isim, resim) VALUES (?, ?)';
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param('ss', $isim, $resim);
+        }
+    } elseif ($tbl === 'alt_kategoriler') {
+        if ($is_edit) {
+            $sql = 'UPDATE alt_kategoriler SET isim = ?, resim = ?, kategori_id = ? WHERE id = ?';
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param('ssii', $isim, $resim, $parent, $_POST['id']);
+        } else {
+            $sql = 'INSERT INTO alt_kategoriler (isim, resim, kategori_id) VALUES (?, ?, ?)';
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param('ssi', $isim, $resim, $parent);
+        }
+    } else {
+        // alt_kategoriler_alt
+        if ($is_edit) {
+            $sql = 'UPDATE alt_kategoriler_alt SET isim = ?, resim = ?, alt_kategori_id = ? WHERE id = ?';
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param('ssii', $isim, $resim, $parent, $_POST['id']);
+        } else {
+            $sql = 'INSERT INTO alt_kategoriler_alt (isim, resim, alt_kategori_id) VALUES (?, ?, ?)';
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param('ssi', $isim, $resim, $parent);
+        }
+    }
+    $stmt->execute();
+    header('Location: categorys.php');
+    exit;
+}
+
+// Verileri çek
+$kats = $con->query("SELECT * FROM kategoriler ORDER BY isim ASC");
+$sub = $con->query("SELECT ak.*, k.isim AS kategori_adi FROM alt_kategoriler ak JOIN kategoriler k ON ak.kategori_id = k.id ORDER BY ak.isim ASC");
+$subsub = $con->query("SELECT aas.*, ak.isim AS alt_kategori_adi FROM alt_kategoriler_alt aas JOIN alt_kategoriler ak ON aas.alt_kategori_id = ak.id ORDER BY aas.isim ASC");
+
+// Düzenleme için GET parametreleri
+$edit_tbl = ($_GET['action'] === 'edit') ? $_GET['table'] : null;
+$edit_id = $edit_tbl ? $id : null;
+if ($edit_tbl) {
+    $r = $con->query("SELECT * FROM $edit_tbl WHERE id = $edit_id")->fetch_assoc();
+}
+include 'header.php';
+include 'sidebar.php';
 ?>
-<div id="container-categorys-heading" class="container">
-    <div class="row">
-        <div class="col-12">
-            <h3 class="center">
-                Kullanım Kılavuzu
-            </h3>
-            <p>
-                Bu sayfada kategorileri, alt kategorileri ve alt kategorilerin altını yönetebilirsiniz.<br>
-                Kategori Güncelleme ve Silme işlemleri için tabloda bulunan butonları kullanabilirsiniz.<br>
-                Alt Kategori Güncelle ve Ekleme işlemlerinde ise hangi kategorinin altında gözükmesini istiyorsanız o kategorinin id bilgisine bakıp eklemeli veya güncellemelisiniz.<br>
-                Alt Kategorilerin Altı Ekleme işleminde ise hangi alt kategorinin altında gözükmesini istiyorsanız o alt kategorinin id bilgisine bakıp eklemelisiniz.
+
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid mt-4">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><button
+                        class="nav-link <?= (!$edit_tbl || $edit_tbl === 'kategoriler') ? 'active' : '' ?>"
+                        data-bs-toggle="tab" data-bs-target="#main">Kategori</button></li>
+                <li class="nav-item"><button class="nav-link <?= ($edit_tbl === 'alt_kategoriler') ? 'active' : '' ?>"
+                        data-bs-toggle="tab" data-bs-target="#sub">Alt Kategori</button></li>
+                <li class="nav-item"><button
+                        class="nav-link <?= ($edit_tbl === 'alt_kategoriler_alt') ? 'active' : '' ?>"
+                        data-bs-toggle="tab" data-bs-target="#subsub">Alt-Alt Kategori</button></li>
+            </ul>
+            <div class="tab-content p-3">
+                <!-- Ana Kategori -->
+                <div id="main"
+                    class="tab-pane fade <?= (!$edit_tbl || $edit_tbl === 'kategoriler') ? 'show active' : '' ?>">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="table" value="kategoriler">
+                        <?php if ($edit_id): ?><input type="hidden" name="id" value="<?= $edit_id ?>"><?php endif; ?>
+                        <div class="mb-3">
+                            <label class="form-label">İsim</label>
+                            <input type="text" name="isim" class="form-control" value="<?= $r['isim'] ?? '' ?>"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resim</label>
+                            <input type="file" name="resim" class="form-control">
+                        </div>
+                        <button type="submit"
+                            class="btn btn-<?= $edit_id ? 'warning' : 'success' ?>"><?= $edit_id ? 'Güncelle' : 'Ekle' ?></button>
+                    </form>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>İsim</th>
+                                <th>Resim</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($o = $kats->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $o['id'] ?></td>
+                                    <td><?= htmlspecialchars($o['isim']) ?></td>
+                                    <td><?php if ($o['resim']): ?><img src="../<?= $o['resim'] ?>"
+                                                style="width:40px"><?php endif; ?></td>
+                                    <td>
+                                        <a href="?action=edit&table=kategoriler&id=<?= $o['id'] ?>#main"
+                                            class="btn btn-sm btn-primary">Düzenle</a>
+                                        <a href="?action=delete&table=kategoriler&id=<?= $o['id'] ?>"
+                                            class="btn btn-sm btn-danger">Sil</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Alt Kategori -->
+                <div id="sub" class="tab-pane fade <?= ($edit_tbl === 'alt_kategoriler') ? 'show active' : '' ?>">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="table" value="alt_kategoriler">
+                        <?php if ($edit_tbl === 'alt_kategoriler'): ?><input type="hidden" name="id"
+                                value="<?= $edit_id ?>"><?php endif; ?>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Üst Kategori</label>
+                                <select name="parent_id" class="form-select" required>
+                                    <option value="">Seçiniz</option>
+                                    <?php $kats->data_seek(0);
+                                    while ($c = $kats->fetch_assoc()): ?>
+                                        <option value="<?= $c['id'] ?>" <?= (($r['kategori_id'] ?? '') == $c['id']) ? 'selected' : '' ?>><?= htmlspecialchars($c['isim']) ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">İsim</label>
+                                <input type="text" name="isim" class="form-control" value="<?= $r['isim'] ?? '' ?>"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resim</label>
+                            <input type="file" name="resim" class="form-control">
+                        </div>
+                        <button type="submit"
+                            class="btn btn-<?= ($edit_tbl === 'alt_kategoriler') ? 'warning' : 'success' ?>"><?= ($edit_tbl === 'alt_kategoriler') ? 'Güncelle' : 'Ekle' ?></button>
+                    </form>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>İsim</th>
+                                <th>Üst Kategori</th>
+                                <th>Resim</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($o = $sub->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $o['id'] ?></td>
+                                    <td><?= htmlspecialchars($o['isim']) ?></td>
+                                    <td><?= htmlspecialchars($o['kategori_adi']) ?></td>
+                                    <td><?php if ($o['resim']): ?><img src="../assets/img/categorys/<?= $o['resim'] ?>"
+                                                style="width:40px"><?php endif; ?></td>
+                                    <td>
+                                        <a href="?action=edit&table=alt_kategoriler&id=<?= $o['id'] ?>#sub"
+                                            class="btn btn-sm btn-primary">Düzenle</a>
+                                        <a href="?action=delete&table=alt_kategoriler&id=<?= $o['id'] ?>"
+                                            class="btn btn-sm btn-danger">Sil</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Alt-Alt Kategori -->
+                <div id="subsub"
+                    class="tab-pane fade <?= ($edit_tbl === 'alt_kategoriler_alt') ? 'show active' : '' ?>">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="table" value="alt_kategoriler_alt">
+                        <?php if ($edit_tbl === 'alt_kategoriler_alt'): ?><input type="hidden" name="id"
+                                value="<?= $edit_id ?>"><?php endif; ?>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Üst Alt Kategori</label>
+                                <select name="parent_id" class="form-select" required>
+                                    <option value="">Seçiniz</option>
+                                    <?php $sub->data_seek(0);
+                                    while ($c = $sub->fetch_assoc()): ?>
+                                        <option value="<?= $c['id'] ?>" <?= (($r['alt_kategori_id'] ?? '') == $c['id']) ? 'selected' : '' ?>><?= htmlspecialchars($c['isim']) ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">İsim</label>
+                                <input type="text" name="isim" class="form-control" value="<?= $r['isim'] ?? '' ?>"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resim</label>
+                            <input type="file" name="resim" class="form-control">
+                        </div>
+                        <button type="submit"
+                            class="btn btn-<?= ($edit_tbl === 'alt_kategoriler_alt') ? 'warning' : 'success' ?>"><?= ($edit_tbl === 'alt_kategoriler_alt') ? 'Güncelle' : 'Ekle' ?></button>
+                    </form>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>İsim</th>
+                                <th>Üst Alt Kategori</th>
+                                <th>Resim</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($o = $subsub->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $o['id'] ?></td>
+                                    <td><?= htmlspecialchars($o['isim']) ?></td>
+                                    <td><?= htmlspecialchars($o['alt_kategori_adi']) ?></td>
+                                    <td><?php if ($o['resim']): ?><img src="../assets/img/categorys/<?= $o['resim'] ?>"
+                                                style="width:40px"><?php endif; ?></td>
+                                    <td>
+                                        <a href="?action=edit&table=alt_kategoriler_alt&id=<?= $o['id'] ?>#subsub"
+                                            class="btn btn-sm btn-primary">Düzenle</a>
+                                        <a href="?action=delete&table=alt_kategoriler_alt&id=<?= $o['id'] ?>"
+                                            class="btn btn-sm btn-danger">Sil</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
-<div id="container-categorys" class="container mt-5">
-    <h1 class="mb-4">Kategoriler</h1>
-    <a href="add_form.php?table=kategoriler" class="btn btn-primary mb-3">Ekle</a>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>İsim</th>
-                <th>Resim</th>
-                <th>Kategori ID</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = $result_kategoriler->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id']; ?></td>
-                <td><?= $row['isim']; ?></td>
-                <td><?= $row['resim']; ?></td>
-                <td><?= $row['kategori_id']; ?></td>
-                <td>
-                    <a href="update_form.php?table=kategoriler&id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Güncelle</a>
-                    <a href="categorys.php?action=delete&table=kategoriler&id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
-                </td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-
-    <h1 class="mt-5 mb-4">Alt Kategoriler</h1>
-    <a href="add_form.php?table=alt_kategoriler" class="btn btn-primary mb-3">Ekle</a>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>İsim</th>
-                <th>Resim</th>
-                <th>Kategori ID</th>
-                <th>Kategori İsmi</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = $result_alt_kategoriler->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id']; ?></td>
-                <td><?= $row['isim']; ?></td>
-                <td><?= $row['resim']; ?></td>
-                <td><?= $row['kategori_id']; ?></td>
-                <td><?= $row['kategori_isim']; ?></td>
-                <td>
-                    <a href="update_form.php?table=alt_kategoriler&id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Güncelle</a>
-                    <a href="categorys.php?action=delete&table=alt_kategoriler&id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
-                </td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-
-    <h1 class="mt-5 mb-4">Alt Kategorilerin Altı</h1>
-    <a href="add_form.php?table=alt_kategoriler_alt" class="btn btn-primary mb-3">Ekle</a>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>İsim</th>
-                <th>Resim</th>
-                <th>Alt Kategori ID</th>
-                <th>Alt Kategori İsmi</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = $result_alt_kategoriler_alt->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id']; ?></td>
-                <td><?= $row['isim']; ?></td>
-                <td><?= $row['resim']; ?></td>
-                <td><?= $row['alt_kategori_id']; ?></td>
-                <td><?= $row['alt_kategori_isim']; ?></td>
-                <td>
-                    <a href="update_form.php?table=alt_kategoriler_alt&id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Güncelle</a>
-                    <a href="categorys.php?action=delete&table=alt_kategoriler_alt&id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
-                </td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
 </div>
 
-<?php include 'footer.php'; // Footer dosyasını dahil ediyoruz ?>
+<?php include 'footer.php'; ?>

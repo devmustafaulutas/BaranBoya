@@ -1,7 +1,6 @@
-RewriteEngine On    # Turn on the rewriting engine
+RewriteEngine On   
 php_flag display_errors on
 RewriteBase /vogue/dashboard/
-# RewriteBase /vogue/dashboard/
 
 
 RewriteRule    ^dashboard/?$    index.php    [NC,L]
@@ -20,6 +19,7 @@ RewriteRule    ^services/?$    services.php    [NC,L]
 RewriteRule    ^settings/?$    site-settings.php    [NC,L]
 RewriteRule    ^social/?$    social-links.php    [NC,L]
 RewriteRule    ^socials/?$    socials.php    [NC,L]
+RewriteRule    ^suppliers/?$    suppliers.php    [NC,L]
 
 RewriteRule    ^why/?$    why-us.php    [NC,L]
 RewriteRule    ^logo/?$    updatelogo.php    [NC,L]

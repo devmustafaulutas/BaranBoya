@@ -77,6 +77,7 @@ $stmt->close();
 
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">

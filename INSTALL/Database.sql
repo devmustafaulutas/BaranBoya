@@ -84,21 +84,6 @@ CREATE TABLE `alt_kategoriler_alt` (
     `alt_kategori_id` INT,
     FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
-
--- Ürünler tablosu, alt kategorilere bağlı
-CREATE TABLE `urunler` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `isim` VARCHAR(100) NOT NULL,
-    `aciklama` TEXT,
-    `fiyat` DECIMAL(10, 2) NOT NULL,
-    `stok` INT DEFAULT 0,
-    `resim` VARCHAR(255) NOT NULL,
-    `kategori_id` INT DEFAULT NULL,
-    `alt_kategori_id`  INT DEFAULT NULL,
-    `alt_kategori_alt_id` INT DEFAULT NULL,
-    FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
-) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
-
 INSERT INTO `kategoriler` (`isim`,`resim`) VALUES
 
 ('Reçineler','assets/img/categorys/YAT 1.jpeg'),
@@ -183,6 +168,26 @@ INSERT INTO `alt_kategoriler_alt` (`isim`,`resim`, `alt_kategori_id`) VALUES
 ('Mek Peroksitler (Polyester ve Jelkot Dondurucu)','alt_category_alt.png', 33),
 ('Kobalt Oktoatlar (Polyester ve Jelkot Hızlandırıcılar)','alt_category_alt.png', 33), 
 ('İnceltici Monomerler ve Kıvamlaştırıcılar','alt_category_alt.png', 33);
+
+-- Ürünler tablosu, alt kategorilere bağlı
+CREATE TABLE `urunler` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `isim` VARCHAR(100) NOT NULL,
+    `aciklama` TEXT,
+    `ozellikler` TEXT,
+    `kimyasalyapi` TEXT,
+    `renk` TEXT,
+    `uygulamasekli` TEXT,
+    `kullanimalani` TEXT,
+    `fiyat` DECIMAL(10, 2),
+    `stok` INT DEFAULT 0,
+    `resim` VARCHAR(255) NOT NULL,
+    `kategori_id` INT DEFAULT NULL,
+    `alt_kategori_id`  INT DEFAULT NULL,
+    `alt_kategori_alt_id` INT DEFAULT NULL,
+    FOREIGN KEY (`alt_kategori_id`) REFERENCES `alt_kategoriler`(`id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
+
 
 -- Ürünler için INSERT sorguları
 INSERT INTO `urunler` (`isim`, `aciklama`, `fiyat`, `stok`, `resim`, `kategori_id`, `alt_kategori_id`, `alt_kategori_alt_id`) VALUES
@@ -626,8 +631,8 @@ CREATE TABLE IF NOT EXISTS `service` (
   `id` int(11) NOT NULL,
   `service_title` varchar(500) NOT NULL,
   `service_desc` varchar(1000) NOT NULL,
-  `service_detail` varchar(2000) NOT NULL,
-  `ufile` varchar(1000) NOT NULL,
+  `service_detail` varchar(2000),
+  `ufile` varchar(1000),
   `icon` varchar(200) NOT NULL,
   `upadated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;

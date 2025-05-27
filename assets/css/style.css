@@ -3530,7 +3530,7 @@ body > div.main.overflow-hidden > section.section.breadcrumb-area.overlay-dark.d
 .product-card-row {
     display: flex;
     flex-wrap: wrap; /* Kartlar yatayda ve satırlara yayılır */
-    gap: 20px; /* Kartlar arasındaki boşluk */
+    gap: 10px; /* Kartlar arasındaki boşluk */
 }
 
 .category-card, .subcategory-card {

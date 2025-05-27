@@ -324,7 +324,7 @@ if ($action == 'delete_logo' && isset($_GET['id'])) {
             <a class="nav-link <?php echo ($action == 'edit_sitecontact') ? 'active' : ''; ?>" href="sitesettings.php?action=sitecontact">İletişim Bilgileri</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php echo ($action == 'edit_logo') ? 'active' : ''; ?>" href="sitesettings.php?action=edit_logo">Logolar</a>
+            <a class="nav-link <?php echo ($action == 'edit_logo') ? 'active' : ''; ?>" href="sitesettings.php?action=logo">Logolar</a>
         </li>
         <li class="nav-item">
             <a class="nav-link <?php echo ($action == 'setup_2fa.php') ? 'active' : ''; ?>" href="sitesettings.php?action=setup_2fa.php">2 Aşamalı Doğrulama</a>
@@ -599,7 +599,7 @@ if ($action == 'delete_logo' && isset($_GET['id'])) {
                     </div>
                     <?php
                     break;
-                    case 'edit_logo':
+                    case 'logo':
                         ?>
                         <?php
                         if ($action == 'edit_logo' && isset($logo)):

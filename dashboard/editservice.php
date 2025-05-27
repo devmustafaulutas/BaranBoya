@@ -1,191 +1,199 @@
 <?php
-include"header.php";
-$todo=  mysqli_real_escape_string($con,$_GET['id']);
-include"sidebar.php";
+// edit-service.php
 
+// Veritabanı bağlantısı ve POST işlemleri
+include "../z_db.php";
+$status = "OK";
+$msg    = "";
+
+// Gelen id
+$todo = intval($_GET['id']);
+
+// Kaydetme işlemi
+if (isset($_POST['save'])) {
+    $service_title  = mysqli_real_escape_string($con, $_POST['service_title']);
+    $service_desc   = mysqli_real_escape_string($con, $_POST['service_desc']);
+    $service_detail = mysqli_real_escape_string($con, $_POST['service_detail']);
+    $icon_html      = mysqli_real_escape_string($con, $_POST['icon_html']);
+
+    // Validasyon
+    if (strlen($service_title) < 5) {
+        $msg    .= "Başlık en az 5 karakter olmalı.<br>";
+        $status = "NOTOK";
+    }
+    if (strlen($service_desc) > 150) {
+        $msg    .= "Kısa açıklama 150 karakterden uzun olamaz.<br>";
+        $status = "NOTOK";
+    }
+    if (strlen($service_detail) < 15) {
+        $msg    .= "Detay en az 15 karakter olmalı.<br>";
+        $status = "NOTOK";
+    }
+    if (empty($icon_html)) {
+        $msg    .= "Lütfen bir ikon seçin.<br>";
+        $status = "NOTOK";
+    }
+
+    if ($status === "OK") {
+        $sql = "UPDATE service SET
+                    service_title='{$service_title}',
+                    service_desc='{$service_desc}',
+                    service_detail='{$service_detail}',
+                    icon='{$icon_html}'
+                 WHERE id={$todo}";
+        if (mysqli_query($con, $sql)) {
+            header("Location: services");
+            exit;
+        } else {
+            $msg = "Veritabanı hatası: " . mysqli_error($con);
+        }
+    }
+}
+
+// Mevcut verileri çekme
+$query = "SELECT * FROM service WHERE id={$todo}";
+$result = mysqli_query($con, $query);
+$row = mysqli_fetch_assoc($result);
+
+$service_title  = $row['service_title'] ?? '';
+$service_desc   = $row['service_desc'] ?? '';
+$service_detail = $row['service_detail'] ?? '';
+$icon_html      = $row['icon'] ?? '';
+// Icon sınıfını çek
+if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
+    $icon_class = $m[1];
+} else {
+    $icon_class = 'ri-tools-line';
+}
 ?>
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
+<?php include "header.php"; ?>
+<?php include "sidebar.php"; ?>
+<!-- RemixIcon CDN -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
 <div class="main-content">
- <div class="page-content">
-       <div class="container-fluid">
+  <div class="page-content">
+    <div class="container-fluid">
 
-                    <!-- start page title -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">Edit Service</h4>
+      <!-- Sayfa Başlığı -->
+      <div class="row mb-4">
+        <div class="col-6">
+          <h4 class="page-title">Edit Service</h4>
+        </div>
+        <div class="col-6 text-end">
+          <a href="services" class="btn btn-secondary">Back to List</a>
+        </div>
+      </div>
 
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
-                                        <li class="breadcrumb-item active">Service</li>
-                                    </ol>
-                                </div>
+      <?php if (!empty($msg)): ?>
+        <div class="alert alert-danger"><?= $msg ?></div>
+      <?php endif; ?>
 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end page title -->
-                    <?php
-					 $query="SELECT * FROM  service where id='$todo' ";
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <form method="post">
 
-
- $result = mysqli_query($con,$query);
-$i=0;
-while($row = mysqli_fetch_array($result))
-{
-	$id="$row[id]";
-	$service_title="$row[service_title]";
-	$service_desc="$row[service_desc]";
-  $service_detail="$row[service_detail]";
-}
-  ?>
-
-                    <div class="row">
-
-                        <!--end col-->
-                        <div class="col-xxl-9">
-                            <div class="card mt-xxl-n5">
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab" aria-selected="false">
-                                                <i class="fas fa-home"></i> Edit Service
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-
-
-
-                                <?php
-           $status = "OK"; //initial status
-$msg="";
-           if(ISSET($_POST['save'])){
-$service_title = mysqli_real_escape_string($con,$_POST['service_title']);
-$service_desc = mysqli_real_escape_string($con,$_POST['service_desc']);
-$service_detail = mysqli_real_escape_string($con,$_POST['service_detail']);
- /*
-$uploads_dir = 'uploads';
-
-        $tmp_name = $_FILES["ufile"]["tmp_name"];
-        // basename() may prevent filesystem traversal attacks;
-        // further validation/sanitation of the filename may be appropriate
-        $name = basename($_FILES["ufile"]["name"]);
-        $random_digit=rand(0000,9999);
-        $new_file_name=$random_digit.$name;
-
-        move_uploaded_file($tmp_name, "$uploads_dir/$new_file_name");*/
-
-if($status=="OK")
-{
-$qb=mysqli_query($con,"update service set service_title='$service_title', service_desc='$service_desc', service_detail='$service_detail' where id='$todo'");
-
-
-		if($qb){
-		    	$errormsg= "
-<div class='alert alert-success alert-dismissible alert-outline fade show'>
-                 Service Updated successfully.
-                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                  </div>
- "; //printing error if found in validation
-
-		}
-	}
-
-        elseif ($status!=="OK") {
-            $errormsg= "
-<div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                     ".$msg." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>"; //printing error if found in validation
-
-
-    }
-    else{
-			$errormsg= "
-      <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                 Some Technical Glitch Is There. Please Try Again Later Or Ask Admin For Help.
-                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                 </div>"; //printing error if found in validation
-
-
-		}
-           }
-           ?>
-
-
-
-                                <div class="card-body p-4">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-						{
-						print $errormsg;
-						}
-   ?>
-              <form action="" method="post" enctype="multipart/form-data">
-                                                <div class="row">
-
-
-
-   <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label"> Service Title</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" name="service_title" value="<?php print $service_title ?>" placeholder="Enter Service Title">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label"> Short Description</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_desc" rows="2"><?php print $service_desc ?></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label"> Service Detail</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea5" name="service_detail" rows="3"><?php print $service_detail ?></textarea>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <!--end col-->
-
-                                                    <!--end col-->
-                                                    <div class="col-lg-12">
-                                                        <div class="hstack gap-2 justify-content-end">
-                                                            <button type="submit" name="save" class="btn btn-primary">Update Service</button>
-
-                                                        </div>
-                                                    </div>
-                                                    <!--end col-->
-                                                </div>
-                                                <!--end row-->
-                                            </form>
-                                        </div>
-                                        <!--end tab-pane-->
-
-                                        <!--end tab-pane-->
-
-                                        <!--end tab-pane-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end col-->
-                    </div>
-
-
+                <div class="mb-3">
+                  <label class="form-label">Service Title</label>
+                  <input type="text" name="service_title" class="form-control"
+                         value="<?= htmlspecialchars($service_title, ENT_QUOTES) ?>" required>
                 </div>
-                <!-- container-fluid -->
-            </div>
-            <!-- End Page-content -->
 
-            <?php include"footer.php";?>
+                <div class="mb-3">
+                  <label class="form-label">Short Description</label>
+                  <textarea name="service_desc" class="form-control" rows="2" required><?= htmlspecialchars($service_desc, ENT_QUOTES) ?></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Detailed Description</label>
+                  <textarea name="service_detail" class="form-control" rows="4" required><?= htmlspecialchars($service_detail, ENT_QUOTES) ?></textarea>
+                </div>
+
+                <!-- Icon Picker -->
+                <div class="mb-3">
+                  <label class="form-label">Icon</label>
+                  <div>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#iconModal">
+                      <i id="iconPreview" class="<?= $icon_class ?> fs-2"></i>
+                      <span class="ms-2">Select Icon</span>
+                    </button>
+                  </div>
+                  <input type="hidden" name="icon_html" id="iconInput" value="<?= htmlspecialchars($icon_html, ENT_QUOTES) ?>" required>
+                </div>
+
+                <div class="text-end">
+                  <button type="submit" name="save" class="btn btn-primary">Update Service</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Icon Selection Modal -->
+<div class="modal fade" id="iconModal" tabindex="-1" aria-labelledby="iconModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="iconModalLabel">Choose Icon</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <?php
+          $icons = [
+            'ri-tools-line'=>'Tools',
+            'ri-customer-service-line'=>'Customer Service',
+            'ri-settings-2-line'=>'Settings',
+            'ri-certificate-line'=>'Certificate',
+            'ri-star-line'=>'Star',
+            'ri-rocket-line'=>'Rocket',
+            'ri-bar-chart-line'=>'Bar Chart',
+            'ri-pencil-line'=>'Edit',
+            'ri-delete-bin-line'=>'Delete',
+            'ri-check-line'=>'Check',
+            'ri-mail-line'=>'Mail',
+            'ri-phone-line'=>'Phone',
+            'ri-calendar-line'=>'Calendar',
+            'ri-earth-line'=>'Earth',
+            'ri-lock-line'=>'Lock',
+            'ri-unlock-line'=>'Unlock',
+            'ri-heart-line'=>'Heart',
+            'ri-user-line'=>'User',
+            'ri-share-forward-line'=>'Share',
+            'ri-download-line'=>'Download'
+          ];
+          foreach ($icons as $class => $label): ?>
+            <div class="col-2 text-center">
+              <button type="button" class="btn btn-light icon-btn p-2" data-icon="<?= $class ?>">
+                <i class="<?= $class ?> fs-3"></i>
+              </button>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.icon-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cls = btn.getAttribute('data-icon');
+      document.getElementById('iconPreview').className = cls + ' fs-2';
+      document.getElementById('iconInput').value = '<i class="' + cls + '"></i>';
+      var modal = bootstrap.Modal.getInstance(document.getElementById('iconModal'));
+      modal.hide();
+    });
+  });
+</script>
+
+<?php include "footer.php"; ?>

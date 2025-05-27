@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="row">
                 <?php
-                $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id DESC LIMIT 6");
+                $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id");
                 $stmt->execute();
                 $stmt->bind_result($id, $serviceg, $service_desc, $icon); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
 
@@ -362,7 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Client Logos -->
                     <div id="client-logos" class="client-logos d-flex flex-wrap justify-content-center">
                         <?php
-                        $stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id DESC LIMIT 8");
+                        $stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id");
                         $stmt->execute();
                         $stmt->bind_result($id, $resim); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
 

@@ -1,243 +1,177 @@
-<?php include "header.php"; ?>
-<?php include "sidebar.php"; ?>
-<?php include "../z_db.php"; ?>
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
+<?php
+// products.php
+include "header.php";
+include "sidebar.php";
+include "../z_db.php";
+
+// 1) Kategori filtreleme
+$kategoriId = isset($_GET['kategori']) && is_numeric($_GET['kategori']) ? (int) $_GET['kategori'] : 0;
+
+// 2) Sayfalama
+$page    = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+$perPage = 20;
+$offset  = ($page - 1) * $perPage;
+
+// 3) Toplam kayıt
+$totalSql = "SELECT COUNT(*) FROM urunler WHERE 1" . ($kategoriId ? " AND kategori_id = ?" : "");
+$stmt = $con->prepare($totalSql);
+if ($kategoriId) $stmt->bind_param("i", $kategoriId);
+$stmt->execute();
+$stmt->bind_result($totalRows);
+$stmt->fetch();
+$stmt->close();
+$totalPages = ceil($totalRows / $perPage);
+
+// 4) Verileri çek
+$dataSql = "
+  SELECT u.id, u.isim, u.aciklama, u.ozellikler, u.kimyasalyapi,
+         u.renk, u.uygulamasekli, u.kullanimalani,
+         u.fiyat, u.stok, u.resim,
+         k.isim AS kategori_adi,
+         ak.isim AS alt_kategori_adi,
+         aak.isim AS alt_alt_kategori_adi
+  FROM urunler u
+  LEFT JOIN kategoriler k  ON u.kategori_id           = k.id
+  LEFT JOIN alt_kategoriler ak  ON u.alt_kategori_id     = ak.id
+  LEFT JOIN alt_kategoriler_alt aak ON u.alt_kategori_alt_id = aak.id
+  WHERE 1" 
+  . ($kategoriId ? " AND u.kategori_id = ?" : "")
+  . " LIMIT ?, ?";
+$stmt = $con->prepare($dataSql);
+if ($kategoriId) {
+    $stmt->bind_param("iii", $kategoriId, $offset, $perPage);
+} else {
+    $stmt->bind_param("ii", $offset, $perPage);
+}
+$stmt->execute();
+$res = $stmt->get_result();
+?>
+
 <div class="main-content">
-    <div class="page-content">
-        <div class="container-fluid">
+  <div class="page-content">
+    <div class="container-fluid">
 
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Ürün Listesi</h4>
-
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="#">Ürünler</a></li>
-                                <li class="breadcrumb-item active">Liste</li>
-                            </ol>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- end page title -->
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Tüm Ürünler</h5>
-                            <a href="productadd.php" class="btn btn-success">
-                                <i class="bi bi-plus-lg"></i> Ürün Ekle
-                            </a>
-                        </div>
-
-                        <div class="card-body">
-                            <?php
-                            // Kategorileri çek
-                            $kategori_query = "SELECT * FROM kategoriler ORDER BY isim ASC";
-                            $kategori_result = mysqli_query($con, $kategori_query);
-
-                            // Seçili kategori
-                            $selected_kategori = isset($_GET['kategori']) && is_numeric($_GET['kategori']) ? (int)$_GET['kategori'] : 0;
-
-                            // Sayfa numarasını al, yoksa 1 olarak ayarla
-                            $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-
-                            // Sayfa başına ürün sayısı
-                            $records_per_page = 20;
-
-                            // Toplam ürün sayısını al
-                            $total_query = "SELECT COUNT(*) FROM urunler WHERE 1";
-
-                            $params = [];
-                            $types = "";
-                            if ($selected_kategori > 0) {
-                                $total_query .= " AND kategori_id = ?";
-                                $params[] = $selected_kategori;
-                                $types .= "i";
-                            }
-
-                            $stmt_total = $con->prepare($total_query);
-                            if (!empty($params)) {
-                                $stmt_total->bind_param($types, ...$params);
-                            }
-                            $stmt_total->execute();
-                            $stmt_total->bind_result($total_rows);
-                            $stmt_total->fetch();
-                            $stmt_total->close();
-
-                            $total_pages = ceil($total_rows / $records_per_page);
-
-                            // LIMIT ve OFFSET hesapla
-                            $offset = ($page - 1) * $records_per_page;
-
-                            // Ürünleri çek
-                            $query = "SELECT urunler.id, urunler.isim, urunler.aciklama, urunler.fiyat, urunler.stok, urunler.resim, urunler.kategori_id, urunler.alt_kategori_id, urunler.alt_kategori_alt_id, kategoriler.isim AS kategori_adi, alt_kategoriler.isim AS alt_kategori_adi, alt_kategoriler_alt.isim AS alt_alt_kategori_adi 
-                                      FROM urunler 
-                                      LEFT JOIN kategoriler ON urunler.kategori_id = kategoriler.id 
-                                      LEFT JOIN alt_kategoriler ON urunler.alt_kategori_id = alt_kategoriler.id 
-                                      LEFT JOIN alt_kategoriler_alt ON urunler.alt_kategori_alt_id = alt_kategoriler_alt.id 
-                                      WHERE 1";
-
-                            $params = [];
-                            $types = "";
-                            if ($selected_kategori > 0) {
-                                $query .= " AND urunler.kategori_id = ?";
-                                $params[] = $selected_kategori;
-                                $types .= "i";
-                            }
-
-                            $query .= " LIMIT ?, ?";
-                            $params[] = $offset;
-                            $params[] = $records_per_page;
-                            $types .= "ii";
-
-                            $stmt = $con->prepare($query);
-                            $stmt->bind_param($types, ...$params);
-                            $stmt->execute();
-                            $result = [];
-                            $stmt->store_result();
-                            $stmt->bind_result($id, $isim, $aciklama, $fiyat, $stok, $resim, $kategori_id, $alt_kategori_id, $alt_kategori_alt_id, $kategori_adi, $alt_kategori_adi, $alt_alt_kategori_adi);
-                            while ($stmt->fetch()) {
-                                $result[] = [
-                                    'id' => $id,
-                                    'isim' => $isim,
-                                    'aciklama' => $aciklama,
-                                    'fiyat' => $fiyat,
-                                    'stok' => $stok,
-                                    'resim' => $resim,
-                                    'kategori_id' => $kategori_id,
-                                    'alt_kategori_id' => $alt_kategori_id,
-                                    'alt_kategori_alt_id' => $alt_kategori_alt_id,
-                                    'kategori_adi' => $kategori_adi,
-                                    'alt_kategori_adi' => $alt_kategori_adi,
-                                    'alt_alt_kategori_adi' => $alt_alt_kategori_adi
-                                ];
-                            }
-
-                            echo "<form method='get' action='products.php' class='mb-3'>
-                                    <div class='row g-3'>
-                                        <div class='col-md-3'>
-                                            <select name='kategori' class='form-select' onchange='this.form.submit()'>
-                                                <option value='0'>Tüm Kategoriler</option>";
-                            while ($kategori = mysqli_fetch_assoc($kategori_result)) {
-                                $selected = ($kategori['id'] == $selected_kategori) ? "selected" : "";
-                                echo "<option value='{$kategori['id']}' {$selected}>{$kategori['isim']}</option>";
-                            }
-                            echo "      </select>
-                                        </div>
-                                        <div class='col-md-3'>
-                                            <button type='submit' class='btn btn-secondary w-100'>Filtrele</button>
-                                        </div>
-                                    </div>
-                                  </form>";
-
-                            if (!empty($result)) {
-                                echo "<table class='table table-bordered table-hover'>";
-                                echo "<thead class='table-light'>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Resim</th>
-                                            <th>İsim</th>
-                                            <th>Kategori</th>
-                                            <th>Alt Kategori</th>
-                                            <th>Alt-Alt Kategori</th>
-                                            <th>Fiyat</th>
-                                            <th>Açıklama</th>
-                                            <th>Stok</th>
-                                            <th>Aksiyon</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>";
-
-                                foreach ($result as $row) {
-                                    $imagePath = !empty($row['resim']) ? $row['resim'] : 'uploads/default.jpg';
-
-                                    echo "<tr>
-                                            <td>" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td><img src='../" . htmlspecialchars($imagePath, ENT_QUOTES, 'UTF-8') . "' style='width: 50px; height: auto;' alt='Product Image'></td>
-                                            <td>" . htmlspecialchars($row['isim'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>" . htmlspecialchars($row['kategori_adi'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>" . htmlspecialchars($row['alt_kategori_adi'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>" . htmlspecialchars($row['alt_alt_kategori_adi'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>" . htmlspecialchars($row['fiyat'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>" . htmlspecialchars($row['aciklama'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>" . htmlspecialchars($row['stok'], ENT_QUOTES, 'UTF-8') . "</td>
-                                            <td>
-                                                <a href='productupdate.php?id=" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-warning btn-sm'>Güncelle</a>
-                                                <form action='productdel.php' method='post' style='display:inline;' onsubmit='return confirm(\"Ürünü silmek istediğinizden emin misiniz?\");'>
-                                                    <input type='hidden' name='product_id' value='" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "'>
-                                                    <button type='submit' name='delete' class='btn btn-danger btn-sm'>Sil</button>
-                                                </form>
-                                            </td>
-                                          </tr>";
-                                }
-
-                                echo "</tbody></table>";
-
-                                // Sayfalama Kontrolleri
-                                echo "<nav aria-label='Page navigation example'>";
-                                echo "<ul class='pagination justify-content-center'>";
-
-                                // Önceki sayfa butonu
-                                if ($page > 1) {
-                                    echo "<li class='page-item'>
-                                            <a class='page-link' href='products.php?page=" . ($page - 1) . "&kategori={$selected_kategori}' aria-label='Previous'>
-                                                <span aria-hidden='true'>&laquo;</span>
-                                            </a>
-                                          </li>";
-                                } else {
-                                    echo "<li class='page-item disabled'>
-                                            <span class='page-link' aria-label='Previous'>
-                                                <span aria-hidden='true'>&laquo;</span>
-                                            </span>
-                                          </li>";
-                                }
-
-                                // Sayfa numaralarını göster
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    if ($i == $page) {
-                                        echo "<li class='page-item active'><span class='page-link'>{$i}</span></li>";
-                                    } else {
-                                        echo "<li class='page-item'><a class='page-link' href='products.php?page={$i}&kategori={$selected_kategori}'>{$i}</a></li>";
-                                    }
-                                }
-
-                                // Sonraki sayfa butonu
-                                if ($page < $total_pages) {
-                                    echo "<li class='page-item'>
-                                            <a class='page-link' href='products.php?page=" . ($page + 1) . "&kategori={$selected_kategori}' aria-label='Next'>
-                                                <span aria-hidden='true'>&raquo;</span>
-                                            </a>
-                                          </li>";
-                                } else {
-                                    echo "<li class='page-item disabled'>
-                                            <span class='page-link' aria-label='Next'>
-                                                <span aria-hidden='true'>&raquo;</span>
-                                            </span>
-                                          </li>";
-                                }
-
-                                echo "</ul>";
-                                echo "</nav>";
-
-                            } else {
-                                echo "<div class='alert alert-info'>Hiç ürün bulunamadı.</div>";
-                            }
-
-                            $stmt->close();
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Başlık ve Filtre/Buton -->
+      <div class="row mb-4 align-items-center">
+        <div class="col-12 col-md-6 mb-2 mb-md-0">
+          <h4 class="page-title mb-0">Ürün Listesi</h4>
         </div>
+        <div class="col-12 col-md-6">
+          <div class="d-flex flex-wrap justify-content-md-end gap-2">
+            <form method="get" class="d-flex">
+              <select name="kategori" class="form-select me-2" onchange="this.form.submit()">
+                <option value="0">Tüm Kategoriler</option>
+                <?php
+                $katRes = $con->query("SELECT id,isim FROM kategoriler ORDER BY isim");
+                while ($k = $katRes->fetch_assoc()):
+                  $sel = $k['id'] == $kategoriId ? 'selected' : '';
+                ?>
+                  <option value="<?= $k['id'] ?>" <?= $sel ?>><?= htmlspecialchars($k['isim']) ?></option>
+                <?php endwhile; ?>
+              </select>
+            </form>
+            <a href="productadd.php" class="btn btn-success">
+              <i class="ri-add-line"></i> Ürün Ekle
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ürün Tablosu -->
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th class="d-none d-sm-table-cell">#</th>
+                  <th>Resim</th>
+                  <th>İsim</th>
+                  <th class="d-none d-md-table-cell">Açıklama</th>
+                  <th class="d-none d-lg-table-cell">Özellikler</th>
+                  <th class="d-none d-lg-table-cell">Kimyasal Yapı</th>
+                  <th class="d-none d-xl-table-cell">Renk</th>
+                  <th class="d-none d-xl-table-cell">Uygulama Şekli</th>
+                  <th class="d-none d-xl-table-cell">Kullanım Alanı</th>
+                  <th class="d-none d-md-table-cell">Kategori</th>
+                  <th class="d-none d-lg-table-cell">Alt Kategori</th>
+                  <th class="d-none d-xl-table-cell">Alt-Alt Kategori</th>
+                  <th class="d-none d-sm-table-cell">Fiyat</th>
+                  <th class="d-none d-sm-table-cell">Stok</th>
+                  <th>İşlemler</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if ($res->num_rows):
+                  while ($u = $res->fetch_assoc()): ?>
+                    <tr>
+                      <td class="d-none d-sm-table-cell"><?= $u['id'] ?></td>
+                      <td>
+                        <img src="../<?= htmlspecialchars($u['resim']) ?>"
+                             class="img-fluid"
+                             style="max-width:50px;"
+                             alt="">
+                      </td>
+                      <td><?= htmlspecialchars($u['isim']) ?></td>
+                      <td class="d-none d-md-table-cell">
+                        <?= nl2br(htmlspecialchars(substr($u['aciklama'], 0, 50))) ?>…
+                      </td>
+                      <td class="d-none d-lg-table-cell">
+                        <?= nl2br(htmlspecialchars(substr($u['ozellikler'], 0, 30))) ?>…
+                      </td>
+                      <td class="d-none d-lg-table-cell"><?= htmlspecialchars($u['kimyasalyapi']) ?></td>
+                      <td class="d-none d-xl-table-cell"><?= htmlspecialchars($u['renk']) ?></td>
+                      <td class="d-none d-xl-table-cell"><?= htmlspecialchars($u['uygulamasekli']) ?></td>
+                      <td class="d-none d-xl-table-cell"><?= htmlspecialchars($u['kullanimalani']) ?></td>
+                      <td class="d-none d-md-table-cell"><?= htmlspecialchars($u['kategori_adi']) ?></td>
+                      <td class="d-none d-lg-table-cell"><?= htmlspecialchars($u['alt_kategori_adi']) ?></td>
+                      <td class="d-none d-xl-table-cell"><?= htmlspecialchars($u['alt_alt_kategori_adi']) ?></td>
+                      <td class="d-none d-sm-table-cell"><?= number_format($u['fiyat'], 2) ?> ₺</td>
+                      <td class="d-none d-sm-table-cell"><?= htmlspecialchars($u['stok']) ?></td>
+                      <td>
+                        <a href="productupdate.php?id=<?= $u['id'] ?>"
+                           class="btn btn-sm btn-warning mb-1">Güncelle</a>
+                        <form method="post" action="productdel.php" class="d-inline"
+                              onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
+                          <input type="hidden" name="product_id" value="<?= $u['id'] ?>">
+                          <button name="delete" class="btn btn-sm btn-danger">Sil</button>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php endwhile;
+                else: ?>
+                  <tr>
+                    <td colspan="15" class="text-center">Hiç ürün bulunamadı.</td>
+                  </tr>
+                <?php endif; ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sayfalama -->
+      <nav class="mt-3">
+        <ul class="pagination justify-content-center flex-wrap gap-1">
+          <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+            <a class="page-link"
+               href="products.php?page=<?= $page - 1 ?>&kategori=<?= $kategoriId ?>">&laquo;</a>
+          </li>
+          <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+              <a class="page-link"
+                 href="products.php?page=<?= $i ?>&kategori=<?= $kategoriId ?>"><?= $i ?></a>
+            </li>
+          <?php endfor; ?>
+          <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+            <a class="page-link"
+               href="products.php?page=<?= $page + 1 ?>&kategori=<?= $kategoriId ?>">&raquo;</a>
+          </li>
+        </ul>
+      </nav>
 
     </div>
+  </div>
+</div>
 
 <?php include "footer.php"; ?>

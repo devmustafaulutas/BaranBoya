@@ -1,109 +1,82 @@
-<?php include "header.php"; ?>
-<?php include "../z_db.php" ?>
-<?php include "sidebar.php"; ?>
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
+<?php
+include "../z_db.php";    // DB bağlantısı
+session_start();
+
+$delete_error = "";
+if (isset($_GET['delete_id'])) {
+    $todelete = mysqli_real_escape_string($con, $_GET['delete_id']);
+    if (mysqli_query($con, "DELETE FROM blog WHERE id='$todelete'")) {
+        header("Location: blog.php");
+        exit;
+    } else {
+        $delete_error = "Silme hatası: " . mysqli_error($con);
+    }
+}
+
+// 2) Başlık ve sidebar
+include "header.php";
+include "sidebar.php";
+?>
 <div class="main-content">
-    <div class="page-content">
-        <div class="container-fluid">
-
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Blog</h4>
-
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">All</a></li>
-                                <li class="breadcrumb-item active">Blog</li>
-                            </ol>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- end page title -->
-
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Blog List</h5>
-                        </div>
-                        <div class="card-body">
-                            <table id="example"
-                                class="table table-bordered dt-responsive nowrap table-striped align-middle"
-                                style="width:100%">
-                                <thead>
-                                    <tr>
-
-                                        <th data-ordering="false">Blog Title</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <?php
-                                    $q = "SELECT * FROM  blog ORDER BY id DESC";
-
-
-                                    $r123 = mysqli_query($con, $q);
-
-                                    while ($ro = mysqli_fetch_array($r123)) {
-
-                                        $id = "$ro[id]";
-                                        $blog_title = "$ro[blog_title]";
-
-
-                                        print "<tr>
-
-				  <td>
-				  $blog_title
-				  </td>
-
-          <td>
-                                                    <div class='dropdown d-inline-block'>
-                                                        <button class='btn btn-soft-secondary btn-sm dropdown' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                            <i class='ri-more-fill align-middle'></i>
-                                                        </button>
-                                                        <ul class='dropdown-menu dropdown-menu-end'>
-
-                                                            <li><a href='editblog.php?id=$id' class='dropdown-item edit-item-btn'><i class='ri-pencil-fill align-bottom me-2 text-muted'></i> Edit</a></li>
-                                                            <li>
-                                                                <a href='deleteblog.php?id=$id' class='dropdown-item remove-item-btn'>
-                                                                    <i class='ri-delete-bin-fill align-bottom me-2 text-muted'></i> Delete
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-
-
-				  </tr>";
-
-                                    }
-                                    ?>
-
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div><!--end col-->
-            </div><!--end row-->
-
-
-
-
+  <div class="page-content">
+    <div class="container-fluid">
+      <!-- Sayfa Başlığı -->
+      <div class="row">
+        <div class="col-12">
+          <h4 class="page-title">Blog Listesi</h4>
         </div>
-        <!-- container-fluid -->
-    </div>
-    <!-- End Page-content -->
+      </div>
 
-    <?php include "footer.php"; ?>
+      <!-- Blog Tablosu -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-striped table-bordered mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Blog Başlığı</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $sorgu = "SELECT * FROM blog ORDER BY id DESC";
+                  $sonuc = mysqli_query($con, $sorgu);
+                  while ($row = mysqli_fetch_assoc($sonuc)) {
+                      $id     = $row['id'];
+                      $baslik = htmlspecialchars($row['blog_title'], ENT_QUOTES, 'UTF-8');
+                      echo "<tr>
+                              <td>{$baslik}</td>
+                              <td>
+                                <a href='add-blog.php' 
+                                class='btn btn-sm btn-success'>
+                                    <i class='ri-add-line align-middle'></i>Ekle
+                                </a>
+                                <a href='blog.php?delete_id={$id}' 
+                                  class='btn btn-sm btn-danger' 
+                                  title='Sil' 
+                                  onclick=\"return confirm('Bu blogu silmek istediğinize emin misiniz?');\">
+                                  <i class='ri-delete-bin-2-fill'></i> Sil
+                                </a>
+                                <a href='editblog.php?id={$id}' 
+                                   class='btn btn-sm btn-warning me-1' 
+                                   title='Düzenle'>
+                                  <i class='ri-pencil-fill'></i> Düzenle
+                                </a>
+                              </td>
+                            </tr>";
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end row -->
+
+    </div><!-- end container-fluid -->
+  </div><!-- end page-content -->
+</div><!-- end main-content -->
+
+<?php include "footer.php"; ?>
