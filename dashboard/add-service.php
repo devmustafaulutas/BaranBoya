@@ -39,10 +39,10 @@ if (isset($_POST['save'])) {
         }
     }
 }
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 
-<?php include "header.php"; ?>
-<?php include "sidebar.php"; ?>
 
 <!-- RemixIcon CDN -->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">

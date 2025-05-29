@@ -11,8 +11,8 @@ if (isset($_GET['delete_id'])) {
     $delete_error = "Silme hatası: " . mysqli_error($con);
   }
 }
-include "header.php";
-include "sidebar.php";
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">
   <div class="page-content">

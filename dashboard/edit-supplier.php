@@ -46,9 +46,9 @@ if (isset($_POST['save'])) {
     }
   }
 }
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
-<?php include "header.php"; ?>
-<?php include "sidebar.php"; ?>
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">

@@ -1,71 +1,139 @@
 <?php
+// dashboard/siteconfig.php
 require __DIR__ . '/init.php';
 
-$config = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1"));
-if ($_SERVER['REQUEST_METHOD']==='POST') {
-    $title   = mysqli_real_escape_string($con, $_POST['site_title']);
-    $keywords= mysqli_real_escape_string($con, $_POST['site_keyword']);
-    $desc    = mysqli_real_escape_string($con, $_POST['site_desc']);
-    $about   = mysqli_real_escape_string($con, $_POST['site_about']);
-    $footer  = mysqli_real_escape_string($con, $_POST['site_footer']);
-    $follow  = mysqli_real_escape_string($con, $_POST['follow_text']);
-    $url     = mysqli_real_escape_string($con, $_POST['site_url']);
+// Mevcut ayarları çek
+$config = mysqli_fetch_assoc(
+    mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1")
+);
 
-    $stmt = $con->prepare("
-        UPDATE siteconfig SET
-          site_title=?, site_keyword=?, site_desc=?, site_about=?,
-          site_footer=?, follow_text=?, site_url=?, updated_at=NOW()
-        WHERE id=1
-    ");
-    $stmt->bind_param("sssssss",
-      $title, $keywords, $desc, $about,
-      $footer, $follow, $url
+// Form gönderimi
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title    = mysqli_real_escape_string($con, $_POST['site_title']);
+    $keywords = mysqli_real_escape_string($con, $_POST['site_keyword']);
+    $desc     = mysqli_real_escape_string($con, $_POST['site_desc']);
+    $about    = mysqli_real_escape_string($con, $_POST['site_about']);
+    $footer   = mysqli_real_escape_string($con, $_POST['site_footer']);
+    $follow   = mysqli_real_escape_string($con, $_POST['follow_text']);
+    $url      = mysqli_real_escape_string($con, $_POST['site_url']);
+
+    $stmt = $con->prepare(
+        "UPDATE siteconfig SET
+            site_title     = ?,
+            site_keyword   = ?,
+            site_desc      = ?,
+            site_about     = ?,
+            site_footer    = ?,
+            follow_text    = ?,
+            site_url       = ?,
+            updated_at     = NOW()
+         WHERE id = 1"
+    );
+    $stmt->bind_param(
+        'sssssss',
+        $title,
+        $keywords,
+        $desc,
+        $about,
+        $footer,
+        $follow,
+        $url
     );
     if ($stmt->execute()) {
-      $msg = "<div class='alert alert-success'>Kaydedildi.</div>";
-      $config = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1"));
+        $msg = '<div class="alert alert-success">Ayarlar başarıyla kaydedildi.</div>';
+        $config = mysqli_fetch_assoc(
+            mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1")
+        );
     } else {
-      $msg = "<div class='alert alert-danger'>Hata: {$stmt->error}</div>";
+        $msg = '<div class="alert alert-danger">Hata: ' . htmlspecialchars($stmt->error) . '</div>';
     }
+    $stmt->close();
 }
-include "header.php";
-include "sidebar.php";
+
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
+
 <div class="main-content">
   <div class="page-content container-fluid">
-    <h4>Site Ayarları</h4>
-    <?= $msg ?? '' ?>
-    <form method="post">
-      <div class="mb-3">
-        <label>Site Başlığı</label>
-        <input name="site_title" class="form-control"
-               value="<?= htmlspecialchars($config['site_title']) ?>">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header text-white">
+            <h5 class="mb-0">Site Ayarları</h5>
+          </div>
+          <div class="card-body">
+            <?= $msg ?? '' ?>
+            <form method="post">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="site_title">Site Başlığı</label>
+                  <input
+                    type="text"
+                    id="site_title"
+                    name="site_title"
+                    class="form-control"
+                    value="<?= htmlspecialchars($config['site_title'], ENT_QUOTES) ?>"
+                  >
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="site_keyword">SEO Kelimeleri</label>
+                  <input
+                    type="text"
+                    id="site_keyword"
+                    name="site_keyword"
+                    class="form-control"
+                    value="<?= htmlspecialchars($config['site_keyword'], ENT_QUOTES) ?>"
+                  >
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="site_desc">Site Açıklaması</label>
+                  <textarea
+                    id="site_desc"
+                    name="site_desc"
+                    class="form-control"
+                    rows="3"
+                  ><?= htmlspecialchars($config['site_desc'], ENT_QUOTES) ?></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="site_about">Footer Hakkında</label>
+                  <textarea
+                    id="site_about"
+                    name="site_about"
+                    class="form-control"
+                    rows="3"
+                  ><?= htmlspecialchars($config['site_about'], ENT_QUOTES) ?></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="site_footer">Footer Yazısı</label>
+                  <input
+                    type="text"
+                    id="site_footer"
+                    name="site_footer"
+                    class="form-control"
+                    value="<?= htmlspecialchars($config['site_footer'], ENT_QUOTES) ?>"
+                  >
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="site_url">Site URL</label>
+                  <input
+                    type="url"
+                    id="site_url"
+                    name="site_url"
+                    class="form-control"
+                    value="<?= htmlspecialchars($config['site_url'], ENT_QUOTES) ?>"
+                  >
+                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-success">Kaydet</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label>SEO Kelimeleri</label>
-        <input name="site_keyword" class="form-control"
-               value="<?= htmlspecialchars($config['site_keyword']) ?>">
-      </div>
-      <div class="mb-3">
-        <label>Site Açıklaması</label>
-        <textarea name="site_desc" class="form-control" rows="3"><?= htmlspecialchars($config['site_desc']) ?></textarea>
-      </div>
-      <div class="mb-3">
-        <label>Footer Açıklaması</label>
-        <textarea name="site_about" class="form-control" rows="3"><?= htmlspecialchars($config['site_about']) ?></textarea>
-      </div>
-      <div class="mb-3">
-        <label>Footer Yazısı</label>
-        <input name="site_footer" class="form-control"
-               value="<?= htmlspecialchars($config['site_footer']) ?>">
-      </div>
-      <div class="mb-3">
-        <label>Site URL</label>
-        <input name="site_url" type="url" class="form-control"
-               value="<?= htmlspecialchars($config['site_url']) ?>">
-      </div>
-      <button class="btn btn-primary">Kaydet</button>
-    </form>
+    </div>
   </div>
 </div>
-<?php include "footer.php"; ?>
+
+<?php include __DIR__ . '/footer.php'; ?>

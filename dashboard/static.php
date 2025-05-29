@@ -34,8 +34,8 @@ if ($action === 'edit' && $id) {
 
 // --- Listeleme ---
 $items = mysqli_query($con, "SELECT * FROM static ORDER BY id DESC");
-include "header.php";
-include "sidebar.php";
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">
   <div class="page-content">

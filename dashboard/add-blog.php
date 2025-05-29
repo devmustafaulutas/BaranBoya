@@ -38,10 +38,8 @@ if (isset($_POST['save'])) {
     }
   }
 }
-?>
-<?php
-include "header.php";
-include "sidebar.php";
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">
   <div class="page-content">

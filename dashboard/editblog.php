@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/init.php';
 
-include "header.php";
 $todo = mysqli_real_escape_string($con, $_GET['id']);
-include "sidebar.php";
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">
     <div class="page-content">

@@ -44,10 +44,9 @@ if ($action === 'edit' && isset($_GET['id'])) {
     $selectedFa = $resEdit['fa'];
 }
 $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
-
-<?php include 'header.php'; ?>
-<?php include 'sidebar.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <div class="main-content">
     <div class="page-content">

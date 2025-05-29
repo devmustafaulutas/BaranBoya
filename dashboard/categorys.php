@@ -83,8 +83,8 @@ $edit_id = $edit_tbl ? $id : null;
 if ($edit_tbl) {
     $r = $con->query("SELECT * FROM $edit_tbl WHERE id = $edit_id")->fetch_assoc();
 }
-include 'header.php';
-include 'sidebar.php';
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 
 <div class="main-content">
