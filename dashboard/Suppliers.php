@@ -1,8 +1,6 @@
 <?php
-// tedarikciler.php
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
-// Silme işlemi POST veya GET ile
 if (isset($_POST['delete_id'])) {
     $id = intval($_POST['delete_id']);
     mysqli_query($con, "DELETE FROM tedarikcilerimiz WHERE id=$id");
@@ -14,27 +12,21 @@ if (isset($_POST['delete_id'])) {
     header("Location: tedarikciler.php");
     exit;
 }
-
 include "header.php";
 include "sidebar.php";
-
-// Verileri çek
 $res = mysqli_query($con, "SELECT * FROM tedarikcilerimiz ORDER BY id DESC");
 $counter = 1;
 ?>
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-
-            <!-- Başlık ve Ekle Butonu -->
-            <div class="row mb-3">
-                <div class="col-6">
-                    <h4 class="page-title">Tedarikçilerimiz</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-header  text-white">
+                        <h4 class="page-title">Tedarikçilerimiz</h4>
+                    </div>
                 </div>
-
             </div>
-
-            <!-- Tablo -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -42,7 +34,7 @@ $counter = 1;
                             <table class="table table-striped table-bordered mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>#</th>
+                                        <th>ID</th>
                                         <th>Resim</th>
                                         <th>Güncellenme Tarihi</th>
                                         <th>İşlemler</th>
@@ -59,10 +51,8 @@ $counter = 1;
                                                 </td>
                                                 <td><?= $row['guncellenme_tarihi'] ?></td>
                                                 <td>
-                                                    <!-- Düzenle -->
                                                     <a href="edit-supplier.php?id=<?= $row['id'] ?>"
                                                         class="btn btn-sm btn-warning">Düzenle</a>
-                                                    <!-- Silme formu -->
                                                     <form method="post" action="tedarikciler.php" style="display:inline-block;">
                                                         <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
                                                         <button type="submit" class="btn btn-sm btn-danger"
@@ -84,10 +74,8 @@ $counter = 1;
                         </div>
                     </div>
                 </div>
-            </div><!-- end row -->
-
-        </div><!-- end container -->
-    </div><!-- end page-content -->
-</div><!-- end main-content -->
-
+            </div>
+        </div>
+    </div>
+</div>
 <?php include "footer.php"; ?>

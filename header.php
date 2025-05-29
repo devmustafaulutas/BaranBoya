@@ -27,14 +27,14 @@ $stmt->fetch();
 $stmt->close();
 
 // siteconfig tablosundan verileri hazırlıklı ifadelerle alın
-$stmt = $con->prepare("SELECT site_title, site_about, site_footer, follow_text FROM siteconfig WHERE id = ?");
+$stmt = $con->prepare("SELECT site_title, site_about, site_footer FROM siteconfig WHERE id = ?");
 if (!$stmt) {
     die("Sorgu hazırlanamadı: (" . $con->errno . ") " . $con->error);
 }
 $id = 1;
 $stmt->bind_param("i", $id);
 $stmt->execute();
-$stmt->bind_result($site_title, $site_about, $site_footer, $follow_text);
+$stmt->bind_result($site_title, $site_about, $site_footer);
 $stmt->fetch();
 $stmt->close();
 ?>

@@ -1,5 +1,5 @@
 <?php
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
 $kategori_id = isset($_GET['kategori_id']) ? (int)$_GET['kategori_id'] : 0;
 

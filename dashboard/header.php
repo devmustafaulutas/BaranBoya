@@ -1,10 +1,5 @@
 <?php
-include "../z_db.php";
-
-
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}// Check, if username session is NOT set then this page will jump to login page
+require_once __DIR__ . '/../z_db.php';
 
 if (!isset($_SESSION['username'])) {
     print "
@@ -36,12 +31,12 @@ if (isset($_SESSION['username'])) {
     <title>Dashboard | Vogue</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" href="../assets/img/favicon.png">
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
     <!-- Core CSS’ler -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
     <link href="assets/css/blog.css" rel="stylesheet" />
     <link href="assets/css/custom.min.css" rel="stylesheet" />
@@ -68,26 +63,7 @@ if (isset($_SESSION['username'])) {
             <header id="page-topbar">
                 <div class="navbar-header">
                     <div class="d-flex">
-                        <!-- LOGO -->
-                        <div class="navbar-brand-box horizontal-logo">
-                            <a href="index" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="" height="22">
-                                </span>
-                                <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="" height="17">
-                                </span>
-                            </a>
-
-                            <a href="index" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="" height="22">
-                                </span>
-                                <span class="logo-lg">
-                                    <img src="assets/images/logo-light.png" alt="" height="17">
-                                </span>
-                            </a>
-                        </div>
+                        
 
                         <button type="button"
                             class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"

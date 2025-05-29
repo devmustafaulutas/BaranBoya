@@ -1,8 +1,6 @@
 <?php
-// add-service.php
+require __DIR__ . '/init.php';
 
-// 1) Veritabanı bağlantısı ve POST işlemleri
-include "../z_db.php";
 $status = "OK";
 $msg    = "";
 

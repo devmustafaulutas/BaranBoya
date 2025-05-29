@@ -1,13 +1,7 @@
 <?php
-// siteconfig.php
-include "header.php";
-include "sidebar.php";
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
-// Mevcut ayarları çek
 $config = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1"));
-
-// POST ile güncelle
 if ($_SERVER['REQUEST_METHOD']==='POST') {
     $title   = mysqli_real_escape_string($con, $_POST['site_title']);
     $keywords= mysqli_real_escape_string($con, $_POST['site_keyword']);
@@ -34,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       $msg = "<div class='alert alert-danger'>Hata: {$stmt->error}</div>";
     }
 }
+include "header.php";
+include "sidebar.php";
 ?>
 <div class="main-content">
   <div class="page-content container-fluid">
@@ -46,27 +42,22 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
                value="<?= htmlspecialchars($config['site_title']) ?>">
       </div>
       <div class="mb-3">
-        <label>Site Keywords</label>
+        <label>SEO Kelimeleri</label>
         <input name="site_keyword" class="form-control"
                value="<?= htmlspecialchars($config['site_keyword']) ?>">
       </div>
       <div class="mb-3">
-        <label>Site Description</label>
+        <label>Site Açıklaması</label>
         <textarea name="site_desc" class="form-control" rows="3"><?= htmlspecialchars($config['site_desc']) ?></textarea>
       </div>
       <div class="mb-3">
-        <label>Footer About</label>
+        <label>Footer Açıklaması</label>
         <textarea name="site_about" class="form-control" rows="3"><?= htmlspecialchars($config['site_about']) ?></textarea>
       </div>
       <div class="mb-3">
-        <label>Footer Text</label>
+        <label>Footer Yazısı</label>
         <input name="site_footer" class="form-control"
                value="<?= htmlspecialchars($config['site_footer']) ?>">
-      </div>
-      <div class="mb-3">
-        <label>Social Follow Text</label>
-        <input name="follow_text" class="form-control"
-               value="<?= htmlspecialchars($config['follow_text']) ?>">
       </div>
       <div class="mb-3">
         <label>Site URL</label>

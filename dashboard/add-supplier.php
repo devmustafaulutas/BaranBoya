@@ -1,13 +1,9 @@
 <?php
-// add-supplier.php
+require __DIR__ . '/init.php';
 
-// Veritabanı bağlantısı ve POST işlemleri
-include "../z_db.php";
 $msg = "";
 $status = "OK";
-
 if (isset($_POST['save'])) {
-    // Dosya yükleme kontrolü
     if (isset($_FILES['resim']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['resim']['tmp_name'];
         $origName = basename($_FILES['resim']['name']);
@@ -28,8 +24,6 @@ if (isset($_POST['save'])) {
         $msg = "Lütfen bir resim seçin.";
         $status = "NOTOK";
     }
-
-    // Kayıt işlemi
     if ($status === "OK") {
         $sql = "INSERT INTO tedarikcilerimiz (resim) VALUES ('".mysqli_real_escape_string($con, $newName)."')";
         if (mysqli_query($con, $sql)) {
@@ -41,15 +35,11 @@ if (isset($_POST['save'])) {
     }
 }
 ?>
-
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
-
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-
-      <!-- Sayfa Başlığı -->
       <div class="row mb-4">
         <div class="col-6">
           <h4 class="page-title">Yeni Tedarikçi Ekle</h4>
@@ -58,11 +48,9 @@ if (isset($_POST['save'])) {
           <a href="suppliers" class="btn btn-secondary">Geri Dön</a>
         </div>
       </div>
-
       <?php if (!empty($msg)): ?>
         <div class="alert alert-danger"><?= $msg ?></div>
       <?php endif; ?>
-
       <div class="row">
         <div class="col-lg-6">
           <div class="card">
@@ -80,9 +68,7 @@ if (isset($_POST['save'])) {
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
 <?php include "footer.php"; ?>

@@ -1,33 +1,29 @@
 <?php
-include "../z_db.php";    // DB bağlantısı
-session_start();
+require __DIR__ . '/init.php';
 
 $delete_error = "";
 if (isset($_GET['delete_id'])) {
-    $todelete = mysqli_real_escape_string($con, $_GET['delete_id']);
-    if (mysqli_query($con, "DELETE FROM blog WHERE id='$todelete'")) {
-        header("Location: blog.php");
-        exit;
-    } else {
-        $delete_error = "Silme hatası: " . mysqli_error($con);
-    }
+  $todelete = mysqli_real_escape_string($con, $_GET['delete_id']);
+  if (mysqli_query($con, "DELETE FROM blog WHERE id='$todelete'")) {
+    header("Location: blog.php");
+    exit;
+  } else {
+    $delete_error = "Silme hatası: " . mysqli_error($con);
+  }
 }
-
-// 2) Başlık ve sidebar
 include "header.php";
 include "sidebar.php";
 ?>
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-      <!-- Sayfa Başlığı -->
       <div class="row">
         <div class="col-12">
-          <h4 class="page-title">Blog Listesi</h4>
+          <div class="card-header  text-white">
+            <h4 class="page-title">Blog Listesi</h4>
+          </div>
         </div>
       </div>
-
-      <!-- Blog Tablosu -->
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -44,9 +40,9 @@ include "sidebar.php";
                   $sorgu = "SELECT * FROM blog ORDER BY id DESC";
                   $sonuc = mysqli_query($con, $sorgu);
                   while ($row = mysqli_fetch_assoc($sonuc)) {
-                      $id     = $row['id'];
-                      $baslik = htmlspecialchars($row['blog_title'], ENT_QUOTES, 'UTF-8');
-                      echo "<tr>
+                    $id = $row['id'];
+                    $baslik = htmlspecialchars($row['blog_title'], ENT_QUOTES, 'UTF-8');
+                    echo "<tr>
                               <td>{$baslik}</td>
                               <td>
                                 <a href='add-blog.php' 
@@ -73,10 +69,8 @@ include "sidebar.php";
             </div>
           </div>
         </div>
-      </div><!-- end row -->
-
-    </div><!-- end container-fluid -->
-  </div><!-- end page-content -->
-</div><!-- end main-content -->
-
+      </div>
+    </div>
+  </div>
+</div>
 <?php include "footer.php"; ?>

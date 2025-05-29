@@ -1,164 +1,241 @@
 <?php
+// dashboard/login.php
+
+// 1) HTTPS + Session
+if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off') {
+    header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    exit;
+}
 session_start();
-include_once("../z_db.php");
-require '../vendor/autoload.php';
+session_regenerate_id(true);
+
+// 2) Lib + DB
+require __DIR__ . '/lib/security.php';
+include_once __DIR__ . '/../z_db.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 
-$g      = new GoogleAuthenticator();
-$msg    = '';
-// Adım bilgisi: '1' = kullanıcı/şifre, '2' = 2FA
-$step   = $_POST['step'] ?? '1';
+$g    = new GoogleAuthenticator();
+$step = $_POST['step'] ?? '1';
+$msg  = '';
 
+// Initialize counters if not set
+if (!isset($_SESSION['login_fail_count'])) {
+    $_SESSION['login_fail_count'] = 0;
+    $_SESSION['login_last_fail']  = null;
+}
+
+// 3) FORM İŞLEME (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // CSRF
+    if (!verifyCsrf($_POST['csrf'] ?? '')) {
+        die('Geçersiz CSRF token.');
+    }
+
+    // ► STEP 1: Login
     if ($step === '1') {
-        // ────────── 1️⃣ Kullanıcı adı + şifre kontrolü ──────────
         $u = mysqli_real_escape_string($con, $_POST['username']);
         $p = mysqli_real_escape_string($con, $_POST['password']);
 
-        $res = mysqli_query($con, "
-            SELECT id, username, password, 2fa_secret
+        $stmt = $con->prepare("
+          SELECT id, username, password, `2fa_secret_enc`
             FROM admin
-            WHERE username = '$u'
+           WHERE username = ? LIMIT 1
         ");
-        if ($row = mysqli_fetch_assoc($res)) {
-            // Düz metin kontrolü (hash kullanmıyorsak)
-            if ($row['password'] === $p) {
-                // 2FA etkin mi?
-                if (!empty($row['2fa_secret'])) {
-                    $_SESSION['temp_user_id']   = $row['id'];
-                    $_SESSION['temp_username']  = $row['username'];
-                    $step = '2';
-                } else {
-                    // Direkt login
-                    session_regenerate_id(true);
-                    $_SESSION['username']      = $row['username'];
-                    $_SESSION['authenticated'] = true;
-                    header('Location: index.php');
-                    exit;
-                }
-            } else {
-                $msg = "Şifre yanlış.";
-            }
+        $stmt->bind_param('s', $u);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        if (!$row || $row['password'] !== $p) {
+            $msg = 'Kullanıcı/şifre hatalı.';
+            $_SESSION['login_fail_count']++;
+            $_SESSION['login_last_fail'] = date('Y-m-d H:i:s');
         } else {
-            $msg = "Kullanıcı bulunamadı.";
+            // Reset login attempts on success
+            $_SESSION['login_fail_count'] = 0;
+            // 2FA kurulmuş mu?
+            if (empty($row['2fa_secret_enc'])) {
+                $_SESSION['username'] = $u;
+                header('Location: twofa.php');
+                exit;
+            } else {
+                $_SESSION['temp_username'] = $u;
+                $step = '2';
+            }
         }
     }
-    elseif ($step === '2') {
-        // ────────── 2️⃣ 2FA kodu kontrolü ──────────
-        if (!isset($_SESSION['temp_username'])) {
-            header('Location: login.php');
-            exit;
-        }
-        $userRes = mysqli_query($con, "
-            SELECT 2fa_secret
-            FROM admin
-            WHERE username = '" . mysqli_real_escape_string($con, $_SESSION['temp_username']) . "'
-        ");
-        $qr     = mysqli_fetch_assoc($userRes);
-        $secret = $qr['2fa_secret'] ?? '';
 
+    // ► STEP 2: 2FA veya Backup
+    elseif ($step === '2') {
         $code = trim($_POST['2fa_code'] ?? '');
+
+        // Fetch 2FA data
+        $stmt = $con->prepare("
+          SELECT `2fa_secret_enc`, `backup_codes`, totp_fail_count, totp_last_fail
+            FROM admin
+           WHERE username = ? LIMIT 1
+        ");
+        $stmt->bind_param('s', $_SESSION['temp_username']);
+        $stmt->execute();
+        $r = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        $secret     = decryptSecret($r['2fa_secret_enc']);
+        $backHashes = json_decode($r['backup_codes'] ?? '[]', true);
+
+        // Check TOTP
         if ($g->checkCode($secret, $code)) {
+            // reset fail count
+            $upd = $con->prepare("UPDATE admin SET totp_fail_count = 0 WHERE username = ?");
+            $upd->bind_param('s', $_SESSION['temp_username']);
+            $upd->execute();
+
             session_regenerate_id(true);
             $_SESSION['username']      = $_SESSION['temp_username'];
             $_SESSION['authenticated'] = true;
-            unset($_SESSION['temp_username'], $_SESSION['temp_user_id']);
+            unset($_SESSION['temp_username']);
+            header('Location: index.php');
+            exit;
+        }
+        // Check backup code
+        elseif (verifyBackupCode($code, $backHashes)) {
+            // remove used
+            $remain = array_filter($backHashes, fn($h)=>!password_verify($code,$h));
+            $upd2 = $con->prepare("UPDATE admin SET backup_codes = ? WHERE username = ?");
+            $json = json_encode(array_values($remain));
+            $upd2->bind_param('ss',$json,$_SESSION['temp_username']);
+            $upd2->execute();
+
+            session_regenerate_id(true);
+            $_SESSION['username']      = $_SESSION['temp_username'];
+            $_SESSION['authenticated'] = true;
+            unset($_SESSION['temp_username']);
             header('Location: index.php');
             exit;
         } else {
-            $msg = "Geçersiz 2FA kodu.";
-            $step = '2';
+            // increment TOTP fail count
+            $stmt2 = $con->prepare("
+              UPDATE admin
+                 SET totp_fail_count = totp_fail_count+1,
+                     totp_last_fail  = NOW()
+               WHERE username = ?
+            ");
+            $stmt2->bind_param('s', $_SESSION['temp_username']);
+            $stmt2->execute();
+            $msg = 'Geçersiz 2FA veya kurtarma kodu.';
         }
     }
 }
+
+// —————————————————————————————————
+// 4) KİLİT LOGİĞİNİ 
+// Login kilidi
+$loginLocked    = false;
+$loginRemaining = 0;
+if ($step==='1' && $_SESSION['login_fail_count']>=5) {
+    $last   = strtotime($_SESSION['login_last_fail']);
+    $until  = $last + 300;
+    $now    = time();
+    if ($now < $until) {
+        $loginLocked    = true;
+        $loginRemaining = $until - $now;
+    } else {
+        $_SESSION['login_fail_count'] = 0;
+    }
+}
+
+// 2FA brute–force kilidi
+$twofaLocked    = false;
+$twofaRemaining = 0;
+if ($step === '2' && isset($_SESSION['temp_username'])) {
+    // Use UNIX_TIMESTAMP to avoid timezone issues
+    $stmt = $con->prepare(
+        "SELECT totp_fail_count, UNIX_TIMESTAMP(totp_last_fail) AS last_fail_ts
+           FROM admin
+          WHERE username = ? LIMIT 1"
+    );
+    $stmt->bind_param('s', $_SESSION['temp_username']);
+    $stmt->execute();
+    $rr = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    if ($rr['totp_fail_count'] >= 5) {
+        $last   = intval($rr['last_fail_ts']);
+        $unlock = $last + 300;
+        $now    = time();
+        if ($now < $unlock) {
+            $twofaLocked    = true;
+            $twofaRemaining = $unlock - $now;
+        } else {
+            // Reset totp fail count after lock expires
+            $upd = $con->prepare("UPDATE admin SET totp_fail_count = 0 WHERE username = ?");
+            $upd->bind_param('s', $_SESSION['temp_username']);
+            $upd->execute();
+        }
+    }
+}
+// CSRF token
+$csrf = csrfToken();
 ?>
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="utf-8" />
-    <title>Giriş | Baran Boya</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.icon">
-    <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css -->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <!-- Custom Css -->
-    <link href="assets/css/login.css" rel="stylesheet" type="text/css" />
+<head><meta charset="utf-8"><title>Giriş</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/app.min.css" rel="stylesheet">
 </head>
-<body>
-<div class="auth-page-wrapper">
-  <div class="auth-page-content">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-5">
-          <div class="card mt-5">
-            <div class="card-body p-4">
+<body class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card p-4" style="width:100%;max-width:400px;">
+    <h5 class="text-center mb-3"><?= $step==='1'?'Admin Giriş':'2FA Doğrulama' ?></h5>
 
-              <?php if ($step === '2'): ?>
-                <!-- 2FA Doğrulama Formu -->
-                <div class="text-center mb-3">
-                  <h5 class="text-primary">2FA Doğrulama</h5>
-                  <i class="fas fa-shield-alt fa-3x text-primary"></i>
-                </div>
-                <form method="post">
-                  <input type="hidden" name="step" value="2">
-                  <div class="mb-3">
-                    <label for="2fa_code" class="form-label">2FA Kodu:</label>
-                    <input type="text" id="2fa_code" name="2fa_code"
-                           class="form-control" required autofocus>
-                  </div>
-                  <div class="mt-3 d-grid">
-                    <button type="submit" class="btn btn-primary">Doğrula</button>
-                  </div>
-                </form>
-              <?php else: ?>
-                <!-- 1️⃣ Kullanıcı Adı/Şifre Formu -->
-                <div class="text-center mt-2 mb-3">
-                  <h5 class="text-primary">Admin Giriş</h5>
-                  <i class="fas fa-user-shield fa-3x text-primary"></i>
-                </div>
-                <div class="p-2 mt-4">
-                  <form method="post">
-                    <input type="hidden" name="step" value="1">
-                    <div class="mb-3">
-                      <label for="username" class="form-label">Kullanıcı Adı:</label>
-                      <input type="text" id="username" name="username"
-                             class="form-control" required autofocus>
-                    </div>
-                    <div class="mb-3">
-                      <label for="password" class="form-label">Şifre:</label>
-                      <input type="password" id="password" name="password"
-                             class="form-control" required>
-                    </div>
-                    <div class="mt-3 d-grid">
-                      <button type="submit" class="btn btn-primary">Giriş Yap</button>
-                    </div>
-                  </form>
-                </div>
-              <?php endif; ?>
-
-              <?php if ($msg): ?>
-                <p class="text-danger mt-3"><?= htmlspecialchars($msg) ?></p>
-              <?php endif; ?>
-
-            </div>
-          </div>
-        </div>
+    <?php if($step==='1' && $loginLocked): ?>
+      <div class="alert alert-warning text-center">
+        5 yanlış deneme. Lütfen <span id="cd1"></span> sonra deneyin.
       </div>
-    </div>
-  </div><!-- end auth-page-content -->
-</div><!-- end auth-page-wrapper -->
+      <script>
+      (function(){
+        var rem = <?= $loginRemaining ?>, el = document.getElementById('cd1');
+        function t(){ if(rem<=0) return location.reload(); el.textContent = Math.floor(rem/60)+'m '+rem%60+'s'; rem--; }
+        t(); setInterval(t,1000);
+      })();
+      </script>
 
-<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/libs/simplebar/simplebar.min.js"></script>
-<script src="assets/libs/node-waves/waves.min.js"></script>
-<script src="assets/libs/feather-icons/feather.min.js"></script>
-<script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-<script src="assets/js/plugins.js"></script>
-<script src="assets/js/login.js"></script>
+    <?php elseif($step==='2' && $twofaLocked): ?>
+      <div class="alert alert-warning text-center">
+        5 yanlış 2FA deneme. Lütfen <span id="cd2"></span> sonra deneyin.
+      </div>
+      <script>
+      (function(){
+        var rem = <?= $twofaRemaining ?>, el = document.getElementById('cd2');
+        function t(){ if(rem<=0) return location.reload(); el.textContent = Math.floor(rem/60)+'m '+rem%60+'s'; rem--; }
+        t(); setInterval(t,1000);
+      })();
+      </script>
+
+    <?php else: ?>
+      <?php if($msg): ?>
+        <div class="alert alert-danger text-center"><?= htmlspecialchars($msg) ?></div>
+      <?php endif; ?>
+      <form method="post">
+        <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf) ?>">
+        <input type="hidden" name="step" value="<?= htmlspecialchars($step) ?>">
+
+        <?php if($step==='1'): ?>
+          <div class="mb-3"><label for="u">Kullanıcı Adı</label>
+          <input id="u" name="username" class="form-control" required autofocus></div>
+          <div class="mb-3"><label for="p">Şifre</label>
+          <input id="p" name="password" type="password" class="form-control" required></div>
+        <?php else: ?>
+          <div class="mb-3"><label for="c">2FA veya Kurtarma Kodu</label>
+          <input id="c" name="2fa_code" class="form-control" required autofocus></div>
+        <?php endif; ?>
+
+        <button class="btn btn-primary w-100">
+          <?= $step==='1'?'Giriş Yap':'Doğrula' ?>
+        </button>
+      </form>
+    <?php endif; ?>
+
+  </div>
 </body>
 </html>

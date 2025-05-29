@@ -1,7 +1,6 @@
 <?php
-include '../z_db.php';
+require __DIR__ . '/init.php';
 
-// DELETE işlemi
 $action = $_GET['action'] ?? '';
 $table = $_GET['table'] ?? '';
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -21,15 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resim = '';
 
     // Resim upload
+// Resim upload
     if (isset($_FILES['resim']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
         $dir = '../assets/img/categorys/';
         $tmp = $_FILES['resim']['tmp_name'];
         $ext = pathinfo($_FILES['resim']['name'], PATHINFO_EXTENSION);
-        $file = uniqid('cat_', true) . ".{$ext}";
-        move_uploaded_file($tmp, "$dir{$file}");
-        $resim = $file;
-    }
+        $fileName = uniqid('cat_', true) . ".{$ext}";
+        move_uploaded_file($tmp, "{$dir}{$fileName}");
 
+        // DATABASE'E TAM PATH KAYDEDİLİYOR
+        $resim = "assets/img/categorys/{$fileName}";
+    }
     // Parent ID (alt- and alt-alt için)
     $parent = $_POST['parent_id'] ?? null;
 

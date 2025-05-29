@@ -1,33 +1,26 @@
 <?php
-// hizmetler.php
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
-// POST ile silme işlemi (header yönlendirmesinin çalışması için include'dan önce)
 if (isset($_POST['delete_id'])) {
-    $id = intval($_POST['delete_id']);
-    mysqli_query($con, "DELETE FROM service WHERE id=$id");
-    header("Location: services");
-    exit;
+  $id = intval($_POST['delete_id']);
+  mysqli_query($con, "DELETE FROM service WHERE id=$id");
+  header("Location: services");
+  exit;
 }
-
 include "header.php";
 include "sidebar.php";
-
-// Verileri çek
 $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
 ?>
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-
-      <!-- Başlık -->
-      <div class="row mb-3">
-        <div class="col-6">
-          <h4 class="page-title">Hizmetler</h4>
+      <div class="row">
+        <div class="col-12">
+          <div class="card-header  text-white">
+            <h4 class="page-title">Hizmetler</h4>
+          </div>
         </div>
       </div>
-
-      <!-- Tablo -->
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -52,26 +45,27 @@ $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
                         <td><?= $row['icon'] ?></td>
                         <td>
                           <a href="add-service.php" class="btn btn-sm btn-success">Ekle</a>
-                          <!-- Silme formu -->
                           <form method="post" action="services" style="display:inline-block;">
                             <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bu hizmeti silmek istediğinize emin misiniz?')">Sil</button>
+                            <button type="submit" class="btn btn-sm btn-danger"
+                              onclick="return confirm('Bu hizmeti silmek istediğinize emin misiniz?')">Sil</button>
                           </form>
                           <a href="editservice.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">Düzenle</a>
                         </td>
                       </tr>
                     <?php endwhile; ?>
                   <?php else: ?>
-                    <tr><td colspan="5" class="text-center">Hiç hizmet bulunamadı.</td></tr>
+                    <tr>
+                      <td colspan="5" class="text-center">Hiç hizmet bulunamadı.</td>
+                    </tr>
                   <?php endif; ?>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-      </div><!-- end row -->
-
-    </div><!-- end container -->
-  </div><!-- end page-content -->
-</div><!-- end main-content -->
+      </div>
+    </div>
+  </div>
+</div>
 <?php include "footer.php"; ?>

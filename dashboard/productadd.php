@@ -1,5 +1,5 @@
 <?php
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
 // Kategorileri çek
 $kategori_query  = "SELECT * FROM kategoriler ORDER BY isim ASC";

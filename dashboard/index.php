@@ -1,14 +1,5 @@
 <?php
-// 1) Hata raporlamayı aç
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// 2) Oturumu başlat
-session_start();
-
-// 3) Veritabanı bağlantısını al (path’i projenize göre kontrol edin)
-require_once __DIR__ . '/../z_db.php';  // index.php’niz dashboard/ içindeyse
+require __DIR__ . '/init.php';
 
 // 4) Giriş kontrolü
 if (empty($_SESSION['authenticated'])) {

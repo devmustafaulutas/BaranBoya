@@ -1,20 +1,14 @@
 <?php
-// socials.php
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
-// CRUD işlemleri
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $msg = '';
-
-// Silme
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     $delId = intval($_POST['delete_id']);
     mysqli_query($con, "DELETE FROM social WHERE id={$delId}");
     header('Location: socials.php');
     exit;
 }
-
-// Ekleme
 if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $fa = mysqli_real_escape_string($con, $_POST['fa']);
@@ -28,8 +22,6 @@ if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $msg = 'Ekleme sırasında hata oluştu.';
     }
 }
-
-// Güncelleme
 if ($action === 'edit' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -45,37 +37,28 @@ if ($action === 'edit' && isset($_GET['id'])) {
             $msg = 'Güncelleme sırasında hata oluştu.';
         }
     }
-    // Mevcut kayıt
     $stmt = $con->prepare("SELECT * FROM social WHERE id=?");
     $stmt->bind_param('i', $id);
     $stmt->execute();
     $resEdit = $stmt->get_result()->fetch_assoc();
     $selectedFa = $resEdit['fa'];
 }
-
-// Listeleme
 $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
 ?>
 
 <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
-<!-- Font Awesome CDN -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-
-            <!-- Başlık -->
             <div class="row mb-4">
                 <div class="col-6">
                     <h4 class="page-title">Sosyal Medya Yönetimi</h4>
                 </div>
             </div>
-
             <?php if ($msg): ?>
                 <div class="alert alert-danger"><?= $msg ?></div><?php endif; ?>
-
             <?php if ($action === 'create' || ($action === 'edit' && isset($resEdit))): ?>
                 <div class="row">
                     <div class="col-lg-6">
@@ -93,7 +76,6 @@ $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
                                         <input type="text" name="name" class="form-control" required
                                             value="<?= $action === 'edit' ? htmlspecialchars($resEdit['name'], ENT_QUOTES) : '' ?>">
                                     </div>
-                                    <!-- Icon Picker -->
                                     <div class="mb-3">
                                         <label class="form-label">İkon Seç</label>
                                         <div>
@@ -122,8 +104,6 @@ $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
                         </div>
                     </div>
                 </div>
-
-                <!-- Icon Selection Modal -->
                 <div class="modal fade" id="faModal" tabindex="-1" aria-labelledby="faModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -171,7 +151,6 @@ $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
                         });
                     });
                 </script>
-
             <?php else: ?>
                 <div class="row">
                     <div class="col-12">
@@ -224,7 +203,6 @@ $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
                     </div>
                 </div>
             <?php endif; ?>
-
         </div>
     </div>
 </div>

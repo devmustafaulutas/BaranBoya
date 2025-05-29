@@ -1,42 +1,41 @@
 <?php
-// static.php
-include "header.php";
-include "sidebar.php";
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
 $action = $_GET['action'] ?? 'list';
 $id     = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
 // --- Silme ---
 if ($action === 'delete' && $id) {
-    mysqli_query($con, "DELETE FROM static WHERE id = $id");
-    header("Location: static.php");
-    exit;
+  mysqli_query($con, "DELETE FROM static WHERE id = $id");
+  header("Location: static.php");
+  exit;
 }
 
 // --- Ekleme ---
 if ($action === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $t = mysqli_real_escape_string($con, $_POST['stitle']);
-    $s = mysqli_real_escape_string($con, $_POST['stext']);
-    mysqli_query($con, "INSERT INTO static (stitle, stext, updated_at) VALUES ('$t', '$s', NOW())");
-    header("Location: static.php");
-    exit;
+  $t = mysqli_real_escape_string($con, $_POST['stitle']);
+  $s = mysqli_real_escape_string($con, $_POST['stext']);
+  mysqli_query($con, "INSERT INTO static (stitle, stext, updated_at) VALUES ('$t', '$s', NOW())");
+  header("Location: static.php");
+  exit;
 }
 
 // --- Düzenleme ---
 if ($action === 'edit' && $id) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $t = mysqli_real_escape_string($con, $_POST['stitle']);
-        $s = mysqli_real_escape_string($con, $_POST['stext']);
-        mysqli_query($con, "UPDATE static SET stitle='$t', stext='$s', updated_at=NOW() WHERE id=$id");
-        header("Location: static.php");
-        exit;
-    }
-    $edit = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM static WHERE id=$id"));
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $t = mysqli_real_escape_string($con, $_POST['stitle']);
+    $s = mysqli_real_escape_string($con, $_POST['stext']);
+    mysqli_query($con, "UPDATE static SET stitle='$t', stext='$s', updated_at=NOW() WHERE id=$id");
+    header("Location: static.php");
+    exit;
+  }
+  $edit = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM static WHERE id=$id"));
 }
 
 // --- Listeleme ---
 $items = mysqli_query($con, "SELECT * FROM static ORDER BY id DESC");
+include "header.php";
+include "sidebar.php";
 ?>
 <div class="main-content">
   <div class="page-content">

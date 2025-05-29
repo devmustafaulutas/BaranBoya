@@ -1,5 +1,4 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
@@ -13,12 +12,6 @@ SET time_zone = "+00:00";
 SET NAMES 'utf8mb4';
 SET CHARACTER SET utf8mb4;
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `truvaayv_scriptdb`
 --
@@ -30,19 +23,24 @@ SET CHARACTER SET utf8mb4;
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(150) NOT NULL,
   `password` varchar(150) NOT NULL,
-  `2fa_secret`  VARCHAR(255) NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_turkish_ci;
+  `2fa_secret` VARCHAR(255)       NULL,
+  `2fa_secret_enc` VARBINARY(512) NULL,
+  `backup_codes` TEXT             NULL,
+  `totp_fail_count` INT NOT NULL DEFAULT 0,
+  `totp_last_fail` DATETIME       NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`, `updated_at`) VALUES
-(1, 'admin', 'admin', '2022-07-13 11:00:19');
+INSERT INTO `admin` (`id`, `username`, `password`,`2fa_secret`, `updated_at`) VALUES
+(1, 'admin', 'admin','ZLZ54VIBHWSQCCUZ','2022-07-13 11:00:19');
 
 -- --------------------------------------------------------
 
@@ -782,9 +780,9 @@ CREATE TABLE IF NOT EXISTS `social` (
 -- Dumping data for table `social`
 INSERT INTO `social` (`id`, `name`, `fa`, `social_link`) 
 VALUES 
-    (1, 'Facebook', 'fa-facebook', 'https://www.facebook.com/baranpolyester'),
-    (2, 'Instagram', 'fa-instagram', 'https://www.instagram.com/baranboyaepoxs/'),
-    (3, 'Twitter', 'fa-twitter', 'https://x.com/baranboya');
+    (1, 'Facebook', 'fas fa-facebook', 'https://www.facebook.com/baranpolyester'),
+    (2, 'Instagram', 'fas fa-instagram', 'https://www.instagram.com/baranboyaepoxs/'),
+    (3, 'Twitter', 'fas fa-twitter', 'https://x.com/baranboya');
 
 -- --------------------------------------------------------
 
@@ -842,34 +840,7 @@ VALUES
     ('POLİYA LOGO.png', CURRENT_TIMESTAMP()),
     ('Turkuaz.png', CURRENT_TIMESTAMP());
 
--- --------------------------------------------------------
--- --------------------------------------------------------
---
--- Table structure for table `sektörler`
---
 
---
--- Table structure for table `why_us`
---
-
---
--- Dumping data for table `why_us`
---
-
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `blog`
---
 ALTER TABLE `blog`
   ADD PRIMARY KEY (`id`);
 

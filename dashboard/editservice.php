@@ -1,22 +1,14 @@
 <?php
-// edit-service.php
+require __DIR__ . '/init.php';
 
-// Veritabanı bağlantısı ve POST işlemleri
-include "../z_db.php";
 $status = "OK";
 $msg    = "";
-
-// Gelen id
 $todo = intval($_GET['id']);
-
-// Kaydetme işlemi
 if (isset($_POST['save'])) {
     $service_title  = mysqli_real_escape_string($con, $_POST['service_title']);
     $service_desc   = mysqli_real_escape_string($con, $_POST['service_desc']);
     $service_detail = mysqli_real_escape_string($con, $_POST['service_detail']);
     $icon_html      = mysqli_real_escape_string($con, $_POST['icon_html']);
-
-    // Validasyon
     if (strlen($service_title) < 5) {
         $msg    .= "Başlık en az 5 karakter olmalı.<br>";
         $status = "NOTOK";
@@ -33,7 +25,6 @@ if (isset($_POST['save'])) {
         $msg    .= "Lütfen bir ikon seçin.<br>";
         $status = "NOTOK";
     }
-
     if ($status === "OK") {
         $sql = "UPDATE service SET
                     service_title='{$service_title}',
@@ -49,8 +40,6 @@ if (isset($_POST['save'])) {
         }
     }
 }
-
-// Mevcut verileri çekme
 $query = "SELECT * FROM service WHERE id={$todo}";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);
@@ -69,14 +58,10 @@ if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
 
 <?php include "header.php"; ?>
 <?php include "sidebar.php"; ?>
-<!-- RemixIcon CDN -->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-
-      <!-- Sayfa Başlığı -->
       <div class="row mb-4">
         <div class="col-6">
           <h4 class="page-title">Edit Service</h4>
@@ -85,11 +70,9 @@ if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
           <a href="services" class="btn btn-secondary">Back to List</a>
         </div>
       </div>
-
       <?php if (!empty($msg)): ?>
         <div class="alert alert-danger"><?= $msg ?></div>
       <?php endif; ?>
-
       <div class="row">
         <div class="col-lg-8">
           <div class="card">
@@ -101,18 +84,14 @@ if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
                   <input type="text" name="service_title" class="form-control"
                          value="<?= htmlspecialchars($service_title, ENT_QUOTES) ?>" required>
                 </div>
-
                 <div class="mb-3">
                   <label class="form-label">Short Description</label>
                   <textarea name="service_desc" class="form-control" rows="2" required><?= htmlspecialchars($service_desc, ENT_QUOTES) ?></textarea>
                 </div>
-
                 <div class="mb-3">
                   <label class="form-label">Detailed Description</label>
                   <textarea name="service_detail" class="form-control" rows="4" required><?= htmlspecialchars($service_detail, ENT_QUOTES) ?></textarea>
                 </div>
-
-                <!-- Icon Picker -->
                 <div class="mb-3">
                   <label class="form-label">Icon</label>
                   <div>
@@ -123,22 +102,17 @@ if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
                   </div>
                   <input type="hidden" name="icon_html" id="iconInput" value="<?= htmlspecialchars($icon_html, ENT_QUOTES) ?>" required>
                 </div>
-
                 <div class="text-end">
                   <button type="submit" name="save" class="btn btn-primary">Update Service</button>
                 </div>
-
               </form>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
-<!-- Icon Selection Modal -->
 <div class="modal fade" id="iconModal" tabindex="-1" aria-labelledby="iconModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -195,5 +169,4 @@ if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
     });
   });
 </script>
-
 <?php include "footer.php"; ?>

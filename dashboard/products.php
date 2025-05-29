@@ -1,8 +1,5 @@
 <?php
-// products.php
-include "header.php";
-include "sidebar.php";
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
 // 1) Kategori filtreleme
 $kategoriId = isset($_GET['kategori']) && is_numeric($_GET['kategori']) ? (int) $_GET['kategori'] : 0;
@@ -24,33 +21,35 @@ $totalPages = ceil($totalRows / $perPage);
 
 // 4) Verileri çek
 $dataSql = "
-  SELECT u.id, u.isim, u.aciklama, u.ozellikler, u.kimyasalyapi,
-         u.renk, u.uygulamasekli, u.kullanimalani,
-         u.fiyat, u.stok, u.resim,
-         k.isim AS kategori_adi,
-         ak.isim AS alt_kategori_adi,
-         aak.isim AS alt_alt_kategori_adi
-  FROM urunler u
-  LEFT JOIN kategoriler k  ON u.kategori_id           = k.id
-  LEFT JOIN alt_kategoriler ak  ON u.alt_kategori_id     = ak.id
-  LEFT JOIN alt_kategoriler_alt aak ON u.alt_kategori_alt_id = aak.id
-  WHERE 1" 
-  . ($kategoriId ? " AND u.kategori_id = ?" : "")
-  . " LIMIT ?, ?";
+SELECT u.id, u.isim, u.aciklama, u.ozellikler, u.kimyasalyapi,
+u.renk, u.uygulamasekli, u.kullanimalani,
+u.fiyat, u.stok, u.resim,
+k.isim AS kategori_adi,
+ak.isim AS alt_kategori_adi,
+aak.isim AS alt_alt_kategori_adi
+FROM urunler u
+LEFT JOIN kategoriler k  ON u.kategori_id           = k.id
+LEFT JOIN alt_kategoriler ak  ON u.alt_kategori_id     = ak.id
+LEFT JOIN alt_kategoriler_alt aak ON u.alt_kategori_alt_id = aak.id
+WHERE 1" 
+. ($kategoriId ? " AND u.kategori_id = ?" : "")
+. " LIMIT ?, ?";
 $stmt = $con->prepare($dataSql);
 if ($kategoriId) {
-    $stmt->bind_param("iii", $kategoriId, $offset, $perPage);
+  $stmt->bind_param("iii", $kategoriId, $offset, $perPage);
 } else {
-    $stmt->bind_param("ii", $offset, $perPage);
+  $stmt->bind_param("ii", $offset, $perPage);
 }
 $stmt->execute();
 $res = $stmt->get_result();
+include "header.php";
+include "sidebar.php";
 ?>
 
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-
+      
       <!-- Başlık ve Filtre/Buton -->
       <div class="row mb-4 align-items-center">
         <div class="col-12 col-md-6 mb-2 mb-md-0">

@@ -1,5 +1,5 @@
 <?php
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
 // 1) Ürün ID'sini al
 $product_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;

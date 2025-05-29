@@ -1,27 +1,26 @@
 <?php
-// logo.php
-include "header.php";
-include "sidebar.php";
-include "../z_db.php";
+require __DIR__ . '/init.php';
 
 $row = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM logo WHERE id=1"));
 if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_FILES['logo'])) {
-    $u = "../assets/img/logo/";
-    $f = $_FILES['logo'];
-    $ext = pathinfo($f['name'],PATHINFO_EXTENSION);
-    $new = uniqid('logo_').".$ext";
-    if (move_uploaded_file($f['tmp_name'], "$u$new")) {
-      if ($row['logo'] && file_exists("$u{$row['logo']}"))
-        unlink("$u{$row['logo']}");
-      $stmt = $con->prepare("UPDATE logo SET logo=?, updated_at=NOW() WHERE id=1");
-      $stmt->bind_param("s",$new);
-      $stmt->execute();
-      $msg = "<div class='alert alert-success'>Güncellendi.</div>";
-      $row['logo']=$new;
-    } else {
-      $msg = "<div class='alert alert-danger'>Yükleme Hatası</div>";
-    }
+  $u = "../assets/img/logo/";
+  $f = $_FILES['logo'];
+  $ext = pathinfo($f['name'],PATHINFO_EXTENSION);
+  $new = uniqid('logo_').".$ext";
+  if (move_uploaded_file($f['tmp_name'], "$u$new")) {
+    if ($row['logo'] && file_exists("$u{$row['logo']}"))
+    unlink("$u{$row['logo']}");
+  $stmt = $con->prepare("UPDATE logo SET logo=?, updated_at=NOW() WHERE id=1");
+  $stmt->bind_param("s",$new);
+  $stmt->execute();
+  $msg = "<div class='alert alert-success'>Güncellendi.</div>";
+  $row['logo']=$new;
+} else {
+  $msg = "<div class='alert alert-danger'>Yükleme Hatası</div>";
 }
+}
+include "header.php";
+include "sidebar.php";
 ?>
 <div class="main-content">
   <div class="page-content container-fluid">

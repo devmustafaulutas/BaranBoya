@@ -54,3 +54,540 @@
 [11-May-2025 18:03:06 Europe/Berlin] PHP Warning:  require(dashboard/PHPMailer/src/Exception.php): failed to open stream: No such file or directory in C:\xampp\htdocs\vogue\index.php on line 12
 [11-May-2025 18:03:06 Europe/Berlin] PHP Fatal error:  require(): Failed opening required 'dashboard/PHPMailer/src/Exception.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\vogue\index.php on line 12
 >>>>>>> b12754676ce9ed13a03d6c47a9c5a321927dbdc0
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\footer.php(1): include()
+#1 C:\xampp\htdocs\vogue\index.php(459): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:24 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:24 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:24 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:24 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:25 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:25 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:25 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:25 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:25 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:26 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:26 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:26 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:26 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:27 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:27 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:27 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:28 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:28 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:28 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:29 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:29 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:29 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:29 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:30 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:30 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:30 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:30 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:31 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:31 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:31 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:31 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:32 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:32 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:32 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:32 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:33 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:33 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:33 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:33 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:33 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:33 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:35 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:35 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:37 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:37 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:37 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:37 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:37 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:37 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:39 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[28-May-2025 14:21:40 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2002): Normal olarak her yuva adresi (iletişim kuralı/ağ adresi/bağlantı noktası) için yalnızca bir kullanıma izin veriliyor.
+ in C:\xampp\htdocs\vogue\z_db.php on line 7
+[28-May-2025 14:21:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on bool in C:\xampp\htdocs\vogue\z_db.php:8
+Stack trace:
+#0 C:\xampp\htdocs\vogue\index.php(15): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
+[29-May-2025 14:10:16 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
