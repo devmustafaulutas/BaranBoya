@@ -1,87 +1,108 @@
 <?php
+// dashboard/suppliers_edit.php
 require __DIR__ . '/init.php';
 
-$msg = "";
-$status = "OK";
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$msg    = '';
+$status = 'OK';
+$id     = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if (!$id) {
-  header('Location: suppliers');
-  exit;
+    header('Location: suppliers.php');
+    exit;
 }
-$res = mysqli_query($con, "SELECT * FROM tedarikcilerimiz WHERE id=$id");
-if (mysqli_num_rows($res) == 0) {
-  header('Location: suppliers');
-  exit;
+
+// Fetch existing supplier image
+$stmt = $con->prepare("SELECT resim FROM tedarikcilerimiz WHERE id = ? LIMIT 1");
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$stmt->bind_result($currentImage);
+if (!$stmt->fetch()) {
+    $stmt->close();
+    header('Location: suppliers.php');
+    exit;
 }
-$row = mysqli_fetch_assoc($res);
-$currentImage = $row['resim'];
-if (isset($_POST['save'])) {
-  if (!empty($_FILES['resim']['name']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
-    $tmpName = $_FILES['resim']['tmp_name'];
-    $origName = basename($_FILES['resim']['name']);
-    $ext = strtolower(pathinfo($origName, PATHINFO_EXTENSION));
-    $allowed = ['jpg', 'jpeg', 'png', 'gif'];
-    if (!in_array($ext, $allowed)) {
-      $msg = "Sadece JPG, JPEG, PNG ve GIF formatlarına izin verilmektedir.";
-      $status = "NOTOK";
-    } else {
-      $newName = uniqid('sup_') . "." . $ext;
-      $uploadDir = '../assets/img/tedarikcilerimiz/';
-      if (!move_uploaded_file($tmpName, $uploadDir . $newName)) {
-        $msg = "Dosya yükleme sırasında bir hata oluştu.";
-        $status = "NOTOK";
-      } else {
-        @unlink($uploadDir . $currentImage);
-        $currentImage = $newName;
-      }
+$stmt->close();
+
+// Handle update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
+    if (!empty($_FILES['resim']['name']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
+        $file    = $_FILES['resim'];
+        $ext     = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $allowed = ['jpg','jpeg','png','gif'];
+        if (!in_array($ext, $allowed)) {
+            $msg    = 'Sadece JPG, JPEG, PNG ve GIF formatlarına izin verilmektedir.';
+            $status = 'NOTOK';
+        } else {
+            $newName   = uniqid('sup_') . ".{$ext}";
+            $uploadDir = __DIR__ . '/../assets/img/tedarikcilerimiz/';
+            if (move_uploaded_file($file['tmp_name'], $uploadDir . $newName)) {
+                // Delete old
+                if ($currentImage && file_exists($uploadDir . $currentImage)) {
+                    unlink($uploadDir . $currentImage);
+                }
+                $currentImage = $newName;
+            } else {
+                $msg    = 'Dosya yükleme sırasında bir hata oluştu.';
+                $status = 'NOTOK';
+            }
+        }
     }
-  }
-  if ($status === "OK") {
-    $sql = "UPDATE tedarikcilerimiz SET resim='" . mysqli_real_escape_string($con, $currentImage) . "' WHERE id=$id";
-    if (mysqli_query($con, $sql)) {
-      header('Location: suppliers');
-      exit;
-    } else {
-      $msg = "Veritabanı hatası: " . mysqli_error($con);
+    if ($status === 'OK') {
+        $stmt2 = $con->prepare(
+            "UPDATE tedarikcilerimiz SET resim = ? WHERE id = ?"
+        );
+        $stmt2->bind_param('si', $currentImage, $id);
+        if ($stmt2->execute()) {
+            header('Location: suppliers.php');
+            exit;
+        } else {
+            $msg = 'Veritabanı hatası: ' . htmlspecialchars($stmt2->error, ENT_QUOTES);
+        }
+        $stmt2->close();
     }
-  }
 }
+
 include __DIR__ . '/header.php';
 include __DIR__ . '/sidebar.php';
 ?>
+
 <div class="main-content">
-  <div class="page-content">
-    <div class="container-fluid">
-      <div class="row mb-4">
-        <div class="col-6">
-          <h4 class="page-title">Düzenle: Tedarikçi #<?= $id ?></h4>
-        </div>
-        <div class="col-6 text-end">
-          <a href="suppliers" class="btn btn-secondary">Geri Dön</a>
-        </div>
-      </div>
-      <?php if (!empty($msg)): ?>
-        <div class="alert alert-danger"><?= $msg ?></div>
-      <?php endif; ?>
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <form method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                  <label class="form-label">Mevcut Resim</label><br>
-                  <img src="../assets/img/tedarikcilerimiz/<?= htmlspecialchars($currentImage) ?>" alt="Tedarikçi"
-                    style="width:100px;">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Yeni Resim (isteğe bağlı)</label>
-                  <input type="file" name="resim" accept="image/*" class="form-control">
-                </div>
-                <div class="text-end">
-                  <button type="submit" name="save" class="btn btn-primary">Güncelle</button>
-                </div>
-              </form>
-            </div>
+  <div class="page-content container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Tedarikçi Görselini Güncelle</h5>
+            <a href="suppliers" class="btn btn-secondary btn-sm">Geri Dön</a>
+          </div>
+          <div class="card-body">
+            <?php if ($msg): ?>
+              <div class="alert alert-danger"><?= htmlspecialchars($msg, ENT_QUOTES) ?></div>
+            <?php endif; ?>
+
+            <form method="post" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label class="form-label">Mevcut Resim</label><br>
+                <img
+                  src="<?= htmlspecialchars('../assets/img/tedarikcilerimiz/' . $currentImage, ENT_QUOTES) ?>"
+                  alt="Tedarikçi"
+                  class="img-fluid mb-3"
+                  style="max-width:150px;"
+                >
+              </div>
+              <div class="mb-3">
+                <label for="resim" class="form-label">Yeni Resim (isteğe bağlı)</label>
+                <input
+                  type="file"
+                  id="resim"
+                  name="resim"
+                  accept="image/*"
+                  class="form-control"
+                >
+              </div>
+              <div class="text-end">
+                <button type="submit" name="save" class="btn btn-warning w-10">Güncelle</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -89,4 +110,4 @@ include __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-<?php include "footer.php"; ?>
+<?php include __DIR__ . '/footer.php'; ?>

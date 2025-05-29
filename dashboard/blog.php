@@ -11,19 +11,25 @@ if (isset($_GET['delete_id'])) {
     $delete_error = "Silme hatası: " . mysqli_error($con);
   }
 }
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include "header.php";
+include "sidebar.php";
 ?>
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <div class="card-header  text-white">
-            <h4 class="page-title">Blog Listesi</h4>
+          <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h4 class="page-title">Blog</h4>
+            <div class="text-end">
+              <a href="add-blog.php" class="btn btn-success">
+                <i class="ri-add-line"></i> Yeni Ekle
+              </a>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -45,10 +51,6 @@ include __DIR__ . '/sidebar.php';
                     echo "<tr>
                               <td>{$baslik}</td>
                               <td>
-                                <a href='add-blog.php' 
-                                class='btn btn-sm btn-success'>
-                                    <i class='ri-add-line align-middle'></i>Ekle
-                                </a>
                                 <a href='blog.php?delete_id={$id}' 
                                   class='btn btn-sm btn-danger' 
                                   title='Sil' 

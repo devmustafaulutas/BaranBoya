@@ -456,4 +456,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!--====== Call To Action Area Start ======-->
 
-      <?php include "footer.php"; ?>
+      <?php include __DIR__ . '/footer.php'; ?>

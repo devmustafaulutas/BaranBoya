@@ -135,7 +135,7 @@ else {
     </div>
 </section>
 
-<?php include "footer.php"; ?>
+<?php include __DIR__ . '/footer.php'; ?>
 
 <script>
 // ...existing code...

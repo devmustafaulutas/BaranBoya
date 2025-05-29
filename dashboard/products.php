@@ -173,4 +173,4 @@ include __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-<?php include "footer.php"; ?>
+<?php include __DIR__ . '/footer.php'; ?>

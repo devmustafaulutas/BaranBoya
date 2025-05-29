@@ -51,16 +51,24 @@ include __DIR__ . '/sidebar.php';
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-            <div class="row mb-4">
-                <div class="col-6">
-                    <h4 class="page-title">Sosyal Medya Yönetimi</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-header text-white d-flex justify-content-between align-items-center">
+                        <h4 class="page-title">Blog</h4>
+                        <div class="text-end">
+                            <a href="socials.php?action=create" class="btn btn-success">
+                                <i class="ri-add-line"></i> Yeni Ekle
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <?php if ($msg): ?>
                 <div class="alert alert-danger"><?= $msg ?></div><?php endif; ?>
             <?php if ($action === 'create' || ($action === 'edit' && isset($resEdit))): ?>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -95,7 +103,7 @@ include __DIR__ . '/sidebar.php';
                                     </div>
                                     <div class="text-end">
                                         <button type="submit"
-                                            class="btn btn-primary"><?= $action === 'create' ? 'Ekle' : 'Güncelle' ?></button>
+                                            class="btn btn-warning"><?= $action === 'create' ? 'Ekle' : 'Güncelle' ?></button>
                                         <a href="socials.php" class="btn btn-secondary">İptal</a>
                                     </div>
                                 </form>
@@ -156,9 +164,9 @@ include __DIR__ . '/sidebar.php';
                         <div class="card">
                             <div class="card-body p-0">
                                 <table class="table table-striped table-bordered mb-0">
-                                    <thead class="table-light">
+                                    <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>ID</th>
                                             <th>İsim</th>
                                             <th>İkon</th>
                                             <th>Link</th>
@@ -183,10 +191,6 @@ include __DIR__ . '/sidebar.php';
                                                         <button type="submit" class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</button>
                                                     </form>
-                                                    <?php if ($action === ''): ?>
-                                                        <a href="socials.php?action=create" class="btn btn-sm btn-success">
-                                                            Ekle</a>
-                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>

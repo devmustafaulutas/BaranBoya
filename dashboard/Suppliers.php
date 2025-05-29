@@ -22,8 +22,15 @@ $counter = 1;
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card-header  text-white">
-                        <h4 class="page-title">Tedarikçilerimiz</h4>
+                    <div class="card-header text-white d-flex justify-content-between align-items-center">
+                        <h4 class="page-title">Tedarikçiler</h4>
+                        <div class="text-end">
+                            <div class="text-end">
+                                <a href="add-supplier.php" class="btn btn-success">
+                                    <i class="ri-add-line"></i> Yeni Ekle
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,7 +39,7 @@ $counter = 1;
                     <div class="card">
                         <div class="card-body p-0">
                             <table class="table table-striped table-bordered mb-0">
-                                <thead class="table-light">
+                                <thead >
                                     <tr>
                                         <th>ID</th>
                                         <th>Resim</th>
@@ -58,9 +65,6 @@ $counter = 1;
                                                         <button type="submit" class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Bu tedarikçiyi silmek istediğinize emin misiniz?')">Sil</button>
                                                     </form>
-                                                    <a href="add-supplier.php" class="btn btn-sm btn-success">
-                                                        <i class="ri-add-line"></i>Ekle
-                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>

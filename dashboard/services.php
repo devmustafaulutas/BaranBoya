@@ -15,18 +15,25 @@ $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
   <div class="page-content">
     <div class="container-fluid">
       <div class="row">
+      <div class="row">
         <div class="col-12">
-          <div class="card-header  text-white">
-            <h4 class="page-title">Hizmetler</h4>
+          <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h4 class="page-title">Servisler</h4>
+            <div class="text-end">
+              <a href="add-service.php" class="btn btn-success">
+                <i class="ri-add-line"></i> Yeni Ekle
+              </a>
+            </div>
           </div>
         </div>
+      </div>
       </div>
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-body p-0">
+            <div class="card-body">
               <table class="table table-striped table-bordered mb-0">
-                <thead class="table-light">
+                <thead >
                   <tr>
                     <th>ID</th>
                     <th>Başlık</th>
@@ -44,7 +51,6 @@ $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
                         <td><?= htmlspecialchars(mb_substr($row['service_desc'], 0, 50), ENT_QUOTES) ?>…</td>
                         <td><?= $row['icon'] ?></td>
                         <td>
-                          <a href="add-service.php" class="btn btn-sm btn-success">Ekle</a>
                           <form method="post" action="services" style="display:inline-block;">
                             <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
                             <button type="submit" class="btn btn-sm btn-danger"

@@ -41,46 +41,51 @@ if (isset($_POST['save'])) {
 include __DIR__ . '/header.php';
 include __DIR__ . '/sidebar.php';
 ?>
+
 <div class="main-content">
-  <div class="page-content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <h4>Blog Ekle</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xxl-9">
-          <div class="card">
-            <div class="card-body">
-              <?php if (!empty($msg)): ?>
-                <div class="alert alert-danger"><?= $msg ?></div>
-              <?php endif; ?>
-              <form method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                  <label class="form-label">Blog Başlığı</label>
-                  <input type="text" name="blog_title" class="form-control">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Kısa Açıklama</label>
-                  <textarea name="blog_desc" class="form-control" rows="2"></textarea>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Blog Detay</label>
-                  <textarea name="blog_detail" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Görsel</label>
-                  <input type="file" name="ufile" class="form-control">
-                </div>
-                <button type="submit" name="save" class="btn btn-primary">Ekle</button>
-              </form>
+  <div class="page-content container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Yeni Blog Ekle</h4>
+            <div class="col-12 text-end">
+              <a href="blog" class="btn btn-secondary">Geri</a>
             </div>
+          </div>
+          <div class="card-body">
+            <?= $msg ?? '' ?>
+            <form method="post" enctype="multipart/form-data">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="blog_title" class="form-label">Blog Başlığı</label>
+                  <input type="text" id="blog_title" name="blog_title" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="ufile" class="form-label">Görsel</label>
+                  <input type="file" id="ufile" name="ufile" accept="image/*" class="form-control" required>
+                </div>
+                <div class="col-12">
+                  <label for="blog_desc" class="form-label">Kısa Açıklama</label>
+                  <textarea id="blog_desc" name="blog_desc" class="form-control" rows="2"
+                    required><?= htmlspecialchars($_POST['blog_desc'] ?? '', ENT_QUOTES) ?></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="blog_detail" class="form-label">Blog Detay</label>
+                  <textarea id="blog_detail" name="blog_detail" class="form-control" rows="5"
+                    required><?= htmlspecialchars($_POST['blog_detail'] ?? '', ENT_QUOTES) ?></textarea>
+                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button type="submit" name="save" class="btn btn-success">Kaydet</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <?php include "footer.php"; ?>

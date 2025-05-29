@@ -311,4 +311,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         </section>
         <!--====== Call To Action Area End ======-->
 
-      <?php include "footer.php"; ?>
+      <?php include __DIR__ . '/footer.php'; ?>

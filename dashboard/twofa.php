@@ -49,48 +49,50 @@ $otpauth = "otpauth://totp/{$issuer}:{$user}?secret={$secret}&issuer={$issuer}&a
 include __DIR__ . '/header.php';
 include __DIR__ . '/sidebar.php';
 ?>
-<div class="content-wrapper" style="padding-top:70px;">
-  <section class="content">
-    <div class="container d-flex justify-content-center">
-      <div class="row">
-        <div class="col-12">
-          <div class="card shadow-sm" style="max-width:400px; width:100%;">
-            <div class="card-header text-white">
-              <h5 class="mb-0">İki aşamalı doğrulama</h5>
-            </div>
-            <div class="card-body text-center">
-              <p>Google Authenticator
-                uygulamanızda<br><strong><?= htmlspecialchars($issuer) ?>:<?= htmlspecialchars($user) ?></strong> isimli
-                iki aşamalı doğrulamayı eklemek için QR’yı okutun:</p>
-              <div id="qrcode" class="mb-4" style="display: flex;
-                  justify-content: center;
-                  align-items:center;"></div>
+<div class="main-content">
+  <div class="page-content container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-12">
+        <div class="card shadow-sm">
+          <div class="card-header  text-white text-center">
+            <h4 class="mb-0">İki Aşamalı Doğrulama (2FA)</h4>
+          </div>
+          <div class="card-body text-center">
+            <p>
+              Google Authenticator uygulamasında
+              <strong><?= htmlspecialchars($issuer) ?>:<?= htmlspecialchars($user) ?></strong>
+              hesabınızı eklemek için QR kodu taratın . <br>
+              Admin paneline sadece bu iki aşamalı doğrulama koduna veya kurtarma koduna sahip kullanıcılar giriş yapabilir.
+            </p>
+            <div id="qrcode" class="d-flex justify-content-center mb-4"></div>
 
-              <?php if (!empty($showCodes)): ?>
-                <hr>
-                <p><strong>Kurtarma Kodlarınız:</strong></p>
-                <ul class="text-start">
-                  <?php foreach ($showCodes as $c): ?>
-                    <li><code><?= htmlspecialchars($c) ?></code></li>
-                  <?php endforeach; ?>
-                </ul>
-              <?php endif; ?>
+            <?php if (!empty($showCodes)): ?>
+              <hr>
+              <p><strong>Kurtarma Kodlarınız (bir kez görüntülendi):</strong></p>
+              <ul class="list-group list-group-flush text-center mb-3">
+                <?php foreach ($showCodes as $code): ?>
+                  <li class="list-group-item bg-transparent"><code><?= htmlspecialchars($code) ?></code></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
 
-              <a href="login.php" class="btn btn-success w-100 mt-3">Giriş Sayfasına Dön</a>
-            </div>
+            <a href="login.php" class="btn btn-success w-10">Giriş Sayfasına Dön</a>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
+<!-- QRCode.js yüklemesi -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-  new QRCode(document.getElementById('qrcode'), {
-    text: "<?= $otpauth ?>",
-    width: 200,
-    height: 200
+  document.addEventListener('DOMContentLoaded', function() {
+    new QRCode(document.getElementById('qrcode'), {
+      text: "<?= $otpauth ?>",
+      width: 200,
+      height: 200
+    });
   });
 </script>
 <?php include "footer.php"; ?>
