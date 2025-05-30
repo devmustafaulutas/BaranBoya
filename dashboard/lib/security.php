@@ -18,7 +18,8 @@ if (!defined('APP_IV')) {
  * @param string $secret
  * @return string 
  */
-function encryptSecret(string $secret): string {
+function encryptSecret(string $secret): string
+{
     return openssl_encrypt($secret, 'AES-256-CBC', APP_KEY, OPENSSL_RAW_DATA, APP_IV);
 }
 
@@ -28,7 +29,8 @@ function encryptSecret(string $secret): string {
  * @param string $enc
  * @return string 
  */
-function decryptSecret(string $enc): string {
+function decryptSecret(string $enc): string
+{
     return openssl_decrypt($enc, 'AES-256-CBC', APP_KEY, OPENSSL_RAW_DATA, APP_IV);
 }
 
@@ -37,7 +39,8 @@ function decryptSecret(string $enc): string {
  *
  * @return string
  */
-function csrfToken(): string {
+function csrfToken(): string
+{
     if (empty($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
     }
@@ -50,7 +53,8 @@ function csrfToken(): string {
  * @param string $token
  * @return bool
  */
-function verifyCsrf(string $token): bool {
+function verifyCsrf(string $token): bool
+{
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 
@@ -60,7 +64,8 @@ function verifyCsrf(string $token): bool {
  * @param int $count
  * @return array<string>
  */
-function generateBackupCodes(int $count = 8): array {
+function generateBackupCodes(int $count = 8): array
+{
     $codes = [];
     for ($i = 0; $i < $count; $i++) {
         $codes[] = bin2hex(random_bytes(4));
@@ -74,7 +79,8 @@ function generateBackupCodes(int $count = 8): array {
  * @param string[] $codes
  * @return string[] hashing yapılmış dizin
  */
-function hashBackupCodes(array $codes): array {
+function hashBackupCodes(array $codes): array
+{
     $hashed = [];
     foreach ($codes as $code) {
         $hashed[] = password_hash($code, PASSWORD_DEFAULT);
@@ -89,7 +95,8 @@ function hashBackupCodes(array $codes): array {
  * @param string[] $hashedCodes
  * @return bool
  */
-function verifyBackupCode(string $inputCode, array $hashedCodes): bool {
+function verifyBackupCode(string $inputCode, array $hashedCodes): bool
+{
     foreach ($hashedCodes as $i => $hash) {
         if (password_verify($inputCode, $hash)) {
             return true;

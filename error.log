@@ -591,3 +591,9 @@ Stack trace:
 #1 {main}
   thrown in C:\xampp\htdocs\vogue\z_db.php on line 8
 [29-May-2025 14:10:16 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
+[30-May-2025 08:26:27 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
+[30-May-2025 08:32:49 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
+[30-May-2025 09:34:20 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
+[30-May-2025 10:25:01 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
+[30-May-2025 10:26:54 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69
+[30-May-2025 10:27:35 Europe/Berlin] PHP Notice:  Undefined variable: follow_safe in C:\xampp\htdocs\vogue\footer.php on line 69

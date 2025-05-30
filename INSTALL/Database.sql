@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(150) NOT NULL,
   `password` varchar(150) NOT NULL,
+  `twofa_enabled` TINYINT(1) NOT NULL DEFAULT 0,
   `2fa_secret` VARCHAR(255)       NULL,
   `2fa_secret_enc` VARBINARY(512) NULL,
   `backup_codes` TEXT             NULL,
@@ -39,8 +40,17 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`,`2fa_secret`, `updated_at`) VALUES
-(1, 'admin', 'admin','ZLZ54VIBHWSQCCUZ','2022-07-13 11:00:19');
+INSERT INTO `admin`
+  (`id`, `username`, `password`, `twofa_enabled`, `2fa_secret`, `updated_at`)
+VALUES
+  (1, 'admin', 'admin', 0, 'ZLZ54VIBHWSQCCUZ', '2022-07-13 11:00:19');
+CREATE TABLE admin_remember(
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT NOT NULL,
+  `token_hash` VARCHAR(255) NOT NULL,
+  `expires_at` DATETIME NOT NULL,
+  INDEX(user_id)
+);
 
 -- --------------------------------------------------------
 

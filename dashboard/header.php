@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Vogue</title>
+    <title>Dashboard | BaranBoya</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="../assets/img/favicon.png">
