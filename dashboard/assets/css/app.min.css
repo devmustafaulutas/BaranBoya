@@ -17810,18 +17810,14 @@ span.flatpickr-weekday {
   display: block
 }
 
-/*# sourceMappingURL=app.min.css.map */
-/* 1) Önceki boş kutucukları kaldırıyoruz */
 .site-settings-toggle::after {
   display: none !important;
 }
 
-/* 2) Ok ikonuna geçiş efekti ekle */
 .site-settings-arrow {
   transition: transform .3s ease;
 }
 
-/* 3) Menü açıkken oku ters çevir */
 .site-settings-toggle:not(.collapsed) .site-settings-arrow,
 .site-settings-toggle[aria-expanded="true"] .site-settings-arrow {
   transform: rotate(-180deg);
@@ -17832,4 +17828,164 @@ body>div.app-menu.navbar-menu>div.navbar-brand-box {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+:root {
+  --sidebar-width: 250px;
+}
+
+:root {
+  --sidebar-width: 250px;
+}
+
+.app-menu.navbar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: #1e1e2d;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+  z-index: 1050;
+}
+
+body.sidebar-collapsed .app-menu.navbar-menu {
+  transform: translateX(-100%) !important;
+}
+
+.vertical-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1040;
+}
+
+.vertical-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  body.sidebar-collapsed .main-content {
+    margin-left: 0 !important;
+  }
+
+  body.sidebar-collapsed header#page-topbar {
+    margin-left: 0 !important;
+  }
+}
+
+body.sidebar-collapsed .footer {
+  left: 0 !important;
+}
+
+@media (min-width: 768px) {
+  body.sidebar-collapsed #page-topbar {
+    left: 0 !important;
+  }
+}
+
+#layout-wrapper {
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease;
+}
+
+body.sidebar-collapsed #layout-wrapper {
+  margin-left: 0 !important;
+}
+
+#layout-wrapper.collapsed .app-menu.navbar-menu {
+  transform: translateX(-100%);
+}
+
+#layout-wrapper.collapsed {
+  margin-left: 0;
+}
+
+#layout-wrapper.collapsed header#page-topbar,
+#layout-wrapper.collapsed .main-content {
+  margin-left: 0;
+}
+
+@media (max-width: 767.98px) {
+  [data-layout="vertical"] .app-menu.navbar-menu {
+    transform: none !important;
+    margin-left: initial !important;
+    padding-top: initial !important;
+    padding-bottom: initial !important;
+  }
+}
+
+body.sidebar-collapsed .app-menu.navbar-menu {
+  transform: translateX(-100%) !important;
+}
+
+body:not(.sidebar-collapsed) .app-menu.navbar-menu {
+  transform: translateX(0) !important;
+}
+
+@media (max-width: 767.98px) {
+  body.sidebar-collapsed .app-menu.navbar-menu {
+    transform: translateX(-100%) !important;
+  }
+}
+
+body.sidebar-collapsed {
+  .app-menu.navbar-menu {
+    transform: translateX(-100%) !important;
+  }
+
+  #layout-wrapper,
+  header#page-topbar,
+  .main-content,
+  .footer {
+    margin-left: 0 !important;
+    left: 0 !important;
+  }
+}
+
+body:not(.sidebar-collapsed) {
+  .app-menu.navbar-menu {
+    transform: translateX(0) !important;
+  }
+}
+
+body.sidebar-collapsed .app-menu.navbar-menu {
+  transform: translateX(-100%) !important;
+}
+
+body.sidebar-collapsed .sidebar-background {
+  display: none !important;
+}
+
+.close-sidebar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vz-vertical-menu-title-color-dark);
+  background-color: #1B2440;
+  font-size: 1.25rem;
+  padding-right: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+body.sidebar-collapsed .close-sidebar-btn {
+  display: none;
+  /* kapalıyken gizle */
+}
+
+.close-sidebar-btn i {
+  display: block;
 }

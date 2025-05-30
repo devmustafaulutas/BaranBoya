@@ -1,9 +1,7 @@
 <?php
-include "header.php";
-error_reporting(E_ALL); // Tüm hataları ve uyarıları göster
-
+include "header.php"; 
+include "z_db.php";
 require 'dashboard/PHPMailer/src/SMTP.php';
-require 'z_db.php'; // Veritabanı bağlantısını dahil et
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -135,7 +133,8 @@ else {
     </div>
 </section>
 
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include  __DIR__  . '/footer.php'; ?>
+
 
 <script>
 // ...existing code...

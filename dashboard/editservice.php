@@ -54,8 +54,8 @@ if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
 } else {
   $icon_class = 'ri-tools-line';
 }
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 ?>
 
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -177,4 +177,4 @@ include __DIR__ . '/sidebar.php';
     });
   });
 </script>
-<?php include "footer.php"; ?>
+<?php include __DIR__ . "footer.php"; ?>

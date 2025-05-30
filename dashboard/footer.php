@@ -1,6 +1,16 @@
 <?php
-require __DIR__ . '/init.php';
-?>
+require_once __DIR__ . '/../z_db.php';
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    print "
+				<script language='javascript'>
+					window.location = 'login.php';
+				</script>
+			";
+
+}?>
 <footer class="footer">
   <div class="container-fluid">
     <div class="row">
@@ -26,7 +36,6 @@ require __DIR__ . '/init.php';
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
 <!-- datatables -->
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>

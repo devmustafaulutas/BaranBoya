@@ -121,8 +121,8 @@ $alt_kategori_result  = mysqli_query($con, "SELECT * FROM alt_kategoriler ORDER 
 $alt_alt_result       = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt ORDER BY isim ASC");
 
 // 6) Artık header ve sidebar’ı dahil edebiliriz
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">
   <div class="page-content">
@@ -224,4 +224,5 @@ include __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include  __DIR__  . '/footer.php'; ?>
+

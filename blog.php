@@ -1,5 +1,7 @@
-<?php include "header.php"; ?>
-<?php include "z_db.php" ?>
+<?php 
+include  "header.php";
+include  "z_db.php"; ?>
+
 <?php 
     $query = "SELECT * FROM blog ORDER BY updated_at DESC";
     $result = mysqli_query($con , $query);
@@ -107,4 +109,4 @@
     }
 </script>
 
-<?php include "footer.php"; ?>
+<?php include __DIR__ . "footer.php"; ?>

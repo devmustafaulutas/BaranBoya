@@ -1,6 +1,5 @@
 <?php
-include "header.php";
-
+include "header.php"; 
 // Şifreleme ve Deşifreleme Fonksiyonları
 function encrypt_id($id) {
     $key = 'gizli-anahtar'; // Anahtarınızı güvenli bir yerde saklayın
@@ -238,4 +237,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
         </section>
         <!--====== Call To Action Area End ======-->
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include  '/footer.php'; ?>
+

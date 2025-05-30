@@ -1,6 +1,5 @@
 <?php
-include "../z_db.php";
-
+include __DIR__ ."../z_db.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
     $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
 

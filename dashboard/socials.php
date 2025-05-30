@@ -44,8 +44,8 @@ if ($action === 'edit' && isset($_GET['id'])) {
     $selectedFa = $resEdit['fa'];
 }
 $resList = mysqli_query($con, "SELECT * FROM social ORDER BY id DESC");
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <div class="main-content">
@@ -54,7 +54,7 @@ include __DIR__ . '/sidebar.php';
             <div class="row">
                 <div class="col-12">
                     <div class="card-header text-white d-flex justify-content-between align-items-center">
-                        <h4 class="page-title">Blog</h4>
+                        <h4 class="page-title">Sosyal Medya</h4>
                         <div class="text-end">
                             <a href="socials.php?action=create" class="btn btn-success">
                                 <i class="ri-add-line"></i> Yeni Ekle
@@ -210,4 +210,4 @@ include __DIR__ . '/sidebar.php';
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . "footer.php"; ?>

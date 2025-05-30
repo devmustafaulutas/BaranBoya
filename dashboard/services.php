@@ -7,8 +7,8 @@ if (isset($_POST['delete_id'])) {
   header("Location: services");
   exit;
 }
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
 ?>
 <div class="main-content">
@@ -74,4 +74,4 @@ $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
     </div>
   </div>
 </div>
-<?php include "footer.php"; ?>
+<?php include __DIR__ . "footer.php"; ?>

@@ -79,8 +79,8 @@ $otpauth = "otpauth://totp/{$issuer}:{$user}"
          . "&algorithm=SHA1&digits=6&period=30";
 
 // 4) Layout
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">
   <div class="page-content container-fluid">
@@ -136,4 +136,5 @@ include __DIR__ . '/sidebar.php';
   });
 </script>
 
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include  __DIR__  . '/footer.php'; ?>
+

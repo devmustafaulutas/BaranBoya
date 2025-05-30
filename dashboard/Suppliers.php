@@ -12,8 +12,8 @@ if (isset($_POST['delete_id'])) {
     header("Location: tedarikciler.php");
     exit;
 }
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 $res = mysqli_query($con, "SELECT * FROM tedarikcilerimiz ORDER BY id DESC");
 $counter = 1;
 ?>
@@ -82,4 +82,4 @@ $counter = 1;
         </div>
     </div>
 </div>
-<?php include "footer.php"; ?>
+<?php include __DIR__ . "footer.php"; ?>

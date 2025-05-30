@@ -1,4 +1,5 @@
-<?php include "header.php"; ?>
+<?php include    '/header.php'; ?>
+
 <!-- ***** Breadcrumb Area Start ***** -->
 <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
     <div class="container">
@@ -97,4 +98,4 @@ $ufile = "$tr[logo]";
     </div>
 </section>
 <!--====== Call To Action Area End ======-->
-<?php include "footer.php"; ?>
+<?php include  "footer.php"; ?>

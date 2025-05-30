@@ -42,8 +42,8 @@ if ($kategoriId) {
 }
 $stmt->execute();
 $res = $stmt->get_result();
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 ?>
 
 <div class="main-content">
@@ -173,4 +173,5 @@ include __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include  __DIR__  . '/footer.php'; ?>
+

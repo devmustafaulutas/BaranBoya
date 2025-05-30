@@ -1,7 +1,16 @@
 <?php
-require __DIR__ . '/init.php';
-$username = $_SESSION['username'];
-?>
+require_once __DIR__ . '/../z_db.php';
+
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION['username'];
+} else {
+  print "
+				<script language='javascript'>
+					window.location = 'login.php';
+				</script>
+			";
+
+} ?>
 <div class="app-menu navbar-menu">
   <!-- LOGO -->
   <div class="navbar-brand-box">
@@ -29,9 +38,6 @@ $username = $_SESSION['username'];
         <img src="../assets/img/logo/<?php print $ufile ?>" alt="" height="30">
       </span>
     </a>
-    <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
-      <i class="ri-record-circle-line"></i>
-    </button>
   </div>
 
   <div id="scrollbar">
@@ -39,8 +45,12 @@ $username = $_SESSION['username'];
 
       <div id="two-column-menu">
       </div>
-      <ul class="navbar-nav" id="navbar-nav">
-        <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+      <ul class="navbar-nav " id="navbar-nav">
+        <li class="menu-title d-flex justify-content-between align-items-center"><span data-key="t-menu">Menu</span>
+          <button id="sidebar-close-btn" class="close-sidebar-btn">
+            <i class="fas fa-times-circle"></i>
+          </button>
+        </li>
 
 
         <li class="nav-item">

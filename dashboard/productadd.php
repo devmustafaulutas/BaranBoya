@@ -82,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
   }
 }
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 ?>
 
 
@@ -250,7 +250,8 @@ include __DIR__ . '/sidebar.php';
 </div>
 
 
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include  __DIR__  . '/footer.php'; ?>
+
 
 <script>
   // Alt kategori çekme

@@ -1,9 +1,9 @@
 <?php
-include __DIR__ . '/z_db.php';
+include  'z_db.php';
 
 // 2) siteconfig’dan bütün alanları çekelim
 $stmt = $con->prepare(
-    "SELECT site_about, site_footer
+  "SELECT site_about, site_footer
        FROM siteconfig
       WHERE id = 1
       LIMIT 1"
@@ -14,7 +14,7 @@ $stmt->fetch();
 $stmt->close();
 
 // 3) XSS koruması
-$about_safe  = htmlspecialchars($site_about,  ENT_QUOTES, 'UTF-8');
+$about_safe = htmlspecialchars($site_about, ENT_QUOTES, 'UTF-8');
 $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
 ?>
 <!--====== Footer Area Start ======-->
@@ -38,7 +38,7 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
             <ul>
               <?php
               $svcStmt = $con->prepare(
-                  "SELECT id, service_title
+                "SELECT id, service_title
                      FROM service
                     ORDER BY id DESC
                     LIMIT 5"
@@ -46,15 +46,15 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
               $svcStmt->execute();
               $svcStmt->bind_result($sid, $stitle);
               while ($svcStmt->fetch()):
-                  $title_safe = htmlspecialchars($stitle, ENT_QUOTES, 'UTF-8');
-                  $url = 'servicedetail.php?id=' . urlencode($sid);
-              ?>
+                $title_safe = htmlspecialchars($stitle, ENT_QUOTES, 'UTF-8');
+                $url = 'home';
+                ?>
                 <li class="py-2">
                   <a class="text-black-50" href="<?= $url ?>">
                     <?= $title_safe ?>
                   </a>
                 </li>
-              <?php
+                <?php
               endwhile;
               $svcStmt->close();
               ?>
@@ -66,30 +66,37 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
         <div class="col-12 col-sm-6 col-lg-4">
           <div class="footer-items">
             <h3 class="footer-title text-uppercase mb-2">Sosyal Medya</h3>
+            <?php
+            $follow_text = 'Bizi sosyal medya hesaplarımızdan takip edebilirsiniz.';
+            $follow_safe = htmlspecialchars($follow_text, ENT_QUOTES, 'UTF-8');
+            ?>
             <p class="mb-2"><?= $follow_safe ?></p>
             <ul class="social-icons list-inline pt-2">
               <?php
-              $socStmt = $con->prepare(
-                  "SELECT fa, social_link
-                     FROM social
-                    ORDER BY id DESC
-                    LIMIT 5"
-              );
+              // … hazırlık kodu …
+              $socStmt = $con->prepare("
+                SELECT fa, social_link
+                  FROM social
+                ORDER BY id
+              ");
               $socStmt->execute();
               $socStmt->bind_result($fa, $slink);
+
               while ($socStmt->fetch()):
-                  $icon_safe = htmlspecialchars($fa, ENT_QUOTES, 'UTF-8');
-                  $href_safe = htmlspecialchars($slink, ENT_QUOTES, 'UTF-8');
-              ?>
+                // marka ikonları fab olmalı
+                $icon_class = str_replace('fas ', 'fab ', $fa);
+                $href_safe = htmlspecialchars($slink, ENT_QUOTES, 'UTF-8');
+                ?>
                 <li class="list-inline-item px-1 text-white">
                   <a href="<?= $href_safe ?>" target="_blank" rel="noopener">
-                    <i class="fab <?= $icon_safe ?>"></i>
+                    <i class="<?= htmlspecialchars($icon_class, ENT_QUOTES, 'UTF-8') ?>"></i>
                   </a>
                 </li>
-              <?php
+                <?php
               endwhile;
               $socStmt->close();
               ?>
+
             </ul>
           </div>
         </div>
@@ -97,14 +104,14 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
       </div>
 
       <!-- Footer Alt (copyright) -->
-      <div class="copyright-area d-flex flex-wrap justify-content-center justify-content-sm-between text-center py-4">
+      <div class="copyright-area d-flex flex-wrap justify-content-center text-center py-4">
         <div class="copyright-left">
           <?= $footer_safe ?>
         </div>
-        <div class="copyright-right">
+        <div class="copyright-right" style="visibility:hidden; width: 0px; height: 0px;">
           Made with <i class="fas fa-heart"></i> by
           <a href="https://github.com/devmustafaulutas" target="_blank" rel="noopener">
-            Adeus
+            Mustafa Ulutaş
           </a>
         </div>
       </div>
@@ -112,26 +119,6 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
     </div>
   </div>
 </footer>
-<!--====== Footer Area End ======-->
-
-<!--====== Modal Responsive Menu Area Start ======-->
-<div id="menu" class="modal fade p-0">
-    <div class="modal-dialog dialog-animated">
-        <div class="modal-content h-100">
-            <div class="modal-header" data-dismiss="modal">
-                Menu <i class="far fa-times-circle icon-close"></i>
-            </div>
-            <div class="menu modal-body">
-                <div class="row w-100">
-                    <div class="items p-0 col-12 text-center"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--====== Modal Responsive Menu Area End ======-->
-
-</div>
 
 
 <!-- ***** All jQuery Plugins ***** -->
@@ -156,7 +143,5 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
 <script src="assets/js/background.js"></script>
 </body>
 
-
-<!-- Mirrored from theme-land.com/digimx/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 15:13:02 GMT -->
-
+        <!-- ***** Made by Mustafa Ulutaş Github : https://github.com/devmustafaulutas ***** -->
 </html>

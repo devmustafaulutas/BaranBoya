@@ -1,4 +1,5 @@
- <?php include "header.php";?>
+ <?php  include "header.php"; ?>
+
         <section class="section breadcrumb-area overlay-dark d-flex align-items-center">
             <div class="container">
                 <div class="row">
@@ -311,4 +312,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         </section>
         <!--====== Call To Action Area End ======-->
 
-      <?php include __DIR__ . '/footer.php'; ?>
+      <?php include   '/footer.php'; ?>
+

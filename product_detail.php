@@ -1,7 +1,6 @@
 <?php
-include "z_db.php";
-include "header.php";
-
+include "header.php"; 
+include "z_db.php" ;
 // Şifreleme ve Deşifreleme Fonksiyonları
 function encrypt_id($id)
 {
@@ -358,4 +357,4 @@ if ($alt_kategori_alt_id) {
 
 <!--====== Product Detail Area End ======-->
 
-<?php include "footer.php"; ?>
+<?php include  "footer.php"; ?>

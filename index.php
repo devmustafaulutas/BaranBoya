@@ -1,18 +1,9 @@
 <?php include "header.php"; ?>
 <?php
-    error_reporting(E_ALL); // Tüm hataları ve uyarıları göster
-    ini_set('display_errors', 0); // Hataları ekrana yazdırma (güvenlik için kapalı)
-    ini_set('log_errors', 1); // Hataları log dosyasına yaz
-    ini_set('error_log', __DIR__ . '/error.log'); // Hataları kaydedeceğiniz log dosyasının yolu (__DIR__ geçerli dizini belirtir)
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
 require 'dashboard/PHPMailer/src/SMTP.php';
-require 'z_db.php'; // Veritabanı bağlantısını dahil et
+require 'z_db.php'; 
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -20,13 +11,12 @@ use PHPMailer\PHPMailer\Exception;
 $errormsg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $status = "OK"; // Başlangıç durumu
+    $status = "OK";
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
     $phone = htmlspecialchars($_POST['phone']);
     $message = htmlspecialchars($_POST['message']);
 
-    // Form alanı doğrulama
     if (strlen($name) < 5) {
         $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
         $status = "NOTOK";
@@ -44,25 +34,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $status = "NOTOK";
     }
 
-    // Eğer doğrulama başarılıysa e-posta gönderimi
     if ($status == "OK") {
         $mail = new PHPMailer(true);
 
         try {
-            // SMTP Sunucu Ayarları
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = getenv('SMTP_USERNAME'); // Çevresel değişkenden alınan Gmail adresi
-            $mail->Password = getenv('SMTP_PASSWORD'); // Çevresel değişkenden alınan Gmail uygulama şifresi
+            $mail->Username = getenv('SMTP_USERNAME');
+            $mail->Password = getenv('SMTP_PASSWORD'); 
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            // Gönderen ve Alıcı Bilgileri
-            $mail->setFrom(getenv('SMTP_FROM_EMAIL'), 'Sender Name'); // Gönderen e-posta adresi
-            $mail->addAddress(getenv('SMTP_TO_EMAIL')); // Alıcı e-posta adresi
+            $mail->setFrom(getenv('SMTP_FROM_EMAIL'), 'Sender Name'); 
+            $mail->addAddress(getenv('SMTP_TO_EMAIL')); 
 
-            // Mesaj İçeriği
             $mail->isHTML(true);
             $mail->Subject = 'Yeni İletişim Mesajı';
             $mail->Body = "
@@ -94,16 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-    <!-- ***** Welcome Area Start ***** -->
         <section id="home" class="section welcome-area bg-overlay overflow-hidden d-flex align-items-center">
             <div class="container">
                 <div class="row align-items-center">
-                    <!-- Welcome Intro Start -->
                     <div class="col-12 col-md-12">
                     <?php
     $stmt = $con->prepare("SELECT id, stitle, stext FROM static");
     $stmt->execute();
-    $stmt->bind_result($id, $stitle, $stext); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
+    $stmt->bind_result($id, $stitle, $stext); 
 
     while ($stmt->fetch()) {
         $result[] = [
@@ -112,36 +96,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'stext' => $stext
         ];
     }
-
-    $service_title = "Hizmetlerimiz"; // Örnek statik değer
-    $service_text = "Sunulan hizmetler hakkında kısa açıklama."; // Örnek statik değer
-
-    $contact_title = "İletişim"; // Örnek statik değer
-    $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz."; // Örnek statik değer
+    $service_title = "Hizmetlerimiz"; 
+    $service_text = "Sunulan hizmetler hakkında kısa açıklama."; 
+    $contact_title = "İletişim";
+    $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz."; 
 
 ?>
 
                         <div class="welcome-intro">
                             <h1><?php print $stitle?></h1>
                             <p class="text-white my-4"><?php print $stext?></p>
-                            <!-- Buttons -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-       
-        
-
-        <!-- ***** Service Area End ***** -->
-        <!-- ***** Service Area End ***** -->
-
-        
         <section id="custom-bg" id="service" class="section service-area bg-grey ptb_150">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-7">
-                        <!-- Section Heading -->
                         <div class="section-heading text-center" data-text="<?php echo $service_title; ?>">
                             <h2 class="whoarewe-title" ><?php echo $service_title; ?></h2>
                             <p class="d-none d-sm-block mt-4"><?php echo $service_text; ?></p>
@@ -152,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php
                 $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id");
                 $stmt->execute();
-                $stmt->bind_result($id, $serviceg, $service_desc, $icon); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
+                $stmt->bind_result($id, $serviceg, $service_desc, $icon); 
 
                 while ($stmt->fetch()) {
                     $services[] = [
@@ -169,7 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $service_desc = $service['service_desc'];
                     $icon = $service['icon'];
 
-                    // HTML çıktısını oluştur
                     print "
                     <div class='col-12 col-md-6 col-lg-4 mb-4'>
                         <div class='single-service p-4' style='border:1px solid #788282;'>
@@ -186,7 +158,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 </div>
             </div>
-            <!-- Shape Bottom -->
             <div class="shape shape-bottom">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="#FFFFFF">
                     <path class="shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
@@ -197,7 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
 
        
-        <!-- ***** Sektor Area Start ***** -->
         <section id="custom-bg" class="index-sektorler-section">
             <div class="container">
                 <div class="row text-center mb-5">
@@ -207,7 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 1 (col-4 resim, col-8 içerik) -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-4 col-md-6 col-sm-12 index-sector-image-container">
                         <img src="assets/img/baranboya/HAVACILIK VE SAVUNMA.png" alt="Havacılık ve Savunma" class="index-sector-image fade-in">
@@ -222,7 +191,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 2 (col-8 içerik, col-4 resim) -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-8 col-md-6 col-sm-12 index-sector-content-wrap fade-in">
                         <div class="index-sector-content">
@@ -237,7 +205,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 3 (col-4 resim, col-8 içerik) -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-4 col-md-6 col-sm-12 index-sector-image-container">
                         <img src="assets/img/baranboya/unnamed (5).png" alt="Banyo" class="index-sector-image fade-in">
@@ -252,7 +219,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 4 (col-8 içerik, col-4 resim) -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-8 col-md-6 col-sm-12 index-sector-content-wrap fade-in">
                         <div class="index-sector-content">
@@ -267,7 +233,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 5: Hobi ve Tasarım -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-4 col-md-6 col-sm-12 index-sector-image-container">
                         <img src="assets/img/baranboya/HOBİ ve TASARIM.png" alt="Hobi ve Tasarım" class="index-sector-image fade-in">
@@ -282,7 +247,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 6: Otomotiv ve Ulaşım -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-8 col-md-6 col-sm-12 index-sector-content-wrap fade-in">
                         <div class="index-sector-content">
@@ -296,8 +260,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <img src="assets/img/baranboya/unnamed (1).png" alt="Otomotiv ve Ulaşım" class="index-sector-image fade-in">
                     </div>
                 </div>
-
-                <!-- Sektör 7: İnşaat ve Mimari Tasarım -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-4 col-md-6 col-sm-12 index-sector-image-container">
                         <img src="assets/img/baranboya/unnamed (4).png" alt="İnşaat ve Mimari Tasarım" class="index-sector-image fade-in">
@@ -312,7 +274,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 8: Heykel ve Sanat -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-8 col-md-6 col-sm-12 index-sector-content-wrap fade-in">
                         <div class="index-sector-content">
@@ -327,7 +288,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
 
-                <!-- Sektör 9: Enerji ve Sürdürülebilirlik -->
                 <div class="index-sektor-item row align-items-center mb-4">
                     <div class="col-lg-4 col-md-6 col-sm-12 index-sector-image-container">
                         <img src="assets/img/baranboya/SÜRDÜRÜLEBİLİR ENERJİ.png" alt="Enerji ve Sürdürülebilirlik" class="index-sector-image fade-in">
@@ -343,14 +303,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </section>
-        <!-- ***** Sektor Area End ***** -->
                 
         <section id="custom-bg" class="section review-area ptb_100">
             <div class="container">
                 <hr>
                 <div class="row justify-content-center">
                     <div id="tedarikcilerimiz-baslik"class="col-12 col-md-10 col-lg-7">
-                        <!-- Section Heading -->
 
 
                         <div class="section-heading text-center"></div>
@@ -359,12 +317,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="row">
-                    <!-- Client Logos -->
                     <div id="client-logos" class="client-logos d-flex flex-wrap justify-content-center">
                         <?php
                         $stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id");
                         $stmt->execute();
-                        $stmt->bind_result($id, $resim); // Sütun adlarını veritabanınızdaki sütunlara göre ayarlayın
+                        $stmt->bind_result($id, $resim);
 
                         while ($stmt->fetch()) {
                             $tedarikciler[] = [
@@ -376,7 +333,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         foreach ($tedarikciler as $tedarikci) {
                             $resim = $tedarikci['resim'];
 
-                            // Resimleri yatayda göstermek için HTML çıktısı
                             print "
                             <div class='single-logo p-3'>
                                 <img class='img-fluid' src='assets/img/tedarikcilerimiz/$resim' >
@@ -389,9 +345,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             </div>
         </section>
-        <!-- ***** Review Area End ***** -->
 
-        <!--====== Contact Area Start ======-->
         <section id="custom-bg" id="contact" class="contact-area ptb_100">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
@@ -451,9 +405,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </section>
-        <!--====== Contact Area End ======-->
-        <!--====== Contact Area End ======-->
-
-        <!--====== Call To Action Area Start ======-->
-
-      <?php include __DIR__ . '/footer.php'; ?>
+      <?php include   'footer.php'; ?>

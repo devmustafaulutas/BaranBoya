@@ -8,8 +8,8 @@ if (empty($_SESSION['authenticated'])) {
 }
 
 // 5) Ortak header ve sidebar
-include __DIR__ . '/header.php';
-include __DIR__ . '/sidebar.php';
+include  __DIR__ .  '/header.php';
+include  __DIR__ . '/sidebar.php';
 
 // 6) Sayı sayma fonksiyonu
 function getCount(mysqli $con, string $table): int {
@@ -201,6 +201,4 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
-<?php
-// Son olarak footer’ı include et
-include __DIR__ . '/footer.php';
+<?php include __DIR__ . "footer.php"; ?>

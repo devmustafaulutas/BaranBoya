@@ -726,18 +726,16 @@ INSERT INTO `siteconfig` (
     `follow_text`, 
     `site_url`, 
     `updated_at`
-) 
-VALUES
-(
-    1, 
-    'Church, Marketing', 
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias accusamus harum ullam tempore debitis et, expedita, repellat delectus aspernatur neque itaque qui quod.', 
-    'Vogue Website', 
-    'Young coders can use events to coordinate timing and communication between different sprites or pieces of their story. For instance, the when _ key pressed block is an event that starts code whenever the corresponding key on the keyboard is pressed.', 
-    '© 2025 All Rights Reserved', 
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nihil tenetur minus quidem est deserunt molestias.', 
-    'https://ornek.truva-software.com/vogue/', 
-    '2022-07-17 19:52:12'
+) VALUES (
+    1,
+    'poliya,polyester, polyester reçine, epoksi, epoksi reçine, cam elyafı, jelkot, kalıp silikonu, rtv2, poliya polyester, poliya jelkot',
+    'Firmamız polyester, jelkot, kalıp silikonu, epoksi ve poliüretan reçine ve tamamlayıcı kompozit malzemelerle hizmet vermektedir.',
+    'Polyester Epoksi Reçine Cam Elyafı Jelkot Kalıp Silikonu doğru adres',
+    'Firmamız, yüksek performanslı polyester, epoksi ve poliüretan reçineler, cam elyafı ve jelkot gibi kompozit malzemelerde uzmanlaşmıştır ve müşterilerine kapsamlı teknik destek sunar.',
+    '© 2025 Baran Boya. Tüm Hakları Saklıdır.',
+    'Bizi sosyal medyada takip edin!',
+    'https://baranboya.com',
+    '2025-05-30 12:00:00'
 );
 
 -- --------------------------------------------------------
@@ -790,9 +788,9 @@ CREATE TABLE IF NOT EXISTS `social` (
 -- Dumping data for table `social`
 INSERT INTO `social` (`id`, `name`, `fa`, `social_link`) 
 VALUES 
-    (1, 'Facebook', 'fas fa-facebook', 'https://www.facebook.com/baranpolyester'),
-    (2, 'Instagram', 'fas fa-instagram', 'https://www.instagram.com/baranboyaepoxs/'),
-    (3, 'Twitter', 'fas fa-twitter', 'https://x.com/baranboya');
+    (1, 'Facebook', 'fab fa-facebook', 'https://www.facebook.com/baranpolyester'),
+    (2, 'Instagram', 'fab fa-instagram', 'https://www.instagram.com/baranboyaepoxs/'),
+    (3, 'Twitter', 'fab fa-twitter', 'https://x.com/baranboya');
 
 -- --------------------------------------------------------
 

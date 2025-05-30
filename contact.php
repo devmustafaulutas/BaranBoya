@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include "header.php";
-include "z_db.php";
+include  "header.php";
+include  "z_db.php";
 
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
@@ -259,4 +259,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </section>
 
 <!--====== Map Area End ======-->
-<?php include "footer.php"; ?>
+<?php include __DIR__ . "footer.php"; ?>
