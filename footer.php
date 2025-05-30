@@ -18,6 +18,7 @@ $about_safe = htmlspecialchars($site_about, ENT_QUOTES, 'UTF-8');
 $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
 ?>
 <!--====== Footer Area Start ======-->
+
 <footer id="custom-bg-down" class="section footer-area">
   <div class="footer-top ptb_25" style="border-top:2px solid white">
     <div class="container">

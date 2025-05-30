@@ -1,9 +1,12 @@
 <?php
 session_start();
 
-include  "header.php";
-include  "z_db.php";
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
+include "z_db.php";
+include "header.php";
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
 require 'dashboard/PHPMailer/src/SMTP.php';
@@ -12,6 +15,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 $errormsg = "";
+
+var_dump($_SESSION['csrf_token'], $_POST['csrf_token']);
 
 // Başlık ve açıklama metinleri
 if (!isset($contact_title)) {
@@ -22,106 +27,128 @@ if (!isset($contact_text)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $status  = "OK";
-    $name    = htmlspecialchars($_POST['name']);
-    $email   = htmlspecialchars($_POST['email']);
-    $phone   = htmlspecialchars($_POST['phone']);
-    $message = htmlspecialchars($_POST['message']);
-
-    // Basit rate-limit: en az 60 saniye bekle
-    $bekleme_suresi = 60;
-    if (isset($_SESSION['last_contact_time'])
-        && (time() - $_SESSION['last_contact_time'] < $bekleme_suresi)
-    ) {
-        $errormsg  = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                        Lütfen en az {$bekleme_suresi} saniye bekleyip tekrar deneyin.
-                     </div>";
-        $status = "NOTOK";
-    }
-
-    // Form doğrulama
-    if ($status === "OK") {
-        if (strlen($name) < 5) {
-            $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
-            $status   = "NOTOK";
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errormsg .= "Geçerli bir e-posta adresi giriniz.<br>";
-            $status   = "NOTOK";
-        }
-        if (strlen($phone) < 8) {
-            $errormsg .= "Telefon numarası 8 karakterden uzun olmalı.<br>";
-            $status   = "NOTOK";
-        }
-        if (strlen($message) < 10) {
-            $errormsg .= "Mesaj 10 karakterden uzun olmalı.<br>";
-            $status   = "NOTOK";
-        }
-    }
-
-    if ($status === "OK") {
-        // Veritabanına kaydet
-        $stmt = $con->prepare(
-            "INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)"
-        );
-        $stmt->bind_param("ssss", $name, $email, $phone, $message);
-        $stmt->execute();
-
-        // E-posta gönderimi
-        $mail = new PHPMailer(true);
-        try {
-            // UTF-8 kodlama
-            $mail->CharSet  = 'UTF-8';
-            $mail->Encoding = 'base64';
-
-            // SMTP Debug (isteğe bağlı)
-//          $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-
-            // SMTP Ayarları
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'baranboya@gmail.com';
-            $mail->Password   = 'lbzg cigc usyk zlwa'; // uygulama şifreniz
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
-
-            // Gönderen ve alıcı
-            $mail->setFrom('baranboya@gmail.com', 'Baran Boya');
-            $mail->addAddress('mustafaum538@gmail.com');
-
-            // İçerik
-            $mail->isHTML(true);
-            $mail->Subject = 'Yeni İletişim Mesajı';
-            $mail->Body    = "
-                <h3>İsim: {$name}</h3>
-                <h3>Email: {$email}</h3>
-                <h3>Telefon: {$phone}</h3>
-                <p>Mesaj: {$message}</p>";
-
-            $mail->send();
-
-            // Rate-limit zamanını güncelle
-            $_SESSION['last_contact_time'] = time();
-
-            $errormsg = "<div class='alert alert-success alert-dismissible alert-outline fade show'>
-                            Mesaj başarıyla gönderildi. En kısa sürede sizinle iletişime geçilecektir.
-                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                         </div>";
-        } catch (Exception $e) {
-            $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                            Mesaj gönderilemedi. Hata: {$mail->ErrorInfo}
-                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                         </div>";
-        }
+    // CSRF kontrolü
+    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        $errormsg = "
+            <div class='alert alert-danger alert-dismissible alert-outline fade show'>
+                Geçersiz istek (CSRF hatası).
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>";
     } else {
-        // Form validasyon veya rate-limit hatalarını göster
-        $errormsg = "<div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                        {$errormsg}
+        $status = "OK";
+
+        // Basit rate-limit: en az 60 saniye bekle
+        $bekleme_suresi = 60;
+        if (
+            isset($_SESSION['last_contact_time'])
+            && (time() - $_SESSION['last_contact_time'] < $bekleme_suresi)
+        ) {
+            $errormsg = "
+                <div class='alert alert-danger alert-dismissible alert-outline fade show'>
+                    Lütfen en az {$bekleme_suresi} saniye bekleyip tekrar deneyin.
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+            $status = "NOTOK";
+        }
+
+        // Girdileri temizle & filtrele
+        $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+        $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+        $phone = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
+        $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
+
+        // Form doğrulama
+        if ($status === "OK") {
+            if (mb_strlen($name) < 5) {
+                $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
+                $status = "NOTOK";
+            }
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errormsg .= "Geçerli bir e-posta adresi giriniz.<br>";
+                $status = "NOTOK";
+            }
+            if (mb_strlen($phone) < 8) {
+                $errormsg .= "Telefon numarası 8 karakterden uzun olmalı.<br>";
+                $status = "NOTOK";
+            }
+            if (mb_strlen($message) < 10) {
+                $errormsg .= "Mesaj 10 karakterden uzun olmalı.<br>";
+                $status = "NOTOK";
+            }
+        }
+
+        if ($status === "OK") {
+            // 1) Veritabanına kaydet
+            $stmt = $con->prepare(
+                "INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)"
+            );
+            $stmt->bind_param("ssss", $name, $email, $phone, $message);
+            $stmt->execute();
+            $stmt->close();
+
+            // 2) E-posta gönderimi
+            $mail = new PHPMailer(true);
+            try {
+                $mail->CharSet = 'UTF-8';
+                $mail->Encoding = 'base64';
+
+                // SMTP Ayarları
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = getenv('SMTP_USERNAME') ?: 'baranboya@gmail.com';
+                $mail->Password = getenv('SMTP_PASSWORD') ?: 'lbzg cigc usyk zlwa';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+
+                // Gönderen (fallback ile)
+                $fromEmail = getenv('SMTP_FROM_EMAIL') ?: 'baranboya@gmail.com';
+                $mail->setFrom($fromEmail, 'Baran Boya');
+
+                // Yanıt adresi olarak kullanıcı
+                $mail->addReplyTo($email, $name);
+
+                // Alıcı
+                $mail->addAddress(getenv('SMTP_TO_EMAIL') ?: 'mustafaum538@gmail.com');
+
+                // İçerik
+                $mail->isHTML(true);
+                $mail->Subject = 'Yeni İletişim Mesajı';
+                $mail->Body = "
+                    <h3>İsim: " . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . "</h3>
+                    <h3>Email: " . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . "</h3>
+                    <h3>Telefon: " . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . "</h3>
+                    <p>Mesaj: " . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . "</p>
+                ";
+
+                $mail->send();
+
+                // Rate-limit zamanını güncelle
+                $_SESSION['last_contact_time'] = time();
+
+                $errormsg = "
+                    <div class='alert alert-success alert-dismissible alert-outline fade show'>
+                        Mesaj başarıyla gönderildi. En kısa sürede sizinle iletişime geçilecektir.
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                     </div>";
+                    </div>";
+            } catch (Exception $e) {
+                $errormsg = "
+                    <div class='alert alert-danger alert-dismissible alert-outline fade show'>
+                        Mesaj gönderilemedi. Hata: " . htmlspecialchars($mail->ErrorInfo, ENT_QUOTES, 'UTF-8') . "
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+            }
+        } else {
+            // Validasyon veya rate-limit hataları
+            $errormsg = "
+                <div class='alert alert-danger alert-dismissible alert-outline fade show'>
+                    {$errormsg}
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+        }
     }
 }
+
 ?>
 
 
@@ -177,6 +204,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php if (!empty($errormsg))
                         echo $errormsg; ?>
                     <form action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token"
+                            value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -259,4 +288,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </section>
 
 <!--====== Map Area End ======-->
-<?php include __DIR__ . "footer.php"; ?>
+<?php include "footer.php"; ?>

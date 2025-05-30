@@ -250,7 +250,7 @@ include  __DIR__ . '/sidebar.php';
 </div>
 
 
-<?php include  __DIR__  . '/footer.php'; ?>
+  <?php include "footer.php"; ?>
 
 
 <script>

@@ -201,4 +201,4 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
-<?php include __DIR__ . "footer.php"; ?>
+<?php include "footer.php"; ?>

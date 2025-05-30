@@ -82,4 +82,4 @@ $counter = 1;
         </div>
     </div>
 </div>
-<?php include __DIR__ . "footer.php"; ?>
+  <?php include "footer.php"; ?>

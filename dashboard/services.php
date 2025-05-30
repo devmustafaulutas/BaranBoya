@@ -74,4 +74,4 @@ $res = mysqli_query($con, "SELECT * FROM service ORDER BY id DESC");
     </div>
   </div>
 </div>
-<?php include __DIR__ . "footer.php"; ?>
+  <?php include "footer.php"; ?>
