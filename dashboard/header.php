@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../z_db.php';
 
 
-// Check, if username session is NOT set then this page will jump to login page
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 } else {
@@ -27,18 +26,15 @@ if (isset($_SESSION['username'])) {
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-    <!-- Core CSS’ler -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/blog.css" rel="stylesheet" />
     <link href="assets/css/custom.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
     
-    <!-- Diğer kütüphane CSS’leri -->
     <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" />
     <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" />
     
     
-    <!-- Layout config -->
     <script src="assets/js/index.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
@@ -48,7 +44,6 @@ if (isset($_SESSION['username'])) {
 <body>
 
 
-    <!-- Begin page -->
     <div id="layout-wrapper">
 
         <header id="page-topbar">

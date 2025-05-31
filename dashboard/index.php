@@ -1,17 +1,14 @@
 <?php
 require __DIR__ . '/init.php';
 
-// 4) Giriş kontrolü
 if (empty($_SESSION['authenticated'])) {
     header('Location: login.php');
     exit;
 }
 
-// 5) Ortak header ve sidebar
 include  __DIR__ .  '/header.php';
 include  __DIR__ . '/sidebar.php';
 
-// 6) Sayı sayma fonksiyonu
 function getCount(mysqli $con, string $table): int {
     $sql = "SELECT COUNT(*) FROM `$table`";
     $res = mysqli_query($con, $sql);
@@ -22,7 +19,6 @@ function getCount(mysqli $con, string $table): int {
     return (int)$row[0];
 }
 
-// 7) Haftalık ziyaret verisini çek ve dizilere ata
 $visitsRes = mysqli_query($con,
   "SELECT DATE(visited_at) AS dt, COUNT(*) AS cnt
    FROM page_visits
@@ -47,12 +43,10 @@ for ($i = 6; $i >= 0; $i--) {
   <div class="page-content">
     <div class="container-fluid">
 
-      <!-- Başlık -->
       <div class="row mb-4">
         <div class="col"><h4 class="fw-bold">Dashboard</h4></div>
       </div>
 
-      <!-- Kartlar -->
       <div class="row g-3">
         <?php $cnt = getCount($con, 'service'); ?>
         <div class="col-lg-3 col-md-6 d-flex">
@@ -122,9 +116,7 @@ for ($i = 6; $i >= 0; $i--) {
           </div>
         </div>
       </div>
-      <!-- /Kartlar -->
 
-      <!-- İletişim Mesajları -->
       <div class="row g-3 mt-4">
         <div class="col-lg-6 d-flex">
           <div class="card flex-fill">
@@ -165,9 +157,7 @@ for ($i = 6; $i >= 0; $i--) {
           </div>
         </div>
       </div>
-      <!-- /Tablo -->
 
-      <!-- Haftalık Sayfa Ziyaretleri Grafiği -->
       <div class="row g-3 mt-4">
         <div class="col-12 d-flex">
           <div class="card flex-fill">
@@ -178,13 +168,11 @@ for ($i = 6; $i >= 0; $i--) {
           </div>
         </div>
       </div>
-      <!-- /Grafik -->
 
     </div>
   </div>
 </div>
 
-<!-- ApexCharts -->
 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(){

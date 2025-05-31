@@ -1,13 +1,10 @@
 <?php
-// dashboard/siteconfig.php
 require __DIR__ . '/init.php';
 
-// Mevcut ayarları çek
 $config = mysqli_fetch_assoc(
     mysqli_query($con, "SELECT * FROM siteconfig WHERE id=1")
 );
 
-// Form gönderimi
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title    = mysqli_real_escape_string($con, $_POST['site_title']);
     $keywords = mysqli_real_escape_string($con, $_POST['site_keyword']);

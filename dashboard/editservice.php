@@ -48,7 +48,6 @@ $service_title = $row['service_title'] ?? '';
 $service_desc = $row['service_desc'] ?? '';
 $service_detail = $row['service_detail'] ?? '';
 $icon_html = $row['icon'] ?? '';
-// Icon sınıfını çek
 if (preg_match('/class="([^"]+)"/', $icon_html, $m)) {
   $icon_class = $m[1];
 } else {

@@ -1,15 +1,12 @@
 <?php
-// dashboard/blog_edit.php
 require __DIR__ . '/init.php';
 
-// ID from query string (sanitize)
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if ($id <= 0) {
     header('Location: blog.php');
     exit;
 }
 
-// Fetch existing blog entry
 $stmt = $con->prepare("SELECT blog_title, blog_desc, blog_detail FROM blog WHERE id = ? LIMIT 1");
 $stmt->bind_param('i', $id);
 $stmt->execute();
@@ -21,14 +18,12 @@ if (!$stmt->fetch()) {
 }
 $stmt->close();
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
     $title  = trim($_POST['blog_title']);
     $desc   = trim($_POST['blog_desc']);
     $detail = trim($_POST['blog_detail']);
     $errors = [];
 
-    // Validation rules
     if (strlen($title) < 5) {
         $errors[] = 'Başlık en az 5 karakter olmalı.';
     }

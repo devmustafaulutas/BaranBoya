@@ -10,7 +10,6 @@ if (isset($_POST['save'])) {
   $service_detail = mysqli_real_escape_string($con, $_POST['service_detail']);
   $icon_html = mysqli_real_escape_string($con, $_POST['icon_html']);
 
-  // Validasyon
   if (strlen($service_title) < 5) {
     $msg .= "Başlık en az 5 karakter olmalı.<br>";
     $status = "NOTOK";
@@ -28,7 +27,6 @@ if (isset($_POST['save'])) {
     $status = "NOTOK";
   }
 
-  // Ekleme
   if ($status === "OK") {
     $sql = "INSERT INTO service (service_title, service_desc, service_detail, icon) VALUES ('{$service_title}','{$service_desc}','{$service_detail}','{$icon_html}')";
     if (mysqli_query($con, $sql)) {
@@ -44,14 +42,10 @@ include  __DIR__ . '/sidebar.php';
 ?>
 
 
-<!-- RemixIcon CDN -->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-
-      <!-- Page Title -->
       <div class="row mb-4">
         <div class="row">
           <div class="col-12">
@@ -93,7 +87,6 @@ include  __DIR__ . '/sidebar.php';
                       placeholder="Enter Detailed Description" required></textarea>
                   </div>
 
-                  <!-- Icon Picker -->
                   <div class="mb-3">
                     <label class="form-label">Simge</label>
                     <div>
@@ -120,7 +113,6 @@ include  __DIR__ . '/sidebar.php';
     </div>
   </div>
 
-  <!-- Icon Selection Modal -->
   <div class="modal fade" id="iconModal" tabindex="-1" aria-labelledby="iconModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

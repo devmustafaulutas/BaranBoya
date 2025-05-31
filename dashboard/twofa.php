@@ -1,15 +1,11 @@
 <?php
-// dashboard/twofa.php
 
 session_start();
-// Eğer kullanıcı login olup da 2FA kurulumuna gelmişse burada:
-// (login.php’de 2FA kurulmamışsa twofa.php’ye yönlendirdiğinizi varsayıyoruz)
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit;
 }
 
-// DB ve security
 require_once __DIR__ . '/../z_db.php';
 require_once __DIR__ . '/lib/security.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
@@ -18,18 +14,15 @@ $g      = new GoogleAuthenticator();
 $user   = $_SESSION['username'];
 $issuer = 'Baran Boya';
 
-// 1) “Etkinleştir” POST’u: twofa_enabled = 1 olarak işaretle ve login’e dön
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $upd = $con->prepare("UPDATE admin SET twofa_enabled = 1 WHERE username = ?");
     $upd->bind_param('s', $user);
     $upd->execute();
-    // bir kez gösterilen backup kodlarını temizleyelim
     unset($_SESSION['backup_codes']);
     header('Location: login.php');
     exit;
 }
 
-// 2) Secret ve backup kodları çek / oluştur
 $stmt = $con->prepare("
     SELECT twofa_enabled, `2fa_secret_enc`, `backup_codes`
       FROM admin
@@ -40,9 +33,7 @@ $stmt->execute();
 $row = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
-// Eğer henüz enable edilmediyse setup adımındayız
 if (!$row['twofa_enabled']) {
-    // Secret yoksa oluştur
     if (empty($row['2fa_secret_enc'])) {
         $secret    = $g->generateSecret();
         $secretEnc = encryptSecret($secret);
@@ -59,26 +50,20 @@ if (!$row['twofa_enabled']) {
         $u->execute();
         $u->close();
 
-        // code’ları ekranda göstermek üzere session’da sakla
         $_SESSION['backup_codes'] = $codes;
     } else {
-        // zaten oluşturulmuş: decrypt et
         $secret = decryptSecret($row['2fa_secret_enc']);
     }
-    // backup listesi
     $showCodes = $_SESSION['backup_codes'] ?? [];
 } else {
-    // eğer enable zaten 1 ise, bu sayfayı yeniden gösterme
     header('Location: index.php');
     exit;
 }
 
-// 3) OTP URI
 $otpauth = "otpauth://totp/{$issuer}:{$user}"
          . "?secret={$secret}&issuer={$issuer}"
          . "&algorithm=SHA1&digits=6&period=30";
 
-// 4) Layout
 include  __DIR__ .  '/header.php';
 include  __DIR__ . '/sidebar.php';
 ?>
@@ -110,7 +95,6 @@ include  __DIR__ . '/sidebar.php';
               </ul>
             <?php endif; ?>
 
-            <!-- 5) Etkinleştir Butonu -->
             <form method="post">
               <button type="submit" class="btn btn-success w-100">
                 2FA’yı Etkinleştir ve Girişe Dön
@@ -124,7 +108,6 @@ include  __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-<!-- QRCode.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {

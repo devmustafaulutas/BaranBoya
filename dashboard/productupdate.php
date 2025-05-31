@@ -1,10 +1,8 @@
 <?php
 require __DIR__ . '/init.php';
 
-// 1) Ürün ID'sini al
 $product_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-// 2) Mevcut resmi DB’den çekiyoruz ki POST içinde $resim tanımlı olsun
 $oldResStmt = $con->prepare("SELECT resim FROM urunler WHERE id = ?");
 $oldResStmt->bind_param("i", $product_id);
 $oldResStmt->execute();
@@ -12,9 +10,7 @@ $oldResStmt->bind_result($resim);
 $oldResStmt->fetch();
 $oldResStmt->close();
 
-// 3) Eğer form POST edildiyse, önce işlemleri yapıp yönlendiriyoruz
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Form alanları
     $isim               = $_POST['isim'];
     $aciklama           = $_POST['aciklama'];
     $ozellikler         = $_POST['ozellikler'];
@@ -26,17 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stok               = $_POST['stok'];
     $kategori_id        = intval($_POST['kategori_id']);
 
-    // “Alt Kategori” artık zorunlu değil; boşsa null yapıyoruz
     $alt_kategori_id = (isset($_POST['alt_kategori_id']) && $_POST['alt_kategori_id'] !== '')
         ? intval($_POST['alt_kategori_id'])
         : null;
 
-    // “Alt-Alt Kategori” da boş olabiliyor
     $alt_kategori_alt_id = (isset($_POST['alt_kategori_alt_id']) && $_POST['alt_kategori_alt_id'] !== '')
         ? intval($_POST['alt_kategori_alt_id'])
         : null;
 
-    // Resim güncelleme
     if (isset($_FILES['resim']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
         $upload_dir    = "../assets/img/products/";
         $allowed_types = ['image/jpeg','image/png','image/gif'];
@@ -50,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newName  = uniqid('urun_', true) . ".$ext";
             $dest     = $upload_dir . $newName;
             if (move_uploaded_file($tmp, $dest)) {
-                // Eski resmi sil
                 if (!empty($resim) && file_exists($upload_dir . $resim)) {
                     unlink($upload_dir . $resim);
                 }
@@ -101,12 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $stmt->close();
 
-    // Yönlendiriyoruz
     header("Location: products.php");
     exit();
 }
 
-// 5) GET ise formu gösterebilmek için mevcut ürün bilgilerini çekiyoruz
 $query = "
   SELECT 
     isim, aciklama, ozellikler, kimyasalyapi, renk, uygulamasekli, kullanimalani,
@@ -125,12 +115,10 @@ $stmt->bind_result(
 $stmt->fetch();
 $stmt->close();
 
-// 6) Tüm kategori listelerini de çekelim (edit dropdownları için)
 $kategori_result      = mysqli_query($con, "SELECT * FROM kategoriler ORDER BY isim ASC");
 $alt_kategori_result  = mysqli_query($con, "SELECT * FROM alt_kategoriler ORDER BY isim ASC");
 $alt_alt_result       = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt ORDER BY isim ASC");
 
-// 7) Header ve Sidebar’ı ekleyelim
 include __DIR__ . '/header.php';
 include __DIR__ . '/sidebar.php';
 ?>
@@ -141,52 +129,42 @@ include __DIR__ . '/sidebar.php';
       <h5 class="mb-3">Ürün Güncelle</h5>
       <form action="productupdate.php?id=<?= $product_id ?>" method="post" enctype="multipart/form-data">
         <div class="row">
-          <!-- Ürün İsmi -->
           <div class="col-md-6 mb-3">
             <label class="form-label">Ürün İsmi</label>
             <input type="text" name="isim" class="form-control" value="<?= htmlspecialchars($isim) ?>" required>
           </div>
-          <!-- Fiyat -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Fiyat</label>
             <input type="number" step="0.01" name="fiyat" class="form-control" value="<?= htmlspecialchars($fiyat) ?>" required>
           </div>
-          <!-- Stok -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Stok</label>
             <input type="number" name="stok" class="form-control" value="<?= htmlspecialchars($stok) ?>" required>
           </div>
-          <!-- Açıklama -->
           <div class="col-12 mb-3">
             <label class="form-label">Açıklama</label>
             <textarea name="aciklama" class="form-control" rows="2" required><?= htmlspecialchars($aciklama) ?></textarea>
           </div>
-          <!-- Özellikler -->
           <div class="col-12 mb-3">
             <label class="form-label">Özellikler</label>
             <textarea name="ozellikler" class="form-control" rows="2"><?= htmlspecialchars($ozellikler) ?></textarea>
           </div>
-          <!-- Kimyasal Yapı -->
           <div class="col-md-4 mb-3">
             <label class="form-label">Kimyasal Yapı</label>
             <input type="text" name="kimyasalyapi" class="form-control" value="<?= htmlspecialchars($kimyasalyapi) ?>">
           </div>
-          <!-- Renk -->
           <div class="col-md-4 mb-3">
             <label class="form-label">Renk</label>
             <input type="text" name="renk" class="form-control" value="<?= htmlspecialchars($renk) ?>">
           </div>
-          <!-- Uygulama Şekli -->
           <div class="col-md-4 mb-3">
             <label class="form-label">Uygulama Şekli</label>
             <input type="text" name="uygulamasekli" class="form-control" value="<?= htmlspecialchars($uygulamasekli) ?>">
           </div>
-          <!-- Kullanım Alanı -->
           <div class="col-12 mb-3">
             <label class="form-label">Kullanım Alanı</label>
             <input type="text" name="kullanimalani" class="form-control" value="<?= htmlspecialchars($kullanimalani) ?>">
           </div>
-          <!-- Resim -->
           <div class="col-md-6 mb-3">
             <label class="form-label">Resim</label>
             <input type="file" name="resim" class="form-control">
@@ -194,7 +172,6 @@ include __DIR__ . '/sidebar.php';
               <img src="../<?= htmlspecialchars($resim) ?>" style="width:100px; margin-top:8px;" alt="Mevcut Resim">
             <?php endif; ?>
           </div>
-          <!-- Kategori (zorunlu) -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Kategori</label>
             <select name="kategori_id" class="form-select" required>
@@ -206,7 +183,6 @@ include __DIR__ . '/sidebar.php';
               <?php endwhile; ?>
             </select>
           </div>
-          <!-- Alt Kategori (artık *required değil*) -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Alt Kategori</label>
             <select name="alt_kategori_id" class="form-select">
@@ -218,7 +194,6 @@ include __DIR__ . '/sidebar.php';
               <?php endwhile; ?>
             </select>
           </div>
-          <!-- Alt-Alt Kategori (gerekmiyorsa boş bırakılabilir) -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Alt-Alt Kategori</label>
             <select name="alt_kategori_alt_id" class="form-select">

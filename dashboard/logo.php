@@ -1,13 +1,10 @@
 <?php
-// dashboard/logo.php
 require __DIR__ . '/init.php';
 
-// Mevcut logo bilgisini çek
 $row = mysqli_fetch_assoc(
     mysqli_query($con, "SELECT * FROM logo WHERE id=1")
 );
 
-// Form gönderimi
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['logo'])) {
     $uploadDir = __DIR__ . '/../assets/img/logo/';
     $file      = $_FILES['logo'];
@@ -15,11 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['logo'])) {
     $newName   = uniqid('logo_') . ".{$ext}";
 
     if (move_uploaded_file($file['tmp_name'], $uploadDir . $newName)) {
-        // Eski dosyayı sil
         if ($row['logo'] && file_exists($uploadDir . $row['logo'])) {
             unlink($uploadDir . $row['logo']);
         }
-        // DB güncelle
         $stmt = $con->prepare(
             "UPDATE logo SET logo = ?, updated_at = NOW() WHERE id = 1"
         );

@@ -1,19 +1,12 @@
 <?php
-// ----------------------------------------------------------------
-// 1) init.php dahil et (session kontrolü + DB bağlantısı + security)
-// ----------------------------------------------------------------
 require_once __DIR__ . '/init.php';
 
-// ----------------------------------------------------------------
-// 2) GET / POST işlemleri (CRUD)
-// ----------------------------------------------------------------
 $action   = $_GET['action']  ?? '';
 $table    = $_GET['table']   ?? '';
 $id       = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $errors   = [];
 $messages = [];
 
-// 2.A) Silme işlemi
 if (
     $action === 'delete'
     && in_array($table, ['kategoriler','alt_kategoriler','alt_kategoriler_alt'], true)
@@ -32,10 +25,9 @@ if (
     exit;
 }
 
-// 2.B) Düzenleme için veriyi çekme (mysqli_fetch_assoc ile)
 $edit_tbl = null;
 $edit_id  = null;
-$r        = []; // Seçilen kaydın verileri burada tutulacak
+$r        = []; 
 
 if (
     $action === 'edit'
@@ -45,7 +37,6 @@ if (
     $edit_tbl = $table;
     $edit_id  = $id;
 
-    // Tablo ismini kesin olarak belirleyelim (SQL injection’a karşı safe)
     if ($edit_tbl === 'kategoriler') {
         $safeTable = 'kategoriler';
     }
@@ -53,20 +44,16 @@ if (
         $safeTable = 'alt_kategoriler';
     }
     else {
-        // alt_kategoriler_alt
         $safeTable = 'alt_kategoriler_alt';
     }
 
-    // SQL’i çalıştırıp sonucu fetch_assoc ile alıyoruz
     $sql = "SELECT * FROM `$safeTable` WHERE id = $edit_id LIMIT 1";
     $res = mysqli_query($con, $sql);
     if ($res && mysqli_num_rows($res) > 0) {
         $r = mysqli_fetch_assoc($res);
     }
-    // Not: Eğer satır gelmezse $r boş kalır ve form boş görünür.
 }
 
-// 2.C) Ekle / Güncelle (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tbl       = $_POST['table']      ?? '';
     $is_edit   = !empty($_POST['id']);
@@ -74,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $old_resim = trim($_POST['old_resim'] ?? '');
     $parent_id = isset($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
 
-    // Basit validasyon
     if (mb_strlen($isim) < 3) {
         $errors[] = "İsim en az 3 karakter olmalı.";
     }
@@ -82,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Geçersiz tablo seçimi.";
     }
 
-    // Resim yükleme (varsa)
     $resim = $old_resim;
     if (
         isset($_FILES['resim'])
@@ -107,10 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // INSERT / UPDATE
     if (count($errors) === 0) {
         if ($tbl === 'kategoriler') {
-            // "kategoriler" tablosunda kategori_id sütunu parent ilişkisini tutuyor.
             if ($is_edit) {
                 $parent_kat = $parent_id ?? null;
                 $sql      = "UPDATE kategoriler SET isim = ?, resim = ?, kategori_id = ? WHERE id = ?";
@@ -144,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
-        else { // alt_kategoriler_alt
+        else { 
             if ($parent_id === null || $parent_id <= 0) {
                 $errors[] = "Lütfen önce bir üst alt kategori seçin.";
             } else {
@@ -184,9 +167,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ----------------------------------------------------------------
-// 3) Tablolardaki kayıtları listeleme
-// ----------------------------------------------------------------
 $kats   = $con->query("SELECT * FROM kategoriler ORDER BY isim ASC");
 $sub    = $con->query("
     SELECT ak.id, ak.isim, ak.resim, ak.kategori_id, k.isim AS kategori_adi
@@ -201,9 +181,6 @@ $subsub = $con->query("
     ORDER BY aas.isim ASC
 ");
 
-// ----------------------------------------------------------------
-// 4) UI/UX: header/sidebar include + “main-content” bloğu
-// ----------------------------------------------------------------
 ?>
 
 <?php include __DIR__ . '/header.php'; ?>
@@ -214,7 +191,6 @@ $subsub = $con->query("
     <div class="container-fluid mt-4">
       <h2 class="mb-4 text-center">Kategori Yönetim Paneli</h2>
 
-      <!-- Hata / Başarı Mesajları -->
       <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
           <ul class="mb-0">
@@ -234,7 +210,6 @@ $subsub = $con->query("
         </div>
       <?php endif; ?>
 
-      <!-- Tab Başlıkları -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
           <button
@@ -265,9 +240,7 @@ $subsub = $con->query("
         </li>
       </ul>
 
-      <!-- Tab İçerikleri -->
       <div class="tab-content bg-white p-4 border border-top-0 rounded-bottom">
-        <!-- 1) KATEGORİ TAB’I -->
         <div
           id="tab-main"
           class="tab-pane fade <?php echo (!$edit_tbl || $edit_tbl==='kategoriler') ? 'show active' : '' ?>"
@@ -371,7 +344,6 @@ $subsub = $con->query("
           </table>
         </div>
 
-        <!-- 2) ALT KATEGORİ TAB’I -->
         <div
           id="tab-sub"
           class="tab-pane fade <?php echo ($edit_tbl==='alt_kategoriler') ? 'show active' : '' ?>"
@@ -391,7 +363,6 @@ $subsub = $con->query("
               <select name="parent_id" class="form-select" required>
                 <option value="">Seçiniz</option>
                 <?php
-                // Kategori tablosunu yeniden sarmalamak için data_seek
                 $kats->data_seek(0);
                 while ($c = $kats->fetch_assoc()):
                   $sel = (isset($r['kategori_id']) && $r['kategori_id'] == $c['id']) ? 'selected' : '';

@@ -1,14 +1,8 @@
 <?php 
-// dashboard/sidebar.php
-
-// 1) Oturum zaten init.php tarafından kontrol edildi, ekstra session_start() gerekmez
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit;
 }
-
-// 2) $con, init.php vasıtasıyla z_db.php’de hazırlandı
-//    Bu yüzden doğrudan veritabanı sorgusu yapabiliriz.
 $ufile = '';
 if (isset($con) && $con instanceof mysqli) {
     $rr = $con->query("SELECT logo FROM logo LIMIT 1");
@@ -19,9 +13,7 @@ if (isset($con) && $con instanceof mysqli) {
 }
 ?>
 <div class="app-menu navbar-menu">
-  <!-- LOGO -->
   <div class="navbar-brand-box">
-    <!-- Dark Logo-->
     <a href="home" class="logo logo-dark">
       <span class="logo-sm">
         <?php if ($ufile !== ''): ?>
@@ -38,7 +30,6 @@ if (isset($con) && $con instanceof mysqli) {
         <?php endif; ?>
       </span>
     </a>
-    <!-- Light Logo-->
     <a href="home" class="logo logo-light">
       <span class="logo-sm">
         <?php if ($ufile !== ''): ?>
@@ -161,11 +152,7 @@ if (isset($con) && $con instanceof mysqli) {
 
       </ul>
     </div>
-    <!-- Sidebar -->
   </div>
-
   <div class="sidebar-background"></div>
 </div>
-<!-- Left Sidebar End -->
-<!-- Vertical Overlay-->
 <div class="vertical-overlay"></div>

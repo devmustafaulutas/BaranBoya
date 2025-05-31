@@ -1,5 +1,4 @@
 <?php
-// dashboard/suppliers_edit.php
 require __DIR__ . '/init.php';
 
 $msg    = '';
@@ -10,7 +9,6 @@ if (!$id) {
     exit;
 }
 
-// Fetch existing supplier image
 $stmt = $con->prepare("SELECT resim FROM tedarikcilerimiz WHERE id = ? LIMIT 1");
 $stmt->bind_param('i', $id);
 $stmt->execute();
@@ -22,7 +20,6 @@ if (!$stmt->fetch()) {
 }
 $stmt->close();
 
-// Handle update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
     if (!empty($_FILES['resim']['name']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
         $file    = $_FILES['resim'];
@@ -35,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
             $newName   = uniqid('sup_') . ".{$ext}";
             $uploadDir = __DIR__ . '/../assets/img/tedarikcilerimiz/';
             if (move_uploaded_file($file['tmp_name'], $uploadDir . $newName)) {
-                // Delete old
                 if ($currentImage && file_exists($uploadDir . $currentImage)) {
                     unlink($uploadDir . $currentImage);
                 }

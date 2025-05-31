@@ -1,13 +1,10 @@
 <?php
-// dashboard/contact.php
 require __DIR__ . '/init.php';
 
-// Fetch existing contact data
 $contact = mysqli_fetch_assoc(
     mysqli_query($con, "SELECT * FROM sitecontact WHERE id=1")
 );
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $p1 = mysqli_real_escape_string($con, $_POST['phone1']);
     $p2 = mysqli_real_escape_string($con, $_POST['phone2']);
@@ -22,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         $msg = '<div class="alert alert-success">Bilgiler başarıyla kaydedildi.</div>';
-        // reload data
         $contact = mysqli_fetch_assoc(
             mysqli_query($con, "SELECT * FROM sitecontact WHERE id=1")
         );

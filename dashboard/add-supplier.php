@@ -1,12 +1,10 @@
 <?php
-// dashboard/suppliers_add.php
 require __DIR__ . '/init.php';
 
 $msg    = '';
 $status = 'OK';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['resim'])) {
-    // File validation
     $file     = $_FILES['resim'];
     $ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $allowed  = ['jpg', 'jpeg', 'png', 'gif'];

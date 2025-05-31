@@ -1,15 +1,12 @@
 <?php
 require __DIR__ . '/init.php';
 
-// 1) Kategori filtreleme
 $kategoriId = isset($_GET['kategori']) && is_numeric($_GET['kategori']) ? (int) $_GET['kategori'] : 0;
 
-// 2) Sayfalama
 $page    = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 $perPage = 20;
 $offset  = ($page - 1) * $perPage;
 
-// 3) Toplam kayıt
 $totalSql = "SELECT COUNT(*) FROM urunler WHERE 1" . ($kategoriId ? " AND kategori_id = ?" : "");
 $stmt = $con->prepare($totalSql);
 if ($kategoriId) $stmt->bind_param("i", $kategoriId);
@@ -19,7 +16,6 @@ $stmt->fetch();
 $stmt->close();
 $totalPages = ceil($totalRows / $perPage);
 
-// 4) Verileri çek
 $dataSql = "
 SELECT u.id, u.isim, u.aciklama, u.ozellikler, u.kimyasalyapi,
 u.renk, u.uygulamasekli, u.kullanimalani,
@@ -50,7 +46,6 @@ include  __DIR__ . '/sidebar.php';
   <div class="page-content">
     <div class="container-fluid">
       
-      <!-- Başlık ve Filtre/Buton -->
       <div class="row mb-4 align-items-center">
         <div class="col-12 col-md-6 mb-2 mb-md-0">
           <h4 class="page-title mb-0">Ürün Listesi</h4>
@@ -76,7 +71,6 @@ include  __DIR__ . '/sidebar.php';
         </div>
       </div>
 
-      <!-- Ürün Tablosu -->
       <div class="card">
         <div class="card-body p-0">
           <div class="table-responsive">
@@ -149,7 +143,6 @@ include  __DIR__ . '/sidebar.php';
         </div>
       </div>
 
-      <!-- Sayfalama -->
       <nav class="mt-3">
         <ul class="pagination justify-content-center flex-wrap gap-1">
           <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">

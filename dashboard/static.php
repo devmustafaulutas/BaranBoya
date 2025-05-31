@@ -4,14 +4,12 @@ require __DIR__ . '/init.php';
 $action = $_GET['action'] ?? 'list';
 $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
 
-// --- Silme ---
 if ($action === 'delete' && $id) {
   mysqli_query($con, "DELETE FROM static WHERE id = $id");
   header("Location: static.php");
   exit;
 }
 
-// --- Ekleme ---
 if ($action === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
   $t = mysqli_real_escape_string($con, $_POST['stitle']);
   $s = mysqli_real_escape_string($con, $_POST['stext']);
@@ -20,7 +18,6 @@ if ($action === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
   exit;
 }
 
-// --- Düzenleme ---
 if ($action === 'edit' && $id) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $t = mysqli_real_escape_string($con, $_POST['stitle']);
@@ -32,7 +29,6 @@ if ($action === 'edit' && $id) {
   $edit = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM static WHERE id=$id"));
 }
 
-// --- Listeleme ---
 $items = mysqli_query($con, "SELECT * FROM static ORDER BY id DESC");
 include  __DIR__ .  '/header.php';
 include  __DIR__ . '/sidebar.php';
