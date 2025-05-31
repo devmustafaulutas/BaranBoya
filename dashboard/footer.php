@@ -16,7 +16,7 @@ if (isset($_SESSION['username'])) {
     <div class="row">
       <div class="col-sm-6">
         <p>
-          All rights are reserved © Paywell.
+          All rights are reserved © BaranBoya.
         </p>
       </div>
       <div class="col-sm-6">

@@ -4,7 +4,7 @@ require __DIR__ . '/init.php';
 // 1) Ürün ID'sini al
 $product_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-// Mevcut resmi DB’den çekiyoruz ki POST içinde $resim tanımlı olsun
+// 2) Mevcut resmi DB’den çekiyoruz ki POST içinde $resim tanımlı olsun
 $oldResStmt = $con->prepare("SELECT resim FROM urunler WHERE id = ?");
 $oldResStmt->bind_param("i", $product_id);
 $oldResStmt->execute();
@@ -24,9 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $kullanimalani      = $_POST['kullanimalani'];
     $fiyat              = $_POST['fiyat'];
     $stok               = $_POST['stok'];
-    $kategori_id        = $_POST['kategori_id'];
-    $alt_kategori_id    = $_POST['alt_kategori_id'];
-    $alt_kategori_alt_id= $_POST['alt_kategori_alt_id'];
+    $kategori_id        = intval($_POST['kategori_id']);
+
+    // “Alt Kategori” artık zorunlu değil; boşsa null yapıyoruz
+    $alt_kategori_id = (isset($_POST['alt_kategori_id']) && $_POST['alt_kategori_id'] !== '')
+        ? intval($_POST['alt_kategori_id'])
+        : null;
+
+    // “Alt-Alt Kategori” da boş olabiliyor
+    $alt_kategori_alt_id = (isset($_POST['alt_kategori_alt_id']) && $_POST['alt_kategori_alt_id'] !== '')
+        ? intval($_POST['alt_kategori_alt_id'])
+        : null;
 
     // Resim güncelleme
     if (isset($_FILES['resim']) && $_FILES['resim']['error'] === UPLOAD_ERR_OK) {
@@ -36,39 +44,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name          = basename($_FILES['resim']['name']);
         $type          = mime_content_type($tmp);
         $size          = $_FILES['resim']['size'];
+
         if (in_array($type, $allowed_types) && $size <= 2*1024*1024) {
             $ext      = pathinfo($name, PATHINFO_EXTENSION);
             $newName  = uniqid('urun_', true) . ".$ext";
             $dest     = $upload_dir . $newName;
             if (move_uploaded_file($tmp, $dest)) {
-                // eski resmi sil
+                // Eski resmi sil
                 if (!empty($resim) && file_exists($upload_dir . $resim)) {
                     unlink($upload_dir . $resim);
                 }
-                $resim ="assets/img/products/$newName";
+                $resim = "assets/img/products/$newName";
             }
         }
     }
 
-    // 4) UPDATE sorgusu (14 parametre)
     $sql = "
       UPDATE urunler SET
-        isim           = ?, 
-        aciklama       = ?, 
-        ozellikler     = ?, 
-        kimyasalyapi   = ?, 
-        renk           = ?, 
-        uygulamasekli  = ?, 
-        kullanimalani  = ?, 
-        fiyat          = ?, 
-        stok           = ?, 
-        resim          = ?, 
-        kategori_id    = ?, 
-        alt_kategori_id= ?, 
-        alt_kategori_alt_id = ?
+        isim                 = ?,
+        aciklama             = ?,
+        ozellikler           = ?,
+        kimyasalyapi         = ?,
+        renk                 = ?,
+        uygulamasekli        = ?,
+        kullanimalani        = ?,
+        fiyat                = ?,
+        stok                 = ?,
+        resim                = ?,
+        kategori_id          = ?,
+        alt_kategori_id      = ?,
+        alt_kategori_alt_id  = ?
       WHERE id = ?
     ";
     $stmt = $con->prepare($sql);
+
     $stmt->bind_param(
         "sssssssdisiiii",
         $isim,
@@ -86,17 +95,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $alt_kategori_alt_id,
         $product_id
     );
+
     if (!$stmt->execute()) {
         die("Güncelleme hatası: " . $stmt->error);
     }
     $stmt->close();
 
-    // yönlendir, kesinlikle HTML çıktıdan önce
+    // Yönlendiriyoruz
     header("Location: products.php");
     exit();
 }
 
-// 5) GET ise formu gösterebilmek için diğer alanları çekelim
+// 5) GET ise formu gösterebilmek için mevcut ürün bilgilerini çekiyoruz
 $query = "
   SELECT 
     isim, aciklama, ozellikler, kimyasalyapi, renk, uygulamasekli, kullanimalani,
@@ -108,22 +118,23 @@ $stmt = $con->prepare($query);
 $stmt->bind_param("i", $product_id);
 $stmt->execute();
 $stmt->bind_result(
-    $isim, $aciklama, $ozellikler, $kimyasalyapi, $renk, 
+    $isim, $aciklama, $ozellikler, $kimyasalyapi, $renk,
     $uygulamasekli, $kullanimalani, $fiyat, $stok, $resim,
     $kategori_id, $alt_kategori_id, $alt_kategori_alt_id
 );
 $stmt->fetch();
 $stmt->close();
 
-// kategorileri çek
+// 6) Tüm kategori listelerini de çekelim (edit dropdownları için)
 $kategori_result      = mysqli_query($con, "SELECT * FROM kategoriler ORDER BY isim ASC");
 $alt_kategori_result  = mysqli_query($con, "SELECT * FROM alt_kategoriler ORDER BY isim ASC");
 $alt_alt_result       = mysqli_query($con, "SELECT * FROM alt_kategoriler_alt ORDER BY isim ASC");
 
-// 6) Artık header ve sidebar’ı dahil edebiliriz
-include  __DIR__ .  '/header.php';
-include  __DIR__ . '/sidebar.php';
+// 7) Header ve Sidebar’ı ekleyelim
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
+
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
@@ -180,38 +191,40 @@ include  __DIR__ . '/sidebar.php';
             <label class="form-label">Resim</label>
             <input type="file" name="resim" class="form-control">
             <?php if ($resim): ?>
-              <img src="../<?= htmlspecialchars($resim) ?>" style="width:100px;margin-top:8px;">
+              <img src="../<?= htmlspecialchars($resim) ?>" style="width:100px; margin-top:8px;" alt="Mevcut Resim">
             <?php endif; ?>
           </div>
-          <!-- Kategoriler -->
+          <!-- Kategori (zorunlu) -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Kategori</label>
             <select name="kategori_id" class="form-select" required>
               <option value="">Seçiniz</option>
               <?php while($k = mysqli_fetch_assoc($kategori_result)): ?>
-                <option value="<?= $k['id'] ?>" <?= $k['id']==$kategori_id?'selected':'' ?>>
+                <option value="<?= $k['id'] ?>" <?= $k['id'] == $kategori_id ? 'selected' : '' ?>>
                   <?= htmlspecialchars($k['isim']) ?>
                 </option>
               <?php endwhile; ?>
             </select>
           </div>
+          <!-- Alt Kategori (artık *required değil*) -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Alt Kategori</label>
-            <select name="alt_kategori_id" class="form-select" required>
+            <select name="alt_kategori_id" class="form-select">
               <option value="">Seçiniz</option>
               <?php while($a = mysqli_fetch_assoc($alt_kategori_result)): ?>
-                <option value="<?= $a['id'] ?>" <?= $a['id']==$alt_kategori_id?'selected':'' ?>>
+                <option value="<?= $a['id'] ?>" <?= $a['id'] == $alt_kategori_id ? 'selected' : '' ?>>
                   <?= htmlspecialchars($a['isim']) ?>
                 </option>
               <?php endwhile; ?>
             </select>
           </div>
+          <!-- Alt-Alt Kategori (gerekmiyorsa boş bırakılabilir) -->
           <div class="col-md-3 mb-3">
             <label class="form-label">Alt-Alt Kategori</label>
             <select name="alt_kategori_alt_id" class="form-select">
               <option value="">Seçiniz</option>
               <?php while($b = mysqli_fetch_assoc($alt_alt_result)): ?>
-                <option value="<?= $b['id'] ?>" <?= $b['id']==$alt_kategori_alt_id?'selected':'' ?>>
+                <option value="<?= $b['id'] ?>" <?= $b['id'] == $alt_kategori_alt_id ? 'selected' : '' ?>>
                   <?= htmlspecialchars($b['isim']) ?>
                 </option>
               <?php endwhile; ?>
@@ -224,5 +237,4 @@ include  __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-  <?php include "footer.php"; ?>
-
+<?php include "footer.php"; ?>

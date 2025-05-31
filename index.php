@@ -1,8 +1,25 @@
 <?php
-session_start();
+// 1) Oturum ayarları
+session_name("SITE_SESSION");
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path'     => '/',
+    'domain'   => $_SERVER['HTTP_HOST'],
+    'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (empty($_SESSION['site_csrf_token'])) {
+    $_SESSION['site_csrf_token'] = bin2hex(random_bytes(32));
+}
+
+
 include "header.php";
 include "z_db.php";
-
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
 require 'dashboard/PHPMailer/src/SMTP.php';
@@ -12,22 +29,13 @@ use PHPMailer\PHPMailer\Exception;
 
 $errormsg = "";
 
-// CSRF token oluştur
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-// Başlık ve açıklama metinleri
-if (!isset($contact_title)) {
-    $contact_title = "İletişim";
-}
-if (!isset($contact_text)) {
-    $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.";
-}
-
+// 4) GET veya POST’a göre sayfa içeriği
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF kontrolü
-    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+    // ► CSRF kontrolü
+    if (
+        !isset($_POST['site_csrf_token'])
+        || !hash_equals($_SESSION['site_csrf_token'], $_POST['site_csrf_token'])
+    ) {
         $errormsg = "
             <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                 Geçersiz istek (CSRF hatası).
@@ -35,12 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>";
     } else {
         $status = "OK";
-
-        // Basit rate-limit: en az 60 saniye bekle
         $bekleme_suresi = 60;
-        if (isset($_SESSION['last_contact_time'])
-            && (time() - $_SESSION['last_contact_time'] < $bekleme_suresi)
-        ) {
+        if (isset($_SESSION['last_contact_time']) && (time() - $_SESSION['last_contact_time'] < $bekleme_suresi)) {
             $errormsg = "
                 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                     Lütfen en az {$bekleme_suresi} saniye bekleyip tekrar deneyin.
@@ -48,35 +52,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>";
             $status = "NOTOK";
         }
-
-        // Girdileri temizle & filtrele
         $name    = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
         $email   = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
         $phone   = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
         $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
-
-        // Form doğrulama
         if ($status === "OK") {
             if (mb_strlen($name) < 5) {
                 $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
-                $status   = "NOTOK";
+                $status = "NOTOK";
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errormsg .= "Geçerli bir e-posta adresi giriniz.<br>";
-                $status   = "NOTOK";
+                $status = "NOTOK";
             }
             if (mb_strlen($phone) < 8) {
                 $errormsg .= "Telefon numarası 8 karakterden uzun olmalı.<br>";
-                $status   = "NOTOK";
+                $status = "NOTOK";
             }
             if (mb_strlen($message) < 10) {
                 $errormsg .= "Mesaj 10 karakterden uzun olmalı.<br>";
-                $status   = "NOTOK";
+                $status = "NOTOK";
             }
         }
-
         if ($status === "OK") {
-            // 1) Veritabanına kaydet
             $stmt = $con->prepare(
                 "INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)"
             );
@@ -84,13 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             $stmt->close();
 
-            // 2) E-posta gönderimi
             $mail = new PHPMailer(true);
             try {
                 $mail->CharSet    = 'UTF-8';
                 $mail->Encoding   = 'base64';
-
-                // SMTP Ayarları
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
@@ -99,17 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
-                // Gönderen (fallback ile)
                 $fromEmail = getenv('SMTP_FROM_EMAIL') ?: 'baranboya@gmail.com';
                 $mail->setFrom($fromEmail, 'Baran Boya');
-
-                // Yanıt adresi olarak kullanıcı
                 $mail->addReplyTo($email, $name);
-
-                // Alıcı
                 $mail->addAddress(getenv('SMTP_TO_EMAIL') ?: 'mustafaum538@gmail.com');
-
-                // İçerik
                 $mail->isHTML(true);
                 $mail->Subject = 'Yeni İletişim Mesajı';
                 $mail->Body    = "
@@ -118,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3>Telefon: " . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . "</h3>
                     <p>Mesaj: " . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . "</p>
                 ";
-
                 $mail->send();
 
                 // Rate-limit zamanını güncelle
@@ -147,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Dinamik veriler için dizileri başta tanımla
+
 $result = [];
 $services = [];
 $tedarikciler = [];
@@ -433,26 +420,30 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
     </div>
 </section>
 
-<section id="custom-bg" id="contact" class="contact-area ptb_100">
+<section id="custom-bg" class="contact-area ptb_100">
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-lg-5">
                 <div class="section-heading text-center mb-3">
-                    <h2><?php echo htmlspecialchars($contact_title); ?></h2>
-                    <p class="d-none d-sm-block mt-4"><?php echo htmlspecialchars($contact_text); ?></p>
+                    <h2><?php echo htmlspecialchars($contact_title, ENT_QUOTES, 'UTF-8'); ?></h2>
+                    <p class="d-none d-sm-block mt-4">
+                        <?php echo htmlspecialchars($contact_text, ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
                 <div class="contact-us">
                     <ul>
+                        <!-- İletişim ikonları / telefon / e-posta vb. -->
                         <li class="contact-info color-1 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-mobile-alt fa-3x"></i></span>
-                            <a class="d-block my-2" href="tel:<?php echo htmlspecialchars($phone1); ?>">
-                                <h3><?php echo htmlspecialchars($phone1); ?></h3>
+                            <a class="d-block my-2"
+                                href="tel:<?php echo htmlspecialchars($phone1, ENT_QUOTES, 'UTF-8'); ?>">
+                                <h3><?php echo htmlspecialchars($phone1, ENT_QUOTES, 'UTF-8'); ?></h3>
                             </a>
                         </li>
                         <li class="contact-info color-3 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-envelope-open-text fa-3x"></i></span>
-                            <a class="d-none d-sm-block my-2" href="mailto:<?php echo htmlspecialchars($email); ?>">
-                                <h3><?php echo htmlspecialchars($email); ?></h3>
+                            <a class="d-none d-sm-block my-2"
+                                href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>">
+                                <h3><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?></h3>
                             </a>
                         </li>
                     </ul>
@@ -463,8 +454,7 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
                     <?php if (!empty($errormsg))
                         echo $errormsg; ?>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="csrf_token"
-                            value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="hidden" name="site_csrf_token" value="<?php echo htmlspecialchars($_SESSION['site_csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

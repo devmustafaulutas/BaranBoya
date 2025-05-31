@@ -1,5 +1,5 @@
 <?php
-include  'z_db.php';
+include 'z_db.php';
 
 // 2) siteconfig’dan bütün alanları çekelim
 $stmt = $con->prepare(
@@ -138,11 +138,13 @@ $footer_safe = htmlspecialchars($site_footer, ENT_QUOTES, 'UTF-8');
 <script src="assets/js/animations.js"></script>
 <script src="assets/js/sektor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Active js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-..."
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+  </script>
 <script src="assets/js/active.js"></script>
 <script src="assets/js/background.js"></script>
 </body>
 
-        <!-- ***** Made by Mustafa Ulutaş Github : https://github.com/devmustafaulutas ***** -->
+<!-- ***** Made by Mustafa Ulutaş Github : https://github.com/devmustafaulutas ***** -->
+
 </html>

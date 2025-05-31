@@ -30,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($status == "OK") {
-        // PHPMailer ile email gönderme işlemi
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
@@ -121,7 +120,6 @@ else {
         </div>
     </div>
 </section>
-<!-- Hizmetler Bölümü -->
 <section class="section sector-detail-area">
     <div class="container">
         <?php if ($sectorName): ?>
@@ -137,11 +135,9 @@ else {
 
 
 <script>
-// ...existing code...
 
 document.addEventListener("DOMContentLoaded", function() {
   const sectorDetailArea = document.querySelector(".sector-detail-area");
-  // Basit hover animasyonu örneği
   sectorDetailArea.addEventListener("mouseenter", () => {
     sectorDetailArea.style.transform = "scale(1.01)";
     sectorDetailArea.style.transition = "transform 0.5s";
@@ -150,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function() {
     sectorDetailArea.style.transform = "scale(1)";
   });
 
-  // Ekstra animasyonlar için ikonları ekleyin
   const icons = document.createElement('div');
   icons.innerHTML = `
     <div class="animated-icon"></div>
@@ -160,5 +155,4 @@ document.addEventListener("DOMContentLoaded", function() {
   `;
   sectorDetailArea.appendChild(icons);
 });
-// ...existing code...
 </script>

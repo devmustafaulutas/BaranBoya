@@ -46,7 +46,6 @@ function csrfToken(): string
     }
     return $_SESSION['csrf_token'];
 }
-
 /**
  * Gelen CSRF token'ın doğruluğunu kontrol eder
  *

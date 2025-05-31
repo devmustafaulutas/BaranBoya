@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
-                if(entry.target.classList.contains('index-feature-card') || entry.target.classList.contains('index-product-card')){
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('index-feature-card') || entry.target.classList.contains('index-product-card')) {
                     entry.target.classList.add('animate');
                 }
-                if(entry.target.classList.contains('fade-in')){
+                if (entry.target.classList.contains('fade-in')) {
                     entry.target.classList.add('visible');
                 }
                 observer.unobserve(entry.target);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateCounter = () => {
             count += increment;
-            if(count < target){
+            if (count < target) {
                 counter.innerText = Math.ceil(count);
                 requestAnimationFrame(updateCounter);
             } else {
@@ -41,5 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         updateCounter();
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    var toastElList = [].slice.call(
+        document.querySelectorAll("#toast-container .toast")
+    );
+    toastElList.forEach(function (toastEl) {
+        var toast = new bootstrap.Toast(toastEl);
+        toast.show();
     });
 });

@@ -16,10 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $kullanimalani = $_POST['kullanimalani'];
   $fiyat = $_POST['fiyat'];
   $stok = $_POST['stok'];
-  $kategori_id = $_POST['kategori_id'];
-  $alt_kategori_id = $_POST['alt_kategori_id'];
-  $alt_kategori_alt_id = isset($_POST['alt_kategori_alt_id']) && $_POST['alt_kategori_alt_id'] !== ''
-    ? $_POST['alt_kategori_alt_id']
+
+  // Kategori zorunlu kalmaya devam ediyor
+  $kategori_id = intval($_POST['kategori_id']);
+
+  // Alt kategori artık zorunlu değil: boşsa null olarak ata
+  $alt_kategori_id = (isset($_POST['alt_kategori_id']) && $_POST['alt_kategori_id'] !== '')
+    ? intval($_POST['alt_kategori_id'])
+    : null;
+
+  // Alt-alt kategori de aynı mantıkla null olabilir
+  $alt_kategori_alt_id = (isset($_POST['alt_kategori_alt_id']) && $_POST['alt_kategori_alt_id'] !== '')
+    ? intval($_POST['alt_kategori_alt_id'])
     : null;
 
   // Resim yükleme
@@ -52,12 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Veritabanına ekle
   if (!isset($error_message)) {
+    // Sorguda kategori_id her durumda var, ama alt_kategori_id ve alt_kategori_alt_id null olabilir
     $sql = "INSERT INTO urunler
             (isim, aciklama, ozellikler, kimyasalyapi, renk, uygulamasekli, kullanimalani,
              fiyat, stok, resim, kategori_id, alt_kategori_id, alt_kategori_alt_id)
          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $stmt = $con->prepare($sql);
 
+    // bind_param tipi: s = string, d = double, i = integer
+    // kategori_id → i
+    // alt_kategori_id → i veya NULL
+    // alt_kategori_alt_id → i veya NULL
+    // null aktarabilmek için her zaman 'i' kullandık; boştaysa PHP otomatik olarak NULL geçecektir
     $stmt->bind_param(
       "sssssssdisiii",
       $isim,
@@ -82,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
   }
 }
-include  __DIR__ .  '/header.php';
-include  __DIR__ . '/sidebar.php';
-?>
 
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
+?>
 
 <div class="main-content">
   <div class="page-content container-fluid">
@@ -103,6 +117,7 @@ include  __DIR__ . '/sidebar.php';
 
             <form action="productadd.php" method="post" enctype="multipart/form-data">
               <div class="row g-3">
+                <!-- Ürün İsmi -->
                 <div class="col-12 col-md-6">
                   <label for="isim" class="form-label">Ürün İsmi</label>
                   <input
@@ -113,6 +128,7 @@ include  __DIR__ . '/sidebar.php';
                     required
                   >
                 </div>
+                <!-- Fiyat -->
                 <div class="col-12 col-md-6">
                   <label for="fiyat" class="form-label">Fiyat (₺)</label>
                   <input
@@ -124,6 +140,7 @@ include  __DIR__ . '/sidebar.php';
                     required
                   >
                 </div>
+                <!-- Açıklama -->
                 <div class="col-12">
                   <label for="aciklama" class="form-label">Açıklama</label>
                   <textarea
@@ -134,6 +151,7 @@ include  __DIR__ . '/sidebar.php';
                     required
                   ></textarea>
                 </div>
+                <!-- Özellikler -->
                 <div class="col-12">
                   <label for="ozellikler" class="form-label">Özellikler</label>
                   <textarea
@@ -143,6 +161,7 @@ include  __DIR__ . '/sidebar.php';
                     rows="2"
                   ></textarea>
                 </div>
+                <!-- Kimyasal Yapı -->
                 <div class="col-12 col-md-4">
                   <label for="kimyasalyapi" class="form-label">Kimyasal Yapı</label>
                   <input
@@ -152,6 +171,7 @@ include  __DIR__ . '/sidebar.php';
                     class="form-control"
                   >
                 </div>
+                <!-- Renk -->
                 <div class="col-12 col-md-4">
                   <label for="renk" class="form-label">Renk</label>
                   <input
@@ -161,6 +181,7 @@ include  __DIR__ . '/sidebar.php';
                     class="form-control"
                   >
                 </div>
+                <!-- Uygulama Şekli -->
                 <div class="col-12 col-md-4">
                   <label for="uygulamasekli" class="form-label">Uygulama Şekli</label>
                   <input
@@ -170,6 +191,7 @@ include  __DIR__ . '/sidebar.php';
                     class="form-control"
                   >
                 </div>
+                <!-- Kullanım Alanı -->
                 <div class="col-12 col-md-6">
                   <label for="kullanimalani" class="form-label">Kullanım Alanı</label>
                   <input
@@ -179,6 +201,7 @@ include  __DIR__ . '/sidebar.php';
                     class="form-control"
                   >
                 </div>
+                <!-- Stok -->
                 <div class="col-12 col-md-6">
                   <label for="stok" class="form-label">Stok</label>
                   <input
@@ -189,6 +212,7 @@ include  __DIR__ . '/sidebar.php';
                     required
                   >
                 </div>
+                <!-- Ürün Resmi -->
                 <div class="col-12 col-md-12">
                   <label for="resim" class="form-label">Ürün Resmi</label>
                   <input
@@ -200,6 +224,7 @@ include  __DIR__ . '/sidebar.php';
                     required
                   >
                 </div>
+                <!-- Kategori (zorunlu) -->
                 <div class="col-12 col-md-4">
                   <label for="kategori_id" class="form-label">Kategori</label>
                   <select
@@ -216,17 +241,18 @@ include  __DIR__ . '/sidebar.php';
                     <?php endwhile; ?>
                   </select>
                 </div>
+                <!-- Alt Kategori (artık *required değil*) -->
                 <div class="col-12 col-md-4">
                   <label for="alt_kategori_id" class="form-label">Alt Kategori</label>
                   <select
                     id="alt_kategori_id"
                     name="alt_kategori_id"
                     class="form-select"
-                    required
                   >
                     <option value="">Seçiniz</option>
                   </select>
                 </div>
+                <!-- Alt-Alt Kategori (also *required değil*) -->
                 <div class="col-12 col-md-4">
                   <label for="alt_kategori_alt_id" class="form-label">Alt-Alt Kategori</label>
                   <select
@@ -249,12 +275,10 @@ include  __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-
-  <?php include "footer.php"; ?>
-
+<?php include "footer.php"; ?>
 
 <script>
-  // Alt kategori çekme
+  // “Kategori” değiştiğinde, alt kategori listesini doldurup zorunluluk kaldırdık
   document.getElementById('kategori_id').addEventListener('change', function () {
     const cat = this.value,
       alt = document.getElementById('alt_kategori_id'),
@@ -264,14 +288,16 @@ include  __DIR__ . '/sidebar.php';
     if (!cat) return;
     fetch('get_alt_kategoriler.php?kategori_id=' + cat)
       .then(r => r.json())
-      .then(j => j.forEach(o => {
-        const opt = document.createElement('option');
-        opt.value = o.id; opt.text = o.isim;
-        alt.appendChild(opt);
-      }));
+      .then(json => {
+        json.forEach(o => {
+          let opt = document.createElement('option');
+          opt.value = o.id; opt.text = o.isim;
+          alt.appendChild(opt);
+        });
+      });
   });
 
-  // Alt-alt kategori çekme
+  // “Alt Kategori” değiştiğinde, alt-alt kategori listesini doldurup zorunluluk kaldırdık
   document.getElementById('alt_kategori_id').addEventListener('change', function () {
     const sub = this.value,
       altalt = document.getElementById('alt_kategori_alt_id');
@@ -279,9 +305,9 @@ include  __DIR__ . '/sidebar.php';
     if (!sub) return;
     fetch('get_alt_alt_kategoriler.php?alt_kategori_id=' + sub)
       .then(r => r.json())
-      .then(j => {
-        if (j.length) j.forEach(o => {
-          const opt = document.createElement('option');
+      .then(json => {
+        json.forEach(o => {
+          let opt = document.createElement('option');
           opt.value = o.id; opt.text = o.isim;
           altalt.appendChild(opt);
         });

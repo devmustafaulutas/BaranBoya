@@ -144,7 +144,6 @@
     color: #e0f7fa;
 }
 
-/* Özel Bağlantılar için Stiller */
 .index-product-link {
     margin-bottom: 20px;
     background-color: #00bcd4;
@@ -156,9 +155,7 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Bağlantıların Genel Stilini Sıfırlama */
 .index-industrial-paint-product-showcase .index-product-link {
-    /* Genel <a> stillerinden kurtul */
     background: none;
     color: inherit;
     padding: 0;
@@ -170,7 +167,6 @@
     cursor: pointer;
 }
 
-/* Özel Bağlantılar İçin Stil Belirleme */
 .index-industrial-paint-product-showcase .index-product-link {
     background-color: #00bcd4;
     color: #ffffff;
@@ -186,7 +182,6 @@
     transform: translateY(-3px);
 }
 
-/* Animasyonlar */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -202,9 +197,7 @@
 :: Responsive Ayarlar
 ************************************************************ */
 
-/* Mobil Cihazlar (max-width: 767.98px) */
 @media (max-width: 767.98px) {
-    /* Özellikler Bölümü */
     .index-industrial-paint-features-section {
         padding: 60px 20px;
     }
@@ -262,9 +255,7 @@
     }
 }
 
-/* Tablet Cihazlar (min-width: 768px) ve (max-width: 991.98px) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-    /* Özellikler Bölümü */
     .index-industrial-paint-features-section {
         padding: 80px 40px;
     }
@@ -286,7 +277,6 @@
         font-size: 1.05rem;
     }
     
-    /* Ürün Vitrin Bölümü */
     .index-industrial-paint-product-showcase {
         padding: 80px 40px;
     }
@@ -322,6 +312,5 @@
     }
 }
 
-/* Büyük Cihazlar (min-width: 992px) */
 @media (min-width: 992px) {
 }
