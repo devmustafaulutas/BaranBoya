@@ -1,4 +1,7 @@
 <?php
+// contact.php
+
+// 1) SESSION ve CSRF AYARLARI
 session_name("SITE_SESSION");
 session_set_cookie_params([
     'lifetime' => 0,
@@ -12,13 +15,14 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// CSRF Token yoksa üret
 if (empty($_SESSION['site_csrf_token'])) {
     $_SESSION['site_csrf_token'] = bin2hex(random_bytes(32));
 }
 
-
 include "header.php";
 include "z_db.php";
+
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
 require 'dashboard/PHPMailer/src/SMTP.php';
@@ -27,10 +31,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 $errormsg = "";
+$contact_title = $contact_title ?? "İletişim";
+$contact_text  = $contact_text  ?? "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.";
 
-// 4) GET veya POST’a göre sayfa içeriği
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ► CSRF kontrolü
+    //  ► CSRF kontrolü
     if (
         !isset($_POST['site_csrf_token'])
         || !hash_equals($_SESSION['site_csrf_token'], $_POST['site_csrf_token'])
@@ -43,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $status = "OK";
         $bekleme_suresi = 60;
+
+        // ► RATE‐LIMIT: en az 60 saniye beklet
         if (isset($_SESSION['last_contact_time']) && (time() - $_SESSION['last_contact_time'] < $bekleme_suresi)) {
             $errormsg = "
                 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
@@ -51,10 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>";
             $status = "NOTOK";
         }
+
+        // Alanları sanitize et
         $name    = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
         $email   = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
         $phone   = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
         $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
+
+        // ► ALAN DOĞRULAMA
         if ($status === "OK") {
             if (mb_strlen($name) < 5) {
                 $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
@@ -73,7 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $status = "NOTOK";
             }
         }
+
         if ($status === "OK") {
+            // ► VERİTABANINA KAYDET
             $stmt = $con->prepare(
                 "INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)"
             );
@@ -81,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             $stmt->close();
 
+            // ► E‐POSTAYI GÖNDER
             $mail = new PHPMailer(true);
             try {
                 $mail->CharSet    = 'UTF-8';
@@ -88,15 +103,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = getenv('SMTP_USERNAME') ?: 'baranboya@gmail.com';
-                $mail->Password   = getenv('SMTP_PASSWORD') ?: 'lbzg cigc usyk zlwa';
+
+                // ——————————————
+// BURAYA, “mustafaum538@gmail.com” için oluşturduğunuz APP PASSWORD’u koyun
+                $mail->Username   = 'mustafaum538@gmail.com';      // SMTP kullanıcı (gmail hesabı)
+                $mail->Password   = 'yiyumtwphgckujvp';            // 16 haneli App Password
+
+                // ——————————————
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
-                $fromEmail = getenv('SMTP_FROM_EMAIL') ?: 'baranboya@gmail.com';
-                $mail->setFrom($fromEmail, 'Baran Boya');
+                // Gönderici (From) adresi ile SMTP kullanıcı aynı olmalı
+                $mail->setFrom('mustafaum538@gmail.com', 'Baran Boya');
+                // Alıcı iki seçenek: “nereye gönderilsin?” mesela yine mustafaum…
+                $mail->addAddress('mustafaum538@gmail.com');      // İletişim mesajları bu adrese gidecek
+                // Kullanıcının yanıt (reply) adresi formda doldurduğu e‐posta olsun
                 $mail->addReplyTo($email, $name);
-                $mail->addAddress(getenv('SMTP_TO_EMAIL') ?: 'mustafaum538@gmail.com');
+
                 $mail->isHTML(true);
                 $mail->Subject = 'Yeni İletişim Mesajı';
                 $mail->Body    = "
@@ -107,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ";
                 $mail->send();
 
-                // Rate-limit zamanını güncelle
+                // Rate‐limit zamanını güncelle
                 $_SESSION['last_contact_time'] = time();
 
                 $errormsg = "
@@ -116,14 +139,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                     </div>";
             } catch (Exception $e) {
+                $err = $mail->ErrorInfo;
                 $errormsg = "
                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                        Mesaj gönderilemedi. Hata: " . htmlspecialchars($mail->ErrorInfo, ENT_QUOTES, 'UTF-8') . "
+                        Mesaj gönderilemedi. Hata: " . htmlspecialchars($err, ENT_QUOTES, 'UTF-8') . "
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                     </div>";
             }
         } else {
-            // Validasyon veya rate-limit hataları
+            // Geçersiz form / rate‐limit hataları
             $errormsg = "
                 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                     {$errormsg}
@@ -132,6 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 
 
 ?>
@@ -184,8 +209,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php if (!empty($errormsg))
                         echo $errormsg; ?>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="csrf_token"
-                            value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="hidden" name="site_csrf_token"
+                            value="<?php echo htmlspecialchars($_SESSION['site_csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

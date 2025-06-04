@@ -1,13 +1,13 @@
 <?php
-// 1) Oturum ayarları
+
 session_name("SITE_SESSION");
 session_set_cookie_params([
-    'lifetime' => 0,
-    'path'     => '/',
-    'domain'   => $_SERVER['HTTP_HOST'],
-    'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
-    'httponly' => true,
-    'samesite' => 'Lax',
+  'lifetime' => 0,
+  'path'     => '/',            
+  'domain'   => $_SERVER['HTTP_HOST'],
+  'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+  'httponly' => true,
+  'samesite' => 'Lax',
 ]);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -20,6 +20,7 @@ if (empty($_SESSION['site_csrf_token'])) {
 
 include "header.php";
 include "z_db.php";
+
 require 'dashboard/PHPMailer/src/Exception.php';
 require 'dashboard/PHPMailer/src/PHPMailer.php';
 require 'dashboard/PHPMailer/src/SMTP.php';
@@ -29,9 +30,12 @@ use PHPMailer\PHPMailer\Exception;
 
 $errormsg = "";
 
-// 4) GET veya POST’a göre sayfa içeriği
+// Yine, gerekirse contact_title/contact_text benzeri değişkenleri tanımlayabilirsiniz:
+$contact_title = $contact_title ?? "İletişim";
+$contact_text  = $contact_text  ?? "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ► CSRF kontrolü
+    //  ► CSRF kontrolü
     if (
         !isset($_POST['site_csrf_token'])
         || !hash_equals($_SESSION['site_csrf_token'], $_POST['site_csrf_token'])
@@ -52,10 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>";
             $status = "NOTOK";
         }
+
+        // Alanları sanitize et
         $name    = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
         $email   = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
         $phone   = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
         $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
+
+        // ► ALANLARIN DOĞRULANMASI
         if ($status === "OK") {
             if (mb_strlen($name) < 5) {
                 $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
@@ -74,7 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $status = "NOTOK";
             }
         }
+
         if ($status === "OK") {
+            // ► VERİTABANINA KAYIT
             $stmt = $con->prepare(
                 "INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)"
             );
@@ -82,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             $stmt->close();
 
+            // ► E‐POSTA GÖNDERME
             $mail = new PHPMailer(true);
             try {
                 $mail->CharSet    = 'UTF-8';
@@ -89,15 +100,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = getenv('SMTP_USERNAME') ?: 'baranboya@gmail.com';
-                $mail->Password   = getenv('SMTP_PASSWORD') ?: 'lbzg cigc usyk zlwa';
+
+                // ——————————————
+                $mail->Username   = 'mustafaum538@gmail.com';      // SMTP kullanıcı (gmail hesabı)
+                $mail->Password   = 'yiyumtwphgckujvp';            // 16 haneli App Password
+// ——————————————
+
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
-                $fromEmail = getenv('SMTP_FROM_EMAIL') ?: 'baranboya@gmail.com';
-                $mail->setFrom($fromEmail, 'Baran Boya');
+                // Gönderici adresi ile SMTP kullanıcı adresi mutlaka aynı olmalı
+                $mail->setFrom('mustafaum538@gmail.com', 'Baran Boya');
+                // Dilediğiniz alıcı adresini verin:
+                $mail->addAddress('mustafaum538@gmail.com');
                 $mail->addReplyTo($email, $name);
-                $mail->addAddress(getenv('SMTP_TO_EMAIL') ?: 'mustafaum538@gmail.com');
+
                 $mail->isHTML(true);
                 $mail->Subject = 'Yeni İletişim Mesajı';
                 $mail->Body    = "
@@ -108,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ";
                 $mail->send();
 
-                // Rate-limit zamanını güncelle
                 $_SESSION['last_contact_time'] = time();
 
                 $errormsg = "
@@ -117,14 +133,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                     </div>";
             } catch (Exception $e) {
+                $err = $mail->ErrorInfo;
                 $errormsg = "
                     <div class='alert alert-danger alert-dismissible alert-outline fade show'>
-                        Mesaj gönderilemedi. Hata: " . htmlspecialchars($mail->ErrorInfo, ENT_QUOTES, 'UTF-8') . "
+                        Mesaj gönderilemedi. Hata: " . htmlspecialchars($err, ENT_QUOTES, 'UTF-8') . "
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                     </div>";
             }
         } else {
-            // Validasyon veya rate-limit hataları
+            // Validasyon veya rate‐limit hatası
             $errormsg = "
                 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                     {$errormsg}
@@ -133,7 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 
 $result = [];
 $services = [];
@@ -393,17 +409,6 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
     <div class="row">
         <div id="client-logos" class="client-logos d-flex flex-wrap justify-content-center">
             <?php
-            $stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id");
-            $stmt->execute();
-            $stmt->bind_result($id, $resim);
-
-            while ($stmt->fetch()) {
-                $tedarikciler[] = [
-                    'id' => $id,
-                    'resim' => $resim
-                ];
-            }
-
             foreach ($tedarikciler as $tedarikci) {
                 $resim = $tedarikci['resim'];
 
@@ -427,7 +432,8 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
                 <div class="section-heading text-center mb-3">
                     <h2><?php echo htmlspecialchars($contact_title, ENT_QUOTES, 'UTF-8'); ?></h2>
                     <p class="d-none d-sm-block mt-4">
-                        <?php echo htmlspecialchars($contact_text, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php echo htmlspecialchars($contact_text, ENT_QUOTES, 'UTF-8'); ?>
+                    </p>
                 </div>
                 <div class="contact-us">
                     <ul>
@@ -454,7 +460,8 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
                     <?php if (!empty($errormsg))
                         echo $errormsg; ?>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="site_csrf_token" value="<?php echo htmlspecialchars($_SESSION['site_csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="hidden" name="site_csrf_token"
+                            value="<?php echo htmlspecialchars($_SESSION['site_csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

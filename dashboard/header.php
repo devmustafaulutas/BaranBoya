@@ -38,17 +38,24 @@ if (isset($_SESSION['username'])) {
     <script src="assets/js/index.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
-
+  <script>
+    (function(){
+      try {
+        if (localStorage.getItem('sidebarCollapsed') === 'true') {
+          document.documentElement.classList.add('sidebar-collapsed');
+        }
+      } catch (e) {
+      }
+    })();
+  </script>
 </head>
-
 <body>
-
-
     <div id="layout-wrapper">
 
         <header id="page-topbar">
             <div class="navbar-header">
                 <div class="d-flex justify-content-between align-items-center w-100">
+                    <!-- Hamburger / Menü -->
                     <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                         id="topnav-hamburger-icon">
                         <span class="hamburger-icon">
@@ -58,9 +65,26 @@ if (isset($_SESSION['username'])) {
                         </span>
                     </button>
 
+                    <!-- Sağ tarafa yerleştirilen kullanıcı/buton alanı -->
+                    <div class="d-flex align-items-center">
+                        <!-- İsteğe bağlı: Kullanıcı adına tıklayınca profil sayfasına gidebilirsiniz -->
+                        <span class="me-3 text-white">Merhaba, <?= htmlspecialchars($username, ENT_QUOTES) ?></span>
+
+                        <!-- Çıkış Yap butonu -->
+                        <a href="logout.php"
+                           class="btn btn-outline-light btn-sm"
+                           style="margin-right: 1rem;">
+                            <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                        </a>
+                    </div>
                 </div>
             </div>
+        </header>
     </div>
-    </header>
+
+    <!-- Diğer içerikler… -->
+
+    <!-- JS dosyaları en sona -->
+    <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

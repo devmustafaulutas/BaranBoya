@@ -1,35 +1,53 @@
-// assets/js/dashboard.js
 document.addEventListener('DOMContentLoaded', () => {
-  const btn     = document.getElementById('topnav-hamburger-icon');
-  const overlay = document.querySelector('.vertical-overlay');
+  const btn        = document.getElementById('topnav-hamburger-icon');
+  const overlay    = document.querySelector('.vertical-overlay');
+  const closeBtn   = document.getElementById('sidebar-close-btn');
+  const body       = document.body;
+  const STORAGE_KEY = 'sidebarCollapsed'; 
 
-  if (!btn) return;
+  const collapsedState = localStorage.getItem(STORAGE_KEY);
+  if (collapsedState === 'true') {
+    body.classList.add('sidebar-collapsed');
+    if (overlay) overlay.classList.remove('show');
+    if (btn) btn.classList.remove('open');
+  } else {
+    body.classList.remove('sidebar-collapsed');
+    if (overlay) overlay.classList.remove('show');
+    if (btn) btn.classList.add('open');
+  }
 
-  btn.addEventListener('click', () => {
-    // body’ye tek sınıf ekle/çıkart
-    document.body.classList.toggle('sidebar-collapsed');
-    // overlay varsa göster/gizle
-    if (overlay) overlay.classList.toggle('show');
-  });
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const isCollapsed = body.classList.contains('sidebar-collapsed');
+      if (isCollapsed) {
+        body.classList.remove('sidebar-collapsed');
+        if (overlay) overlay.classList.remove('show');
+        btn.classList.add('open');
+      } else {
+        body.classList.add('sidebar-collapsed');
+        if (overlay) overlay.classList.remove('show');
+        btn.classList.remove('open');
+      }
+      const newState = body.classList.contains('sidebar-collapsed') ? 'true' : 'false';
+      localStorage.setItem(STORAGE_KEY, newState);
+    });
+  }
 
   if (overlay) {
     overlay.addEventListener('click', () => {
-      document.body.classList.remove('sidebar-collapsed');
+      body.classList.remove('sidebar-collapsed');
       overlay.classList.remove('show');
+      if (btn) btn.classList.add('open');
+      localStorage.setItem(STORAGE_KEY, 'false');
     });
-  }
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const closeBtn = document.getElementById('sidebar-close-btn');
-  const toggleBtn = document.getElementById('topnav-hamburger-icon');
-
-  function collapseSidebar() {
-    document.body.classList.add('sidebar-collapsed');
-    toggleBtn.classList.remove('open');
   }
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', collapseSidebar);
+    closeBtn.addEventListener('click', () => {
+      body.classList.add('sidebar-collapsed');
+      if (overlay) overlay.classList.remove('show');
+      if (btn) btn.classList.remove('open');
+      localStorage.setItem(STORAGE_KEY, 'true');
+    });
   }
-  // Mevcut overlay tıklama kodun zaten collapseSidebar yapıyor.
 });

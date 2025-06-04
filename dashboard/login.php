@@ -1,23 +1,13 @@
 <?php
-session_name("ADMIN_SESSION");
-session_set_cookie_params([
-  'lifetime' => 0,
-  'path'     => '/dashboard', 
-  'domain'   => $_SERVER['HTTP_HOST'],
-  'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
-  'httponly' => true,
-  'samesite' => 'Strict',
-]);
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// /vogue/dashboard/login.php
 
+// 1) init.php dosyasının yolunu düzeltip yüklüyoruz:
+require_once __DIR__ . '/init.php';
 
-require_once __DIR__ . '/../z_db.php';            
-require_once __DIR__ . '/lib/security.php';      
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 global $con;
 
+// “Remember me” çerez kontrolü
 if (empty($_SESSION['authenticated']) && !empty($_COOKIE['remember_me'])) {
     list($userId, $token) = explode(':', $_COOKIE['remember_me'], 2);
 
@@ -43,12 +33,12 @@ if (empty($_SESSION['authenticated']) && !empty($_COOKIE['remember_me'])) {
         $u->close();
 
         if ($uRow) {
-            session_regenerate_id(true); 
+            session_regenerate_id(true);
             $_SESSION['username']      = $uRow['username'];
             $_SESSION['authenticated'] = true;
         }
     } else {
-        setcookie('remember_me', '', time() - 3600, '/dashboard', $_SERVER['HTTP_HOST'], true, true);
+        setcookie('remember_me', '', time() - 3600, $cookiePath, $domain, true, true);
     }
 }
 
@@ -70,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCsrf($_POST['csrf'] ?? '')) {
         die('Geçersiz CSRF token.');
     }
+
     if ($step === '1') {
         $u        = mysqli_real_escape_string($con, $_POST['username']);
         $p        = mysqli_real_escape_string($con, $_POST['password']);
@@ -107,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-
     elseif ($step === '2' && isset($_SESSION['temp_username'])) {
         $code = trim($_POST['2fa_code'] ?? '');
 
@@ -158,10 +148,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   'remember_me',
                   "{$r['id']}:{$token}",
                   time()+86400*30,
-                  '/dashboard',
-                  $_SERVER['HTTP_HOST'],
-                  true,   
-                  true  
+                  $cookiePath,
+                  $domain,
+                  true,
+                  true
                 );
                 unset($_SESSION['remember_me']);
             }
@@ -170,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
         elseif (verifyBackupCode($code, $backups)) {
-            $remain = array_filter($backups, fn($h)=>!password_verify($code, $h));
+            $remain = array_filter($backups, fn($h) => !password_verify($code, $h));
             $upd2 = $con->prepare("UPDATE admin SET backup_codes = ? WHERE id = ?");
             $json = json_encode(array_values($remain));
             $upd2->bind_param('si', $json, $r['id']);
@@ -186,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $stmt2 = $con->prepare("
                 UPDATE admin
-                   SET totp_fail_count = totp_fail_count+1,
+                   SET totp_fail_count = totp_fail_count + 1,
                        totp_last_fail  = NOW()
                  WHERE id = ?
             ");
@@ -199,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $loginLocked    = false;
 $loginRemaining = 0;
-if ($step==='1' && $_SESSION['login_fail_count'] >= 5) {
+if ($step === '1' && $_SESSION['login_fail_count'] >= 5) {
     $last   = strtotime($_SESSION['login_last_fail']);
     $unlock = $last + 300;
     $now    = time();
@@ -212,13 +202,12 @@ if ($step==='1' && $_SESSION['login_fail_count'] >= 5) {
 }
 
 $csrf = csrfToken();
-
 ?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <title>Giriş | Dashboard</title>
+  <title>Admin Giriş | Dashboard</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/app.min.css" rel="stylesheet">
@@ -227,10 +216,10 @@ $csrf = csrfToken();
   <div class="card p-4" style="width:100%;max-width:400px;">
 
     <h5 class="text-center mb-3">
-      <?= $step==='1' ? 'Admin Giriş' : '2FA Doğrulama' ?>
+      <?= $step === '1' ? 'Admin Giriş' : '2FA Doğrulama' ?>
     </h5>
 
-    <?php if($msg): ?>
+    <?php if ($msg): ?>
       <div class="alert alert-danger text-center"><?= htmlspecialchars($msg, ENT_QUOTES) ?></div>
     <?php endif; ?>
 
@@ -238,7 +227,7 @@ $csrf = csrfToken();
       <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
       <input type="hidden" name="step" value="<?= htmlspecialchars($step, ENT_QUOTES) ?>">
 
-      <?php if($step==='1'): ?>
+      <?php if ($step === '1'): ?>
         <div class="mb-3">
           <label for="u" class="form-label">Kullanıcı Adı</label>
           <input id="u" name="username" class="form-control" required autofocus>
@@ -258,7 +247,7 @@ $csrf = csrfToken();
         </div>
       <?php endif; ?>
 
-      <?php if ($loginLocked && $step==='1'): ?>
+      <?php if ($loginLocked && $step === '1'): ?>
         <div class="alert alert-warning text-center">
           Çok fazla deneme. Lütfen <span id="cd1"></span> sonra deneyin.
         </div>
@@ -278,7 +267,7 @@ $csrf = csrfToken();
       <?php endif; ?>
 
       <button class="btn btn-primary w-100">
-        <?= $step==='1' ? 'Giriş Yap' : 'Doğrula' ?>
+        <?= $step === '1' ? 'Giriş Yap' : 'Doğrula' ?>
       </button>
     </form>
   </div>
