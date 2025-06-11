@@ -1,4 +1,5 @@
 <?php
+
 require 'z_db.php';
 if (!function_exists('encrypt_id')) {
     function encrypt_id($id)

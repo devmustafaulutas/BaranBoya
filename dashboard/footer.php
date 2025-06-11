@@ -1,16 +1,13 @@
 <?php
 require_once __DIR__ . '/../z_db.php';
 
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-} else {
-    print "
-				<script language='javascript'>
-					window.location = 'login.php';
-				</script>
-			";
-
-}?>
+$script = basename($_SERVER['SCRIPT_NAME']);
+// Eğer ne `username` ne de `temp_username` yoksa yönlendir
+if (empty($_SESSION['username']) && empty($_SESSION['temp_username']) && $script !== 'twofa.php') {
+    echo "<script>window.location='login.php';</script>";
+    exit;
+}
+?>
 <footer class="footer">
   <div class="container-fluid">
     <div class="row">

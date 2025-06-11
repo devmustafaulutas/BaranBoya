@@ -26,16 +26,12 @@ session_set_cookie_params([
     'samesite' => 'Strict',
 ]);
 
-// 3) Oturumu başlatıyoruz
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 4) Kimlik kontrolü: login.php veya twofa.php ise oturum kontrolü yapmıyoruz.
-//    Diğer sayfalarda $_SESSION['authenticated'] || redirect(login.php)
 $self = basename($_SERVER['SCRIPT_NAME']);
 if ($self === 'login.php') {
-    // Burada sadece formu gösterelim, kimlik sorgusu yok
 }
 elseif ($self === 'twofa.php') {
     if (empty($_SESSION['temp_username'])) {

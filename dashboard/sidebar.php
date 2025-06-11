@@ -1,6 +1,7 @@
 <?php 
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php');
+$script = basename($_SERVER['SCRIPT_NAME']);
+if (!isset($_SESSION['username']) && $script !== 'twofa.php') {
+    echo "<script>window.location='login.php';</script>";
     exit;
 }
 $ufile = '';
