@@ -1,4 +1,5 @@
 <?php 
+include __DIR__ . '/../z_db.php';
 $script = basename($_SERVER['SCRIPT_NAME']);
 if (!isset($_SESSION['username']) && $script !== 'twofa.php') {
     echo "<script>window.location='login.php';</script>";

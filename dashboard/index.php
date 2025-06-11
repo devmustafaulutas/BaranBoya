@@ -1,4 +1,5 @@
 <?php
+// /vogue/dashboard/index.php
 require __DIR__ . '/init.php';
 
 if (empty($_SESSION['authenticated'])) {
@@ -6,8 +7,8 @@ if (empty($_SESSION['authenticated'])) {
     exit;
 }
 
-include  __DIR__ .  '/header.php';
-include  __DIR__ . '/sidebar.php';
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 
 function getCount(mysqli $con, string $table): int {
     $sql = "SELECT COUNT(*) FROM `$table`";
@@ -19,6 +20,7 @@ function getCount(mysqli $con, string $table): int {
     return (int)$row[0];
 }
 
+// — Weekly page visits —
 $visitsRes = mysqli_query($con,
   "SELECT DATE(visited_at) AS dt, COUNT(*) AS cnt
    FROM page_visits
@@ -35,8 +37,19 @@ while ($r = mysqli_fetch_assoc($visitsRes)) {
 $labels = $data = [];
 for ($i = 6; $i >= 0; $i--) {
     $day = date('Y-m-d', strtotime("-{$i} days"));
-    $labels[] = $day;
+    $labels[] = date('d M', strtotime($day));    
     $data[]   = $raw_visits[$day] ?? 0;
+}
+
+// — Last 5 contact messages —
+$contactRes = mysqli_query($con,
+  "SELECT id, name, email, message, created_at
+   FROM contact_messages
+   ORDER BY created_at DESC
+   LIMIT 5"
+);
+if (!$contactRes) {
+    die("SQL Error (contact_messages): " . mysqli_error($con));
 }
 ?>
 <div class="main-content">
@@ -44,11 +57,13 @@ for ($i = 6; $i >= 0; $i--) {
     <div class="container-fluid">
 
       <div class="row mb-4">
-        <div class="col"><h4 class="fw-bold">Dashboard</h4></div>
+        <div class="col">
+          <h4 class="fw-bold">Dashboard</h4>
+        </div>
       </div>
 
+      <!-- Stats cards -->
       <div class="row g-3">
-        <?php $cnt = getCount($con, 'service'); ?>
         <div class="col-lg-3 col-md-6 d-flex">
           <div class="card flex-fill">
             <div class="card-body d-flex align-items-center">
@@ -59,13 +74,12 @@ for ($i = 6; $i >= 0; $i--) {
               </div>
               <div class="flex-grow-1 ms-3">
                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Toplam Servisler</p>
-                <h4 class="mb-0"><?= $cnt ?></h4>
+                <h4 class="mb-0"><?= getCount($con, 'service') ?></h4>
               </div>
             </div>
           </div>
         </div>
 
-        <?php $cnt = getCount($con, 'blog'); ?>
         <div class="col-lg-3 col-md-6 d-flex">
           <div class="card flex-fill">
             <div class="card-body d-flex align-items-center">
@@ -76,13 +90,12 @@ for ($i = 6; $i >= 0; $i--) {
               </div>
               <div class="flex-grow-1 ms-3">
                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Toplam Blog</p>
-                <h4 class="mb-0"><?= $cnt ?></h4>
+                <h4 class="mb-0"><?= getCount($con, 'blog') ?></h4>
               </div>
             </div>
           </div>
         </div>
 
-        <?php $cnt = getCount($con, 'urunler'); ?>
         <div class="col-lg-3 col-md-6 d-flex">
           <div class="card flex-fill">
             <div class="card-body d-flex align-items-center">
@@ -93,13 +106,12 @@ for ($i = 6; $i >= 0; $i--) {
               </div>
               <div class="flex-grow-1 ms-3">
                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Toplam Ürünler</p>
-                <h4 class="mb-0"><?= $cnt ?></h4>
+                <h4 class="mb-0"><?= getCount($con, 'urunler') ?></h4>
               </div>
             </div>
           </div>
         </div>
 
-        <?php $cnt = getCount($con, 'kategoriler'); ?>
         <div class="col-lg-3 col-md-6 d-flex">
           <div class="card flex-fill">
             <div class="card-body d-flex align-items-center">
@@ -110,54 +122,50 @@ for ($i = 6; $i >= 0; $i--) {
               </div>
               <div class="flex-grow-1 ms-3">
                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Toplam Kategoriler</p>
-                <h4 class="mb-0"><?= $cnt ?></h4>
+                <h4 class="mb-0"><?= getCount($con, 'kategoriler') ?></h4>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+ <!-- Contact messages and count side by side -->
       <div class="row g-3 mt-4">
-        <div class="col-lg-6 d-flex">
+        <div class="col-lg-2 d-flex">
           <div class="card flex-fill">
-            <div class="card-body">
-              <h5 class="card-title mb-3">Toplam İletişim Mesajı</h5>
+            <div class="card-body text-center">
+              <h5 class="card-title mb-3">Toplam<br>İletişim Mesajı</h5>
               <h2><?= getCount($con, 'contact_messages') ?></h2>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 d-flex">
-          <div class="card flex-fill">
-            <div class="card-body">
-              <h5 class="card-title mb-3">Son 5 İletişim Mesajı</h5>
-              <div class="table-responsive">
-                <table class="table table-striped mb-0">
-                  <thead><tr><th>Ad Soyad</th><th>Email</th><th>Tarih</th></tr></thead>
-                  <tbody>
-                    <?php
-                      $res = mysqli_query($con,
-                        "SELECT name, email, created_at
-                         FROM contact_messages
-                         ORDER BY created_at DESC
-                         LIMIT 5"
-                      );
-                      if (!$res) die("SQL Error (contact_messages): ".mysqli_error($con));
-                      while($m = mysqli_fetch_assoc($res)):
-                    ?>
-                    <tr>
-                      <td><?= htmlspecialchars($m['name']) ?></td>
-                      <td><?= htmlspecialchars($m['email']) ?></td>
-                      <td><?= $m['created_at'] ?></td>
-                    </tr>
-                    <?php endwhile; ?>
-                  </tbody>
-                </table>
+        <div class="col-lg-10">
+          <div class="row g-3">
+            <?php while ($m = mysqli_fetch_assoc($contactRes)): ?>
+              <div class="col-md-4 d-flex">
+                <div class="card flex-fill shadow-sm">
+                  <div class="card-body">
+                    <h6 class="card-title">
+                      <?= htmlspecialchars($m['name'], ENT_QUOTES) ?>
+                      <small class="text-muted d-block">
+                        <?= date('d M Y, H:i', strtotime($m['created_at'])) ?>
+                      </small>
+                    </h6>
+                    <p class="card-text text-truncate" style="max-height:3em; overflow:hidden;">
+                      <?= htmlspecialchars($m['message'], ENT_QUOTES) ?>
+                    </p>
+                    <a href="contact_view.php?id=<?= $m['id'] ?>" class="btn btn-outline-primary btn-sm">
+                      Detay
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
+            <?php endwhile; ?>
           </div>
         </div>
       </div>
 
+      <!-- Weekly visits chart -->
       <div class="row g-3 mt-4">
         <div class="col-12 d-flex">
           <div class="card flex-fill">
@@ -173,20 +181,26 @@ for ($i = 6; $i >= 0; $i--) {
   </div>
 </div>
 
+<!-- ApexCharts -->
 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
   new ApexCharts(
     document.querySelector("#visits-chart"),
     {
       chart: { type: 'line', height: 300 },
       series: [{ name: 'Ziyaretler', data: <?= json_encode($data) ?> }],
-      xaxis:  { categories: <?= json_encode($labels) ?> },
+      xaxis:  { 
+        categories: <?= json_encode($labels) ?>,
+        labels: { rotate: -45 }
+      },
       stroke: { curve: 'smooth' },
-      tooltip:{ x: { format: 'yyyy-MM-dd' } }
+      tooltip: {
+        x: { formatter: val => val }
+      }
     }
   ).render();
 });
 </script>
 
-<?php include "footer.php"; ?>
+<?php include __DIR__ . '/footer.php'; ?>

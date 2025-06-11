@@ -4,12 +4,12 @@ require __DIR__ . '/init.php';
 if (isset($_POST['delete_id'])) {
     $id = intval($_POST['delete_id']);
     mysqli_query($con, "DELETE FROM tedarikcilerimiz WHERE id=$id");
-    header("Location: tedarikciler.php");
+    header("Location: suppliers.php");
     exit;
 } elseif (isset($_GET['delete_id'])) {
     $id = intval($_GET['delete_id']);
     mysqli_query($con, "DELETE FROM tedarikcilerimiz WHERE id=$id");
-    header("Location: tedarikciler.php");
+    header("Location: suppliers.php");
     exit;
 }
 include  __DIR__ .  '/header.php';
@@ -60,7 +60,7 @@ $counter = 1;
                                                 <td>
                                                     <a href="edit-supplier.php?id=<?= $row['id'] ?>"
                                                         class="btn btn-sm btn-warning">Düzenle</a>
-                                                    <form method="post" action="tedarikciler.php" style="display:inline-block;">
+                                                    <form method="post" action="suppliers.php" style="display:inline-block;">
                                                         <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
                                                         <button type="submit" class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Bu tedarikçiyi silmek istediğinize emin misiniz?')">Sil</button>

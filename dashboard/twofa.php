@@ -5,13 +5,11 @@ require_once __DIR__ . '/../z_db.php';
 require_once __DIR__ . '/lib/security.php';
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 
-// temp_username yoksa zorunlu yeniden login
 if (empty($_SESSION['temp_username'])) {
     header('Location: login.php');
     exit;
 }
 
-// artık bu değişkende bizim user var
 $user = $_SESSION['temp_username'];
 $g    = new GoogleAuthenticator();
 $issuer = 'Baran Boya';
@@ -67,7 +65,6 @@ $otpauth = "otpauth://totp/{$issuer}:{$user}"
          . "&algorithm=SHA1&digits=6&period=30";
 
 include  __DIR__ .  '/header.php';
-
 include  __DIR__ . '/sidebar.php';
 ?>
 <div class="main-content">

@@ -1,4 +1,5 @@
 <?php
+// /vogue/dashboard/add-supplier.php
 require __DIR__ . '/init.php';
 
 $msg    = '';
@@ -26,9 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['resim'])) {
     }
 
     if ($status === 'OK') {
-        $stmt = $con->prepare(
-            'INSERT INTO tedarikcilerimiz (resim, created_at) VALUES (?, NOW())'
-        );
+        // Tabloda "created_at" yerine "guncellenme_tarihi" alanı mevcut
+        $sql = 'INSERT INTO `tedarikcilerimiz` (`resim`, `guncellenme_tarihi`) VALUES (?, NOW())';
+        $stmt = $con->prepare($sql);
+        if (!$stmt) {
+            die('SQL Prepare Error: ' . htmlspecialchars($con->error));
+        }
         $stmt->bind_param('s', $newName);
         if ($stmt->execute()) {
             header('Location: suppliers.php');
@@ -40,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['resim'])) {
     }
 }
 
-include  __DIR__ .  '/header.php';
-include  __DIR__ . '/sidebar.php';
+include __DIR__ . '/header.php';
+include __DIR__ . '/sidebar.php';
 ?>
 
 <div class="main-content">
@@ -49,13 +53,13 @@ include  __DIR__ . '/sidebar.php';
     <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="card shadow-sm">
-          <div class="card-header  text-white d-flex justify-content-between align-items-center">
+          <div class="card-header text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Tedarikçi Ekle</h5>
             <a href="suppliers.php" class="btn btn-secondary btn-sm">Geri</a>
           </div>
           <div class="card-body">
             <?php if ($msg): ?>
-              <div class="alert alert-danger"><?= $msg ?></div>
+              <div class="alert alert-danger"><?= htmlspecialchars($msg) ?></div>
             <?php endif; ?>
 
             <form method="post" enctype="multipart/form-data">
@@ -81,4 +85,4 @@ include  __DIR__ . '/sidebar.php';
   </div>
 </div>
 
-  <?php include "footer.php"; ?>
+<?php include __DIR__ . '/footer.php'; ?>
