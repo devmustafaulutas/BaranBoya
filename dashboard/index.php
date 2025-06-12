@@ -20,7 +20,6 @@ function getCount(mysqli $con, string $table): int {
     return (int)$row[0];
 }
 
-// — Weekly page visits —
 $visitsRes = mysqli_query($con,
   "SELECT DATE(visited_at) AS dt, COUNT(*) AS cnt
    FROM page_visits
@@ -41,12 +40,11 @@ for ($i = 6; $i >= 0; $i--) {
     $data[]   = $raw_visits[$day] ?? 0;
 }
 
-// — Last 5 contact messages —
 $contactRes = mysqli_query($con,
   "SELECT id, name, email, message, created_at
    FROM contact_messages
    ORDER BY created_at DESC
-   LIMIT 5"
+   LIMIT 3"
 );
 if (!$contactRes) {
     die("SQL Error (contact_messages): " . mysqli_error($con));
@@ -129,21 +127,20 @@ if (!$contactRes) {
         </div>
       </div>
 
- <!-- Contact messages and count side by side -->
-      <div class="row g-3 mt-4">
+      <div class="row g-3 mt-4 align-items-stretch">
         <div class="col-lg-2 d-flex">
-          <div class="card flex-fill">
+           <div class="card flex-fill h-100">
             <div class="card-body text-center">
               <h5 class="card-title mb-3">Toplam<br>İletişim Mesajı</h5>
               <h2><?= getCount($con, 'contact_messages') ?></h2>
             </div>
           </div>
         </div>
-        <div class="col-lg-10">
-          <div class="row g-3">
+        <div class="col-lg-10 d-flex">
+          <div class="row g-3 flex-fill align-items-stretch">
             <?php while ($m = mysqli_fetch_assoc($contactRes)): ?>
-              <div class="col-md-4 d-flex">
-                <div class="card flex-fill shadow-sm">
+              <div class="col-lg-4 d-flex">
+                <div class="card flex-fill shadow-sm h-100">
                   <div class="card-body">
                     <h6 class="card-title">
                       <?= htmlspecialchars($m['name'], ENT_QUOTES) ?>
@@ -152,11 +149,11 @@ if (!$contactRes) {
                       </small>
                     </h6>
                     <p class="card-text text-truncate" style="max-height:3em; overflow:hidden;">
+                      <?= htmlspecialchars($m['email'], ENT_QUOTES) ?>
+                    </p>
+                    <p class="card-text text-truncate" style="max-height:3em; overflow:hidden;">
                       <?= htmlspecialchars($m['message'], ENT_QUOTES) ?>
                     </p>
-                    <a href="contact_view.php?id=<?= $m['id'] ?>" class="btn btn-outline-primary btn-sm">
-                      Detay
-                    </a>
                   </div>
                 </div>
               </div>

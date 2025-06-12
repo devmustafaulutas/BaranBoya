@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 INSERT INTO `admin`
   (`id`, `username`, `password`, `twofa_enabled`, `2fa_secret`, `updated_at`)
 VALUES
-  (1, 'admin', 'admin', 0, 'ZLZ54VIBHWSQCCUZ', '2022-07-13 11:00:19');
+  (1, 'BaranBoyaAdmin', 'Baranboya123!', 0, 'ZLZ54VIBHWSQCCUZ', '2022-07-13 11:00:19');
 CREATE TABLE admin_remember(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT NOT NULL,

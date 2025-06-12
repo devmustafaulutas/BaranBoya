@@ -62,14 +62,11 @@ if (empty($_SESSION['username']) && empty($_SESSION['temp_username']) && $script
                         </span>
                     </button>
 
-                    <!-- Sağ tarafa yerleştirilen kullanıcı/buton alanı -->
                     <div class="d-flex align-items-center">
-                        <!-- İsteğe bağlı: Kullanıcı adına tıklayınca profil sayfasına gidebilirsiniz -->
                         <span class="me-3 text-white">Merhaba, <?= htmlspecialchars($username, ENT_QUOTES) ?></span>
 
-                        <!-- Çıkış Yap butonu -->
                         <a href="logout.php"
-                           class="btn btn-outline-light btn-sm"
+                           class="btn btn-outline-dark btn-sm"
                            style="margin-right: 1rem;">
                             <i class="fas fa-sign-out-alt"></i> Çıkış Yap
                         </a>
@@ -79,9 +76,7 @@ if (empty($_SESSION['username']) && empty($_SESSION['temp_username']) && $script
         </header>
     </div>
 
-    <!-- Diğer içerikler… -->
 
-    <!-- JS dosyaları en sona -->
     <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

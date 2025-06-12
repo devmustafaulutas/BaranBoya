@@ -2,12 +2,12 @@
 
 session_name("SITE_SESSION");
 session_set_cookie_params([
-  'lifetime' => 0,
-  'path'     => '/',            
-  'domain'   => $_SERVER['HTTP_HOST'],
-  'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
-  'httponly' => true,
-  'samesite' => 'Lax',
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => $_SERVER['HTTP_HOST'],
+    'secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+    'httponly' => true,
+    'samesite' => 'Lax',
 ]);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -30,12 +30,27 @@ use PHPMailer\PHPMailer\Exception;
 
 $errormsg = "";
 
-// Yine, gerekirse contact_title/contact_text benzeri değişkenleri tanımlayabilirsiniz:
 $contact_title = $contact_title ?? "İletişim";
-$contact_text  = $contact_text  ?? "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.";
+$contact_text = $contact_text ?? "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.";
+$tedarikciler = [];
+$stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id");
+$stmt->execute();
+$stmt->bind_result($id, $resim);
+while ($stmt->fetch()) {
+    $tedarikciler[] = ['id' => $id, 'resim' => $resim];
+}
+$stmt->close();
+
+$phone1 = $phone2 = $siteEmail = '';
+$stmt = $con->prepare("SELECT phone1, phone2, email FROM sitecontact WHERE id = 1 LIMIT 1");
+$stmt->execute();
+$stmt->bind_result($phone1, $phone2, $siteEmail);
+$stmt->fetch();
+$stmt->close();
+
+$tedarikciSayisi = count($tedarikciler);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //  ► CSRF kontrolü
     if (
         !isset($_POST['site_csrf_token'])
         || !hash_equals($_SESSION['site_csrf_token'], $_POST['site_csrf_token'])
@@ -57,13 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $status = "NOTOK";
         }
 
-        // Alanları sanitize et
-        $name    = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
-        $email   = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-        $phone   = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
+        $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+        $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+        $phone = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
         $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
 
-        // ► ALANLARIN DOĞRULANMASI
         if ($status === "OK") {
             if (mb_strlen($name) < 5) {
                 $errormsg .= "İsim 5 karakterden uzun olmalı.<br>";
@@ -84,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($status === "OK") {
-            // ► VERİTABANINA KAYIT
             $stmt = $con->prepare(
                 "INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)"
             );
@@ -92,32 +104,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             $stmt->close();
 
-            // ► E‐POSTA GÖNDERME
             $mail = new PHPMailer(true);
             try {
-                $mail->CharSet    = 'UTF-8';
-                $mail->Encoding   = 'base64';
+                $mail->CharSet = 'UTF-8';
+                $mail->Encoding = 'base64';
                 $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
-                $mail->SMTPAuth   = true;
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
 
-                // ——————————————
-                $mail->Username   = 'mustafaum538@gmail.com';      // SMTP kullanıcı (gmail hesabı)
-                $mail->Password   = 'yiyumtwphgckujvp';            // 16 haneli App Password
-// ——————————————
+                $mail->Username = 'berkinardadeveli@gmail.com';
+                $mail->Password = 'gvipatsbkgucuvbj';
 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port       = 587;
+                $mail->Port = 587;
 
-                // Gönderici adresi ile SMTP kullanıcı adresi mutlaka aynı olmalı
-                $mail->setFrom('mustafaum538@gmail.com', 'Baran Boya');
-                // Dilediğiniz alıcı adresini verin:
-                $mail->addAddress('mustafaum538@gmail.com');
+                $mail->setFrom('berkinardadeveli@gmail.com', 'Baran Boya');
+                $mail->addAddress('baranboya@gmail.com');
+                $mail->addReplyTo($email, $name);
+
                 $mail->addReplyTo($email, $name);
 
                 $mail->isHTML(true);
                 $mail->Subject = 'Yeni İletişim Mesajı';
-                $mail->Body    = "
+                $mail->Body = "
                     <h3>İsim: " . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . "</h3>
                     <h3>Email: " . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . "</h3>
                     <h3>Telefon: " . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . "</h3>
@@ -141,7 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>";
             }
         } else {
-            // Validasyon veya rate‐limit hatası
             $errormsg = "
                 <div class='alert alert-danger alert-dismissible alert-outline fade show'>
                     {$errormsg}
@@ -155,7 +163,6 @@ $result = [];
 $services = [];
 $tedarikciler = [];
 
-// Static içerikleri çek
 $stmt = $con->prepare("SELECT id, stitle, stext FROM static");
 $stmt->execute();
 $stmt->bind_result($id, $stitle, $stext);
@@ -164,7 +171,6 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 
-// Service içerikleri
 $stmt = $con->prepare("SELECT id, service_title, service_desc, icon FROM service ORDER BY id");
 $stmt->execute();
 $stmt->bind_result($id, $serviceg, $service_desc, $icon);
@@ -178,7 +184,6 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 
-// Tedarikçi logoları
 $stmt = $con->prepare("SELECT id, resim FROM tedarikcilerimiz ORDER BY id");
 $stmt->execute();
 $stmt->bind_result($id, $resim);
@@ -187,7 +192,6 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 
-// Başlık ve metinler
 $service_title = "Hizmetlerimiz";
 $service_text = "Sunulan hizmetler hakkında kısa açıklama.";
 $contact_title = "İletişim";
@@ -408,17 +412,11 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
     </div>
     <div class="row">
         <div id="client-logos" class="client-logos d-flex flex-wrap justify-content-center">
-            <?php
-            foreach ($tedarikciler as $tedarikci) {
-                $resim = $tedarikci['resim'];
-
-                print "
-                            <div class='single-logo p-3'>
-                                <img class='img-fluid' src='assets/img/tedarikcilerimiz/$resim' >
-                            </div>
-                            ";
-            }
-            ?>
+            <?php foreach ($tedarikciler as $t): ?>
+                <div class="single-logo p-3">
+                    <img src="assets/img/tedarikcilerimiz/<?= htmlspecialchars($t['resim'], ENT_QUOTES) ?>" alt="">
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
@@ -437,19 +435,19 @@ $contact_text = "Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanab
                 </div>
                 <div class="contact-us">
                     <ul>
-                        <!-- İletişim ikonları / telefon / e-posta vb. -->
+                        <!-- Telefon 1 -->
                         <li class="contact-info color-1 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-mobile-alt fa-3x"></i></span>
-                            <a class="d-block my-2"
-                                href="tel:<?php echo htmlspecialchars($phone1, ENT_QUOTES, 'UTF-8'); ?>">
-                                <h3><?php echo htmlspecialchars($phone1, ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <a class="d-block my-2" href="tel:<?= htmlspecialchars($phone1, ENT_QUOTES) ?>">
+                                <h3><?= htmlspecialchars($phone1, ENT_QUOTES) ?></h3>
                             </a>
                         </li>
+                        <!-- Email -->
                         <li class="contact-info color-3 bg-hover active hover-bottom text-center p-5 m-3">
                             <span><i class="fas fa-envelope-open-text fa-3x"></i></span>
                             <a class="d-none d-sm-block my-2"
-                                href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>">
-                                <h3><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?></h3>
+                                href="mailto:<?= htmlspecialchars($siteEmail, ENT_QUOTES) ?>">
+                                <h3><?= htmlspecialchars($siteEmail, ENT_QUOTES) ?></h3>
                             </a>
                         </li>
                     </ul>

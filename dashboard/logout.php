@@ -28,5 +28,5 @@ if (!empty($_COOKIE['remember_me'])) {
     setcookie('remember_me', '', time() - 3600, '/', '', true, true);
 }
 
-header('Location: /dashboard/login.php');
+header('Location: login.php');
 exit;

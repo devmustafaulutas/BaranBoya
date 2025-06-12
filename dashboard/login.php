@@ -87,15 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 unset($_SESSION['remember_me']);
             }
-
-            if ($row['twofa_enabled'] === 0) {
-                $_SESSION['username'] = $u;
-                header('Location: twofa.php');
-                exit;
-            } else {
-                $_SESSION['temp_username'] = $u;
-                $step = '2';
-            }
+          if ((int)$row['twofa_enabled'] === 0) {
+              $_SESSION['temp_username'] = $u;
+              header('Location: twofa.php');
+              exit;
+          } else {
+              $_SESSION['temp_username'] = $u;
+              $step = '2';
+          }
         }
     }
     elseif ($step === '2' && isset($_SESSION['temp_username'])) {

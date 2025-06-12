@@ -125,7 +125,7 @@ if (isset($con) && $con instanceof mysqli) {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="twofa.php" class="nav-link" data-key="t-2fa">
+                <a href="twofa_settings.php" class="nav-link" data-key="t-2fa">
                   <i class="ri-shield-keyhole-line me-1"></i> 2 Aşamalı Doğrulama
                 </a>
               </li>
